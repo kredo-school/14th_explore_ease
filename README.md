@@ -224,7 +224,7 @@ https://codelikes.com/mac-node-install/
 ```
 $ npm run build
 ```
-If command above return an error, please check your node version. It might be because of the version. The latest stable version is 18.18.2 at the time when I'm running the command.
+If command above returns an error, please check your node version. It might be because of the version. The latest stable version is 18.18.2 at the time when I'm running the command.
 
 ##### 11. Set Application key
 
