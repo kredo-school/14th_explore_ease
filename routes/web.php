@@ -23,4 +23,3 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::get('/restaurants/show', [App\Http\Controllers\HomeController::class, 'restaurants'])->name('restaurant.show');
-Route::get('/login',[App\Http\Controllers\LoginController::class, 'login']);
