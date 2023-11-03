@@ -54,10 +54,17 @@
                     <div class="row">
                         <div class="col-6 ">
                             <p class="h3">Restaurant name</p>
+                                {{-- @if($post->user->avatar) --}}
+                                    {{-- <img src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}" class="rounded-circle avatar-sm"> --}}
+                                {{-- @else
+                                    <i class="fa-solid fa-circle-user text-secondary icon-sm"></i>
+                                @endif --}}
+
                         </div>
                         <div class="col-6 text-end h3">
                             <a href="" class="text-decoration-none text-dark">
-                                Rating
+                                4.5 <i class="fa-solid fa-star"></i>
+                                {{-- {{ $post->user->name }} --}}
                             </a>
                         </div>
                     </div>
@@ -68,10 +75,10 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <p class="h4">eatures here</p>
+                            <p class="h4">Features here</p>
                         </div>
                         <div class="col-6 text-end" style="font-size: 16px;">
-                            Price here
+                            ￥￥￥
                         </div>
                     </div>
                 </div>
@@ -88,10 +95,17 @@
                     <div class="row">
                         <div class="col-6 ">
                             <p class="h3">Restaurant name</p>
+                                {{-- @if($post->user->avatar) --}}
+                                    {{-- <img src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}" class="rounded-circle avatar-sm"> --}}
+                                {{-- @else
+                                    <i class="fa-solid fa-circle-user text-secondary icon-sm"></i>
+                                @endif --}}
+
                         </div>
                         <div class="col-6 text-end h3">
                             <a href="" class="text-decoration-none text-dark">
-                                Rating
+                                4.5 <i class="fa-solid fa-star"></i>
+                                {{-- {{ $post->user->name }} --}}
                             </a>
                         </div>
                     </div>
@@ -102,10 +116,10 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <p class="h4">eatures here</p>
+                            <p class="h4">Features here</p>
                         </div>
                         <div class="col-6 text-end" style="font-size: 16px;">
-                            Price here
+                            ￥￥￥
                         </div>
                     </div>
                 </div>
@@ -120,10 +134,17 @@
                     <div class="row">
                         <div class="col-6 ">
                             <p class="h3">Restaurant name</p>
+                                {{-- @if($post->user->avatar) --}}
+                                    {{-- <img src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}" class="rounded-circle avatar-sm"> --}}
+                                {{-- @else
+                                    <i class="fa-solid fa-circle-user text-secondary icon-sm"></i>
+                                @endif --}}
+
                         </div>
                         <div class="col-6 text-end h3">
                             <a href="" class="text-decoration-none text-dark">
-                                Rating
+                                4.5 <i class="fa-solid fa-star"></i>
+                                {{-- {{ $post->user->name }} --}}
                             </a>
                         </div>
                     </div>
@@ -134,10 +155,10 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <p class="h4">eatures here</p>
+                            <p class="h4">Features here</p>
                         </div>
                         <div class="col-6 text-end" style="font-size: 16px;">
-                            Price here
+                            ￥￥￥
                         </div>
                     </div>
                 </div>
