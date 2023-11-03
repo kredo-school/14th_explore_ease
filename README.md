@@ -158,6 +158,8 @@ $ brew install mysql
 $ mysql.server start
 ```
 
+
+
 ##### login mysql
 
 ```
@@ -240,7 +242,7 @@ $ php artisan serve
 
 ##### 13. Visit a website
 
-http://127.0.0.1:8000/
+http://127.0.0.1:8000
 
 ## Set Sequel Ace
 
