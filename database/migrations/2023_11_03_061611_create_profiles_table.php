@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
-            //$table->string('username')->unique();
+            $table->string('username')->unique();
             $table->string('first_name');
             $table->string('last_name');
             $table->longText('avatar')->nullable();
