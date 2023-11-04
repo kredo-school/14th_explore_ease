@@ -21,7 +21,7 @@
 
     {{-- Styles --}}
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    
+
     {{-- Font awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -32,7 +32,7 @@
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #E7DA3D;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img class="logo" src="../storage/Logo_ExploreEase_temporaly.png" alt="Logo" style="width:32px; height:32px;">
+                    <img class="logo" src="../storage/Logo.temporaly.png" alt="Logo" style="width:32px; height:32px;">
                     Explore-Ease
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
