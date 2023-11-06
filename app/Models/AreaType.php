@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AreaType extends Model
 {
     use HasFactory;
+
+    protected $table = 'areatypes';
+    public $timestamps = false;
 }
