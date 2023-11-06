@@ -32,7 +32,7 @@
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #E7DA3D;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img class="logo" src="../storage/Logo.temporaly.png" alt="Logo" style="width:32px; height:32px;">
+                    <img class="logo" src="{{ asset('storage/Logo_ExploreEase_fin.png') }}" alt="Logo" style="width:32px; height:32px;">
                     Explore-Ease
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
