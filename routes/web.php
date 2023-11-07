@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RestaurantController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +23,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/login',[App\Http\Controllers\LoginController::class, 'login']);
+Route::get('restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
+
+Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
+
+

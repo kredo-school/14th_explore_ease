@@ -25,6 +25,10 @@
     {{-- Font awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!--CDN for mapbox-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+
 </head>
 <body>
     <div id="app">
@@ -62,7 +66,12 @@
                         @else
                         <!-- Link to Restaurant page -->
                         <li class="nav-item nav-item my-auto me-3">
-                            <a href="#" class="text-decoration-none text-black">Restaurant</a>
+                            <a class="nav-link dropdown-toggle my-auto text-black" href="#" id="dropdown" data-bs-toggle="dropdown">Restaurant</a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a href="{{ route('restaurant.show') }}" class="dropdown-item">See Restaurants</a>
+                                <a href="{{ route('restaurant.adding') }}" class="dropdown-item">Adding new restaurant</a>
+                            </div>
                         </li>
 
                         <!-- Link to Ranking page -->
@@ -76,7 +85,7 @@
                                 <i class="fa-solid fa-globe"></i> Language
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" onclick="#">
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" onclick="">
                                 <a class="dropdown-item" href="#">English</a>
                                 <a class="dropdown-item" href="#">Chinese</a>
                                 <a class="dropdown-item" href="#">Korean</a>
