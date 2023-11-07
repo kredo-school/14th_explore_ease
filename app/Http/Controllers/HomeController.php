@@ -25,4 +25,12 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function restaurantsDetail(){
+        return view('restaurants.detail');
+    }
+
+    public function restaurants(){
+        return view('restaurants.show');
+    }
 }

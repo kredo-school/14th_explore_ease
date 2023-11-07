@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FoodType extends Model
 {
     use HasFactory;
+
+    protected $table = 'foodtypes';
+    public $timestamps = false;
 }

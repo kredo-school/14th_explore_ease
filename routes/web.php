@@ -23,6 +23,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+
+Route::get('/restaurants/detail', [App\Http\Controllers\HomeController::class, 'restaurantsDetail'])->name('restaurants.detail');
+
 Route::get('restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
 
 Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
