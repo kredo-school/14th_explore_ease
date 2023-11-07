@@ -26,7 +26,7 @@
 
                     <div class="col-6 my-auto text-start">
                         <div>
-                            <h2>Start your review of <span style="color:pink"> Restaurant Name </span></h2>
+                            <h2>Start your review of <a href="#" style="color:pink" class="text-decoration-none"> Restaurant Name </a></h2>
                         </div>
                         <br>
                         <div>
@@ -66,7 +66,7 @@
 
                 <!--Graph -->
                 <div class="col-6">
-                    <canvas id="myChart"></canvas>
+                    <canvas id="myChart" class="h-75"></canvas>
 
                     <!-- Pass data to Chart.js -->
                     <script>
@@ -76,20 +76,39 @@
                             data: {
                                 labels: ['5', '4', '3', '2', '1'],
                                 datasets: [{
-                                    label: 'Review totals',
+                                    label: '',
                                     data: [25, 10, 5, 2, 20],
                                     backgroundColor: '#E7DA3D',
-                                    borderColor: '#E7DA3D'
+                                    borderColor: '#E7DA3D',
+
                                 }]
                             },
-                            options: {}
+                            options: {
+                                legend: {
+                                display: false,
+                                },
+                            },
                         });
                     </script>
                 </div>
 
                 <!--Number -->
-                <div class="col-3">
-                    <h1>3.5</h1>
+                <div class="col-3 text-center">
+                    <div>
+                        <span style="font-size: 6rem;">3.9</span>
+                    </div>
+                    <div>
+                        <a href="" class="text-decoration-none"><i class="fa-regular fa-star text-dark" style="font-size:2em;"></i>
+                        <a href="" class="text-decoration-none"><i class="fa-regular fa-star text-dark" style="font-size:2em;"></i>
+                        <a href="" class="text-decoration-none"><i class="fa-regular fa-star text-dark" style="font-size:2em;"></i>
+                        <a href="" class="text-decoration-none"><i class="fa-regular fa-star text-dark" style="font-size:2em;"></i>
+                        <a href="" class="text-decoration-none"><i class="fa-regular fa-star text-dark" style="font-size:2em;"></i>
+                    </div>
+                    <div class="mt-1">
+                        <p style="font-size: 1.5rem;" class="text-decoration-none text-dark">
+                            <span>225</span> reviews
+                        </p>
+                    </div>
                 </div>
 
             </div>
