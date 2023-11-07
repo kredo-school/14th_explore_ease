@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             NationaritySeeder::class,
             FoodTypeSeeder::class,
             FeatureTypeSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }
