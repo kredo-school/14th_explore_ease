@@ -77,7 +77,7 @@
                                 <i class="fa-solid fa-globe"></i> Language
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" onclick="#">
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">English</a>
                                 <a class="dropdown-item" href="#">Chinese</a>
                                 <a class="dropdown-item" href="#">Korean</a>
