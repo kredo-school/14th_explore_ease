@@ -27,6 +27,5 @@ Route::get('/restaurants/show', [App\Http\Controllers\HomeController::class, 're
 
 Route::get('/restaurants/detail', [App\Http\Controllers\HomeController::class, 'restaurantsDetail'])->name('restaurants.detail');
 
-Route::get('/profile', function () {
-    return view('users/profile');
-});
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
+
