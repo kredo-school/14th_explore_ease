@@ -23,6 +23,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/restaurants/detail', [App\Http\Controllers\HomeController::class, 'restaurantsDetail'])->name('restaurants.detail');
 
-Route::get('/profile', function () {
-    return view('users/profile');
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
+
+Route::get('/profile/modal', function () {
+    return view('users/modal/edit');
 });
+
