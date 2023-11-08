@@ -12,7 +12,7 @@
 @endsection
 
 <div class="container w-75">
-<h2>Dashbords</h2>
+<h2>Dashboards</h2>
 {{-- Number of users, reviews, and reservations --}}
 
         <div class="row border">
