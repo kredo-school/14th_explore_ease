@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FeatureType extends Model
 {
     use HasFactory;
+
+    protected $table = 'featuretypes';
+    public $timestamps = false;
 }
