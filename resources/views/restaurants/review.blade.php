@@ -3,8 +3,13 @@
 @section('title', 'restaurants.detail')
 
 @section('content')
+{{-- <!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script> --}}
+
+@section('styles')
 <!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+@endsection
 
 <main class="container">
     <div class="row justify-content-center">
@@ -66,28 +71,40 @@
 
                 <!--Graph -->
                 <div class="col-6">
-                    <canvas id="myChart" class="h-75"></canvas>
+                    <canvas id="ReviewChart" class="h-75"></canvas>
 
                     <!-- Pass data to Chart.js -->
                     <script>
-                        var ctx = document.getElementById('myChart').getContext('2d');
-                        var chart = new Chart(ctx, {
-                            type: 'horizontalBar',
-                            data: {
-                                labels: ['5', '4', '3', '2', '1'],
-                                datasets: [{
-                                    label: '',
-                                    data: [25, 10, 5, 2, 20],
-                                    backgroundColor: '#E7DA3D',
-                                    borderColor: '#E7DA3D',
-
-                                }]
+                    var ctx = document.getElementById("ReviewChart");
+                    var ReviewChart = new Chart(ctx, {
+                        type: 'horizontalBar',
+                        data: {
+                            labels: ['5', '4', '3', '2', '1'],
+                            datasets: [
+                            {
+                                label: '',
+                                data: [91, 45, 121, 100, 98],
+                                backgroundColor: "rgba(255,183,76,0.5)"
+                            }
+                            ]
+                        },
+                        options: {
+                            legend: {
+                            display: false,
                             },
-                            options: {
-                                legend: {
-                                display: false,
-                                },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        suggestedMax: 100,
+                                        suggestedMin: 0,
+                                        stepSize: 10,
+                                callback: function(value, index, values){
+                                    return  value
+                                }
+                                }
+                            }]
                             },
+                        }
                         });
                     </script>
                 </div>
