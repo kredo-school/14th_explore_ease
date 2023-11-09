@@ -37,4 +37,8 @@ class HomeController extends Controller
     public function profileBase(){
         return view('users/profile');
     }
+
+    public function restaurantsReview(){
+        return view('restaurants.review');
+    }
 }
