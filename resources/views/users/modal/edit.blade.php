@@ -1,53 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-     {{-- profile page --}}
-    <div class="profile container w-75">
-        <div class="row mt-2 p-2">
-            <i class="fa-solid fa-user icon-user"></i>
-        </div>
-        <div class="display-5 m-4">Lionel Messi</div>
-        
-        <div class="vertical-line mt-4">
-            <h3>5</h3><p class="p-1">Restaurant</p>
-        </div>
-        <div class="vertical-line mt-4">
-            <h3>5</h3><p class="p-1">Resevation</p>
-        </div>
-        <div class="vertical-line mt-4">
-            <h3>5</h3><p class="p-1">Reviews</p>
-        </div>
-        <div class="vertical-line mt-4">
-            <h3>5</h3><p class="p-1">Bookmarks</p>
-        </div>
-    </div>
-    
-    {{-- profile list --}}
-    
-    <form method="POST" action="#">
-        @csrf
-        <div class="container w-75 mt-4 mx-auto">
-            <div class="row justify-content-center">
-                <div class="col-3">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item"> Profile </a>
-                        <a href="#" class="list-group-item"> Reservation </a>
-                        <a href="#" class="list-group-item"> Reviews </a>
-                        <a href="#" class="list-group-item"> Bookmarks </a>
-                    </div>
-                </div>
-                <div class="col-9">
-                    <div class="row ">
-                        <div class="col-6">
-                            <h1>Profile</h1>
-                        </div>
-                        <div class="col-6 text-end">
-                            <button type="submit" class="btn btn-secondary" data-toggle="modal" data-target="#editProfile">Edit Profile    
-                                <i class="fa-solid fa-pen-to-square icon-edit"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row">
+{{-- Profile editing page modal--}}
+<div class="modal fade" id="editProfile">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> Profile </h5>
+            </div>
+
+            <div class="modal-body">
+                <form action="#" method="POST">
+                    @csrf
+                    <div class="container w-75">
+
+
                         <div class="row ">
                             <div class="col-6">
                                 <label for="firstname" class="col-md-4 col-form-label">First Name</label>
@@ -82,8 +49,15 @@
                                 <input type="country" class="form-control" name="nationality" required>
                             </div>
                         </div>
+
                     </div>
-                </div>
+                </form>
             </div>
-        </div>
+        </div>        
+    </div>
+
+
+</div>
+
+
 @endsection
