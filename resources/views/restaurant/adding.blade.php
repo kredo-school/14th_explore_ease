@@ -2,7 +2,7 @@
 
 @section('title', 'Adding Restaurant')
 @section('content')
-@vite(['resources/js/restaurant.js'])
+@vite(['resources/js/restaurant.js', 'resources/js/restaurantmap.js'])
 
 <div class="container" style="width: 1000px;">
     <form action="" method="POST" enctype="multipart/form-data">
@@ -29,7 +29,7 @@
             </div>
             <div class="mb-3">
                 <label for="restaurant_location" class="form-label h3">Please place the pin accurately at your outlet's location on the map</label>
-                <div class="py-5 bg-secondary" id="restaurant_location">Map here</div>
+                <div id="map" class="py-5 bg-secondary" style='width: 100%; height: 300px;'></div>
             </div>
             <div class="mb-3">
                 <label for="open_hours" class="form-label h3">Open hours</label>
@@ -94,12 +94,37 @@
             </div>
             
             <div class="mb-3">
-                <label for="photo" class="form-label h3">Photo</label>
-                <div class="py-5 bg-secondary" id="photo">
-                <input type="file" name="photo" multiple>
-                    Photo uploading area
+                <label for="photo" class="form-label h3">Photo</label><br>
+                <div class="row">
+                    <div class="col-4">
+                        <input type="file" name="photo">
+                    </div>
+                    <div class="col-4">
+                        <input type="file" name="photo">
+                    </div>
+                    <div class="col-4">
+                        <input type="file" name="photo">
+                    </div>
                 </div>
 
+        <!--photo uploading design-->
+            <!-- <div>
+                <label for="inputTag">
+                    Select Image <br/>
+                    <i class="fa fa-2x fa-camera"></i>
+                    <input id="inputTag" type="file"/>
+                    <br/>
+                    <span id="imageName"></span>
+                </label>
+                </div>
+                <script>
+                    let input = document.getElementById("inputTag");
+                    let imageName = document.getElementById("imageName")
+                    input.addEventListener("change", ()=>{
+                        let inputImage = document.querySelector("input[type=file]").files[0];
+                        imageName.innerText = inputImage.name;
+                    })
+                </script> -->
             </div>
 
             <div class="mb-3">
@@ -178,6 +203,12 @@
                     <label class="form-check-label" for="gluten">Gluten</label>
                 </div>
             </div>
+
+            <div class="mb-3">
+                <label for="descritpiont" class="form-label h3">Description</label><br>
+                <textarea type="textarea" id="description" rows="4" name="dexcription" class="form-control"></textarea>
+            </div>
+
             <div class="text-center">
                 <button type="submit" class="btn-secondary h3 me-5" style="width: 263px; height: 56px;">Cancel</button>
                 <button type="submit" class="btn-secondary h3" style="width: 263px; height: 56px;">Submit</button>

@@ -9,6 +9,33 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    
+    <!-- for photo uploading design -->
+    <!-- <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+  <script src="https://use.fontawesome.com/3a2eaf6206.js"></script>
+	<title>repl.it</title>
+  <style id="photo.upload">
+
+      div{
+        text-align:center;
+        padding:3%;
+        border:thin solid black;
+      }
+      
+      input[type="file"]{
+        display: none;
+      }
+
+      label{
+        cursor:pointer;
+      }
+      
+      #imageName{
+        color:green;
+      }
+  </style> -->
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -96,11 +123,7 @@
                             </div>
                         </li>
 
-                        <script>
-                            $('.dropdown-menu a').click(function(){
-                               $('#selected').text($(this).text());
-                             });
-                        </script>
+
 
                         <!-- Avatar -->
                             <li class="nav-item dropdown">
