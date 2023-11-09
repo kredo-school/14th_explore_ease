@@ -9,7 +9,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
+    <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -17,7 +17,7 @@
     <!-- Font Aweosome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Scripts -->
+    <!-- Style -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @yield('styles')
     
@@ -27,10 +27,6 @@
     {{-- Font awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!--CDN for mapbox-->
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
-
 </head>
 <body>
     <div id="app">
@@ -38,7 +34,7 @@
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #E7DA3D;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img class="logo" src="../storage/Logo_ExploreEase_temporaly.png" alt="Logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -68,12 +64,7 @@
                         @else
                         <!-- Link to Restaurant page -->
                         <li class="nav-item nav-item my-auto me-3">
-                            <a class="nav-link dropdown-toggle my-auto text-black" href="#" id="dropdown" data-bs-toggle="dropdown">Restaurant</a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a href="{{ route('restaurant.show') }}" class="dropdown-item">See Restaurants</a>
-                                <a href="{{ route('restaurant.adding') }}" class="dropdown-item">Adding new restaurant</a>
-                            </div>
+                            <a href="#" class="text-decoration-none text-black">Restaurant</a>
                         </li>
 
                         <!-- Link to Ranking page -->
@@ -97,7 +88,11 @@
                             </div>
                         </li>
 
-
+                        <script>
+                            $('.dropdown-menu a').click(function(){
+                               $('#selected').text($(this).text());
+                             });
+                        </script>
 
                         <!-- Avatar -->
                             <li class="nav-item dropdown">
@@ -143,5 +138,5 @@
             </div>
         </footer>
     </div>
-</body>
+    </body>
 </html>
