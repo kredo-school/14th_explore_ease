@@ -29,3 +29,4 @@ Route::get('/restaurants/detail', [App\Http\Controllers\HomeController::class, '
 
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
 
+Route::get('/restaurants/{id}/review', [App\Http\Controllers\HomeController::class, 'restaurantsReview'])->name('restaurants.review');
