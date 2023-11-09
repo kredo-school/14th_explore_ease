@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RestaurantController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+Route::get('/restaurants/detail', [App\Http\Controllers\HomeController::class, 'restaurantsDetail'])->name('restaurants.detail');
+
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
+
+
+Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
+
+Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
+
+
+
+Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
+
+Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
+
+
+Route::get('/restaurants/{id}/review', [App\Http\Controllers\HomeController::class, 'restaurantsReview'])->name('restaurants.review');
