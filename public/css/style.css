@@ -3,3 +3,27 @@
     background-position: center;
     background-size: cover;
 }
+.icon-user{
+    font-size: 6rem;
+    
+}
+
+.icon-edit{
+    font-size: 1rem;
+}
+
+.profile{
+    display: flex;
+    background-color: #f8b0a6;
+    justify-content: center;
+    width: auto;
+}
+
+
+.vertical-line{
+    border-right: 2px solid;
+    line-height: auto;
+    text-align: center;
+    
+    
+}
