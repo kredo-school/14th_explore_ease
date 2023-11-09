@@ -35,3 +35,10 @@ Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('re
 Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
 
 
+
+Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
+
+Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
+
+
+Route::get('/restaurants/{id}/review', [App\Http\Controllers\HomeController::class, 'restaurantsReview'])->name('restaurants.review');
