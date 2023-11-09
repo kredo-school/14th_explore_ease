@@ -12,21 +12,29 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Font Aweosome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Style -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @yield('styles')
     
-    <!-- Scripts -->
-    @yield('script')
+    {{-- Styles --}}
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+
+    {{-- Font awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <!-- navigation bar -->
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #E7DA3D;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img class="logo" src="../storage/Logo_ExploreEase_temporaly.png" alt="Logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -54,17 +62,57 @@
                                 </li>
                             @endif
                         @else
+                        <!-- Link to Restaurant page -->
+                        <li class="nav-item nav-item my-auto me-3">
+                            <a href="#" class="text-decoration-none text-black">Restaurant</a>
+                        </li>
+
+                        <!-- Link to Ranking page -->
+                        <li class="nav-item my-auto me-3">
+                            <a href="#" class="text-decoration-none text-black">Ranking</a>
+                        </li>
+
+                        <!-- Language selector-->
+                        <li class="nav-item dropdown my-auto me-3">
+                            <a class="nav-link dropdown-toggle my-auto me-3 text-black" href="#" id="dropdown" data-bs-toggle="dropdown">
+                                <i class="fa-solid fa-globe"></i> Language
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">English</a>
+                                <a class="dropdown-item" href="#">Chinese</a>
+                                <a class="dropdown-item" href="#">Korean</a>
+                                <a class="dropdown-item" href="#">Spanish</a>
+                                <a class="dropdown-item" href="#">French</a>
+                                <a class="dropdown-item" href="#">Japanesee</a>
+                            </div>
+                        </li>
+
+                        <script>
+                            $('.dropdown-menu a').click(function(){
+                               $('#selected').text($(this).text());
+                             });
+                        </script>
+
+                        <!-- Avatar -->
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+                                <button class="btn shadow-none nav-link" id="account-dropdown" data-bs-toggle="dropdown">
+                                    @if(Auth::user()->avatar)
+                                        <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}" class="rounded-circle avatar-sm">
+                                    @else
+                                    <i class="fa-regular fa-circle-user" style="color: #000000; "></i>
+                                    @endif
+                                </button>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a href="{{ route('profile') }}" class="dropdown-item">Profile</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    <hr class="hr-blurry">
+                                    <a href="#contact" class="dropdown-item">Contact Us</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
@@ -80,6 +128,16 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer class="text-center text-dark mt-5 d-flex align-items-center"  style="background-color: #E7DA3D; height:168.51px">
+            <div class="container">
+                <a href="https://www.instagram.com/" class="text-decoration-none text-black me-3"><i class="fa-brands fa-instagram  fs-5"></i></a>
+                <a href="https://www.facebook.com/" class="text-decoration-none text-black me-3"><i class="fa-brands fa-square-facebook fs-5"></i></a>
+                <a href="https://www.snapchat.com/" class="text-decoration-none text-black"><i class="fa-brands fa-snapchat fs-5"></i></a>
+                <p class="fs- mt-3">Copyright ©️ 2023</p>
+            </div>
+        </footer>
     </div>
+    @yield('script')
     </body>
 </html>

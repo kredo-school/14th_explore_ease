@@ -15,6 +15,9 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <a href="{{route('restaurant.show')}}">Go to restaurants show page</a>
+
+                    Thank you!
                 </div>
             </div>
         </div>
