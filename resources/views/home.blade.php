@@ -21,6 +21,8 @@
                 </div>
             </div>
         </div>
+<div id='map' style='width: 400px; height: 300px;'></div>
+
     </div>
 </div>
 @endsection
