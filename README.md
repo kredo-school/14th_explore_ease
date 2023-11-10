@@ -1,6 +1,5 @@
 ## Setup Github
 
-Sample
 ##### Check `~/.ssh/id_rsa.pub`
 
 ```sh
