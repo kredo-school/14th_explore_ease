@@ -14,7 +14,7 @@
                 <div class="card-body w-100 border">
                     <div class="row">
                         <div class="col-9">
-                            <p class="h3">Restaurant name</p>
+                            <a href="{{ route('restaurant.detail') }}"><p class="h3">Restaurant name</p></a>
                                 {{-- @if($post->user->avatar) --}}
                                     {{-- <img src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}" class="rounded-circle avatar-sm"> --}}
                                 {{-- @else
@@ -52,7 +52,7 @@
                 <div class="card-body w-100 border">
                     <div class="row">
                         <div class="col-9">
-                            <p class="h3">Restaurant name</p>
+                        <a href="{{ route('restaurant.detail') }}"><p class="h3">Restaurant name</p></a>
                                 {{-- @if($post->user->avatar) --}}
                                     {{-- <img src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}" class="rounded-circle avatar-sm"> --}}
                                 {{-- @else
@@ -92,7 +92,7 @@
                 <div class="card-body w-100 border">
                     <div class="row">
                         <div class="col-9">
-                            <p class="h3">Restaurant name</p>
+                            <a href="{{ route('restaurant.detail') }}"><p class="h3">Restaurant name</p></a>
                                 {{-- @if($post->user->avatar) --}}
                                     {{-- <img src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}" class="rounded-circle avatar-sm"> --}}
                                 {{-- @else
@@ -130,7 +130,7 @@
                 <div class="card-body w-100 border">
                     <div class="row">
                         <div class="col-9">
-                            <p class="h3">Restaurant name</p>
+                        <a href="{{ route('restaurant.detail') }}"><p class="h3">Restaurant name</p></a>
                                 {{-- @if($post->user->avatar) --}}
                                     {{-- <img src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}" class="rounded-circle avatar-sm"> --}}
                                 {{-- @else
@@ -161,6 +161,7 @@
             </div>
         </div>
     </div>
+
 
 </div>
 @endsection
