@@ -29,6 +29,13 @@ class DatabaseSeeder extends Seeder
             RestaurantSeeder::class,
             ReviewSeeder::class,
             BookmarkSeeder::class,
+            SeatSeeder::class,
+            CourseSeeder::class,
+            RestaurantPhotoSeeder::class,
+            OpenHourSeeder::class,
+            FeatureSeeder::class,
+            BudgetSeeder::class,
+            ReservationSeeder::class,
         ]);
     }
 }
