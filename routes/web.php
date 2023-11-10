@@ -38,4 +38,4 @@ Route::get('/restaurants/{id}/review', [App\Http\Controllers\HomeController::cla
 
 Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
 
-Route::get('/profile/bookmark', [ProfileController::])
+Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
