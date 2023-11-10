@@ -37,3 +37,5 @@ Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name(
 Route::get('/restaurants/{id}/review', [App\Http\Controllers\HomeController::class, 'restaurantsReview'])->name('restaurants.review');
 
 Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
+
+Route::get('/profile/bookmark', [ProfileController::])
