@@ -67,13 +67,14 @@
                             @endif
                         @else
                         <!-- Link to Restaurant page -->
-                        <li class="nav-item nav-item my-auto me-3">
-                            <a class="nav-link dropdown-toggle my-auto text-black" href="#" id="dropdown" data-bs-toggle="dropdown">Restaurant</a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a href="{{ route('restaurant.show') }}" class="dropdown-item">See Restaurants</a>
-                                <a href="{{ route('restaurant.adding') }}" class="dropdown-item">Adding new restaurant</a>
-                            </div>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="restaurant-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Restaurant
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="restaurant-dropdown">
+                                <li><a class="dropdown-item" href="{{ route('restaurant.show') }}">See Restaurants</a></li>
+                                <li><a class="dropdown-item" href="{{ route('restaurant.adding') }}">Adding new restaurant</a></li>
+                            </ul>
                         </li>
 
                         <!-- Link to Ranking page -->
