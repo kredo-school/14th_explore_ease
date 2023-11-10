@@ -29,4 +29,16 @@ class HomeController extends Controller
     public function restaurantsDetail(){
         return view('restaurants.detail');
     }
+
+    public function restaurants(){
+        return view('restaurants.show');
+    }
+
+    public function profileBase(){
+        return view('users/profile');
+    }
+
+    public function restaurantsReview(){
+        return view('restaurants.review');
+    }
 }
