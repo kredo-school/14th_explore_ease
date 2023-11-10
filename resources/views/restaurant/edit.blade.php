@@ -25,7 +25,7 @@
             </div>
             <div class="mb-3">
                 <label for="restaurant_address" class="form-label h3">Restaurant address</label>
-                <input type="text" id="restaurant_address" class="form-control" placeholder="">
+                <input type="text" id="restaurant_address" class="form-control" placeholder="Restaurant address">
             </div>
             <div class="mb-3">
                 <label for="restaurant_location" class="form-label h3">Please place the pin accurately at your outlet's location on the map</label>
@@ -74,7 +74,7 @@
             </div>
             <div class="mb-3">
                 <label for="Menu" class="form-label h3">Menu</label><br>
-                <textarea type="textarea" id="Menu" rows="4" name="Menu" class="form-control"></textarea>
+                <textarea type="textarea" id="Menu" rows="4" name="Menu" class="form-control">Menu</textarea>
             </div>
             <div class="mb-3" id="course-menu-parent">
                 <label for="Course_menu" class="form-label h3">Course Menu</label><br>
