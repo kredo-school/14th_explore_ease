@@ -20,7 +20,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @yield('styles')
-    
+
     {{-- Styles --}}
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
@@ -38,7 +38,8 @@
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #E7DA3D;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img class="logo" src="../storage/Logo_ExploreEase_temporaly.png" alt="Logo">
+                    <img class="logo" src="{{ asset('assets/Logo_ExploreEase_fin.png') }}" alt="Logo" style="width:32px; height:32px;">
+                    Explore-Ease
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -67,13 +68,14 @@
                             @endif
                         @else
                         <!-- Link to Restaurant page -->
-                        <li class="nav-item nav-item my-auto me-3">
-                            <a class="nav-link dropdown-toggle my-auto text-black" href="#" id="dropdown" data-bs-toggle="dropdown">Restaurant</a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a href="{{ route('restaurant.show') }}" class="dropdown-item">See Restaurants</a>
-                                <a href="{{ route('restaurant.adding') }}" class="dropdown-item">Adding new restaurant</a>
-                            </div>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="restaurant-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Restaurant
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="restaurant-dropdown">
+                                <li><a class="dropdown-item" href="{{ route('restaurant.show') }}">See Restaurants</a></li>
+                                <li><a class="dropdown-item" href="{{ route('restaurant.adding') }}">Adding new restaurant</a></li>
+                            </ul>
                         </li>
 
                         <!-- Link to Ranking page -->

@@ -74,7 +74,7 @@
             </div>
             <div class="mb-3">
                 <label for="Menu" class="form-label h3">Menu</label><br>
-                <textarea type="textarea" id="Menu" rows="4" name="Menu" class="form-control"></textarea>
+                <textarea type="textarea" id="Menu" rows="4" name="Menu" class="form-control">Menu</textarea>
             </div>
             <div class="mb-3" id="course-menu-parent">
                 <label for="Course_menu" class="form-label h3">Course Menu</label><br>
