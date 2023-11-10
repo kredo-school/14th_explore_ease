@@ -9,147 +9,55 @@
                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {{-- end --}}
 
-<div class="container w-50">
-    <h2>Dashboards</h2>
+<div class="container w-75">
+    <h2>All users</h2>
     {{-- Search Box --}}
-    <div class="container">
-
+    <div class="container text-end mb-3">
+        <form class="form-inline">
+          <div class="form-group row d-flex flex-row-reverse">
+            <div class="col-sm-3">
+              <input type="password" class="form-control" id="inputPassword" placeholder="Search">
+            </div>
+          </div>
+        </form>
     </div>
 
     {{-- User Info Date Table --}}
     <div class="table-responsive">
-        <table class="table table-striped table-sm">
+        <table class="table">
           <thead>
             <tr>
-              <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">id</font></font></th>
-              <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Username</font></font></th>
-              <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">name</font></font></th>
-              <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">タイトル</font></font></th>
-              <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">タイトル</font></font></th>
-              <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">タイトル</font></font></th>
-              <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">タイトル</font></font></th>
+              <th scope="col">id</th>
+              <th scope="col">Username</th>
+              <th  colspan="2">name</th>
+              <th scope="col">registration date</th>
+              <th scope="col">e-mail</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
             </tr>
           </thead>
+          {{-- Data starting here --}}
           <tbody>
             <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,001</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">データ</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ランダム</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">豊かにする</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">スケジュール</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">スケジュール</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">スケジュール</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">スケジュール</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,002</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">豊かにする</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">壮大</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">デザイン</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">調整</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,003</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ランダム</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">リッチ</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">価値</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">役に立つ</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,003</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">情報</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">豊かにする</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">実例</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ランダム</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,004</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">スケジュール</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">データ</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">調整</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">価値</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,005</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">価値</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">壮大</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">スケジュール</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">豊かにする</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,006</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">価値</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">実例</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">リッチ</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ランダム</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,007</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">豊かにする</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">役に立つ</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">情報</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">壮大</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,008</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">データ</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ランダム</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">豊かにする</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">スケジュール</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,009</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">豊かにする</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">壮大</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">デザイン</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">調整</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,010</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ランダム</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">リッチ</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">価値</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">役に立つ</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,011</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">情報</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">豊かにする</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">実例</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ランダム</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,012</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">スケジュール</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">豊かにする</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">調整</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">価値</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,013</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">価値</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">壮大</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">スケジュール</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">デザイン</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,014</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">価値</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">実例</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">リッチ</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ランダム</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1,015</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">データ</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">役に立つ</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">情報</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">スケジュール</font></font></td>
+              <td>#</td>
+              <td>O-Re!</td>
+              <td>Ore</td>
+              <td>Dayo</td>
+              <td>11:00  12 OCT 2024</td>
+              <td>messi@gmail,be.sp</td>
+              <td>1234567890</td>
+              <td><button type="button" class="btn btn-secondary">Inactivate</button></td>
             </tr>
           </tbody>
         </table>
       </div>
-
+      <!--permanent_area-->
+        <div class="d-flex justify-content-center">
+          <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="<%preventry_url>">previous &lt;&lt;</a>
+        <!--nextentry-->
+          <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover mx-5" href="<%nextentry_url>">&gt;&gt;next</a>
+        <!--/permanent_area-->
+        </div>
 </div>
 
 
