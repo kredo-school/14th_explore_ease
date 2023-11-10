@@ -29,185 +29,191 @@
                             </form>
                         </div>
                     </div>
-                    <div class="row mt-4">
-                        <table class="table table-sm table-responsive table-light">
-                            <th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </th>
-                            <tr style="vertical-align: middle">
-                                <td>Restaurantname</td>
-                                <td>18:00-21:00<br>25/OCT/2023</td>
-                                <td>2 person</td>
-                                <td>Course 1</td>
-                                <td>¥16,000</td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary">Edit</a>
-                                </td>
-                                <td>
-                                    {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                    <button class="btn btn-secondary">
-                                        Cancel
-                                    </button>
-                                </td>
-                            </tr>
+                    <div class="row">
+                        <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Restaurant</th>
+                                    <th>Date Time</th>
+                                    <th>Number of people</th>
+                                    <th>Menu</th>
+                                    <th>Price</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="vertical-align: middle">
+                                    <td>Restaurantname</td>
+                                    <td>18:00-21:00<br>25/OCT/2023</td>
+                                    <td>2 person</td>
+                                    <td>Course 1</td>
+                                    <td>¥16,000</td>
+                                    <td>
+                                        <a href="#" class="btn btn-secondary">Edit</a>
+                                    </td>
+                                    <td>
+                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                        <button class="btn btn-secondary">
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
 
-                            <tr style="vertical-align: middle">
-                                <td>Restaurantname</td>
-                                <td>18:00-21:00<br>25/OCT/2023</td>
-                                <td>2 person</td>
-                                <td>Course 1</td>
-                                <td>¥16,000</td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary">Edit</a>
-                                </td>
-                                <td>
-                                    {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                    <button class="btn btn-secondary">
-                                        Cancel
-                                    </button>
-                                </td>
-                            </tr>
 
-                            <tr style="vertical-align: middle">
-                                <td>Restaurantname</td>
-                                <td>18:00-21:00<br>25/OCT/2023</td>
-                                <td>2 person</td>
-                                <td>Course 1</td>
-                                <td>¥16,000</td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary">Edit</a>
-                                </td>
-                                <td>
-                                    {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                    <button class="btn btn-secondary">
-                                        Cancel
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr style="vertical-align: middle">
+                                    <td>Restaurantname</td>
+                                    <td>18:00-21:00<br>25/OCT/2023</td>
+                                    <td>2 person</td>
+                                    <td>Course 1</td>
+                                    <td>¥16,000</td>
+                                    <td>
+                                        <a href="#" class="btn btn-secondary">Edit</a>
+                                    </td>
+                                    <td>
+                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                        <button class="btn btn-secondary">
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
 
-                            <tr style="vertical-align: middle">
-                                <td>Restaurantname</td>
-                                <td>18:00-21:00<br>25/OCT/2023</td>
-                                <td>2 person</td>
-                                <td>Course 1</td>
-                                <td>¥16,000</td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary">Edit</a>
-                                </td>
-                                <td>
-                                    {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                    <button class="btn btn-secondary">
-                                        Cancel
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr style="vertical-align: middle">
+                                    <td>Restaurantname</td>
+                                    <td>18:00-21:00<br>25/OCT/2023</td>
+                                    <td>2 person</td>
+                                    <td>Course 1</td>
+                                    <td>¥16,000</td>
+                                    <td>
+                                        <a href="#" class="btn btn-secondary">Edit</a>
+                                    </td>
+                                    <td>
+                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                        <button class="btn btn-secondary">
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
 
-                            <tr style="vertical-align: middle">
-                                <td>Restaurantname</td>
-                                <td>18:00-21:00<br>25/OCT/2023</td>
-                                <td>2 person</td>
-                                <td>Course 1</td>
-                                <td>¥16,000</td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary">Edit</a>
-                                </td>
-                                <td>
-                                    {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                    <button class="btn btn-secondary">
-                                        Cancel
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr style="vertical-align: middle">
+                                    <td>Restaurantname</td>
+                                    <td>18:00-21:00<br>25/OCT/2023</td>
+                                    <td>2 person</td>
+                                    <td>Course 1</td>
+                                    <td>¥16,000</td>
+                                    <td>
+                                        <a href="#" class="btn btn-secondary">Edit</a>
+                                    </td>
+                                    <td>
+                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                        <button class="btn btn-secondary">
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
 
-                            <tr style="vertical-align: middle">
-                                <td>Restaurantname</td>
-                                <td>18:00-21:00<br>25/OCT/2023</td>
-                                <td>2 person</td>
-                                <td>Course 1</td>
-                                <td>¥16,000</td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary">Edit</a>
-                                </td>
-                                <td>
-                                    {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                    <button class="btn btn-secondary">
-                                        Cancel
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr style="vertical-align: middle">
+                                    <td>Restaurantname</td>
+                                    <td>18:00-21:00<br>25/OCT/2023</td>
+                                    <td>2 person</td>
+                                    <td>Course 1</td>
+                                    <td>¥16,000</td>
+                                    <td>
+                                        <a href="#" class="btn btn-secondary">Edit</a>
+                                    </td>
+                                    <td>
+                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                        <button class="btn btn-secondary">
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
 
-                            <tr style="vertical-align: middle">
-                                <td>Restaurantname</td>
-                                <td>18:00-21:00<br>25/OCT/2023</td>
-                                <td>2 person</td>
-                                <td>Course 1</td>
-                                <td>¥16,000</td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary">Edit</a>
-                                </td>
-                                <td>
-                                    {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                    <button class="btn btn-secondary">
-                                        Cancel
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr style="vertical-align: middle">
+                                    <td>Restaurantname</td>
+                                    <td>18:00-21:00<br>25/OCT/2023</td>
+                                    <td>2 person</td>
+                                    <td>Course 1</td>
+                                    <td>¥16,000</td>
+                                    <td>
+                                        <a href="#" class="btn btn-secondary">Edit</a>
+                                    </td>
+                                    <td>
+                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                        <button class="btn btn-secondary">
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
 
-                            <tr style="vertical-align: middle">
-                                <td>Restaurantname</td>
-                                <td>18:00-21:00<br>25/OCT/2023</td>
-                                <td>2 person</td>
-                                <td>Course 1</td>
-                                <td>¥16,000</td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary">Edit</a>
-                                </td>
-                                <td>
-                                    {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                    <button class="btn btn-secondary">
-                                        Cancel
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr style="vertical-align: middle">
+                                    <td>Restaurantname</td>
+                                    <td>18:00-21:00<br>25/OCT/2023</td>
+                                    <td>2 person</td>
+                                    <td>Course 1</td>
+                                    <td>¥16,000</td>
+                                    <td>
+                                        <a href="#" class="btn btn-secondary">Edit</a>
+                                    </td>
+                                    <td>
+                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                        <button class="btn btn-secondary">
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
 
-                            <tr style="vertical-align: middle">
-                                <td>Restaurantname</td>
-                                <td>18:00-21:00<br>25/OCT/2023</td>
-                                <td>2 person</td>
-                                <td>Course 1</td>
-                                <td>¥16,000</td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary">Edit</a>
-                                </td>
-                                <td>
-                                    {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                    <button class="btn btn-secondary">
-                                        Cancel
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr style="vertical-align: middle">
+                                    <td>Restaurantname</td>
+                                    <td>18:00-21:00<br>25/OCT/2023</td>
+                                    <td>2 person</td>
+                                    <td>Course 1</td>
+                                    <td>¥16,000</td>
+                                    <td>
+                                        <a href="#" class="btn btn-secondary">Edit</a>
+                                    </td>
+                                    <td>
+                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                        <button class="btn btn-secondary">
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
 
-                            <tr style="vertical-align: middle">
-                                <td>Restaurantname</td>
-                                <td>18:00-21:00<br>25/OCT/2023</td>
-                                <td>2 person</td>
-                                <td>Course 1</td>
-                                <td>¥16,000</td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary">Edit</a>
-                                </td>
-                                <td>
-                                    {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                    <button class="btn btn-secondary">
-                                        Cancel
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr style="vertical-align: middle">
+                                    <td>Restaurantname</td>
+                                    <td>18:00-21:00<br>25/OCT/2023</td>
+                                    <td>2 person</td>
+                                    <td>Course 1</td>
+                                    <td>¥16,000</td>
+                                    <td>
+                                        <a href="#" class="btn btn-secondary">Edit</a>
+                                    </td>
+                                    <td>
+                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                        <button class="btn btn-secondary">
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr style="vertical-align: middle">
+                                    <td>Restaurantname</td>
+                                    <td>18:00-21:00<br>25/OCT/2023</td>
+                                    <td>2 person</td>
+                                    <td>Course 1</td>
+                                    <td>¥16,000</td>
+                                    <td>
+                                        <a href="#" class="btn btn-secondary">Edit</a>
+                                    </td>
+                                    <td>
+                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                        <button class="btn btn-secondary">
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
 
                         <!--permanent_area-->
