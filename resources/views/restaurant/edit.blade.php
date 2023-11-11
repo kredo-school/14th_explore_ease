@@ -74,7 +74,7 @@
             </div>
             <div class="mb-3">
                 <label for="Menu" class="form-label h3">Menu</label><br>
-                <textarea type="textarea" id="Menu" rows="4" name="Menu" class="form-control"></textarea>
+                <textarea type="textarea" id="Menu" rows="4" name="Menu" class="form-control">Menu</textarea>
             </div>
             <div class="mb-3" id="course-menu-parent">
                 <label for="Course_menu" class="form-label h3">Course Menu</label><br>
@@ -106,6 +106,25 @@
                         <input type="file" name="photo">
                     </div>
                 </div>
+
+        <!--photo uploading design-->
+            <!-- <div>
+                <label for="inputTag">
+                    Select Image <br/>
+                    <i class="fa fa-2x fa-camera"></i>
+                    <input id="inputTag" type="file"/>
+                    <br/>
+                    <span id="imageName"></span>
+                </label>
+                </div>
+                <script>
+                    let input = document.getElementById("inputTag");
+                    let imageName = document.getElementById("imageName")
+                    input.addEventListener("change", ()=>{
+                        let inputImage = document.querySelector("input[type=file]").files[0];
+                        imageName.innerText = inputImage.name;
+                    })
+                </script> -->
             </div>
 
             <div class="mb-3">
