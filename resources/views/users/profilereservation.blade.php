@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-     {{-- profile page --}}
-    {{-- @include('') --}}
+    {{-- profile page --}}
+    @include('users.header')
 
     <form method="POST" action="#">
         @csrf
@@ -11,7 +11,7 @@
 
                 {{-- profile list --}}
                 <div class="col-3">
-                    {{-- @include('') --}}
+                    @include('users.menu')
                 </div>
 
                 {{-- reservation list --}}
