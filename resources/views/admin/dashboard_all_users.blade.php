@@ -46,24 +46,24 @@
           {{-- Data starting here --}}
           <tbody>
             <tr>
-              <td>#</td>
-              <td>O-Re!</td>
-              <td>Ore</td>
-              <td>Dayo</td>
-              <td>11:00  12 OCT 2024</td>
-              <td>messi@gmail,be.sp</td>
-              <td>1234567890</td>
+              <td class="py-3">#</td>
+              <td class="py-3">O-Re!</td>
+              <td class="py-3">Ore</td>
+              <td class="py-3">Dayo</td>
+              <td class="py-3">11:00  12 OCT 2024</td>
+              <td class="py-3">messi@gmail,be.sp</td>
+              <td class="py-3">1234567890</td>
               <td><button type="button" class="btn btn-secondary">Inactivate</button></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <!--permanent_area-->
+      {{-- permanent_area --}}
         <div class="d-flex justify-content-center">
+        <!--previousry-->
           <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="<%preventry_url>">previous &lt;&lt;</a>
         <!--nextentry-->
           <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover mx-5" href="<%nextentry_url>">&gt;&gt;next</a>
-        <!--/permanent_area-->
         </div>
 </div>
 
