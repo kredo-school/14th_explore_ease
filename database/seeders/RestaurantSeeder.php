@@ -28,7 +28,7 @@ class RestaurantSeeder extends Seeder
                 'description' => 'Traditional Japanese Restaurant.',
                 'menu' => 'Sushi: $2000',
 
-                'areatype_id' => '147',
+                'areatype_id' => 147,
                 'address' => '東京都新宿区',
                 'latitude' => 35.690725,
                 'longitude' => 139.699851,
@@ -43,7 +43,7 @@ class RestaurantSeeder extends Seeder
                 'description' => 'Traditional Japanese Restaurant.',
                 'menu' => 'Sushi: $2000',
 
-                'areatype_id' => '147',
+                'areatype_id' => 147,
                 'address' => '東京都新宿区',
                 'latitude' => 35.690725,
                 'longitude' => 139.699851,
@@ -58,7 +58,7 @@ class RestaurantSeeder extends Seeder
                 'description' => 'Traditional Japanese Restaurant.',
                 'menu' => 'Sushi: $2000',
 
-                'areatype_id' => '147',
+                'areatype_id' => 147,
                 'address' => '東京都新宿区',
                 'latitude' => 35.690725,
                 'longitude' => 139.699851,
@@ -73,7 +73,7 @@ class RestaurantSeeder extends Seeder
                 'description' => 'Traditional Japanese Restaurant.',
                 'menu' => 'Sushi: $2000',
 
-                'areatype_id' => '147',
+                'areatype_id' => 147,
                 'address' => '東京都新宿区',
                 'latitude' => 35.690725,
                 'longitude' => 139.699851,
@@ -88,7 +88,7 @@ class RestaurantSeeder extends Seeder
                 'description' => 'Traditional Japanese Restaurant.',
                 'menu' => 'Sushi: $2000',
 
-                'areatype_id' => '147',
+                'areatype_id' => 147,
                 'address' => '東京都新宿区',
                 'latitude' => 35.690725,
                 'longitude' => 139.699851,
