@@ -30,6 +30,10 @@ class HomeController extends Controller
         return view('restaurants.detail');
     }
 
+    public function restaurantsRanking(){
+        return view('restaurants.ranking');
+    }
+
     public function restaurants(){
         return view('restaurants.show');
     }

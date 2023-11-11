@@ -5,18 +5,29 @@
 
 @include('users.header')
 
+<link rel="stylesheet" href="../public/css/style.css">
 
 <div class="container w-75 mt-4 mx-auto">
-    <div class="row justify-content-center">
+    <div class="row">
         <div class="col-3">
             @include('users.menu')
         </div>
-        <div class="col-9">
-            <div class="h1">Bookmarks</div>
-
-            <div class="row my-2">
-                @for($i=1; $i<=3; $i++)
-                    <div class="col-4">
+        <div class="col-9 p-0">
+            <div class="row">
+                <div class="col">
+                    <div class="h1">Bookmarks</div>
+                </div>
+                <div class="col-auto me-0 pe-0">
+                    {{-- search form --}}
+                    <form method="GET" action="http://www.google.co.jp/search">
+                        <input type="search" name="search" class="btn btn-light btn-lg text-start" placeholder="Search">
+                        {{-- search button --}}
+                        <button type="submit" class="btn btn-light btn-lg" name="submit" alt="search" value="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="rcards">
+                @for($i=1; $i<=5; $i++)
                         <div class="card" style="width: 265px; height: 258px;">
                             <div class="card-header p-0">
                                 <p class="bg-warning m-0" style="height: 173px; width: 265px;">image here</p>
@@ -44,16 +55,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 @endfor
             </div>
-
         </div>
     </div>
-
-
-
-
-
 </div>
 @endsection
