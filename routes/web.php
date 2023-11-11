@@ -19,6 +19,11 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('admin/dashboard_all_owners', function () {
+    return view('admin/dashboard_all_owners');
+});
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
