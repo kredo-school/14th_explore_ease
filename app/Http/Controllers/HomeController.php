@@ -41,4 +41,8 @@ class HomeController extends Controller
     public function restaurantsReview(){
         return view('restaurants.review');
     }
+
+    public function profileReview(){
+        return view('users.profile_review');
+    }
 }

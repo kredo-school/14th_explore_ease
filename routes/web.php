@@ -28,6 +28,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/restaurant/detail', [App\Http\Controllers\HomeController::class, 'restaurantsDetail'])->name('restaurant.detail');
 
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
+Route::get('/profile/review', [App\Http\Controllers\HomeController::class, 'profileReview'])->name('profile.review');
 
 
 Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
