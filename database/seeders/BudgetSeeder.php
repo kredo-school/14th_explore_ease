@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Budget;
+use App\Enums\TimezoneTypeEnum;
 
 class BudgetSeeder extends Seeder
 {
@@ -26,56 +27,56 @@ class BudgetSeeder extends Seeder
         $budgets = [
             [
                 'restaurant_id' => 1,
-                'timezonetype' => 0,
+                'timezonetype' => TimezoneTypeEnum::Lunch,
                 'budget' => 2000,
             ],
             [
                 'restaurant_id' => 1,
-                'timezonetype' => 1,
+                'timezonetype' => TimezoneTypeEnum::Dinner,
                 'budget' => 4000,
             ],
 
             [
                 'restaurant_id' => 2,
-                'timezonetype' => 0,
+                'timezonetype' => TimezoneTypeEnum::Lunch,
                 'budget' => 2000,
             ],
             [
                 'restaurant_id' => 2,
-                'timezonetype' => 1,
+                'timezonetype' => TimezoneTypeEnum::Dinner,
                 'budget' => 4000,
             ],
 
             [
                 'restaurant_id' => 3,
-                'timezonetype' => 0,
+                'timezonetype' => TimezoneTypeEnum::Lunch,
                 'budget' => 2000,
             ],
             [
                 'restaurant_id' => 3,
-                'timezonetype' => 1,
+                'timezonetype' => TimezoneTypeEnum::Dinner,
                 'budget' => 4000,
             ],
 
             [
                 'restaurant_id' => 4,
-                'timezonetype' => 0,
+                'timezonetype' => TimezoneTypeEnum::Lunch,
                 'budget' => 2000,
             ],
             [
                 'restaurant_id' => 4,
-                'timezonetype' => 1,
+                'timezonetype' => TimezoneTypeEnum::Dinner,
                 'budget' => 4000,
             ],
 
             [
                 'restaurant_id' => 5,
-                'timezonetype' => 0,
+                'timezonetype' => TimezoneTypeEnum::Lunch,
                 'budget' => 2000,
             ],
             [
                 'restaurant_id' => 5,
-                'timezonetype' => 1,
+                'timezonetype' => TimezoneTypeEnum::Dinner,
                 'budget' => 4000,
             ],
         ];
