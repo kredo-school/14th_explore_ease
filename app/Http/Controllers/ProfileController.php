@@ -64,6 +64,6 @@ class ProfileController extends Controller
     }
 
     public function bookmark(Profile $profile){
-        view('users.bookmark');
+        return view('users.bookmark');
     }
 }
