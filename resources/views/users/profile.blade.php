@@ -2,26 +2,8 @@
 
 @section('content')
      {{-- profile page --}}
-    <div class="profile container w-75">
-        <div class="row mt-2 p-2">
-            <i class="fa-solid fa-user icon-user"></i>
-        </div>
-        <div class="display-5 m-4">Lionel Messi</div>
-        
-        <div class="vertical-line mt-4">
-            <h3>5</h3><p class="p-1">Restaurant</p>
-        </div>
-        <div class="vertical-line mt-4">
-            <h3>5</h3><p class="p-1">Resevation</p>
-        </div>
-        <div class="vertical-line mt-4">
-            <h3>5</h3><p class="p-1">Reviews</p>
-        </div>
-        <div class="vertical-line mt-4">
-            <h3>5</h3><p class="p-1">Bookmarks</p>
-        </div>
-    </div>
-    
+    @include('users.header')
+
     {{-- profile list --}}
     
     <form method="POST" action="#">
@@ -29,12 +11,7 @@
         <div class="container w-75 mt-4 mx-auto">
             <div class="row justify-content-center">
                 <div class="col-3">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item"> Profile </a>
-                        <a href="#" class="list-group-item"> Reservation </a>
-                        <a href="#" class="list-group-item"> Reviews </a>
-                        <a href="#" class="list-group-item"> Bookmarks </a>
-                    </div>
+                    @include('users.menu')
                 </div>
                 <div class="col-9">
                     <div class="row ">
