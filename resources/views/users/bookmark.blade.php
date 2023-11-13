@@ -28,12 +28,12 @@
             </div>
             <div class="rcards">
                 @for($i=1; $i<=5; $i++)
-                        <div class="card" style="width: 265px; height: 258px;">
+                        <div class="card mb-2" style="width: 265px; height: auto;">
                             <div class="card-header p-0">
                                 <p class="bg-warning m-0" style="height: 173px; width: 265px;">image here</p>
                             </div>
-                            <div class="card-body w-100 border mt-2 m-0 ms-2">
-                                <div class="row">
+                            <div class="card-body w-100 border p-0">
+                                <div class="row ps-2">
                                     <div class="col-9">
                                         <a href="{{ route('restaurant.detail') }}"><p class="h4">Restaurant name</p></a>
                                     </div>
@@ -43,7 +43,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row ps-2">
                                     <div class="col-3">
                                         <p class="border border-dark">
                                             4.5 <i class="fa-solid fa-star"></i>
