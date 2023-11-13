@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\Course;
 
 class CourseSeeder extends Seeder
@@ -20,13 +21,20 @@ class CourseSeeder extends Seeder
      */
     public function run(): void
     {
+        // set 20M on mysql's max_allowed_packet temporarily to avoid over packet size
+        DB::statement('SET GLOBAL max_allowed_packet=20971520');
+
+        $course_image1 = 'data:image/' . 'jpg' . ';base64,' . base64_encode(file_get_contents('public/assets/seeder/course_1.jpg'));
+        $course_image2 = 'data:image/' . 'jpg' . ';base64,' . base64_encode(file_get_contents('public/assets/seeder/course_2.jpg'));
+        $course_image3 = 'data:image/' . 'jpg' . ';base64,' . base64_encode(file_get_contents('public/assets/seeder/course_3.jpg'));
+
         $courses = [
             [
                 'restaurant_id' => 1,
                 'name' => '1 hour course',
                 'description' => 'For 1 hour course.',
                 'price' => 3000,
-                'photo' => null,
+                'photo' => $course_image1,
                 'reservation_minutes' => 60,
             ],
             [
@@ -34,7 +42,7 @@ class CourseSeeder extends Seeder
                 'name' => '1.5 hour course',
                 'description' => 'For 1.5 hour course.',
                 'price' => 4000,
-                'photo' => null,
+                'photo' => $course_image2,
                 'reservation_minutes' => 90,
             ],
             [
@@ -42,7 +50,7 @@ class CourseSeeder extends Seeder
                 'name' => '2 hour course',
                 'description' => 'For 2 hour course.',
                 'price' => 5000,
-                'photo' => null,
+                'photo' => $course_image3,
                 'reservation_minutes' => 120,
             ],
 
@@ -51,7 +59,7 @@ class CourseSeeder extends Seeder
                 'name' => '1 hour course',
                 'description' => 'For 1 hour course.',
                 'price' => 3000,
-                'photo' => null,
+                'photo' => $course_image1,
                 'reservation_minutes' => 60,
             ],
             [
@@ -59,7 +67,7 @@ class CourseSeeder extends Seeder
                 'name' => '1.5 hour course',
                 'description' => 'For 1.5 hour course.',
                 'price' => 4000,
-                'photo' => null,
+                'photo' => $course_image2,
                 'reservation_minutes' => 90,
             ],
             [
@@ -67,7 +75,7 @@ class CourseSeeder extends Seeder
                 'name' => '2 hour course',
                 'description' => 'For 2 hour course.',
                 'price' => 5000,
-                'photo' => null,
+                'photo' => $course_image3,
                 'reservation_minutes' => 120,
             ],
 
@@ -76,7 +84,7 @@ class CourseSeeder extends Seeder
                 'name' => '1 hour course',
                 'description' => 'For 1 hour course.',
                 'price' => 3000,
-                'photo' => null,
+                'photo' => $course_image1,
                 'reservation_minutes' => 60,
             ],
             [
@@ -84,7 +92,7 @@ class CourseSeeder extends Seeder
                 'name' => '1.5 hour course',
                 'description' => 'For 1.5 hour course.',
                 'price' => 4000,
-                'photo' => null,
+                'photo' => $course_image2,
                 'reservation_minutes' => 90,
             ],
             [
@@ -92,7 +100,7 @@ class CourseSeeder extends Seeder
                 'name' => '2 hour course',
                 'description' => 'For 2 hour course.',
                 'price' => 5000,
-                'photo' => null,
+                'photo' => $course_image3,
                 'reservation_minutes' => 120,
             ],
 
@@ -101,7 +109,7 @@ class CourseSeeder extends Seeder
                 'name' => '1 hour course',
                 'description' => 'For 1 hour course.',
                 'price' => 3000,
-                'photo' => null,
+                'photo' => $course_image1,
                 'reservation_minutes' => 60,
             ],
             [
@@ -109,7 +117,7 @@ class CourseSeeder extends Seeder
                 'name' => '1.5 hour course',
                 'description' => 'For 1.5 hour course.',
                 'price' => 4000,
-                'photo' => null,
+                'photo' => $course_image2,
                 'reservation_minutes' => 90,
             ],
             [
@@ -117,7 +125,7 @@ class CourseSeeder extends Seeder
                 'name' => '2 hour course',
                 'description' => 'For 2 hour course.',
                 'price' => 5000,
-                'photo' => null,
+                'photo' => $course_image3,
                 'reservation_minutes' => 120,
             ],
 
@@ -126,7 +134,7 @@ class CourseSeeder extends Seeder
                 'name' => '1 hour course',
                 'description' => 'For 1 hour course.',
                 'price' => 3000,
-                'photo' => null,
+                'photo' => $course_image1,
                 'reservation_minutes' => 60,
             ],
             [
@@ -134,7 +142,7 @@ class CourseSeeder extends Seeder
                 'name' => '1.5 hour course',
                 'description' => 'For 1.5 hour course.',
                 'price' => 4000,
-                'photo' => null,
+                'photo' => $course_image2,
                 'reservation_minutes' => 90,
             ],
             [
@@ -142,7 +150,7 @@ class CourseSeeder extends Seeder
                 'name' => '2 hour course',
                 'description' => 'For 2 hour course.',
                 'price' => 5000,
-                'photo' => null,
+                'photo' => $course_image3,
                 'reservation_minutes' => 120,
             ],
 
