@@ -30,6 +30,9 @@ Route::get('admin/dashboard_all_users', function () {
 Route::get('admin/all_restaurants', function () {
     return view('admin/all_restaurants');
 });
+Route::get('admin/all_reviews', function () {
+    return view('admin/all_reviews');
+});
 
 Auth::routes();
 
