@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     {{-- profile page --}}
     @include('users.header')
 
@@ -44,7 +47,10 @@
                             <tbody>
                                 <tr style="vertical-align: middle">
                                     <td>Restaurantname</td>
-                                    <td style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</td>
+                                    <td>
+                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
+                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
+                                    </td>
                                     <td>4.5 <i class="fa-solid fa-star"></i></td>
                                     <td>18:00-21:00<br>25/OCT/2023</td>
                                     <td>
@@ -60,7 +66,10 @@
 
                                 <tr style="vertical-align: middle">
                                     <td>Restaurantname</td>
-                                    <td style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</td>
+                                    <td>
+                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
+                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
+                                    </td>
                                     <td>4.5 <i class="fa-solid fa-star"></i></td>
                                     <td>18:00-21:00<br>25/OCT/2023</td>
                                     <td>
@@ -76,7 +85,10 @@
 
                                 <tr style="vertical-align: middle">
                                     <td>Restaurantname</td>
-                                    <td style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</td>
+                                    <td>
+                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
+                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
+                                    </td>
                                     <td>4.5 <i class="fa-solid fa-star"></i></td>
                                     <td>18:00-21:00<br>25/OCT/2023</td>
                                     <td>
@@ -92,7 +104,10 @@
 
                                 <tr style="vertical-align: middle">
                                     <td>Restaurantname</td>
-                                    <td style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</td>
+                                    <td>
+                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
+                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
+                                    </td>
                                     <td>4.5 <i class="fa-solid fa-star"></i></td>
                                     <td>18:00-21:00<br>25/OCT/2023</td>
                                     <td>
@@ -108,7 +123,10 @@
 
                                 <tr style="vertical-align: middle">
                                     <td>Restaurantname</td>
-                                    <td style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</td>
+                                    <td>
+                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
+                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
+                                    </td>
                                     <td>4.5 <i class="fa-solid fa-star"></i></td>
                                     <td>18:00-21:00<br>25/OCT/2023</td>
                                     <td>
@@ -124,7 +142,10 @@
 
                                 <tr style="vertical-align: middle">
                                     <td>Restaurantname</td>
-                                    <td style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</td>
+                                    <td>
+                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
+                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
+                                    </td>
                                     <td>4.5 <i class="fa-solid fa-star"></i></td>
                                     <td>18:00-21:00<br>25/OCT/2023</td>
                                     <td>
@@ -140,7 +161,10 @@
 
                                 <tr style="vertical-align: middle">
                                     <td>Restaurantname</td>
-                                    <td style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</td>
+                                    <td>
+                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
+                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
+                                    </td>
                                     <td>4.5 <i class="fa-solid fa-star"></i></td>
                                     <td>18:00-21:00<br>25/OCT/2023</td>
                                     <td>
@@ -156,7 +180,29 @@
 
                                 <tr style="vertical-align: middle">
                                     <td>Restaurantname</td>
-                                    <td style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</td>
+                                    <td>
+                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
+                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
+                                    </td>
+                                    <td>4.5 <i class="fa-solid fa-star"></i></td>
+                                    <td>18:00-21:00<br>25/OCT/2023</td>
+                                    <td>
+                                        <a href="#" class="btn btn-secondary">Edit</a>
+                                    </td>
+                                    <td>
+                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                        <button class="btn btn-secondary">
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr style="vertical-align: middle"></tr>
+                                    <td>Restaurantname</td>
+                                    <td>
+                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
+                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
+                                    </td>
                                     <td>4.5 <i class="fa-solid fa-star"></i></td>
                                     <td>18:00-21:00<br>25/OCT/2023</td>
                                     <td>
@@ -172,23 +218,10 @@
 
                                 <tr style="vertical-align: middle">
                                     <td>Restaurantname</td>
-                                    <td style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</td>
-                                    <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                    <td>18:00-21:00<br>25/OCT/2023</td>
                                     <td>
-                                        <a href="#" class="btn btn-secondary">Edit</a>
+                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
+                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
                                     </td>
-                                    <td>
-                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                        <button class="btn btn-secondary">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <tr style="vertical-align: middle">
-                                    <td>Restaurantname</td>
-                                    <td style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</td>
                                     <td>4.5 <i class="fa-solid fa-star"></i></td>
                                     <td>18:00-21:00<br>25/OCT/2023</td>
                                     <td>
@@ -216,6 +249,7 @@
                 </div>
             </div>
         </div>
+
 
         @vite(['resources/js/textlimit.js'])
 @endsection

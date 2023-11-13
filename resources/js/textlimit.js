@@ -1,6 +1,23 @@
-const limit = document.querySelector(".txt-limit");
-const str = limit.textContent;
-const len = 50; // 半角50字（全角約25字）
-if (str.length > len) {
-  limit.textContent = str.substring(0, len) + "…";
-}
+$(function() {
+    var textHeight = $('.text-limit').height();
+    var lineHeight = parseFloat($('.text-limit').css('line-height'));
+    var lineNum = 2;
+    var textNewHeight = lineHeight * lineNum;
+
+    if (textHeight > textNewHeight) {
+      $('.text-limit').css({
+          'height': textNewHeight,
+          'overflow':'hidden'
+       });
+      $('.readmore-btn').show();
+      $('.readmore-btn').click(function() {
+        $(this).hide();
+        $('.text-limit').css({
+          'height': textHeight,
+          'overflow': 'visible'
+         });
+        return false;
+      });
+    };
+  });
+
