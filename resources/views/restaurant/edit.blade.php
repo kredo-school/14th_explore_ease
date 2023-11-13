@@ -74,7 +74,7 @@
             </div>
             <div class="mb-3">
                 <label for="Menu" class="form-label h3">Menu</label><br>
-                <textarea type="textarea" id="Menu" rows="4" name="Menu" class="form-control"></textarea>
+                <textarea type="textarea" id="Menu" rows="4" name="Menu" class="form-control">Menu</textarea>
             </div>
             <div class="mb-3" id="course-menu-parent">
                 <label for="Course_menu" class="form-label h3">Course Menu</label><br>
@@ -91,6 +91,12 @@
                         <i class="fa-solid fa-circle-plus h1"></i>Add more
                     </div>
                 </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="seats" class="form-label h3">Seats only reservation</label><br>
+                <input type="radio" name="seats" value="available" class="h4"><span class="me-5 h4">Available</span>
+                <input type="radio" name="seats" value="unavailable" class="h4"><span class="h4">Unavailable</span>
             </div>
             
             <div class="mb-3">

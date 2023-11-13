@@ -36,11 +36,16 @@
                     </div>
 
                     <!-- Bookmark -->
-                    <div class="col-4">
+                    <div class="col-2">
                         <a href="" class="text-decoration-none text-black h5">
                             <i class="fa-regular fa-bookmark"></i>
                         </a>
                     </div>
+
+                    <!-- Restaurant edit page -->
+                    <div class="col-2">
+                        <a href="{{route('restaurant.edit')}}" class="btn btn-secondary border-dark">Edit</a>
+                    </div> 
                 </div>
 
                 <!-- Address -->

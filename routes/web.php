@@ -30,13 +30,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/restaurants/detail', [App\Http\Controllers\HomeController::class, 'restaurantsDetail'])->name('restaurants.detail');
 
-Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
 
+Route::get('/restaurant/detail', [App\Http\Controllers\HomeController::class, 'restaurantDetail'])->name('restaurant.detail');
+
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
+Route::get('/profile/reservation', [App\Http\Controllers\HomeController::class, 'profileReservation'])->name('profile.reservation');
 
 Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
 
 Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
 
+Route::get('/restaurant/{id}/review', [App\Http\Controllers\HomeController::class, 'restaurantReview'])->name('restaurant.review');
 
 
 Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
@@ -48,3 +52,4 @@ Route::get('/restaurants/{id}/review', [App\Http\Controllers\HomeController::cla
 
 
 //Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
+Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
