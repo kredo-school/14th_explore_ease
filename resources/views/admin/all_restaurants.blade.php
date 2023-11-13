@@ -29,10 +29,11 @@
             <tr>
               <th scope="col">id</th>
               <th scope="col">Restaurant name</th>
-              <th scope="col">Username</th>
+              <th scope="col">Ownername</th>
               <th scope="col">Reviewdate</th>
               <th scope="col">Rate</th>
-              <th scope="col">Review</th>
+              <th scope="col">Area</th>
+              <th scope="col">Food type</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -50,8 +51,8 @@
                   </div>
                 </div>
               </td>
-              <td class="py-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque deserunt obcaecati suscipit provident<span>...</span>
-              </td>
+              <td class="py-3">Tokyo</td>
+              <td class="py-3">Italian</td>
               <td td class="py-3"><button type="button" class="btn btn-secondary">Inactivate</button>
               </td>
             </tr>
