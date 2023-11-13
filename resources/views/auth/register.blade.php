@@ -42,7 +42,7 @@
                         </div>
 
                         <!-- Usertype -->
-                        <div class="row">
+                        {{-- <div class="row">
                             <label for="usertype" class="col-md-4 col-form-label text-md-end">{{ __('User type') }}</label>
                             <div class="col-md-6">
                                 <select id="usertype" class="form-select" name="usertype">
@@ -59,7 +59,7 @@
                                 @enderror
                             </div>
 
-                        </div>
+                        </div> --}}
 
                         <!-- Password -->
                         <div class="row mb-3">
