@@ -97,7 +97,6 @@
                 <label for="seats" class="form-label h3">Seats only reservation</label><br>
                 <input type="radio" name="seats" value="available" class="h4"><span class="me-5 h4">Available</span>
                 <input type="radio" name="seats" value="unavailable" class="h4"><span class="h4">Unavailable</span>
-
             </div>
 
             <div class="mb-3">
