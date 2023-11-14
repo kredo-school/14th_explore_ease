@@ -45,4 +45,8 @@ class HomeController extends Controller
     public function profileReservation(){
         return view('users.profilereservation');
     }
+
+    public function restaurantsRanking(){
+        return view('restaurants.ranking');
+    }
 }
