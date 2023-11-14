@@ -18,5 +18,24 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call([
+            UserTypeSeeder::class,
+            AreaTypeSeeder::class,
+            NationaritySeeder::class,
+            FoodTypeSeeder::class,
+            FeatureTypeSeeder::class,
+            UserSeeder::class,
+            ProfileSeeder::class,
+            RestaurantSeeder::class,
+            ReviewSeeder::class,
+            BookmarkSeeder::class,
+            SeatSeeder::class,
+            CourseSeeder::class,
+            RestaurantPhotoSeeder::class,
+            OpenHourSeeder::class,
+            FeatureSeeder::class,
+            BudgetSeeder::class,
+            ReservationSeeder::class,
+        ]);
     }
 }
