@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RestaurantController;
@@ -21,10 +21,16 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/admin/dashboard', function () {
+    return view('/admin/dashboard');
+});
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/restaurants/detail', [App\Http\Controllers\HomeController::class, 'restaurantsDetail'])->name('restaurants.detail');
 
 
 Route::get('/restaurant/detail', [App\Http\Controllers\HomeController::class, 'restaurantDetail'])->name('restaurant.detail');
@@ -39,5 +45,15 @@ Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name(
 
 Route::get('/restaurant/{id}/review', [App\Http\Controllers\HomeController::class, 'restaurantReview'])->name('restaurant.review');
 
+
+Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
+
+Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
+
+
+Route::get('/restaurants/{id}/review', [App\Http\Controllers\HomeController::class, 'restaurantsReview'])->name('restaurants.review');
+
+
+//Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
 Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
 
