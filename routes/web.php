@@ -53,3 +53,5 @@ Route::get('/restaurants/{id}/review', [App\Http\Controllers\HomeController::cla
 
 //Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
 Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
+Route::get('/restaurants/ranking', [App\Http\Controllers\HomeController::class, 'restaurantsRanking'])->name('restaurants.ranking');
+

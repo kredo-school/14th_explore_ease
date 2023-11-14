@@ -46,7 +46,12 @@ class HomeController extends Controller
         return view('users.profilereservation');
     }
 
+<<<<<<< HEAD
     public function adminDashboard(){
         return view('admin.dashboard');
+=======
+    public function restaurantsRanking(){
+        return view('restaurants.ranking');
+>>>>>>> f0674b480ca6111db5f268cc0a68ef3138dd2de5
     }
 }
