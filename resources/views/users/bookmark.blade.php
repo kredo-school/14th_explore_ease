@@ -5,7 +5,7 @@
 
 @include('users.header')
 
-<link rel="stylesheet" href="../public/css/style.css">
+@vite(['public/css/style.css'])
 
 <div class="container w-75 mt-4 mx-auto">
     <div class="row">
