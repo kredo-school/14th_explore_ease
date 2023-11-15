@@ -52,10 +52,10 @@ class Restaurant extends Model
         return $this->hasMany(Bookmark::class)->orderBy('restaurant_id')->get();
     }
 
-    /** to get all the seats of a restaurant */
-    public function seats()
+    /** to get one of the seat of a restaurant */
+    public function seat()
     {
-        return $this->hasMany(Seat::class)->orderBy('id')->get();
+        return $this->hasOne(Seat::class);
     }
 
     /** to get all the courses of a restaurant */
