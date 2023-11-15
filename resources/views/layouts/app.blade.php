@@ -57,19 +57,7 @@
                                 </li>
                             @endif
                         @else
-                        <!-- Link to Restaurant page -->
-                        <li class="nav-item nav-item my-auto me-3">
-                            <a href="#" class="text-decoration-none text-black">Restaurant</a>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="restaurant-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Restaurant
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="restaurant-dropdown">
-                                <li><a class="dropdown-item" href="{{ route('restaurant.show') }}">See Restaurants</a></li>
-                                <li><a class="dropdown-item" href="{{ route('restaurant.adding') }}">Adding new restaurant</a></li>
-                            </ul>
-                        </li>
-
+ 
                         <!-- Link to Ranking page -->
                         <li class="nav-item my-auto me-3">
                             <a href="#" class="text-decoration-none text-black">Ranking</a>
