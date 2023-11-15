@@ -58,8 +58,6 @@
                             @endif
                         @else
                         <!-- Link to Restaurant page -->
-                        <li class="nav-item nav-item my-auto me-3">
-                            <a href="#" class="text-decoration-none text-black">Restaurant</a>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="restaurant-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Restaurant
