@@ -20,6 +20,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+Route::get('restaurant/reservation', function () {
+    return view('restaurant/reservations');
+});
+Route::get('admin/dashboard', function () {
+    return view('admin/dashboard');
+});
+Route::get('admin/dashboard_all_users', function () {
+    return view('admin/dashboard_all_users');
+});
 
 Route::get('/admin/dashboard', function () {
     return view('/admin/dashboard');
@@ -57,6 +66,8 @@ Route::get('/restaurants/{id}/review', [App\Http\Controllers\HomeController::cla
 //Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
 Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
 
+
 Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
 
-Route::get('/restaurant/ranking', [App\Http\Controllers\RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
+Route::get('/restaurants/ranking', [App\Http\Controllers\HomeController::class, 'restaurantsRanking'])->name('restaurants.ranking');
+
