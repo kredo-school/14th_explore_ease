@@ -23,11 +23,11 @@ Route::get('/', function () {
 Route::get('restaurant/reservation', function () {
     return view('restaurant/reservations');
 });
-Route::get('admin/dashboard', function () {
+Route::get('/admin/dashboard', function () {
     return view('admin/dashboard');
 });
-Route::get('admin/dashboard_all_users', function () {
-    return view('admin/dashboard_all_users');
+Route::get('/admin/dashboard_all_users', function () {
+    return view('/admin/dashboard_all_users');
 });
 
 Route::get('/admin/dashboard', function () {
