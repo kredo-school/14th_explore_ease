@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Restaurant;
+use App\Models\OpenHour;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
     private $restaurant;
+    private $openhour;
 
-    public function __construct(Restaurant $restaurant){
+    public function __construct(Restaurant $restaurant, OpenHour $openhour){
         $this->restaurant = $restaurant;
+        $this->openhour = $openhour;
     }
 
     /**
@@ -33,7 +36,9 @@ class RestaurantController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
+        //dd($request);
+
         //validate request
         $request->validate([
             'restaurant_name' => 'required',
@@ -44,12 +49,18 @@ class RestaurantController extends Controller
         ]);
 
         //store to the db
-        $this->restaurant->name = $request->restaurant_name;
-        $this->restaurant->areatype_id = $request->area;
-        $this->restaurant->address = $request->restautrant_address;
-        $this->restaurant->latitude = $request->restaurant_latitude;
-        $this->restaurant->longitude = $request->restaurant_longitude;
-        $this->restaurant->
+        // $this->restaurant->name = $request->restaurant_name;
+        // $this->restaurant->areatype_id = $request->area;
+        // $this->restaurant->address = $request->restautrant_address;
+        // $this->restaurant->latitude = $request->latitude;
+        // $this->restaurant->longitude = $request->longitude;
+        // $this->openhour->
+        // $this->openhour->openinghours = $request->open_Monday;
+        // $this->restaurant->menu = $request->menu
+
+        print $request->restaurant_name;
+        print $request->area;
+        print 
     }
 
     /**

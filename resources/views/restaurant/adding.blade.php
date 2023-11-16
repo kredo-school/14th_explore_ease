@@ -29,7 +29,9 @@
             </div>
             <div class="mb-3">
                 <label for="restaurant_location" class="form-label h3">Please place the pin accurately at your outlet's location on the map</label>
-                <div id="map" class="py-5 bg-secondary" style='width: 100%; height: 300px;'>ここにどうやってlatitudeとlongitudeを取り出すnameを入れるのか</div>
+                <div id="map" class="py-5 bg-secondary" style='width: 100%; height: 300px;'></div>
+                <input type="hidden" id="marker-input-latitude" name="latitude"/>
+                <input type="hidden" id="marker-input-longitude" name="longitude"/>
             </div>
             <div class="mb-3">
                 <label for="open_hours" class="form-label h3">Open hours</label>
@@ -43,12 +45,12 @@
                             <label for="open_{{$day}}" class="form-label h4">{{$day}}</label>
                         </div>
                         <div class="col ms-3">
-                            <select id="open_{{$day}}" class="form-select h4">
+                            <select id="open_{{$day}}" class="form-select h4" name="open_{{$day}}>
                                 @for($i=0; $i<12; $i++)
-                                <option value="{{$i}}:00" name="open_{{$days}}">{{$i}}:00 a.m.</option>
+                                <option value="{{$i}}:00">{{$i}}:00 a.m.</option>
                                 @endfor
                                 @for($i=0; $i<12; $i++)
-                                <option value="{{$i}}:00" name="open_{{$day}}">{{$i}}:00 p.m.</option>
+                                <option value="{{$i}}:00">{{$i}}:00 p.m.</option>
                                 @endfor
                             </select>
                         </div>
@@ -74,7 +76,7 @@
             </div>
             <div class="mb-3">
                 <label for="Menu" class="form-label h3">Menu</label><br>
-                <textarea type="textarea" id="Menu" rows="4" name="Menu" class="form-control"></textarea>
+                <textarea type="textarea" id="Menu" rows="4" name="menu" class="form-control"></textarea>
             </div>
             <div class="mb-3" id="course-menu-parent">
                 <label for="Course_menu" class="form-label h3">Course Menu</label><br>
