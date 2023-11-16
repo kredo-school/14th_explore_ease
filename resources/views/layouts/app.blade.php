@@ -22,6 +22,10 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
+    <!--CDN for mapbox-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+
 </head>
 <body>
     <div id="app">
@@ -58,9 +62,8 @@
                                 </li>
                             @endif
                         @else
+
                         <!-- Link to Restaurant page -->
-                        <li class="nav-item nav-item my-auto me-3">
-                            <a href="#" class="text-decoration-none text-black">Restaurant</a>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="restaurant-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Restaurant
@@ -70,7 +73,7 @@
                                 <li><a class="dropdown-item" href="{{ route('restaurant.adding') }}">Adding new restaurant</a></li>
                             </ul>
                         </li>
-
+                        
                         <!-- Link to Ranking page -->
                         <li class="nav-item my-auto me-3">
                             <a href="#" class="text-decoration-none text-black">Ranking</a>

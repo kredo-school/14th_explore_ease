@@ -19,7 +19,7 @@
                             <h1>Profile</h1>
                         </div>
                         <div class="col-6 text-end">
-                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Profile    
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Profile    
                                 <i class="fa-solid fa-pen-to-square icon-edit"></i>
                             </button>
                         </div>
@@ -60,6 +60,66 @@
                                 <label for="username">Nationality</label>
                                 <input type="country" class="form-control" name="nationality" placeholder="Argentina">
                             </div>
+                        </div>
+
+                        {{-- Restaurant Profile for Owners --}}
+                        <div class="row mt-5">
+                            <div class="col-6">
+                                <h1>Restaurant Profile</h1>
+                            </div>
+                            <div class="col-6 text-end">
+                                <button class="btn btn-primary">Add Restaurant   
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Restaurant Name</th>
+                                        <th>Registration Date</th>
+                                        <th>Rate</th>
+                                        <th>Area</th>
+                                        <th>Foodtype</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="vertical-align: middle">
+                                        <td>Jyojyo-en Tokyo </td>
+                                        <td>
+                                            <p style="line-height:24px;" class="text-limit"></p>
+                                        </td>
+                                        <td>4.5 <i class="fa-solid fa-star"></i></td>
+                                        <td>Tokyo</td>
+                                        <td>Japanese</td>
+                                        <td>
+                                            <a href="#" class="btn btn-primary">Edit</a>
+                                            {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                            <button class="btn btn-secondary">
+                                            Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+    
+                                    <tr style="vertical-align: middle">
+                                        <td>Gyoza-no-osho</td>
+                                        <td>
+                                            <p style="line-height:24px;" class="text-limit"></p>
+                                        </td>
+                                        <td>4.5 <i class="fa-solid fa-star"></i></td>
+                                        <td>Tokyo</td>
+                                        <td>Chinese</td>
+                                        <td>
+                                            <a href="#" class="btn btn-primary">Edit</a>
+                                             {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                            <button class="btn btn-secondary">
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
