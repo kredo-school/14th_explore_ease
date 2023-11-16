@@ -15,11 +15,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Style -->
+    <!-- Style -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @yield('styles')
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+
+    <!--CDN for mapbox-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
 
 </head>
 <body>
@@ -57,6 +62,7 @@
                                 </li>
                             @endif
                         @else
+
                         <!-- Link to Restaurant page -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="restaurant-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -67,7 +73,7 @@
                                 <li><a class="dropdown-item" href="{{ route('restaurant.adding') }}">Adding new restaurant</a></li>
                             </ul>
                         </li>
-
+                        
                         <!-- Link to Ranking page -->
                         <li class="nav-item my-auto me-3">
                             <a href="#" class="text-decoration-none text-black">Ranking</a>
