@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
+    private $restaurant;
+
+    public function __construct(Restaurant $restaurant){
+        $this->restaurant = $restaurant;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -33,8 +39,17 @@ class RestaurantController extends Controller
             'restaurant_name' => 'required',
             'area' => 'required',
             'restaurant_address' => 'required',
-            'Menu' => 'required'
+            'Menu' => 'required',
+            'seats' => 'required'
         ]);
+
+        //store to the db
+        $this->restaurant->name = $request->restaurant_name;
+        $this->restaurant->areatype_id = $request->area;
+        $this->restaurant->address = $request->restautrant_address;
+        $this->restaurant->latitude = $request->restaurant_latitude;
+        $this->restaurant->longitude = $request->restaurant_longitude;
+        $this->restaurant->
     }
 
     /**

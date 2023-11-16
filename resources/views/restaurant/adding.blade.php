@@ -11,11 +11,11 @@
         <div class="border border-dark p-5">
             <div class="mb-3">
                 <label for="restaurant_name" class="form-label h3">Restaurant name</label>
-                <input type="text" id="restaurant_name" class="form-control" placeholder="Restaurant name">
+                <input type="text" id="restaurant_name" class="form-control" placeholder="Restaurant name" name="restaurant_name">
             </div>
             <div class="mb-3">
                 <label for="area" class="form-label h3">Area type</label>
-                <select id="area" class="form-select">
+                <select id="area" class="form-select" name="area">
                     <option value="">Select area</option>
                     <option value="">Ginza</option>
                     <option value="">Shibuya</option>
@@ -25,17 +25,17 @@
             </div>
             <div class="mb-3">
                 <label for="restaurant_address" class="form-label h3">Restaurant address</label>
-                <input type="text" id="restaurant_address" class="form-control" placeholder="Restaurant address">
+                <input type="text" id="restaurant_address" class="form-control" placeholder="Restaurant address" name="restaurant_address">
             </div>
             <div class="mb-3">
                 <label for="restaurant_location" class="form-label h3">Please place the pin accurately at your outlet's location on the map</label>
-                <div id="map" class="py-5 bg-secondary" style='width: 100%; height: 300px;'></div>
+                <div id="map" class="py-5 bg-secondary" style='width: 100%; height: 300px;'>ここにどうやってlatitudeとlongitudeを取り出すnameを入れるのか</div>
             </div>
             <div class="mb-3">
                 <label for="open_hours" class="form-label h3">Open hours</label>
                 <br>
                 <?php
-                $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Holidays'];
                 ?>
                 @foreach($days_of_week as $day)
                     <div class="row">
