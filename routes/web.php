@@ -43,7 +43,7 @@ Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('re
 
 Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
 
-Route::get('/restaurant/{id}/review', [App\Http\Controllers\HomeController::class, 'restaurantReview'])->name('restaurant.review');
+Route::get('/restaurant/{id}/review', [App\Http\Controllers\RestaurantController::class, 'restaurantReview'])->name('restaurant.review');
 
 
 Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
@@ -57,7 +57,6 @@ Route::get('/restaurants/{id}/review', [App\Http\Controllers\HomeController::cla
 //Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
 Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
 
-
 Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
 
-Route::get('/restaurants/ranking', [App\Http\Controllers\HomeController::class, 'restaurantsRanking'])->name('restaurants.ranking');
+Route::get('/restaurant/ranking', [App\Http\Controllers\RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');

@@ -26,24 +26,12 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function restaurantDetail(){
-        return view('restaurant.detail');
-    }
-
-    public function restaurantsRanking(){
-        return view('restaurants.ranking');
-    }
-
     public function restaurants(){
         return view('restaurants.show');
     }
 
     public function profileBase(){
         return view('users/profile');
-    }
-
-    public function restaurantReview(){
-        return view('restaurant.review');
     }
 
     public function profileReservation(){
