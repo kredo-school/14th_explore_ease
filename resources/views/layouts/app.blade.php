@@ -22,6 +22,13 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
+<<<<<<< HEAD
+=======
+    <!--CDN for mapbox-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+
+>>>>>>> d5cae06a5f0f70c2aba71287868a58820152b4ee
 </head>
 <body>
     <div id="app">
