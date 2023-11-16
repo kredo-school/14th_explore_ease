@@ -45,10 +45,10 @@
                         <div class="col ms-3">
                             <select id="open_{{$day}}" class="form-select h4">
                                 @for($i=0; $i<12; $i++)
-                                <option value="{{$i}}:00">{{$i}}:00 a.m.</option>
+                                <option value="{{$i}}:00" name="open_{{$days}}">{{$i}}:00 a.m.</option>
                                 @endfor
                                 @for($i=0; $i<12; $i++)
-                                <option value="{{$i}}:00">{{$i}}:00 p.m.</option>
+                                <option value="{{$i}}:00" name="open_{{$day}}">{{$i}}:00 p.m.</option>
                                 @endfor
                             </select>
                         </div>
