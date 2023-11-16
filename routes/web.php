@@ -63,13 +63,9 @@ Route::get('/restaurants/{id}/review', [App\Http\Controllers\HomeController::cla
 
 //Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
 Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
-<<<<<<<<< Temporary merge branch 1
 
 
 Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
 
 Route::get('/restaurants/ranking', [App\Http\Controllers\HomeController::class, 'restaurantsRanking'])->name('restaurants.ranking');
-=========
-Route::get('/restaurants/ranking', [App\Http\Controllers\HomeController::class, 'restaurantsRanking'])->name('restaurants.ranking');
 
->>>>>>>>> Temporary merge branch 2
