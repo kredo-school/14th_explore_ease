@@ -45,7 +45,7 @@
                     <!-- Restaurant edit page -->
                     <div class="col-2">
                         <a href="{{route('restaurant.edit')}}" class="btn btn-secondary border-dark">Edit</a>
-                    </div> 
+                    </div>
                 </div>
 
                 <!-- Address -->
@@ -236,13 +236,13 @@
             </div>
 
             <!-- Review section -->
-            <div class="col-8 mt-5">
+            <div class="col-8 mt-5"></div>
                 <div class="row">
                     <div class="col-10">
                         <h5>Review</h5>
                     </div>
                     <div class="col-2 text-end">
-                        <a href="" class="btn btn-light border-dark">Reiview</a>
+                        <a href="{{-- route('restaurant.review',$review->id) --}}" class="btn btn-secondary border-dark">Reiview</a>
                     </div>
                 </div>
                 <hr>
