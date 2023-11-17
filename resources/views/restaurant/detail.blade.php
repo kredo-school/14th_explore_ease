@@ -19,7 +19,7 @@
         </div>
 
         <div class="row justify-content-center mt-5">
-        <!--  Basic Info section -->
+            <!--  Basic Info section -->
             <div class="col-8">
                 <div class="row">
                     <!-- Resturant name -->
@@ -115,7 +115,7 @@
                 </table>
             </div>
 
-        <!--  Discription section -->
+            <!--  Discription section -->
             <div class="col-8 mt-5">
                 <h5>About us</h5>
                 <hr>
@@ -123,7 +123,7 @@
                 </p>
             </div>
 
-        <!--  Location section -->
+            <!--  Location section -->
             <div class="col-8 mt-5">
                 <div class="row">
                     <div class="col-10">
@@ -168,7 +168,7 @@
                     </script>
             </div>
 
-        <!--  Course section -->
+            <!--  Course section -->
             <div class="col-8 mt-5">
                 <div class="row">
                     <div class="col-2">
@@ -236,13 +236,13 @@
             </div>
 
             <!-- Review section -->
-            <div class="col-8 mt-5"></div>
+            <div class="col-8 mt-5">
                 <div class="row">
                     <div class="col-10">
                         <h5>Review</h5>
                     </div>
                     <div class="col-2 text-end">
-                        <a href="{{-- route('restaurant.review',$review->id) --}}" class="btn btn-secondary border-dark">Reiview</a>
+                        <a href="{{ route('restaurant.review',$restaurant->id) }}" class="btn btn-secondary border-dark">Reiview</a>
                     </div>
                 </div>
                 <hr>
@@ -285,8 +285,7 @@
                     </tr>
                 </table>
             </div>
-
-
+        </div>
 
     </main>
 
