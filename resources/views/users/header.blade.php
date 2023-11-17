@@ -4,7 +4,7 @@
 
     <div class="profile container w-75">
         <div class="row mt-2 p-2">
-            <i class="fa-solid fa-user icon-user"></i>
+            <i class="fa-solid fa-circle-user icon-user"></i>
         </div>
         <div class="display-5 m-4">Lionel Messi</div>
         
