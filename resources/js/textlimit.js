@@ -1,23 +1,16 @@
-$(function() {
-    var textHeight = $('.text-limit').height();
-    var lineHeight = parseFloat($('.text-limit').css('line-height'));
-    var lineNum = 2;
-    var textNewHeight = lineHeight * lineNum;
+function myFunction() {
+    let text = document.getElementById('overflow_text')
+    let toggle = document.getElementById('toggle_text')
 
-    if (textHeight > textNewHeight) {
-      $('.text-limit').css({
-          'height': textNewHeight,
-          'overflow':'hidden'
-       });
-      $('.readmore-btn').show();
-      $('.readmore-btn').click(function() {
-        $(this).hide();
-        $('.text-limit').css({
-          'height': textHeight,
-          'overflow': 'visible'
-         });
-        return false;
-      });
-    };
-  });
-
+    if (text.style.overflow == 'visible') {
+      toggle.innerHTML = 'Read More'
+      text.style.overflow = 'hidden'
+      text.style.textOverflow = 'ellipsis'
+      text.style.whiteSpace = 'nowrap'
+    } else {
+      toggle.innerHTML = 'Read Less'
+      text.style.overflow = 'visible'
+      text.style.textOverflow = 'string'
+      text.style.whiteSpace = 'normal'
+    }
+  }

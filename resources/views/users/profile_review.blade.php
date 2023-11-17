@@ -1,8 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+.myClass {
+  height: 50px;
+  width : 400px;
+}
+
+#overflow_text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+#toggle_text {
+  cursor: pointer;
+}
+
+</style>
+
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+
 
     {{-- profile page --}}
     @include('users.header')
@@ -48,8 +68,10 @@
                                 <tr style="vertical-align: middle">
                                     <td>Restaurantname</td>
                                     <td>
-                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
-                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
+                                        <div class="myClass">
+                                            <p id="overflow_text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
+                                            <span onClick="myFunction()" id="toggle_text">Read More</span>
+                                        </div>
                                     </td>
                                     <td>4.5 <i class="fa-solid fa-star"></i></td>
                                     <td>18:00-21:00<br>25/OCT/2023</td>
@@ -64,176 +86,6 @@
                                     </td>
                                 </tr>
 
-                                <tr style="vertical-align: middle">
-                                    <td>Restaurantname</td>
-                                    <td>
-                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
-                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
-                                    </td>
-                                    <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                    <td>18:00-21:00<br>25/OCT/2023</td>
-                                    <td>
-                                        <a href="#" class="btn btn-secondary">Edit</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                        <button class="btn btn-secondary">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <tr style="vertical-align: middle">
-                                    <td>Restaurantname</td>
-                                    <td>
-                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
-                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
-                                    </td>
-                                    <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                    <td>18:00-21:00<br>25/OCT/2023</td>
-                                    <td>
-                                        <a href="#" class="btn btn-secondary">Edit</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                        <button class="btn btn-secondary">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <tr style="vertical-align: middle">
-                                    <td>Restaurantname</td>
-                                    <td>
-                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
-                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
-                                    </td>
-                                    <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                    <td>18:00-21:00<br>25/OCT/2023</td>
-                                    <td>
-                                        <a href="#" class="btn btn-secondary">Edit</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                        <button class="btn btn-secondary">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <tr style="vertical-align: middle">
-                                    <td>Restaurantname</td>
-                                    <td>
-                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
-                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
-                                    </td>
-                                    <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                    <td>18:00-21:00<br>25/OCT/2023</td>
-                                    <td>
-                                        <a href="#" class="btn btn-secondary">Edit</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                        <button class="btn btn-secondary">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <tr style="vertical-align: middle">
-                                    <td>Restaurantname</td>
-                                    <td>
-                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
-                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
-                                    </td>
-                                    <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                    <td>18:00-21:00<br>25/OCT/2023</td>
-                                    <td>
-                                        <a href="#" class="btn btn-secondary">Edit</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                        <button class="btn btn-secondary">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <tr style="vertical-align: middle">
-                                    <td>Restaurantname</td>
-                                    <td>
-                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
-                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
-                                    </td>
-                                    <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                    <td>18:00-21:00<br>25/OCT/2023</td>
-                                    <td>
-                                        <a href="#" class="btn btn-secondary">Edit</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                        <button class="btn btn-secondary">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <tr style="vertical-align: middle">
-                                    <td>Restaurantname</td>
-                                    <td>
-                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
-                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
-                                    </td>
-                                    <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                    <td>18:00-21:00<br>25/OCT/2023</td>
-                                    <td>
-                                        <a href="#" class="btn btn-secondary">Edit</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                        <button class="btn btn-secondary">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <tr style="vertical-align: middle"></tr>
-                                    <td>Restaurantname</td>
-                                    <td>
-                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
-                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
-                                    </td>
-                                    <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                    <td>18:00-21:00<br>25/OCT/2023</td>
-                                    <td>
-                                        <a href="#" class="btn btn-secondary">Edit</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                        <button class="btn btn-secondary">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <tr style="vertical-align: middle">
-                                    <td>Restaurantname</td>
-                                    <td>
-                                        <p style="line-height:24px;" class="text-limit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
-                                        <span style="text-align:right; display:none;" class="readmore-btn"><a href="">read more</a></span>
-                                    </td>
-                                    <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                    <td>18:00-21:00<br>25/OCT/2023</td>
-                                    <td>
-                                        <a href="#" class="btn btn-secondary">Edit</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                        <button class="btn btn-secondary">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
 
                             </tbody>
                         </table>
@@ -251,5 +103,5 @@
         </div>
 
 
-        @vite(['resources/js/textlimit.js'])
+@vite(['resources/js/textlimit.js'])
 @endsection
