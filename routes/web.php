@@ -29,6 +29,9 @@ Route::get('/admin/dashboard', function () {
 Route::get('/admin/dashboard_all_users', function () {
     return view('/admin/dashboard_all_users');
 });
+Route::get('admin/all_restaurants', function () {
+    return view('admin/all_restaurants');
+});
 
 Route::get('/admin/dashboard', function () {
     return view('/admin/dashboard');
