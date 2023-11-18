@@ -52,9 +52,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
 
-Route::get('/profile/reservation', [App\Http\Controllers\HomeController::class, 'profileReservation'])->name('profile.reservation');
+Route::get('/profile/reservation', [HomeController::class, 'profileReservation'])->name('profile.reservation');
 
-Route::get('/profile/review', [App\Http\Controllers\HomeController::class, 'profileReview'])->name('profile.review');
+Route::get('/profile/review', [HomeController::class, 'profileReview'])->name('profile.review');
 
 Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
 
@@ -69,9 +69,12 @@ Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('res
 Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
 
 // Restaurant Controller
-Route::get('/restaurant/ranking', [App\Http\Controllers\RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
+  // ranking
+Route::get('/restaurant/ranking', [RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
 
-Route::get('/restaurant/{id}/detail', [App\Http\Controllers\RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
+  // detail
+Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
+
 
 // Review Controller
-Route::get('/restaurant/{id}/review', [App\Http\Controllers\ReviewController::class, 'ShowRestaurantReview'])->name('restaurant.review');
+Route::get('/restaurant/{id}/review', [ReviewController::class, 'ShowRestaurantReview'])->name('restaurant.review');
