@@ -21,6 +21,7 @@ class FeatureTypeSeeder extends Seeder
     public function run(): void
     {
         $featuretypes = [
+            ['name' => 'free of gluten', 'description' => 'don\'t include gluten.'],
             ['name' => 'Vegetarian', 'description' => 'can\'t eat meats but egg and milk are possible.'],
             ['name' => 'Vegan', 'description' => 'can eat vegetables only.'],
             ['name' => 'Islam', 'description' => 'can\'t eat pigs meat and can\'t drink alcohol.'],
