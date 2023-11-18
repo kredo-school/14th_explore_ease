@@ -59,6 +59,9 @@ Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase
 
 Route::get('/profile/reservation', [App\Http\Controllers\HomeController::class, 'profileReservation'])->name('profile.reservation');
 
+Route::get('/profile/review', [App\Http\Controllers\HomeController::class, 'profileReview'])->name('profile.review');
+
+
 Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
 
 Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
