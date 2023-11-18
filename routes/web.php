@@ -50,38 +50,31 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/restaurants/detail', [App\Http\Controllers\HomeController::class, 'restaurantsDetail'])->name('restaurants.detail');
-
-
-Route::get('/restaurant/detail', [App\Http\Controllers\HomeController::class, 'restaurantDetail'])->name('restaurant.detail');
-
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
 
-Route::get('/profile/reservation', [App\Http\Controllers\HomeController::class, 'profileReservation'])->name('profile.reservation');
+Route::get('/profile/reservation', [HomeController::class, 'profileReservation'])->name('profile.reservation');
 
-Route::get('/profile/review', [App\Http\Controllers\HomeController::class, 'profileReview'])->name('profile.review');
-
-
-Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
-
-Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
-
-Route::get('/restaurant/{id}/review', [App\Http\Controllers\RestaurantController::class, 'restaurantReview'])->name('restaurant.review');
-
+Route::get('/profile/review', [HomeController::class, 'profileReview'])->name('profile.review');
 
 Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
 
 Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
 
 
-Route::get('/restaurants/{id}/review', [App\Http\Controllers\HomeController::class, 'restaurantsReview'])->name('restaurants.review');
 
 
 //Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
 Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
 
-
 Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
 
-Route::get('/restaurants/ranking', [App\Http\Controllers\HomeController::class, 'restaurantsRanking'])->name('restaurants.ranking');
+// Restaurant Controller
+  // ranking
+Route::get('/restaurant/ranking', [RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
 
+  // detail
+Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
+
+
+// Review Controller
+Route::get('/restaurant/{id}/review', [ReviewController::class, 'ShowRestaurantReview'])->name('restaurant.review');
