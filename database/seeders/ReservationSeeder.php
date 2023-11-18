@@ -40,8 +40,8 @@ class ReservationSeeder extends Seeder
                 'updated_at' => new DateTime(),
             ],
             [
-                'user_id' => 6,
-                'restaurant_id' => 2,
+                'user_id' => 7,
+                'restaurant_id' => 1,
                 'reservation_start_date' => '2023-11-15',
                 'reservation_start_time' => '16:00',
                 'reservation_end_date' => '2023-11-15',
@@ -76,7 +76,7 @@ class ReservationSeeder extends Seeder
 
             [
                 'user_id' => 7,
-                'restaurant_id' => 1,
+                'restaurant_id' => 2,
                 'reservation_start_date' => '2023-11-16',
                 'reservation_start_time' => '12:00',
                 'reservation_end_date' => '2023-11-16',
@@ -92,7 +92,7 @@ class ReservationSeeder extends Seeder
                 'updated_at' => new DateTime(),
             ],
             [
-                'user_id' => 7,
+                'user_id' => 8,
                 'restaurant_id' => 2,
                 'reservation_start_date' => '2023-11-16',
                 'reservation_start_time' => '16:00',
@@ -110,7 +110,7 @@ class ReservationSeeder extends Seeder
             ],
             [
                 'user_id' => 7,
-                'restaurant_id' => 1,
+                'restaurant_id' => 2,
                 'reservation_start_date' => '2023-11-16',
                 'reservation_start_time' => '18:00',
                 'reservation_end_date' => '2023-11-16',
@@ -128,7 +128,7 @@ class ReservationSeeder extends Seeder
 
             [
                 'user_id' => 8,
-                'restaurant_id' => 1,
+                'restaurant_id' => 3,
                 'reservation_start_date' => '2023-11-17',
                 'reservation_start_time' => '12:00',
                 'reservation_end_date' => '2023-11-17',
@@ -144,8 +144,8 @@ class ReservationSeeder extends Seeder
                 'updated_at' => new DateTime(),
             ],
             [
-                'user_id' => 8,
-                'restaurant_id' => 2,
+                'user_id' => 9,
+                'restaurant_id' => 3,
                 'reservation_start_date' => '2023-11-17',
                 'reservation_start_time' => '16:00',
                 'reservation_end_date' => '2023-11-17',
@@ -162,7 +162,7 @@ class ReservationSeeder extends Seeder
             ],
             [
                 'user_id' => 8,
-                'restaurant_id' => 1,
+                'restaurant_id' => 3,
                 'reservation_start_date' => '2023-11-17',
                 'reservation_start_time' => '18:00',
                 'reservation_end_date' => '2023-11-17',
@@ -180,7 +180,7 @@ class ReservationSeeder extends Seeder
 
             [
                 'user_id' => 9,
-                'restaurant_id' => 1,
+                'restaurant_id' => 4,
                 'reservation_start_date' => '2023-11-18',
                 'reservation_start_time' => '12:00',
                 'reservation_end_date' => '2023-11-18',
@@ -196,8 +196,8 @@ class ReservationSeeder extends Seeder
                 'updated_at' => new DateTime(),
             ],
             [
-                'user_id' => 9,
-                'restaurant_id' => 2,
+                'user_id' => 10,
+                'restaurant_id' => 4,
                 'reservation_start_date' => '2023-11-18',
                 'reservation_start_time' => '16:00',
                 'reservation_end_date' => '2023-11-18',
@@ -214,7 +214,7 @@ class ReservationSeeder extends Seeder
             ],
             [
                 'user_id' => 9,
-                'restaurant_id' => 1,
+                'restaurant_id' => 4,
                 'reservation_start_date' => '2023-11-18',
                 'reservation_start_time' => '18:00',
                 'reservation_end_date' => '2023-11-18',
@@ -232,7 +232,7 @@ class ReservationSeeder extends Seeder
 
             [
                 'user_id' => 10,
-                'restaurant_id' => 1,
+                'restaurant_id' => 5,
                 'reservation_start_date' => '2023-11-19',
                 'reservation_start_time' => '12:00',
                 'reservation_end_date' => '2023-11-19',
@@ -248,8 +248,8 @@ class ReservationSeeder extends Seeder
                 'updated_at' => new DateTime(),
             ],
             [
-                'user_id' => 10,
-                'restaurant_id' => 2,
+                'user_id' => 6,
+                'restaurant_id' => 5,
                 'reservation_start_date' => '2023-11-19',
                 'reservation_start_time' => '16:00',
                 'reservation_end_date' => '2023-11-19',
@@ -266,7 +266,7 @@ class ReservationSeeder extends Seeder
             ],
             [
                 'user_id' => 10,
-                'restaurant_id' => 1,
+                'restaurant_id' => 5,
                 'reservation_start_date' => '2023-11-19',
                 'reservation_start_time' => '18:00',
                 'reservation_end_date' => '2023-11-19',

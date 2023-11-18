@@ -2,25 +2,6 @@
 
 @section('content')
 
-<style>
-.myClass {
-  height: auto;
-  width : 400px;
-}
-
-#overflow_text {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-#toggle_text {
-  cursor: pointer;
-  color: #E7DA3D;
-}
-
-</style>
-
     <!-- jQuery -->
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 
