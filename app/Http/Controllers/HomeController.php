@@ -41,4 +41,9 @@ class HomeController extends Controller
     public function adminDashboard(){
         return view('admin.dashboard');
     }
+
+
+    public function profileReview(){
+        return view('users.profile_review');
+    }
 }

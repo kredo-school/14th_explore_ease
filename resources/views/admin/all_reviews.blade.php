@@ -21,11 +21,11 @@
           <thead>
             <tr>
               <th scope="col">id</th>
+              <th scope="col">Restaurant name</th>
               <th scope="col">Username</th>
-              <th  colspan="2">name</th>
-              <th scope="col">registration date</th>
-              <th scope="col">e-mail</th>
-              <th scope="col"></th>
+              <th scope="col">Reviewdate</th>
+              <th scope="col">Rate</th>
+              <th scope="col">Review</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -33,17 +33,30 @@
           <tbody>
             <tr>
               <td class="py-3">#</td>
-              <td class="py-3">O-Re!</td>
-              <td class="py-3">Ore</td>
+              <td class="py-3">OREORESTAURANT in Tokyo</td>
               <td class="py-3">Dayo</td>
-              <td class="py-3">11:00  12 OCT 2024</td>
-              <td class="py-3">messi@gmail,be.sp</td>
-              <td class="py-3">1234567890</td>
-              <td><button type="button" class="btn btn-secondary">Inactivate</button></td>
+              <td class="py-3">11:00  <br>12 OCT 2024</td>
+              <td class="py-3 m">
+                <div class="row">
+                  <div class="col card text-center p-0 shadow-sm">
+                    <p class="my-auto">4.5<i class="fa-solid fa-star text-warning col"></i></p>
+                  </div>
+                </div>
+              </td>
+              <td class="py-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque deserunt obcaecati suscipit provident<span>...</span>
+              </td>
+              <td td class="py-3"><button type="button" class="btn btn-secondary">Inactivate</button>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
+
+
+
+
+
+
       {{-- permanent_area --}}
         <div class="d-flex justify-content-center">
         <!--previousry-->
@@ -52,6 +65,5 @@
           <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover mx-5" href="<%nextentry_url>">&gt;&gt;next</a>
         </div>
 </div>
-
 
 @endsection

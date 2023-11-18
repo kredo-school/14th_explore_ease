@@ -61,9 +61,8 @@
                                 </li>
                             @endif
                         @else
+
                         <!-- Link to Restaurant page -->
-                        <li class="nav-item nav-item my-auto me-3">
-                            <a href="#" class="text-decoration-none text-black">Restaurant</a>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="restaurant-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Restaurant
@@ -113,7 +112,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a href="{{ route('profile') }}" class="dropdown-item">Profile</a>
-                                    <a href="{{ route('admin.show') }}" class="dropdown-item">Dashboard</a>
+                                    <a href="{{-- route('admin.show') --}}" class="dropdown-item">Dashboard</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
