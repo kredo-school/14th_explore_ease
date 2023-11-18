@@ -1,4 +1,4 @@
-function myFunction() {
+function textLimiter() {
     let text = document.getElementById('overflow_text')
     let toggle = document.getElementById('toggle_text')
 
@@ -14,3 +14,4 @@ function myFunction() {
       text.style.whiteSpace = 'normal'
     }
   }
+window.textLimiter = textLimiter;

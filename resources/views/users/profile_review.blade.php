@@ -70,7 +70,7 @@
                                     <td>
                                         <div class="myClass">
                                             <p id="overflow_text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
-                                            <span onClick="myFunction()" id="toggle_text">Read More</span>
+                                            <span onClick="textLimiter()" id="toggle_text">Read More</span>
                                         </div>
                                     </td>
                                     <td>4.5 <i class="fa-solid fa-star"></i></td>
