@@ -19,9 +19,15 @@ function addCourseMenu()
     input.type = "file";
     input.name = "photo";
     
+    const courseName = document.createElement('input');
+    input.type = "text";
+    textarea.classList.add('form-control');
+    textarea.name = "course_name";
+    textarea.placeholder = "Course Name";
+
     const textarea = document.createElement('textarea');
     textarea.classList.add('form-control');
-    textarea.name = "Course_menu";
+    textarea.name = "course_description";
     textarea.placeholder = "Description";
     textarea.rows = 4;
 

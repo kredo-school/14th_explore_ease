@@ -35,15 +35,6 @@ class RestaurantController extends Controller
 
         $days_of_week = [ 'Holidays', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-
-        // //validate request
-        // $request->validate([
-        //     'restaurant_name' => 'required',
-        //     'area' => 'required',
-        //     'restaurant_address' => 'required',
-        //     'Menu' => 'required',
-        //     'seats' => 'required'
-        // ]);
         
         $restaurant = new Restaurant();
         //store to the db
@@ -73,13 +64,13 @@ class RestaurantController extends Controller
         }
 
         
-
-
-
-        //$this->course->photo = $request->photo;
-
-        // return print $request->restaurant_name;
-        // return print $request->area;
+        $course = new Course();
+        $course->restaurant_id = $restaurant->id;
+        $course->photo = 'data:image/' . $request->course_photo->extension().
+        ';base64,'. base64_encode(file_get_contents($request->image));
+        $course->name = $request->course_name;
+        $course->description = $request->course_description;
+        //$course->
 
         return redirect()->back();
 

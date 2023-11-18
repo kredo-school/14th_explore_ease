@@ -82,10 +82,11 @@
                 <label for="Course_menu" class="form-label h3">Course Menu</label><br>
                 <div class="row mb-3">
                     <div class="col-3">
-                            <input type="file" name="photo">
+                            <input type="file" name="course_photo">
                     </div>
                     <div class="col-9">
-                        <textarea type="textarea" id="Course_menu" rows="4" name="Course_menu" class="form-control" Placeholder="Description"></textarea>
+                        <input type="text" placeholder="Course Name" name="course_name">
+                        <textarea type="textarea" id="Course_menu" rows="4" name="course_description" class="form-control" Placeholder="Description"></textarea>
                     </div>
                 </div>
                 <div class="row mb-3">

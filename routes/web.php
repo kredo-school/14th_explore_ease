@@ -41,3 +41,5 @@ Route::get('/restaurants/ranking', [App\Http\Controllers\HomeController::class, 
 
 
 Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
+
+Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
