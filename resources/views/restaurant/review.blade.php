@@ -52,18 +52,23 @@
         </div>
 
         <!--Comment area -->
-        <div class="mt-5">
-            <h3>COMMENT AREA</h3>
-            <textarea name="" id="" rows="10" class="w-100 bg-transparent"></textarea>
-            <div class="row justify-content-center mt-3">
-                <div class="col-6 text-end">
-                    <button type="submit" class="btn btn-light btn-outline-dark" style="width: 30%">Cancel</button>
-                </div>
-                <div class="col-6">
-                    <button type="submit" class="btn btn-secondary" style="width: 30%">Post</button>
+        <form action="{{ route('review.store') }}" method="post">
+            @csrf
+
+            <div class="mt-5">
+                <label for="comment"><h3>COMMENT AREA</h3></label>
+                <textarea name="comment" id="comment" rows="10" class="form-control w-100 bg-transparent"></textarea>
+                <div class="row justify-content-center mt-3">
+                    <div class="col-6 text-end">
+                        <a href="#" class="btn btn-light btn-outline-dark" style="width: 30%">Cancel</a>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-secondary" style="width: 30%">Post</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
+
 
         <!--Review total area -->
         <div class="mt-5">
