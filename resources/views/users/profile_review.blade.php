@@ -4,7 +4,7 @@
 
 <style>
 .myClass {
-  height: 50px;
+  height: auto;
   width : 400px;
 }
 
@@ -16,6 +16,7 @@
 
 #toggle_text {
   cursor: pointer;
+  color: #E7DA3D;
 }
 
 </style>
@@ -65,7 +66,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="vertical-align: middle">
+                                <tr style="vertical-align: middle;">
                                     <td>Restaurantname</td>
                                     <td>
                                         <div class="myClass">
