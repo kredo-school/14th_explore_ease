@@ -27,3 +27,12 @@
     
     
 }
+
+.rcards{
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: start;
+    gap: 10px;
+}

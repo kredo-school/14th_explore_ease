@@ -1,0 +1,10 @@
+
+.top_img{
+    height: 560px;
+    /* padding: 0; */
+}
+.top_img img
+{
+    max-width: 100%;
+    height: auto;
+}
