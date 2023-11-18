@@ -62,4 +62,9 @@ class ReservationController extends Controller
     {
         //
     }
+
+    public function admin_show(Reservation $reservation)
+    {
+        return view('admin.dashboard_all_reservations');
+    }
 }

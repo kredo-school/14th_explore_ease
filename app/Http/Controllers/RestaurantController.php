@@ -107,4 +107,19 @@ class RestaurantController extends Controller
     {
         //
     }
+
+    /** Show restaurant review page */
+    public function restaurantReview(){
+        return view('restaurant.review');
+    }
+
+    /** Show restaurant ranking page */
+    public function restaurantRanking(){
+        return view('restaurant.ranking');
+    }
+
+    /** Show restaurant ranking page */
+    public function restaurantDetail(){
+        return view('restaurant.detail');
+    }
 }
