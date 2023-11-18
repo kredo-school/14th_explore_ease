@@ -88,4 +88,12 @@ class ReviewController extends Controller
 
         return view('restaurant.review')->with('restaurant', $restaurant);
     }
+
+    /** Show restaurant review page */
+    public function ShowRestaurantReview($id){
+        $restaurant = $this->restaurant->findOrFail($id);
+        // $review = $this->review->findOrFail($id);
+
+        return view('restaurant.review')->with('restaurant', $restaurant);
+    }
 }
