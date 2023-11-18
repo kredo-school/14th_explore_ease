@@ -1,23 +1,17 @@
 @extends('layouts.app')
 
+@section('title', $restaurant->name)
+
 @section('content')
 
 {{-- Main V --}}
-
-               <!-- Bootstrap -->
-               <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-               <!-- FontAwsome CDN -->
-               <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
-
-<div class="container-fluid mb-4 p-0 overflow-hidden" style="height: 560px">
-    <img src="../storage/vegetable-skewer-3317060_1920.jpg" alt="restaurant_reservation_image" class="img-fluid overflow-hidden" style="width: 100%; height: auto">
+<div class="container-fluid mb-4 p-0 overflow-hidden main_v_reservation">
+    <img src="{{ $restaurantphoto->photo }}" alt="restaurant_reservation_image" class="img-fluid overflow-hidden">
 </div>
 <div class="container w-50">
         {{-- Message Area --}}
         <div class="container mb-5">
-            <h2 class="mb-4">Greate Restaurant in Tokyo</h2>
+            <h2 class="mb-4">{{ $restaurant->name }}</h2>
             <h3 class="mb-2">Message from Venue</h3>
             <p>▶ As regards the specification of the seat, we may not be able to comply with your request, so please be forewarned.<br>
                 ▶ In the case of reservation for two people, there may be table seats to be hanged side  by side and sofa seat of low table. Please note.<br>
@@ -29,10 +23,12 @@
 
             {{-- Check Box  --}}
             <div class="form-check mb-4">
+              <form action="#" method="post">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
                 <label class="form-check-label" for="flexCheckChecked"> 
                 I confirm I've read the Message from Venue above
                 </label>
+              </form>
             </div>
 
             {{-- Select Box --}}
