@@ -85,7 +85,7 @@
                             <input type="file" name="course_photo">
                     </div>
                     <div class="col-9">
-                        <input type="text" placeholder="Course Name" name="course_name">
+                        <input type="text" placeholder="Course Name" name="course_name" class="form-control">
                         <textarea type="textarea" id="Course_menu" rows="4" name="course_description" class="form-control" Placeholder="Description"></textarea>
                     </div>
                 </div>
@@ -98,21 +98,21 @@
             
             <div class="mb-3">
                 <label for="seats" class="form-label h3">Seats only reservation</label><br>
-                <input type="radio" name="seats" value="available" class="h4"><span class="me-5 h4">Available</span>
-                <input type="radio" name="seats" value="unavailable" class="h4"><span class="h4">Unavailable</span>
+                <input type="radio" name="seat" value="available" class="h4"><span class="me-5 h4">Available</span>
+                <input type="radio" name="seat" value="unavailable" class="h4"><span class="h4">Unavailable</span>
             </div>
 
             <div class="mb-3">
                 <label for="photo" class="form-label h3">Photo</label><br>
                 <div class="row">
                     <div class="col-4">
-                        <input type="file" name="photo">
+                        <input type="file" name="photo_1">
                     </div>
                     <div class="col-4">
-                        <input type="file" name="photo">
+                        <input type="file" name="photo_2">
                     </div>
                     <div class="col-4">
-                        <input type="file" name="photo">
+                        <input type="file" name="photo_3">
                     </div>
                 </div>
             </div>
@@ -138,17 +138,17 @@
                     </div>
                     <div class="col-auto">
                         <div class="btn-group" style="width: 800px;" role="group" aria-label="Basic checkbox toggle button group">
-                            <input type="checkbox" class="btn-check" id="budget1" autocomplete="off">
-                            <label class="btn btn-outline-dark" for="budget1">￥</label>
+                            <input type="checkbox" class="btn-check" id="L_budget1" autocomplete="off">
+                            <label class="btn btn-outline-dark" for="L_budget1">￥</label>
 
-                            <input type="checkbox" class="btn-check" id="budget2" autocomplete="off">
-                            <label class="btn btn-outline-dark" for="budget2">￥￥</label>
+                            <input type="checkbox" class="btn-check" id="L_budget2" autocomplete="off">
+                            <label class="btn btn-outline-dark" for="L_budget2">￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="budget3" autocomplete="off">
-                            <label class="btn btn-outline-dark" for="budget3">￥￥￥</label>
+                            <input type="checkbox" class="btn-check" id="L_budget3" autocomplete="off">
+                            <label class="btn btn-outline-dark" for="L_budget3">￥￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="budget4" autocomplete="off">
-                            <label class="btn btn-outline-dark" for="budget4">￥￥￥￥</label>
+                            <input type="checkbox" class="btn-check" id="L_budget4" autocomplete="off">
+                            <label class="btn btn-outline-dark" for="L_budget4">￥￥￥￥</label>
                         </div>
                     </div>
                 </div>
@@ -158,17 +158,17 @@
                     </div>
                     <div class="col-auto">
                         <div class="btn-group" style="width: 800px;" role="group" aria-label="Basic checkbox toggle button group">
-                            <input type="checkbox" class="btn-check" id="budget1" autocomplete="off">
-                            <label class="btn btn-outline-dark" for="budget1">￥</label>
+                            <input type="checkbox" class="btn-check" id="D_budget1" autocomplete="off">
+                            <label class="btn btn-outline-dark" for="D_budget1">￥</label>
 
-                            <input type="checkbox" class="btn-check" id="budget2" autocomplete="off">
-                            <label class="btn btn-outline-dark" for="budget2">￥￥</label>
+                            <input type="checkbox" class="btn-check" id="D_budget2" autocomplete="off">
+                            <label class="btn btn-outline-dark" for="D_budget2">￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="budget3" autocomplete="off">
-                            <label class="btn btn-outline-dark" for="budget3">￥￥￥</label>
+                            <input type="checkbox" class="btn-check" id="D_budget3" autocomplete="off">
+                            <label class="btn btn-outline-dark" for="D_budget3">￥￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="budget4" autocomplete="off">
-                            <label class="btn btn-outline-dark" for="budget4">￥￥￥￥</label>
+                            <input type="checkbox" class="btn-check" id="D_budget4" autocomplete="off">
+                            <label class="btn btn-outline-dark" for="D_budget4">￥￥￥￥</label>
                         </div>
                     </div>
                 </div>
