@@ -3,6 +3,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -61,7 +62,6 @@ Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name(
 Route::get('/restaurants/{id}/review', [App\Http\Controllers\HomeController::class, 'restaurantsReview'])->name('restaurants.review');
 
 
-//Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
 Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
 
 
@@ -69,3 +69,6 @@ Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('p
 
 Route::get('/restaurants/ranking', [App\Http\Controllers\HomeController::class, 'restaurantsRanking'])->name('restaurants.ranking');
 
+
+//Tommie working on here:)
+Route::get('/restaurant/{id}/reservasions', [ReservationController::class, 'show'])->name('restaurant.reservations');
