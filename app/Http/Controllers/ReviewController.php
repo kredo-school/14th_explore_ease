@@ -16,13 +16,20 @@ class ReviewController extends Controller
         $this -> review = $review;
     }
 
-    public function comment_store(Request $request, $restaurant_id){
+    public function store(Request $request, $restaurant_id){
+        $request->validate([
+            'star' => 'required',
+            'comment' => 'required|min:1'
+        ]);
+
         $this->review->comment = $request->comment;
-        $this->review->user_id = Auth::user()->id;
+        // $this->review->user_id = Auth::user()->id;
+        $this->review->star = $request->star;
+        $this->review->user_id = 3;
         $this->review->restaurant_id = $restaurant_id;
         $this->review->save();
 
-        return redirect()->route('restaurant.detail', $restaurant->id);
+        return redirect()->route('restaurant.detail', $restaurant_id);
     }
 
     /**
@@ -41,13 +48,7 @@ class ReviewController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.

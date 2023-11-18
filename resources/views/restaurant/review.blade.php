@@ -3,8 +3,32 @@
 @section('title', 'restaurants.detail')
 
 @section('content')
-{{-- <!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script> --}}
+<style>
+.rate-form {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.rate-form input[type=radio] {
+  display: none;
+}
+.rate-form label {
+  position: relative;
+  padding: 0 5px;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 50px;
+}
+.rate-form label:hover {
+  color: #ffcc00;
+}
+.rate-form label:hover ~ label {
+  color: #ffcc00;
+}
+.rate-form input[type=radio]:checked ~ label {
+  color: #ffcc00;
+}
+</style>
 
 @section('styles')
 <!-- Chart.js -->
@@ -14,6 +38,9 @@
 <main class="container">
     <div class="row justify-content-center">
         <h1>REVIEWING</h1>
+        <form action="{{ route('restaurant.review.store', $restaurant->id) }}" method="post">
+            @csrf
+
 
         <!--Star rating area -->
         <div class="card mt-3">
@@ -35,36 +62,49 @@
                         </div>
                         <br>
                         <div>
-                            <a href=""><i class="fa-regular fa-star text-dark" style="font-size:4em;"></i></a>
-                            <a href=""><i class="fa-regular fa-star text-dark" style="font-size:4em;"></i></a>
-                            <a href=""><i class="fa-regular fa-star text-dark" style="font-size:4em;"></i></a>
-                            <a href=""><i class="fa-regular fa-star text-dark" style="font-size:4em;"></i></a>
-                            <a href=""><i class="fa-regular fa-star text-dark" style="font-size:4em;"></i></a>
-                        </div>
-                        <br>
-                        <div>
                             <h3>Select rating</h3>
                         </div>
 
+                        <!-- Stars -->
+                        <div class="rate-form">
+                            <input id="star5" type="radio" name="star" value="5">
+                            <label for="star5">★</label>
+                            <input id="star4" type="radio" name="star" value="4">
+                            <label for="star4">★</label>
+                            <input id="star3" type="radio" name="star" value="3">
+                            <label for="star3">★</label>
+                            <input id="star2" type="radio" name="star" value="2">
+                            <label for="star2">★</label>
+                            <input id="star1" type="radio" name="star" value="1">
+                            <label for="star1">★</label>
+                        </div>
+                        <br>
+                        {{-- Error --}}
+                        @error('star')
+                            <div class="text-danger small">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
             </div>
         </div>
 
         <!--Comment area -->
-        <form action="{{ route('restaurant.review.store', $restaurant->id) }}" method="post">
-            @csrf
-
             <div class="mt-5">
                 <label for="comment"><h3>COMMENT AREA</h3></label>
                 <textarea name="comment" id="comment" rows="10" class="form-control w-100 bg-transparent"></textarea>
-                <div class="row justify-content-center mt-3">
-                    <div class="col-6 text-end">
-                        <a href="#" class="btn btn-light btn-outline-dark" style="width: 30%">Cancel</a>
-                    </div>
-                    <div class="col-6">
-                        <button type="submit" class="btn btn-secondary" style="width: 30%">Post</button>
-                    </div>
+                {{-- Error --}}
+                @error('comment')
+                    <div class="text-danger small">{{ $message }}</div>
+                @enderror
+            </div>
+
+        <!--BUTTONS -->
+            <div class="row justify-content-center mt-3">
+                <div class="col-6 text-end">
+                    <a href="{{ route('restaurant.detail', $restaurant->id) }}" class="btn btn-light btn-outline-dark" style="width: 30%">Cancel</a>
+                </div>
+                <div class="col-6">
+                    <button type="submit" class="btn btn-secondary" style="width: 30%">Post</button>
                 </div>
             </div>
         </form>
