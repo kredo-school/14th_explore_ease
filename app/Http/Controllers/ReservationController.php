@@ -24,7 +24,17 @@ class ReservationController extends Controller
         $this->reservation = $reservation;
         $this->restaurantphoto = $restaurantphoto;
     }
-
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $restaurant = $this->restaurant->findOrFail($id);
+        $restaurantphoto =  $this->restaurantphoto->findOrFail($restaurant->id);
+        /*dd($restaurantphoto->photo);*/
+        return view('restaurant.reservations', ['restaurant'=>$restaurant, 'restaurantphoto'=> $restaurantphoto]);
+    }
+    
     public function index()
     {
         
@@ -46,14 +56,6 @@ class ReservationController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-        $restaurant = $this->restaurant->findOrFail($id);
-        return view('restaurant.reservations')->with('restaurant' , $restaurant);
-    }
 
     /**
      * Show the form for editing the specified resource.

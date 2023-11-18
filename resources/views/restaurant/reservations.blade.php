@@ -23,10 +23,12 @@
 
             {{-- Check Box  --}}
             <div class="form-check mb-4">
+              <form action="#" method="post">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
                 <label class="form-check-label" for="flexCheckChecked"> 
                 I confirm I've read the Message from Venue above
                 </label>
+              </form>
             </div>
 
             {{-- Select Box --}}
