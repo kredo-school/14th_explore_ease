@@ -26,6 +26,7 @@ class RestaurantSeeder extends Seeder
                 'user_id' => 11,
                 'name' => 'Restaurant011',
                 'description' => 'Traditional Japanese Restaurant.',
+                'message' => 'Please contact the store directory when booking more than 9 people.',
                 'menu' => 'Sushi: $2000',
 
                 'areatype_id' => 147,
@@ -41,6 +42,7 @@ class RestaurantSeeder extends Seeder
                 'user_id' => 12,
                 'name' => 'Restaurant012',
                 'description' => 'Traditional Japanese Restaurant.',
+                'message' => 'Please contact the store directory when booking more than 9 people.',
                 'menu' => 'Sushi: $2000',
 
                 'areatype_id' => 147,
@@ -56,6 +58,7 @@ class RestaurantSeeder extends Seeder
                 'user_id' => 13,
                 'name' => 'Restaurant013',
                 'description' => 'Traditional Japanese Restaurant.',
+                'message' => 'Please contact the store directory when booking more than 9 people.',
                 'menu' => 'Sushi: $2000',
 
                 'areatype_id' => 147,
@@ -71,6 +74,7 @@ class RestaurantSeeder extends Seeder
                 'user_id' => 14,
                 'name' => 'Restaurant014',
                 'description' => 'Traditional Japanese Restaurant.',
+                'message' => 'Please contact the store directory when booking more than 9 people.',
                 'menu' => 'Sushi: $2000',
 
                 'areatype_id' => 147,
@@ -86,6 +90,7 @@ class RestaurantSeeder extends Seeder
                 'user_id' => 15,
                 'name' => 'Restaurant015',
                 'description' => 'Traditional Japanese Restaurant.',
+                'message' => 'Please contact the store directory when booking more than 9 people.',
                 'menu' => 'Sushi: $2000',
 
                 'areatype_id' => 147,

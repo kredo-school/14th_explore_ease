@@ -3,10 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Restaurant;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
+    private $restaurant;
+    private $review;
+
+    public function __construct(Restaurant $restaurant, Review $review){
+        $this -> restaurant = $restaurant;
+        $this -> review = $review;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -63,18 +72,15 @@ class RestaurantController extends Controller
         //
     }
 
-    /** Show restaurant review page */
-    public function restaurantReview(){
-        return view('restaurant.review');
-    }
-
     /** Show restaurant ranking page */
     public function restaurantRanking(){
         return view('restaurant.ranking');
     }
 
     /** Show restaurant ranking page */
-    public function restaurantDetail(){
-        return view('restaurant.detail');
+    public function ShowRestaurantDetail($id){
+        $restaurant = $this->restaurant->findOrFail($id);
+
+        return view('restaurant.detail')->with('restaurant', $restaurant);
     }
 }
