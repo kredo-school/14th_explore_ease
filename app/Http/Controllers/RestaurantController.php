@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Restaurant;
 use App\Models\OpenHour;
 use App\Models\Course;
+use App\Models\RestaurantPhoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,12 +68,28 @@ class RestaurantController extends Controller
         $course = new Course();
         $course->restaurant_id = $restaurant->id;
         $course->photo = 'data:image/' . $request->course_photo->extension().
-        ';base64,'. base64_encode(file_get_contents($request->image));
+        ';base64,'. base64_encode(file_get_contents($request->course_photo));
         $course->name = $request->course_name;
         $course->description = $request->course_description;
-        //$course->
+        $course->save();
+
+        for($i = 1.; $i <= 3; $i++){
+            $restaurant_photo = new RestaurantPhoto();
+            $restaurant_photo->restaurant_id = $restaurant->id;
+            $restaurant_photo->photo = 'data:image/' . $request->photo_[$i]->extension().
+            ';base64,'. base64_encode(file_get_contents($request->photo_[$i]));
+
+            $restaurant_photo->save();
+        }
+
+        $seat = new Seat();
+
+        if($request->seat = "available"){
+            $seat->restaurant_id = $restaurant->id;
+        }
 
         return redirect()->back();
+
 
     }
 

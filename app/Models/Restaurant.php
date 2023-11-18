@@ -19,6 +19,7 @@ class Restaurant extends Model
         'address',
         'latitude',
         'longitude',
+        'seat',
         'foodtype_id',
     ];
 

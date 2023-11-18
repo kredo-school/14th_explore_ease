@@ -20,10 +20,10 @@ function addCourseMenu()
     input.name = "photo";
     
     const courseName = document.createElement('input');
-    input.type = "text";
-    textarea.classList.add('form-control');
-    textarea.name = "course_name";
-    textarea.placeholder = "Course Name";
+    courseName.type = "text";
+    courseName.classList.add('form-control');
+    courseName.name = "course_name";
+    courseName.placeholder = "Course Name";
 
     const textarea = document.createElement('textarea');
     textarea.classList.add('form-control');
@@ -36,6 +36,7 @@ function addCourseMenu()
 
     // Assebling elements
     mainDivFirstChild.appendChild(input);
+    mainDivSecondChild.appendChild(courseName);
     mainDivSecondChild.appendChild(textarea);
     mainDiv.append(mainDivFirstChild, mainDivSecondChild);
     parentElement.append(mainDiv, addCard);
