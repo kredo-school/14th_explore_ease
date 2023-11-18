@@ -2,24 +2,6 @@
 
 @section('content')
 
-<style>
-.myClass {
-  height: 50px;
-  width : 400px;
-}
-
-#overflow_text {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-#toggle_text {
-  cursor: pointer;
-}
-
-</style>
-
     <!-- jQuery -->
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 
@@ -65,7 +47,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="vertical-align: middle">
+                                <tr style="vertical-align: middle;">
                                     <td>Restaurantname</td>
                                     <td>
                                         <div class="myClass">
