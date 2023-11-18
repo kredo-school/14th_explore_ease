@@ -4,17 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Restaurant;
 use App\Models\OpenHour;
+use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RestaurantController extends Controller
 {
-    private $restaurant;
-    private $openhour;
-
-    public function __construct(Restaurant $restaurant, OpenHour $openhour){
-        $this->restaurant = $restaurant;
-        $this->openhour = $openhour;
-    }
 
     /**
      * Display a listing of the resource.
@@ -37,30 +32,57 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {   
-        //dd($request);
 
-        //validate request
-        $request->validate([
-            'restaurant_name' => 'required',
-            'area' => 'required',
-            'restaurant_address' => 'required',
-            'Menu' => 'required',
-            'seats' => 'required'
-        ]);
+        $days_of_week = [ 'Holidays', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+
+        // //validate request
+        // $request->validate([
+        //     'restaurant_name' => 'required',
+        //     'area' => 'required',
+        //     'restaurant_address' => 'required',
+        //     'Menu' => 'required',
+        //     'seats' => 'required'
+        // ]);
+        
+        $restaurant = new Restaurant();
         //store to the db
-        // $this->restaurant->name = $request->restaurant_name;
-        // $this->restaurant->areatype_id = $request->area;
-        // $this->restaurant->address = $request->restautrant_address;
-        // $this->restaurant->latitude = $request->latitude;
-        // $this->restaurant->longitude = $request->longitude;
-        // $this->openhour->
-        // $this->openhour->openinghours = $request->open_Monday;
-        // $this->restaurant->menu = $request->menu
+        $restaurant->user_id = Auth::id();
+        $restaurant->name = $request->restaurant_name;
+        $restaurant->description = $request->description;
+        $restaurant->menu = $request->menu;
+        $restaurant->areatype_id = $request->area;
+        $restaurant->address = $request->restautrant_address;
+        $restaurant->latitude = $request->latitude;
+        $restaurant->longitude = $request->longitude;
+        $restaurant->foodtype_id = $request->foodtype;
 
-        print $request->restaurant_name;
-        print $request->area;
-        print 
+        $restaurant->save();
+
+        
+        for($i = 0; $i < 8; $i++)
+        {
+            $openhour = new OpenHour();
+
+            $openhour->restaurant_id = $restaurant->id;
+            $openhour->daytype = $i;
+            $openhour->openinghours = $request->input('open_' . $days_of_week[$i]);
+            $openhour->closinghours = $request->input('close_' . $days_of_week[$i]);
+            $openhour->closed = $request->has(`closed_checkbox_$days_of_week[$i]`);
+            $openhour->save();
+        }
+
+        
+
+
+
+        //$this->course->photo = $request->photo;
+
+        // return print $request->restaurant_name;
+        // return print $request->area;
+
+        return redirect()->back();
+
     }
 
     /**
