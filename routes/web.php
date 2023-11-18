@@ -3,6 +3,7 @@ use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\Reservation;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,9 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-Route::get('restaurant/reservation', function () {
-    return view('restaurant/reservations');
-});
+
 Route::get('/admin/dashboard', function () {
     return view('admin/dashboard');
 });
@@ -64,7 +63,6 @@ Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name(
 
 
 
-//Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
 Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
 
 Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
@@ -73,7 +71,10 @@ Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('p
     // ranking
 Route::get('/restaurant/ranking', [RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
 
-    // detail
+#Reservation page
+//Tommie working on here:)
+Route::get('/restaurant/{id}/reservasions', [App\Http\Controllers\ReservationController::class, 'show'])->name('restaurant.reservations');
+  // detail
 Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
 
 
