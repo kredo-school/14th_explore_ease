@@ -5,14 +5,13 @@
 @section('content')
 
 {{-- Main V --}}
-
-<div class="container-fluid mb-4 p-0 overflow-hidden" style="height: 560px">
-    <img src="../storage/vegetable-skewer-3317060_1920.jpg" alt="restaurant_reservation_image" class="img-fluid overflow-hidden" style="width: 100%; height: auto">
+<div class="container-fluid mb-4 p-0 overflow-hidden main_v_reservation">
+    <img src="{{ $restaurantphoto->photo }}" alt="restaurant_reservation_image" class="img-fluid overflow-hidden">
 </div>
 <div class="container w-50">
         {{-- Message Area --}}
         <div class="container mb-5">
-            <h2 class="mb-4">{{}}Greate Restaurant in Tokyo</h2>
+            <h2 class="mb-4">{{ $restaurant->name }}</h2>
             <h3 class="mb-2">Message from Venue</h3>
             <p>▶ As regards the specification of the seat, we may not be able to comply with your request, so please be forewarned.<br>
                 ▶ In the case of reservation for two people, there may be table seats to be hanged side  by side and sofa seat of low table. Please note.<br>

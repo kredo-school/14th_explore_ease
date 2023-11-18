@@ -55,11 +55,6 @@ class ReservationController extends Controller
         return view('restaurant.reservations')->with('restaurant' , $restaurant);
     }
 
-    /**public function show(Reservation $reservation)
-    {
-        //
-    }*/
-
     /**
      * Show the form for editing the specified resource.
      */
