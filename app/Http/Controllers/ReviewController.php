@@ -22,7 +22,7 @@ class ReviewController extends Controller
         $this->review->restaurant_id = $restaurant_id;
         $this->review->save();
 
-        return redirect()->route('restaurant.detail', $restaurant_id);
+        return redirect()->route('restaurant.detail', $restaurant->id);
     }
 
     /**

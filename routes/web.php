@@ -82,4 +82,4 @@ Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaur
 Route::get('/restaurant/{id}/review', [ReviewController::class, 'ShowRestaurantReview'])->name('restaurant.review');
 
     //store comment
-Route::post('/review/comment/store', [ReviewController::class, 'store'])->name('review.store');
+Route::post('/restaurant/{id}/review/comment', [ReviewController::class, 'store'])->name('restaurant.review.store');

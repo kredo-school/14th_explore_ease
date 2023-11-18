@@ -52,7 +52,7 @@
         </div>
 
         <!--Comment area -->
-        <form action="{{ route('review.store') }}" method="post">
+        <form action="{{ route('restaurant.review.store', $restaurant->id) }}" method="post">
             @csrf
 
             <div class="mt-5">
