@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\Reservation;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -67,7 +68,7 @@ Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('res
 Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
 
 // Restaurant Controller
-  // ranking
+    // ranking
 Route::get('/restaurant/ranking', [RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
 
 #Reservation page
@@ -78,4 +79,8 @@ Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaur
 
 
 // Review Controller
+    // show review page
 Route::get('/restaurant/{id}/review', [ReviewController::class, 'ShowRestaurantReview'])->name('restaurant.review');
+
+    //store comment
+Route::post('/restaurant/{id}/review/comment', [ReviewController::class, 'store'])->name('restaurant.review.store');
