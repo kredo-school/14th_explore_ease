@@ -3,8 +3,6 @@
 @section('title', 'restaurants.detail')
 
 @section('content')
-{{-- <!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script> --}}
 
 @section('styles')
 <!-- Chart.js -->
@@ -14,6 +12,9 @@
 <main class="container">
     <div class="row justify-content-center">
         <h1>REVIEWING</h1>
+        <form action="{{ route('restaurant.review.store', $restaurant->id) }}" method="post">
+            @csrf
+
 
         <!--Star rating area -->
         <div class="card mt-3">
@@ -35,35 +36,53 @@
                         </div>
                         <br>
                         <div>
-                            <a href=""><i class="fa-regular fa-star text-dark" style="font-size:4em;"></i></a>
-                            <a href=""><i class="fa-regular fa-star text-dark" style="font-size:4em;"></i></a>
-                            <a href=""><i class="fa-regular fa-star text-dark" style="font-size:4em;"></i></a>
-                            <a href=""><i class="fa-regular fa-star text-dark" style="font-size:4em;"></i></a>
-                            <a href=""><i class="fa-regular fa-star text-dark" style="font-size:4em;"></i></a>
-                        </div>
-                        <br>
-                        <div>
                             <h3>Select rating</h3>
                         </div>
 
+                        <!-- Stars -->
+                        <div class="rate-form">
+                            <input id="star5" type="radio" name="star" value="5">
+                            <label for="star5">★</label>
+                            <input id="star4" type="radio" name="star" value="4">
+                            <label for="star4">★</label>
+                            <input id="star3" type="radio" name="star" value="3">
+                            <label for="star3">★</label>
+                            <input id="star2" type="radio" name="star" value="2">
+                            <label for="star2">★</label>
+                            <input id="star1" type="radio" name="star" value="1">
+                            <label for="star1">★</label>
+                        </div>
+                        <br>
+                        {{-- Error --}}
+                        @error('star')
+                            <div class="text-danger small">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
             </div>
         </div>
 
         <!--Comment area -->
-        <div class="mt-5">
-            <h3>COMMENT AREA</h3>
-            <textarea name="" id="" rows="10" class="w-100 bg-transparent"></textarea>
+            <div class="mt-5">
+                <label for="comment"><h3>COMMENT AREA</h3></label>
+                <textarea name="comment" id="comment" rows="10" class="form-control w-100 bg-transparent"></textarea>
+                {{-- Error --}}
+                @error('comment')
+                    <div class="text-danger small">{{ $message }}</div>
+                @enderror
+            </div>
+
+        <!--BUTTONS -->
             <div class="row justify-content-center mt-3">
                 <div class="col-6 text-end">
-                    <button type="submit" class="btn btn-light btn-outline-dark" style="width: 30%">Cancel</button>
+                    <a href="{{ route('restaurant.detail', $restaurant->id) }}" class="btn btn-light btn-outline-dark" style="width: 30%">Cancel</a>
                 </div>
                 <div class="col-6">
                     <button type="submit" class="btn btn-secondary" style="width: 30%">Post</button>
                 </div>
             </div>
-        </div>
+        </form>
+
 
         <!--Review total area -->
         <div class="mt-5">

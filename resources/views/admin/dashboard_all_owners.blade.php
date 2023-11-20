@@ -1,9 +1,16 @@
 @extends('layouts.app')
 
+@section('styles')
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<!-- FontAwsome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endsection
+
 @section('content')
 
 <div class="container w-75">
-    <h2>All users</h2>
+    <h2>All owners</h2>
     {{-- Search Box --}}
     <div class="container text-end mb-3">
         <form class="form-inline">
@@ -25,7 +32,7 @@
               <th  colspan="2">name</th>
               <th scope="col">registration date</th>
               <th scope="col">e-mail</th>
-              <th scope="col"></th>
+              <th scope="col">phone</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -43,7 +50,7 @@
             </tr>
           </tbody>
         </table>
-      </div>
+    </div>
       {{-- permanent_area --}}
         <div class="d-flex justify-content-center">
         <!--previousry-->

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use App\Models\Restaurant;
+use App\Models\RestaurantPhoto;
+use App\Models\Seat;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -10,9 +13,31 @@ class ReservationController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    private $reservation;
+    private $restaurant;
+    private $restaurantphoto;
+
+    public function __construct(Restaurant $restaurant, Reservation $reservation, RestaurantPhoto $restaurantphoto)
+    {
+        $this->restaurant = $restaurant;
+        $this->reservation = $reservation;
+        $this->restaurantphoto = $restaurantphoto;
+    }
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $restaurant = $this->restaurant->findOrFail($id);
+        $restaurantphoto =  $this->restaurantphoto->findOrFail($restaurant->id);
+        /*dd($restaurantphoto->photo);*/
+        return view('restaurant.reservations', ['restaurant'=>$restaurant, 'restaurantphoto'=> $restaurantphoto]);
+    }
+    
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -31,13 +56,6 @@ class ReservationController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Reservation $reservation)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

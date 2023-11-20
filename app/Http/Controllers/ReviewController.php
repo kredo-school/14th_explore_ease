@@ -3,10 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
+    private $restaurant;
+    private $review;
+
+    public function __construct(Restaurant $restaurant, Review $review){
+        $this -> restaurant = $restaurant;
+        $this -> review = $review;
+    }
+
+    public function store(Request $request, $restaurant_id){
+        $request->validate([
+            'star' => 'required',
+            'comment' => 'required|min:1'
+        ]);
+
+        $this->review->comment = $request->comment;
+        // $this->review->user_id = Auth::user()->id;
+        $this->review->star = $request->star;
+        $this->review->user_id = 3;
+        $this->review->restaurant_id = $restaurant_id;
+        $this->review->save();
+
+        return redirect()->route('restaurant.detail', $restaurant_id);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -23,13 +48,7 @@ class ReviewController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
@@ -62,4 +81,13 @@ class ReviewController extends Controller
     {
         //
     }
+
+    /** Show restaurant review page */
+    public function ShowRestaurantReview($id){
+        $restaurant = $this->restaurant->findOrFail($id);
+        // $review = $this->review->findOrFail($id);
+
+        return view('restaurant.review')->with('restaurant', $restaurant);
+    }
+
 }

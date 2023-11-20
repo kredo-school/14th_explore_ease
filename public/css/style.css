@@ -5,7 +5,7 @@
 }
 .icon-user{
     font-size: 6rem;
-    
+
 }
 
 .icon-edit{
@@ -24,15 +24,59 @@
     border-right: 2px solid;
     line-height: auto;
     text-align: center;
-    
-    
+
+
 }
 
 .rcards{
-    display: flex; 
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
     align-items: start;
     gap: 10px;
+}
+
+
+/* profile review */
+.myClass {
+    height: auto;
+    width : 400px;
+}
+
+#overflow_text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#toggle_text {
+    cursor: pointer;
+    color: #E7DA3D;
+}
+
+/* restaurant_review */
+.rate-form {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.rate-form input[type=radio] {
+  display: none;
+}
+.rate-form label {
+  position: relative;
+  padding: 0 5px;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 50px;
+}
+.rate-form label:hover {
+  color: #ffcc00;
+}
+.rate-form label:hover ~ label {
+  color: #ffcc00;
+}
+.rate-form input[type=radio]:checked ~ label {
+  color: #ffcc00;
 }
