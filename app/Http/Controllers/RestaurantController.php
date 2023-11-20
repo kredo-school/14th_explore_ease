@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Budget;
 use App\Models\Restaurant;
-use App\Models\OpenHour;
-use App\Models\Course;
-use App\Models\Feature;
-use App\Models\FoodType;
-use App\Models\RestaurantPhoto;
-use App\Models\Seat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RestaurantController extends Controller
 {
+
+    private $restaurant;
+    private $review;
+
+    public function __construct(Restaurant $restaurant, Review $review){
+        $this -> restaurant = $restaurant;
+        $this -> review = $review;
+    }
 
     /**
      * Display a listing of the resource.
@@ -141,18 +143,15 @@ class RestaurantController extends Controller
         //
     }
 
-    /** Show restaurant review page */
-    public function restaurantReview(){
-        return view('restaurant.review');
-    }
-
     /** Show restaurant ranking page */
     public function restaurantRanking(){
         return view('restaurant.ranking');
     }
 
     /** Show restaurant ranking page */
-    public function restaurantDetail(){
-        return view('restaurant.detail');
+    public function ShowRestaurantDetail($id){
+        $restaurant = $this->restaurant->findOrFail($id);
+
+        return view('restaurant.detail')->with('restaurant', $restaurant);
     }
 }
