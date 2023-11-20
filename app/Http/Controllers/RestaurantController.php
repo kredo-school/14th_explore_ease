@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Budget;
+use App\Models\Course;
+use App\Models\OpenHour;
 use App\Models\Restaurant;
+use App\Models\RestaurantPhoto;
+use App\Models\Seat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -100,10 +104,10 @@ class RestaurantController extends Controller
         $budget->restaurant_id = $restaurant->id;
         //$budget->timezonetype = $request->
 
-        if
-        $feature = new Feature();
-        $feature->restaurant_id = $restaurant->id;
-        $feature->featuretype_id = $request->features;
+        // if
+        // $feature = new Feature();
+        // $feature->restaurant_id = $restaurant->id;
+        // $feature->featuretype_id = $request->features;
 
 
         return redirect()->back();
