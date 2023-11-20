@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Budget;
 use App\Models\Restaurant;
 use App\Models\OpenHour;
 use App\Models\Course;
+use App\Models\Feature;
+use App\Models\FoodType;
 use App\Models\RestaurantPhoto;
+use App\Models\Seat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -73,6 +77,14 @@ class RestaurantController extends Controller
         $course->description = $request->course_description;
         $course->save();
 
+        
+        $seat = new Seat();
+        if($request->seat = "available"){
+            $seat->restaurant_id = $restaurant->id;
+            $seat->reservation_minutes = 60;
+            $seat->save();
+        }
+
         for($i = 1.; $i <= 3; $i++){
             $restaurant_photo = new RestaurantPhoto();
             $restaurant_photo->restaurant_id = $restaurant->id;
@@ -82,11 +94,15 @@ class RestaurantController extends Controller
             $restaurant_photo->save();
         }
 
-        $seat = new Seat();
+        $budget = new Budget();
+        $budget->restaurant_id = $restaurant->id;
+        //$budget->timezonetype = $request->
 
-        if($request->seat = "available"){
-            $seat->restaurant_id = $restaurant->id;
-        }
+        if
+        $feature = new Feature();
+        $feature->restaurant_id = $restaurant->id;
+        $feature->featuretype_id = $request->features;
+
 
         return redirect()->back();
 

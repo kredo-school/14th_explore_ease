@@ -177,20 +177,20 @@
             <div class="mb-3">
                 <label for="features" class="form-label h3">Features</label><br>
                 <div class="form-check-inline h4">
-                    <input class="form-check-input" type="checkbox" id="vegan" name="features" value="vegan">
+                    <input class="form-check-input" type="checkbox" id="vegan" name="features" value="2">
                     <label class="form-check-label" for="vegan">Vegan</label>
                 </div>
                 <div class="form-check-inline h4">
-                    <input class="form-check-input" type="checkbox" id="vegetable" name="features" value="vegetable">
-                    <label class="form-check-label" for="vegetable">Vegetable</label>
+                    <input class="form-check-input" type="checkbox" id="vegetarian" name="features_1" value="1">
+                    <label class="form-check-label" for="vegetarian">Vegetable</label>
                 </div>
                 <div class="form-check-inline h4">
-                    <input class="form-check-input" type="checkbox" id="haral" name="features" value="haral">
-                    <label class="form-check-label" for="haral">Haral</label>
+                    <input class="form-check-input" type="checkbox" id="Islam" name="features" value="3">
+                    <label class="form-check-label" for="Islam">Islam</label>
                 </div>
                 <div class="form-check-inline h4">
-                    <input class="form-check-input" type="checkbox" id="gluten" name="features" value="gluten">
-                    <label class="form-check-label" for="gluten">Gluten</label>
+                    <input class="form-check-input" type="checkbox" id="gluten_free" name="features" value="7">
+                    <label class="form-check-label" for="gluten_free">Gluten free</label>
                 </div>
             </div>
 
