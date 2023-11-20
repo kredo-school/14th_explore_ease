@@ -71,3 +71,5 @@ Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('p
 
 Route::get('/restaurants/ranking', [App\Http\Controllers\HomeController::class, 'restaurantsRanking'])->name('restaurants.ranking');
 
+#Profile
+Route::get('/profile/{user_id}', [ProfileController::class, 'show'])->name('profile.show');

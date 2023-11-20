@@ -3,10 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
-{
+{   
+    private $profile;
+    private $user;
+
+    public function __construct(Profile $profile, User $user)
+    {
+        $this->profile = $profile;
+        $this->user = $user;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -28,15 +39,15 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Profile $profile)
-    {
-        //
+    public function show($id)
+    {   
+        $user = $this->user->findOrFail($id);
+        return view('users.profile')->with('user', $user);
+        // $profile = $this->profile->findOrFail($user_id);
+        // return view('users.profile')->with('profile', $profile);
     }
 
     /**

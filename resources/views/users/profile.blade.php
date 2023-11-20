@@ -30,7 +30,7 @@
                         <div class="row ">
                             <div class="col-6">
                                 <label for="firstname" class="col-md-4 col-form-label">First Name</label>
-                                <input type="text" class="form-control" name="firstname" placeholder="Lionel">
+                                <input type="text" class="form-control" name="firstname" placeholder="{{ $user->profile->first_name }}">
                             </div>
                             <div class="col-6">
                                 <label for="lastname" class="col-md-4 col-form-label">Last Name</label>
@@ -68,8 +68,8 @@
                                 <h1>Restaurant Profile</h1>
                             </div>
                             <div class="col-6 text-end">
-                                <button class="btn btn-primary">Add Restaurant   
-                                </button>
+                               <a href="#" class="btn btn-primary" role="button">Add Restaurant</a> 
+                            {{-- {{ route('restaurant.adding') }}  <- will put instead of #--}}
                             </div>
                         </div>
                         <div class="row">
