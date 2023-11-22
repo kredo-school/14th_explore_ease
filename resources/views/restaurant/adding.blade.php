@@ -154,16 +154,16 @@
                     </div>
                     <div class="col-auto">
                         <div class="btn-group" style="width: 800px;" role="group" aria-label="Basic checkbox toggle button group">
-                            <input type="checkbox" class="btn-check" id="D_budget1" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="D_budget1" autocomplete="off" name="D_budget1">
                             <label class="btn btn-outline-dark" for="D_budget1">￥</label>
 
-                            <input type="checkbox" class="btn-check" id="D_budget2" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="D_budget2" autocomplete="off" name="D_budget1">
                             <label class="btn btn-outline-dark" for="D_budget2">￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="D_budget3" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="D_budget3" autocomplete="off" name="D_budget1">
                             <label class="btn btn-outline-dark" for="D_budget3">￥￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="D_budget4" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="D_budget4" autocomplete="off" name="D_budget1">
                             <label class="btn btn-outline-dark" for="D_budget4">￥￥￥￥</label>
                         </div>
                     </div>

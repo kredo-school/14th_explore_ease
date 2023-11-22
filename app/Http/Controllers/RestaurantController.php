@@ -84,16 +84,19 @@ class RestaurantController extends Controller
             $openhour->save();
         }
 
-        
-        $course = new Course();
-        $course->restaurant_id = $restaurant->id;
-        $course->photo = 'data:image/' . $request->course_photo->extension().
-        ';base64,'. base64_encode(file_get_contents($request->course_photo));
-        $course->name = $request->course_name;
-        $course->description = $request->course_description;
-        $course->reservation_minutes = 60;
-        $course->save();
-
+        for($i = 0; $i < 4; $i++)ここ質問する！！どうやってJavaScriptで追加したところに１，２，３とラベル付けするか！
+        {
+            if($request->{"course_photo".$i+1}){
+                $course = new Course();
+                $course->restaurant_id = $restaurant->id;
+                $course->photo = 'data:image/' . $request->{"course_photo".$+i}->extension().
+                ';base64,'. base64_encode(file_get_contents($request->{"course_photo".$i+1}));
+                $course->name = $request->{"course_name".$i+1};
+                $course->description = $request->{"course_description".$i+1};
+                $course->reservation_minutes = 60;
+                $course->save();
+            }
+        }
         
         $seat = new Seat();
         if($request->seat = "available"){
@@ -102,39 +105,67 @@ class RestaurantController extends Controller
             $seat->save();
         }
 
-        for($i = 1; $i <= 3; $i++){
-            if($request->photo_[$i]){ //ここどうやって条件分岐？
+        for($i = 0; $i < 3; $i++){
+            if($request->{"photo_".$i+1}){ 
                 $restaurant_photo = new RestaurantPhoto();
                 $restaurant_photo->restaurant_id = $restaurant->id;
-                $restaurant_photo->photo = 'data:image/' . $request->photo_[$i]->extension().
-                ';base64,'. base64_encode(file_get_contents($request->photo_[$i]));
+                $restaurant_photo->photo = 'data:image/' . $request->{"photo_".$i+1}->extension().
+                ';base64,'. base64_encode(file_get_contents($request->{"photo_".$i+1}));
 
                 $restaurant_photo->save();
             }
         }
 
-        for($i = 1; $i <= 4; $i++)
+        for($i = 0; $i < 4; $i++)
         {
-            $budget = new Budget();
-            $budget->restaurant_id = $restaurant->id;
-            $budget->timezonetype = $request->has(`L_budget$i`);
-            $budget->save();
+            if($request->{"L_budget".$i+1}){
+                $budget = new Budget();
+                $budget->restaurant_id = $restaurant->id;
+                $budget->timezonetype = "0";
+                $budget->budgetindex = $i+1;
+                if($i = 0){
+                    $budget->budgetvalue = "￥";
+                } elseif ($i=1){
+                    $budget->budgetvalue = "￥￥";
+                } elseif ($i=2){
+                    $budget->budgetvalue = "￥￥￥";
+                } elseif ($i=3){
+                    $budget->budgetvalue = "￥￥￥￥";
+                }
+
+                $budget->save();
+            }
         }
 
-        for($i = 1; $i <= 4; $i++)
+        for($i = 0; $i < 4; $i++)
         {
-            $budget = new Budget();
-            $budget->restaurant_id = $restaurant->id;
-            $budget->timezonetype = $request->has(`D_budget$i`);
-            $budget->save();
+            if($request->{"D_budget".$i+1}){
+                $budget = new Budget();
+                $budget->restaurant_id = $restaurant->id;
+                $budget->timezonetype = "1";
+                $budget->budgetindex = $i+1;
+                if($i = 0){
+                    $budget->budgetvalue = "￥";
+                } elseif ($i=1){
+                    $budget->budgetvalue = "￥￥";
+                } elseif ($i=2){
+                    $budget->budgetvalue = "￥￥￥";
+                } elseif ($i=3){
+                    $budget->budgetvalue = "￥￥￥￥";
+                }
+                
+                $budget->save();
+            }
         }
 
-        for($i = 1; $i <= 7; $i++)
+        for($i = 0; $i < 7; $i++)
         {
-        $feature = new Feature();
-        $feature->restaurant_id = $restaurant->id;
-        $feature->featuretype_id = $request->has(`features$i`);
-        $feature->save();
+            if($request->{"features".$i+1}){
+                $feature = new Feature();
+                $feature->restaurant_id = $restaurant->id;
+                $feature->featuretype_id = $i+1;
+                $feature->save();
+            }
         }
 
         return redirect()->back();
