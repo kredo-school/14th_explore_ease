@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AreaType;
 use App\Models\Budget;
 use App\Models\Course;
+use App\Models\Feature;
+use App\Models\FoodType;
 use App\Models\OpenHour;
 use App\Models\Restaurant;
 use App\Models\RestaurantPhoto;
+use App\Models\Review;
 use App\Models\Seat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +39,13 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('restaurant.adding');
+        $areatype = new AreaType();
+        $areatypes = $areatype->all();
+
+        $foodtype = new FoodType();
+        $foodtypes = $foodtype->all();
+
+        return view('restaurant.adding')->with('areatypes', $areatypes)->with('foodtypes', $foodtypes);
     }
 
     /**
@@ -44,7 +54,7 @@ class RestaurantController extends Controller
     public function store(Request $request)
     {   
 
-        $days_of_week = [ 'Holidays', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        $days_of_week = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Holiday'];
 
         
         $restaurant = new Restaurant();
@@ -81,6 +91,7 @@ class RestaurantController extends Controller
         ';base64,'. base64_encode(file_get_contents($request->course_photo));
         $course->name = $request->course_name;
         $course->description = $request->course_description;
+        $course->reservation_minutes = 60;
         $course->save();
 
         
@@ -91,24 +102,40 @@ class RestaurantController extends Controller
             $seat->save();
         }
 
-        for($i = 1.; $i <= 3; $i++){
-            $restaurant_photo = new RestaurantPhoto();
-            $restaurant_photo->restaurant_id = $restaurant->id;
-            $restaurant_photo->photo = 'data:image/' . $request->photo_[$i]->extension().
-            ';base64,'. base64_encode(file_get_contents($request->photo_[$i]));
+        for($i = 1; $i <= 3; $i++){
+            if($request->photo_[$i]){ //ここどうやって条件分岐？
+                $restaurant_photo = new RestaurantPhoto();
+                $restaurant_photo->restaurant_id = $restaurant->id;
+                $restaurant_photo->photo = 'data:image/' . $request->photo_[$i]->extension().
+                ';base64,'. base64_encode(file_get_contents($request->photo_[$i]));
 
-            $restaurant_photo->save();
+                $restaurant_photo->save();
+            }
         }
 
-        $budget = new Budget();
-        $budget->restaurant_id = $restaurant->id;
-        //$budget->timezonetype = $request->
+        for($i = 1; $i <= 4; $i++)
+        {
+            $budget = new Budget();
+            $budget->restaurant_id = $restaurant->id;
+            $budget->timezonetype = $request->has(`L_budget$i`);
+            $budget->save();
+        }
 
-        // if
-        // $feature = new Feature();
-        // $feature->restaurant_id = $restaurant->id;
-        // $feature->featuretype_id = $request->features;
+        for($i = 1; $i <= 4; $i++)
+        {
+            $budget = new Budget();
+            $budget->restaurant_id = $restaurant->id;
+            $budget->timezonetype = $request->has(`D_budget$i`);
+            $budget->save();
+        }
 
+        for($i = 1; $i <= 7; $i++)
+        {
+        $feature = new Feature();
+        $feature->restaurant_id = $restaurant->id;
+        $feature->featuretype_id = $request->has(`features$i`);
+        $feature->save();
+        }
 
         return redirect()->back();
 

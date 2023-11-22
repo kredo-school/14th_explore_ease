@@ -16,11 +16,10 @@
             <div class="mb-3">
                 <label for="area" class="form-label h3">Area type</label>
                 <select id="area" class="form-select" name="area">
-                    <option value="1">Select area</option>
-                    <option value="2">Ginza</option>
-                    <option value="3">Shibuya</option>
-                    <option value="4">Ikebukuro</option>
-                    <option value="5">Shinjuku</option>
+                    <option value="0">Select area</option>
+                    @foreach($areatypes as $area)
+                        <option value="{{$area->id}}">{{$area->station_name}}({{$area->line_name}})</option>
+                    @endforeach
                 </select>
             </div>
             <div class="mb-3">
@@ -37,7 +36,7 @@
                 <label for="open_hours" class="form-label h3">Open hours</label>
                 <br>
                 <?php
-                $days_of_week = ['Holidays', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                $days_of_week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Holiday'];
                 ?>
                 @foreach($days_of_week as $day)
                     <div class="row">
@@ -121,12 +120,9 @@
                 <label for="foodtype" class="form-label h3">Food type</label>
                 <select id="foodtype" class="form-select" name="foodtype">
                     <option value="">Select</option>
-                    <option value="5">Japanese food</option>
-                    <option value="4">Chinese food</option>
-                    <option value="6">Korean food</option>
-                    <option value="2">Italian</option>
-                    <option value="9">French</option>
-                    <option value="0">Other</option>
+                    @foreach($foodtypes as $foodtype)
+                        <option value="{{$foodtype->id}}">{{$foodtype->name}}</option>
+                    @endforeach
                 </select>
             </div>
 
@@ -138,16 +134,16 @@
                     </div>
                     <div class="col-auto">
                         <div class="btn-group" style="width: 800px;" role="group" aria-label="Basic checkbox toggle button group">
-                            <input type="checkbox" class="btn-check" id="L_budget1" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="L_budget1" autocomplete="off" name="L_budget1" value="1">
                             <label class="btn btn-outline-dark" for="L_budget1">￥</label>
 
-                            <input type="checkbox" class="btn-check" id="L_budget2" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="L_budget2" autocomplete="off" name="L_budget2" value="2">
                             <label class="btn btn-outline-dark" for="L_budget2">￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="L_budget3" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="L_budget3" autocomplete="off" name="L_budget3" value="3">
                             <label class="btn btn-outline-dark" for="L_budget3">￥￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="L_budget4" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="L_budget4" autocomplete="off" name="L_budget4" value="4">
                             <label class="btn btn-outline-dark" for="L_budget4">￥￥￥￥</label>
                         </div>
                     </div>
@@ -177,23 +173,34 @@
             <div class="mb-3">
                 <label for="features" class="form-label h3">Features</label><br>
                 <div class="form-check-inline h4">
-                    <input class="form-check-input" type="checkbox" id="vegan" name="features" value="2">
+                    <input class="form-check-input" type="checkbox" id="gluten_free" name="features1" value="1">
+                    <label class="form-check-label" for="gluten_free">Gluten free</label>
+                </div>
+                <div class="form-check-inline h4">
+                    <input class="form-check-input" type="checkbox" id="vegetarian" name="features2" value="2">
+                    <label class="form-check-label" for="vegetarian">Vegetarian</label>
+                </div>
+                <div class="form-check-inline h4">
+                    <input class="form-check-input" type="checkbox" id="vegan" name="features3" value="3">
                     <label class="form-check-label" for="vegan">Vegan</label>
                 </div>
                 <div class="form-check-inline h4">
-                    <input class="form-check-input" type="checkbox" id="vegetarian" name="features_1" value="1">
-                    <label class="form-check-label" for="vegetarian">Vegetable</label>
-                </div>
-                <div class="form-check-inline h4">
-                    <input class="form-check-input" type="checkbox" id="Islam" name="features" value="3">
+                    <input class="form-check-input" type="checkbox" id="Islam" name="features4" value="4">
                     <label class="form-check-label" for="Islam">Islam</label>
                 </div>
                 <div class="form-check-inline h4">
-                    <input class="form-check-input" type="checkbox" id="gluten_free" name="features" value="7">
-                    <label class="form-check-label" for="gluten_free">Gluten free</label>
+                    <input class="form-check-input" type="checkbox" id="hindu" name="features5" value="5">
+                    <label class="form-check-label" for="hindu">Hindu</label>
+                </div>
+                <div class="form-check-inline h4">
+                    <input class="form-check-input" type="checkbox" id="judaism" name="features6" value="6">
+                    <label class="form-check-label" for="judaism">Judaism</label>
+                </div>
+                <div class="form-check-inline h4">
+                    <input class="form-check-input" type="checkbox" id="Jainism" name="features7" value="7">
+                    <label class="form-check-label" for="Jainism">Jainism</label>
                 </div>
             </div>
-
             <div class="mb-3">
                 <label for="descritpiont" class="form-label h3">Description</label><br>
                 <textarea type="textarea" id="description" rows="4" name="description" class="form-control"></textarea>
