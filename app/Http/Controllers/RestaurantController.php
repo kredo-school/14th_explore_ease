@@ -4,16 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\Restaurant;
 use App\Models\Review;
+use App\Models\RestaurantPhoto;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
     private $restaurant;
     private $review;
+    private $restaurantphoto;
 
-    public function __construct(Restaurant $restaurant, Review $review){
+    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto){
         $this -> restaurant = $restaurant;
         $this -> review = $review;
+        $this -> restaurantphoto = $restaurantphoto;
+    }
+
+    /** Show restaurant ranking page */
+    public function restaurantRanking(){
+        return view('restaurant.ranking');
+    }
+
+    /** Show restaurant detail page */
+    public function ShowRestaurantDetail($id){
+        $restaurant = $this->restaurant->findOrFail($id);
+        $restaurantphoto = RestaurantPhoto::where($id, 'restaurant_id');
+
+        // $all_restaurantphotos = $this->restaurantphoto;
+
+        // dd($id);
+
+        return view('restaurant.detail')->with('restaurant', $restaurant)->with('restaurantphoto', $restaurantphoto);
     }
 
     /**
@@ -72,15 +92,5 @@ class RestaurantController extends Controller
         //
     }
 
-    /** Show restaurant ranking page */
-    public function restaurantRanking(){
-        return view('restaurant.ranking');
-    }
 
-    /** Show restaurant ranking page */
-    public function ShowRestaurantDetail($id){
-        $restaurant = $this->restaurant->findOrFail($id);
-
-        return view('restaurant.detail')->with('restaurant', $restaurant);
-    }
 }

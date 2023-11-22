@@ -7,15 +7,12 @@
     <main class="container">
         <!-- Picture section -->
         <div class="row justify-content-center">
-            <div class="col-4">
-                <img src="https://www.parisselectbook.com/wp-content/uploads/2023/04/4912_3.jpg" alt="" class="img-fluid" style="object-fit:cover; width:450px; height:450px">
-            </div>
-            <div class="col-4">
-                <img src="https://www.resto.fr/across/resources/static/e35d3dc8d5bd872c305e1ff793ea1cff4d8e019d/site/images/placeholder-detail-resto-1.jpg" alt="" class="img-fluid" style="object-fit:cover; width:450px; height:450px">
-            </div>
-            <div class="col-4">
-                <img src="https://axwwgrkdco.cloudimg.io/v7/__gmpics__/798dbee64ebc44d58b559191991e87ce?w=800&h=800&org_if_sml=1" alt="" class="img-fluid" style="object-fit:cover; width:450px; height:450px">
-            </div>
+            @foreach ($restaurantphoto as $photo)
+                <div class="col-4">
+                    <img src="{{ $photo->photo }}" alt="" class="img-fluid" style="object-fit:cover; width:450px; height:450px">
+                </div>
+            @endforeach
+
         </div>
 
         <div class="row justify-content-center mt-5">

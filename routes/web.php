@@ -3,6 +3,7 @@ use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\RestaurantPhotoController;
 use App\Http\Controllers\Reservation;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Auth;
@@ -70,12 +71,14 @@ Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('p
 // Restaurant Controller
     // ranking
 Route::get('/restaurant/ranking', [RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
+    // detail
+Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
+
 
 #Reservation page
 //Tommie working on here:)
 Route::get('/restaurant/{id}/reservasions', [App\Http\Controllers\ReservationController::class, 'show'])->name('restaurant.reservations');
-  // detail
-Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
+
 
 
 // Review Controller

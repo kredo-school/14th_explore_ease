@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\RestaurantPhoto;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
 class RestaurantPhotoController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -39,13 +41,6 @@ class RestaurantPhotoController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(RestaurantPhoto $restaurantPhoto)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
