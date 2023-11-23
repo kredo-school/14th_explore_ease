@@ -112,7 +112,9 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a href="{{ route('profile.show', Auth::user()->id) }}" class="dropdown-item">Profile</a>
-                                    <a href="{{-- route('admin.show') --}}" class="dropdown-item">Dashboard</a>
+                                    @can('admin')
+                                        <a href="{{-- route('admin.show') --}}" class="dropdown-item">Dashboard</a>
+                                    @endcan
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
