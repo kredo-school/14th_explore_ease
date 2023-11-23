@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Restaurant;
 use App\Models\Review;
 use App\Models\RestaurantPhoto;
+use App\Models\FoodType;
+use App\Models\AreaType;
+use App\Models\FeatureType;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
@@ -12,11 +15,17 @@ class RestaurantController extends Controller
     private $restaurant;
     private $review;
     private $restaurantphoto;
+    private $foodtype;
+    private $areatype;
+    private $featuretype;
 
-    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto){
+    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, FeatureType $featuretype){
         $this -> restaurant = $restaurant;
         $this -> review = $review;
         $this -> restaurantphoto = $restaurantphoto;
+        $this -> foodtype = $foodtype;
+        $this -> areatype = $areatype;
+        $this -> featuretype = $featuretype;
     }
 
     /** Show restaurant ranking page */
@@ -27,13 +36,15 @@ class RestaurantController extends Controller
     /** Show restaurant detail page */
     public function ShowRestaurantDetail($id){
         $restaurant = $this->restaurant->findOrFail($id);
-        $restaurantphoto = RestaurantPhoto::where($id, 'restaurant_id');
+        $restaurantphoto = $restaurant->restaurant_photos;
+                         //↑restaurant Model.    //↑function on restaurant Model.
+        $foodtype = $this->foodtype->findOrFail($restaurant->foodtype->id);
+        $areatype = $this->areatype->findOrFail($restaurant->areatype->id);
+        // $featuretype = $this->featuretype->findOrFail($restaurant->featuretype->id);
 
-        // $all_restaurantphotos = $this->restaurantphoto;
 
-        // dd($id);
-
-        return view('restaurant.detail')->with('restaurant', $restaurant)->with('restaurantphoto', $restaurantphoto);
+        return view('restaurant.detail')->with('restaurant', $restaurant)->with('restaurantphoto', $restaurantphoto)->with('foodtype', $foodtype)->with('areatype', $areatype);
+    // ->with('featuretype', $featuretype)
     }
 
     /**

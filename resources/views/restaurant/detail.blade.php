@@ -3,6 +3,13 @@
 @section('title', 'restaurants.detail')
 
 @section('content')
+<!-- pass latitude and longitude data to mapForDetail.js -->
+<script type="text/javascript">
+    var latitude =  {{ $restaurant->latitude }};
+    var longitude = {{ $restaurant->longitude }};
+</script>
+
+@vite(['resources/js/mapForDetail.js'])
 
     <main class="container">
         <!-- Picture section -->
@@ -21,18 +28,19 @@
                 <div class="row">
                     <!-- Resturant name -->
                     <div class="col-6">
-                        <h2>Restaurant Name</h2>
+                        <h2>{{ $restaurant->name }}</h2>
                     </div>
 
                     <!-- Rating -->
+                    <!-- to be update: create route&function to review!!!! -->
                     <div class="col-2 text-center">
                         <a href="" class="text-decoration-none text-dark h5">
                             4.5 <i class="fa-solid fa-star"></i>
-                            {{-- {{ $post->user->name }} --}}
                         </a>
                     </div>
 
                     <!-- Bookmark -->
+                    <!-- to be update: create route&function to bookmark !!! -->
                     <div class="col-2">
                         <a href="" class="text-decoration-none text-black h5">
                             <i class="fa-regular fa-bookmark"></i>
@@ -40,37 +48,41 @@
                     </div>
 
                     <!-- Restaurant edit page -->
-                    <div class="col-2">
-                        <a href="{{route('restaurant.edit')}}" class="btn btn-secondary border-dark">Edit</a>
+                    <!-- to be update: display this only for Restaurant ORNER !!!!-->
+                    <div class="col-2 text-end">
+                        <a href="{{route('restaurant.edit')}}" class="btn btn-secondary border-dark w-75">Edit</a>
                     </div>
                 </div>
 
                 <!-- Address -->
-                <p>461 Harris St, Ultimo NSW 2007, Australia</p>
+                <p>{{ $restaurant->address }}</p>
 
                 <!-- Price -->
+                <!-- to be discussed & update: need to change budgets table on database?-->
                 <h5 class="mt-3">¥ ¥ ¥ ¥</h5>
 
                 <!-- Food type -->
-                <h5 class="mt-3">Food type</h5>
+                <h5 class="mt-3">{{ $foodtype->name }}</h5>
 
                 <!-- Feature -->
+                <!-- to be update: create route&function to feature !!! -->
                 <div class="row mt-3">
                     <div class="col-1">
-                        <a href="" class="btn btn-light border-dark">feature</a>
+                        <div href="" class="btn btn-light border-dark">{{-- $featuretype->name --}}</div>
                     </div>
                     <div class="col-1">
-                        <a href="" class="btn btn-light border-dark">feature</a>
+                        <div href="" class="btn btn-light border-dark">feature</div>
                     </div>
                     <div class="col-1">
-                        <a href="" class="btn btn-light border-dark">feature</a>
+                        <div href="" class="btn btn-light border-dark">feature</div>
                     </div>
                     <div class="col-1">
-                        <a href="" class="btn btn-light border-dark">feature</a>
+                        <div href="" class="btn btn-light border-dark">feature</div>
                     </div>
                 </div>
 
                 <!-- Time zone -->
+                <!-- to be update: create route&function to Timezone !!! -->
                 <div class="row mt-4">
                     <div class="col-1">
                         <i class="fa-regular fa-sun h4"></i>
@@ -81,6 +93,7 @@
                 </div>
 
                 <!-- Open hours -->
+                <!-- to be update: create route&function to openhors !!! -->
                 <table style="width: 25%;" class="mt-3">
                     <tr>
                         <td>Mon</td>
@@ -116,7 +129,7 @@
             <div class="col-8 mt-5">
                 <h5>About us</h5>
                 <hr>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, illo dicta quaerat facilis vero quidem inventore aperiam temporibus ipsam similique. Aut inventore ab accusamus, eaque labore porro quibusdam fugiat! Dicta!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo repudiandae sit, quia aperiam ab iusto ullam, illum beatae impedit sunt perferendis recusandae aut consectetur ut mollitia voluptatem sequi fuga debitis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea reiciendis minima porro sequi, nisi maiores ab deserunt? Dolorum ipsam, eligendi veritatis at dignissimos doloribus! Incidunt aperiam tempore quis vel rem.
+                <p>{{ $restaurant->description }}
                 </p>
             </div>
 
@@ -127,42 +140,14 @@
                         <h5>Location</h5>
                     </div>
                     <div class="col-2 text-end">
-                        <a href="" class="btn btn-secondary border-dark">location</a>
+                        <div class="btn btn-secondary border-dark">{{ $areatype->station_name }}</div>
                     </div>
                 </div>
                 <hr>
 
-                <!--  API: Google map-->
-                <div id="my_map" style="width: 100%; height: 300px"></div>
-                <script src="https://maps.googleapis.com/maps/api/js?key=<YOUR-API-KEY>&callback=initMapWithAddress" async defer></script>
-                    <script>
-                    var _my_address = '461 Harris St, Ultimo NSW 2007, Australia';
-                    function initMapWithAddress() {
-                        var opts = {
-                            zoom: 15,
-                            mapTypeId: google.maps.MapTypeId.ROADMAP,
-                        };
-                        var my_google_map = new google.maps.Map(document.getElementById('my_map'), opts);
-                        var geocoder = new google.maps.Geocoder();
-                        geocoder.geocode(
-                          {
-                            'address': _my_address,
-                            'region': 'jp'
-                          },
-                          function(result, status){
-                            if(status==google.maps.GeocoderStatus.OK){
-                                var latlng = result[0].geometry.location;
-                                my_google_map.setCenter(latlng);
-                                var marker = new google.maps.Marker({position:latlng, map:my_google_map, title:latlng.toString(), draggable:true});
-                                google.maps.event.addListener(marker, 'dragend', function(event){
-                                    marker.setTitle(event.latLng.toString());
-                                });
+                <!--  MAP -->
+                <div id="map" class="py-5 bg-secondary" style='width: 100%; height: 300px;'></div>
 
-                            }
-                          }
-                        );
-                      }
-                    </script>
             </div>
 
             <!--  Course section -->
