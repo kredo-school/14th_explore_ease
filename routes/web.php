@@ -50,7 +50,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
 
 Route::get('/profile/reservation', [HomeController::class, 'profileReservation'])->name('profile.reservation');
 
@@ -84,3 +83,7 @@ Route::get('/restaurant/{id}/review', [ReviewController::class, 'ShowRestaurantR
 
     //store comment
 Route::post('/restaurant/{id}/review/comment', [ReviewController::class, 'store'])->name('restaurant.review.store');
+
+#Profile(Kazuya)
+Route::get('/profile/{id}/show', [ProfileController::class, 'show'])->name('profile.show');
+Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');

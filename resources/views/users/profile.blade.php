@@ -6,8 +6,6 @@
 
     {{-- profile list --}}
     
-    <form method="POST" action="#">
-        @csrf
         <div class="container w-75 mt-4 mx-auto">
             <div class="row justify-content-center">
                 <div class="col-3">
@@ -30,35 +28,35 @@
                         <div class="row ">
                             <div class="col-6">
                                 <label for="firstname" class="col-md-4 col-form-label">First Name</label>
-                                <input type="text" class="form-control" name="firstname" placeholder="{{ $user->profile->first_name }}">
+                                <input type="text" class="form-control" name="firstname" value="{{ $user->profile->first_name }}" disabled>
                             </div>
                             <div class="col-6">
                                 <label for="lastname" class="col-md-4 col-form-label">Last Name</label>
-                                <input type="text" class="form-control" name="lastname" placeholder="Messi">
+                                <input type="text" class="form-control" name="lastname" value="{{ $user->profile->last_name }}" disabled>
                             </div>
                         </div>
                         <div class="row ">
                             <div class="col">
                                 <label for="username">Username</label>
-                                <input type="text" class="form-control" name="username" placeholder="Lionel">
+                                <input type="text" class="form-control" name="username" value="{{ $user->name }}" disabled>
                             </div>
                         </div>
                         <div class="row ">
                             <div class="col">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" name="email" placeholder="lionelmessi@gmail.com">
+                                <input type="email" class="form-control" name="email" value="{{ $user->email }}" disabled>
                             </div>
                         </div>
                         <div class="row ">
                             <div class="col">
                                 <label for="phone">Phone</label>
-                                <input type="text" class="form-control" name="phone" placeholder="09012345678">
+                                <input type="text" class="form-control" name="phone" value="{{ $user->profile->phone }}" disabled>
                             </div>
                         </div>
                         <div class="row ">
                             <div class="col">
                                 <label for="username">Nationality</label>
-                                <input type="country" class="form-control" name="nationality" placeholder="Argentina">
+                                <input type="country" class="form-control" name="nationality" value="{{ $user->profile->nationarity->name }}" disabled>
                             </div>
                         </div>
 

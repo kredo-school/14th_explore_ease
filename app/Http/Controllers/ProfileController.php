@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Nationarity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,11 +12,13 @@ class ProfileController extends Controller
 {   
     private $profile;
     private $user;
+    private $nationarity;
 
-    public function __construct(Profile $profile, User $user)
+    public function __construct(Profile $profile, User $user, Nationarity $nationarity)
     {
         $this->profile = $profile;
         $this->user = $user;
+        $this->nationarity = $nationarity;
     }
 
     /**
@@ -23,7 +26,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -61,9 +64,33 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Profile $profile)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'first_name' => 'required|min:1|max:50',
+            'last_name' => 'required|min:1|max:50',
+            'name'=> 'required|min:1|max:50',
+            'phone' => 'required|min:1|max:20',
+            // 'nationarity' => 'required',
+            'email' => 'required|email|max:50|unique:users,email,' . Auth::user()->id,
+            'avatar' => 'mimes:jpg,jpeg,gif,png|max:1048',
+        ]);
+
+        $user = $this->user->findOrFail(Auth::user()->id);
+        $user->profile->first_name = $request->first_name;
+        $user->profile->last_name = $request->last_name;
+        $user->profile->phone = $request->phone;
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if($request->avatar){
+            $user->profile->avatar = 'data:image/' . $request->avatar->extension() . ';base64,' . base64_encode(file_get_contents($request->avatar));
+        }
+
+        $user->profile->save();
+
+        return redirect()->route('profile.show', Auth::user()->id);
+
     }
 
     /**
