@@ -32,7 +32,7 @@ class ReservationController extends Controller
         $restaurant = $this->restaurant->findOrFail($id);
         $restaurantphoto =  $this->restaurantphoto->findOrFail($restaurant->id);
         /*dd($restaurantphoto->photo);*/
-        return view('restaurant.reservations', ['restaurant'=>$restaurant, 'restaurantphoto'=> $restaurantphoto]);
+        return view('restaurant.reservation.show', ['restaurant'=>$restaurant, 'restaurantphoto'=> $restaurantphoto]);
     }
     
     public function index()
@@ -53,7 +53,13 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'reservation_ppl' => 'required',
+            'reservation_data' => 'required',
+            'reservation_time' => 'required'
+        ]);
+        dd($request);
+
     }
 
 
