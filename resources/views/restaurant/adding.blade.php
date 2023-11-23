@@ -81,11 +81,11 @@
                 <label for="Course_menu" class="form-label h3">Course Menu</label><br>
                 <div class="row mb-3">
                     <div class="col-3">
-                            <input type="file" name="course_photo">
+                            <input type="file" name="course_photo1">
                     </div>
                     <div class="col-9">
-                        <input type="text" placeholder="Course Name" name="course_name" class="form-control">
-                        <textarea type="textarea" id="Course_menu" rows="4" name="course_description" class="form-control" Placeholder="Description"></textarea>
+                        <input type="text" placeholder="Course Name" name="course_name1" class="form-control course-name">
+                        <textarea type="textarea" id="Course_menu" rows="4" name="course_description1" class="form-control" Placeholder="Description"></textarea>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -202,9 +202,14 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="descritpiont" class="form-label h3">Description</label><br>
+                <label for="description" class="form-label h3">Description</label><br>
                 <textarea type="textarea" id="description" rows="4" name="description" class="form-control"></textarea>
             </div>
+            <div class="mb-3">
+                <label for="message" class="form-label h3">Message to reservation holders</label><br>
+                <textarea type="textarea" id="message" rows="4" name="message" class="form-control"></textarea>
+            </div>
+
 
             <div class="text-center">
                 <button type="submit" class="btn-secondary h3 me-5" style="width: 263px; height: 56px;">Cancel</button>

@@ -68,6 +68,7 @@ class RestaurantController extends Controller
         $restaurant->latitude = $request->latitude;
         $restaurant->longitude = $request->longitude;
         $restaurant->foodtype_id = $request->foodtype;
+        $restaurant->message = $request->message;
 
         $restaurant->save();
 
@@ -84,12 +85,12 @@ class RestaurantController extends Controller
             $openhour->save();
         }
 
-        for($i = 0; $i < 4; $i++)ここ質問する！！どうやってJavaScriptで追加したところに１，２，３とラベル付けするか！
+        for($i = 0; $i < 4; $i++)
         {
             if($request->{"course_photo".$i+1}){
                 $course = new Course();
                 $course->restaurant_id = $restaurant->id;
-                $course->photo = 'data:image/' . $request->{"course_photo".$+i}->extension().
+                $course->photo = 'data:image/' . $request->{"course_photo".$i+1}->extension().
                 ';base64,'. base64_encode(file_get_contents($request->{"course_photo".$i+1}));
                 $course->name = $request->{"course_name".$i+1};
                 $course->description = $request->{"course_description".$i+1};
@@ -167,6 +168,8 @@ class RestaurantController extends Controller
                 $feature->save();
             }
         }
+
+
 
         return redirect()->back();
 
