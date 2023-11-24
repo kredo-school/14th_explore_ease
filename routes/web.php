@@ -74,6 +74,8 @@ Route::get('/restaurant/ranking', [RestaurantController::class, 'restaurantRanki
 #Reservation page
 //Tommie working on here:)
 Route::get('/restaurant/{id}/reservasions', [App\Http\Controllers\ReservationController::class, 'show'])->name('restaurant.reservations');
+Route::get('/restaurant/{id}/reservasions/create', [App\Http\Controllers\ReservationController::class, 'create'])->name('restaurant.reservation.create');
+Route::post('/restaurant/{id}/reservasions', [App\Http\Controllers\ReservationController::class, 'store'])->name('restaurant.reservation.store');
   // detail
 Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
 
