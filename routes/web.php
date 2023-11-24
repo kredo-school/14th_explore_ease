@@ -20,8 +20,14 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
-// SetLocale Middleware
+// Set Locale Middleware
 Route::group(['middleware'=>'set.locale'], function () {
+
+    // Locale Change Root
+    Route::get('/setlocale/{locale}', function($locale) {
+        session()->put('locale', $locale);
+        return redirect()->back();
+    })->name('locale');
 
     Route::get('/', function () {
         return view('index');
@@ -101,10 +107,4 @@ Route::group(['middleware'=>'set.locale'], function () {
     Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
 
     Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
-
-    // Locale Change Root
-    Route::get('/setlocale/{locale}', function($locale) {
-        session()->put('locale', $locale);
-        return redirect()->back();
-    })->name('locale');
 });
