@@ -60,7 +60,7 @@ Route::group(['middleware'=>'set.locale'], function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
 
     Route::get('/profile/reservation', [HomeController::class, 'profileReservation'])->name('profile.reservation');
 
@@ -107,4 +107,7 @@ Route::group(['middleware'=>'set.locale'], function () {
     Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
 
     Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
+    #Profile(Kazuya)
+    Route::get('/profile/{id}/show', [ProfileController::class, 'show'])->name('profile.show');
+    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 });
