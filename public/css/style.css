@@ -19,6 +19,12 @@
     width: auto;
 }
 
+.header-image{
+  object-fit: cover;
+  width: 6rem;
+  height: 6rem;
+}
+
 
 .vertical-line{
     border-right: 2px solid;

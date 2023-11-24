@@ -67,28 +67,26 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|min:1|max:50',
-            'last_name' => 'required|min:1|max:50',
-            'name'=> 'required|min:1|max:50',
-            'phone' => 'required|min:1|max:20',
-            // 'nationarity' => 'required',
-            'email' => 'required|email|max:50|unique:users,email,' . Auth::user()->id,
-            'avatar' => 'mimes:jpg,jpeg,gif,png|max:1048',
+            'firstname' => 'required|min:1|max:50',
+            'lastname' => 'required|min:1|max:50',
+            'username'=> 'required|min:1|max:50',
+            'phonenumber' => 'required|min:1|max:20',
+            'email' => 'required|email|unique:users',
+            'image' => 'image|mimes:jpg,jpeg,gif,png',
         ]);
-
+        
         $user = $this->user->findOrFail(Auth::user()->id);
-        $user->profile->first_name = $request->first_name;
-        $user->profile->last_name = $request->last_name;
-        $user->profile->phone = $request->phone;
-        $user->name = $request->name;
+        $user->profile->first_name = $request->firstname;
+        $user->profile->last_name = $request->lastname;
+        $user->profile->phone = $request->phonenumber;
+        $user->name = $request->username;
         $user->email = $request->email;
-
-        if($request->avatar){
-            $user->profile->avatar = 'data:image/' . $request->avatar->extension() . ';base64,' . base64_encode(file_get_contents($request->avatar));
+        if($request->image){
+            $user->profile->avatar = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
         }
 
         $user->profile->save();
-
+        $user->save();
         return redirect()->route('profile.show', Auth::user()->id);
 
     }

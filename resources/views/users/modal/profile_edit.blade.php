@@ -1,6 +1,6 @@
 <!--Profile edit Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form action="{{ route('profile.update') }}" method="post">
+    <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
       @csrf
       @method('PATCH')
     
@@ -15,7 +15,7 @@
                   <div class="row">
                     <div class="col-3">
                       @if($user->profile->avatar) 
-                        <img src="{{ $user->profile->avatar }}" alt="{{$user->name}}" class="img-thumbnail rounded-circle">
+                        <img src="{{ $user->profile->avatar }}" alt="{{$user->name}}" class="header-image img-thumbnail rounded-circle">
                       @else
                         <i class="fa-solid fa-circle-user icon-user"></i>
                       @endif
@@ -55,7 +55,7 @@
                   <div class="row ">
                     <div class="col">
                       <label for="phone">Phone</label>
-                      <input type="text" class="form-control" name="phone" value="{{ $user->profile->phone }}" autofocus>
+                      <input type="tel" class="form-control" name="phonenumber" value="{{ $user->profile->phone }}" autofocus>
                     </div>
                   </div>
                   <div class="row ">
