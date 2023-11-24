@@ -49,8 +49,6 @@ class ProfileController extends Controller
     {   
         $user = $this->user->findOrFail($id);
         return view('users.profile')->with('user', $user);
-        // $profile = $this->profile->findOrFail($user_id);
-        // return view('users.profile')->with('profile', $profile);
     }
 
     /**
