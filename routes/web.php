@@ -54,9 +54,15 @@ Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase
 
 Route::get('/profile/reservation', [HomeController::class, 'profileReservation'])->name('profile.reservation');
 
-Route::get('/profile/review', [HomeController::class, 'profileReview'])->name('profile.review');
+Route::get('/profile/review', [App\Http\Controllers\HomeController::class, 'profileReview'])->name('profile.review');
+
 
 Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
+
+Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
+
+Route::get('/restaurant/{id}/review', [App\Http\Controllers\RestaurantController::class, 'restaurantReview'])->name('restaurant.review');
+
 
 Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
 
@@ -64,6 +70,7 @@ Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name(
 
 
 Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
+
 
 Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
 
@@ -86,3 +93,7 @@ Route::get('/restaurant/{id}/review', [ReviewController::class, 'ShowRestaurantR
 
     //store comment
 Route::post('/restaurant/{id}/review/comment', [ReviewController::class, 'store'])->name('restaurant.review.store');
+
+Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
+
+Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
