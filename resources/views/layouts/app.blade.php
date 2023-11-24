@@ -111,7 +111,7 @@
                                 </button>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a href="{{ route('profile') }}" class="dropdown-item">Profile</a>
+                                    <a href="{{ route('profile.show', Auth::user()->id) }}" class="dropdown-item">Profile</a>
                                     @can('admin')
                                         <a href="{{-- route('admin.show') --}}" class="dropdown-item">Dashboard</a>
                                     @endcan
