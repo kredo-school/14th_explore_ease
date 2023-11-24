@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->middleware('existprofile');
 
 Route::get('/admin/dashboard', function () {
     return view('admin/dashboard');
@@ -53,9 +53,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/profile/reservation', [HomeController::class, 'profileReservation'])->name('profile.reservation');
 
-Route::get('/profile/review', [HomeController::class, 'profileReview'])->name('profile.review');
+Route::get('/profile/review', [App\Http\Controllers\HomeController::class, 'profileReview'])->name('profile.review');
+
 
 Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
+
+Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
+
+Route::get('/restaurant/{id}/review', [App\Http\Controllers\RestaurantController::class, 'restaurantReview'])->name('restaurant.review');
+
 
 Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
 
@@ -63,6 +69,7 @@ Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name(
 
 
 Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
+
 
 Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
 
@@ -73,6 +80,8 @@ Route::get('/restaurant/ranking', [RestaurantController::class, 'restaurantRanki
 #Reservation page
 //Tommie working on here:)
 Route::get('/restaurant/{id}/reservasions', [App\Http\Controllers\ReservationController::class, 'show'])->name('restaurant.reservations');
+Route::get('/restaurant/{id}/reservasions/create', [App\Http\Controllers\ReservationController::class, 'create'])->name('restaurant.reservation.create');
+Route::post('/restaurant/{id}/reservasions', [App\Http\Controllers\ReservationController::class, 'store'])->name('restaurant.reservation.store');
   // detail
 Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
 
@@ -84,6 +93,9 @@ Route::get('/restaurant/{id}/review', [ReviewController::class, 'ShowRestaurantR
     //store comment
 Route::post('/restaurant/{id}/review/comment', [ReviewController::class, 'store'])->name('restaurant.review.store');
 
+Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
+
+Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
 #Profile(Kazuya)
 Route::get('/profile/{id}/show', [ProfileController::class, 'show'])->name('profile.show');
 Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');

@@ -5,12 +5,23 @@ const map = new mapboxgl.Map({
     zoom:10,
     style: 'mapbox://styles/kayo-24/clood88qv003p01r6f9ht7e56'
 });
-map.resize();
+const markers = [];
+
 map.on('click', (data) => 
 {
     const coordinates = data.lngLat;
+    const markerInputLatitude = document.getElementById('marker-input-latitude');
+    const markerInputLongitude = document.getElementById('marker-input-longitude');
 
-    new mapboxgl.Marker()
+
+    if (markers.length > 0)
+        markers[0].remove();
+
+    markers[0] = new mapboxgl.Marker()
         .setLngLat([coordinates.lng, coordinates.lat])
         .addTo(map);
+
+    markerInputLatitude.value = coordinates.lat;
+    markerInputLongitude.value = coordinates.lng;
+
 });
