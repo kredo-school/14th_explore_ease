@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bookmark;
 use App\Models\Profile;
+use App\Models\RestaurantPhoto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+
+    private $bookmark;
+    private $restaurant_photo;
+
+    public function __construct(Bookmark $bookmark, RestaurantPhoto $restaurant_photo){
+        $this->bookmark = $bookmark;
+        $this->restaurant_photo = $restaurant_photo;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -64,6 +76,13 @@ class ProfileController extends Controller
     }
 
     public function bookmark(Profile $profile){
-        return view('users.bookmark');
+        $bookmarks = $this->bookmark->where('user_id', Auth::id());
+        $restaurant_photo = $this->restaurant_photo->findOrFail();
+        foreach($bookmarks as $bookmark){
+            $restaurant_photos[] = $this->restaurant_photo
+            ->where('restaurant_id', $bookmark->restaurant_id)
+            ->where('restaurant_name', "First Photo");
+        }
+        return view('users.bookmark')->with('bookmarks', $bookmarks);
     }
 }
