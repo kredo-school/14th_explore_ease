@@ -14,7 +14,7 @@
                 <div class="card-body w-100 border">
                     <div class="row">
                         <div class="col-9">
-                            <a href="{{ route('restaurant.detail') }}"><p class="h3">Restaurant name</p></a>
+                            <a href="{{ route('restaurant.detail', $restaurant->id) }}"><p class="h3">Restaurant name</p></a>
                                 {{-- @if($post->user->avatar) --}}
                                     {{-- <img src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}" class="rounded-circle avatar-sm"> --}}
                                 {{-- @else
