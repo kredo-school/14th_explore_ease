@@ -56,24 +56,24 @@
 
         {{-- Couse Area --}}
         <h2 class="mb-4">Course</h2>
-         @foreach($course as $course)
-            <div class="container mb-6">
-                <div class="container mb-5 border-bottom">
-                    <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="{{ $course->photo }}"  class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                        <h4 class="card-title">{{ $course->name }} <span>¥ {{ $course->price }} </span></h4>
-                        <p class="card-text">{{ $course->description }}<a href="#">>Read More</a></p>
-                        <button type="button" class="btn btn-warning mb-3">Select</button>
+                @foreach($all_courses as $course)
+                    <div class="container mb-6">
+                        <div class="container border-bottom">
+                            <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="{{ $course->photo }}"  class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                <h4 class="card-title">{{ $course->name }} <span>¥ {{ $course->price }} </span></h4>
+                                <p class="card-text">{{ $course->description }}<a href="#">>Read More</a></p>
+                                <button type="button" class="btn btn-warning mb-3">Select</button>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
+                @endforeach
         {{-- Request --}}
         <h2 class="mb-4">Requests</h2>
         <div class="form-group  mb-5">
