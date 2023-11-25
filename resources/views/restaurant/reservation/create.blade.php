@@ -57,8 +57,8 @@
         {{-- Couse Area --}}
         <h2 class="mb-4">Course</h2>
                 @foreach($all_courses as $course)
-                    <div class="container mb-6">
-                        <div class="container border-bottom">
+                    <div class="container mb-6 py-4 border-bottom">
+                        <div class="container">
                             <div class="row g-0">
                             <div class="col-md-4">
                                 <img src="{{ $course->photo }}"  class="img-fluid rounded-start" alt="...">
@@ -79,8 +79,8 @@
         <div class="form-group  mb-5">
             <textarea class="form-control" placeholder="leave a comment such as a special requests" id="requests" rows="5"></textarea>
         </div>
+        <div class="align-items-center">
+            <button type="button" class="btn btn-warning mb-3"><a href="{{ route('home')}}"></a>Cancel</button>
+            <input type="submit" value="Submit" class="btn btn-warning mb-3">
         </div>
-        </div>
-        <button type="button" class="btn btn-warning mb-3"><a href="{{ route('home')}}"></a>Cancel</button>
-        <input type="submit" value="Submit" class="btn btn-warning mb-3">
 </form>
