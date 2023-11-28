@@ -12,10 +12,6 @@ use App\Models\Restaurant;
 use App\Models\RestaurantPhoto;
 use App\Models\Review;
 use App\Models\Seat;
-use App\Models\RestaurantPhoto;
-use App\Models\FoodType;
-use App\Models\AreaType;
-use App\Models\Feature;
 use App\Models\FeatureType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,16 +54,7 @@ class RestaurantController extends Controller
         $feature = $restaurant->features;
         // dd($feature);
 
-
-
-        // $feature = $this->restaurant->findOrFail($restaurant->id);
-        // $all_features = $this->feature->all();
-        // foreach ($all_features as $featuretype) {
-        //     $featuretype[] = $feature->featuretype;
-        // }
-        // $all_featuretypes = $this->featuretype->all();
-
-        return view('restaurant.detail'
+        return view('restaurant.detail',
         [
             'restaurant' => $restaurant,
             'restaurantphoto' => $restaurantphoto,
@@ -75,7 +62,6 @@ class RestaurantController extends Controller
             'areatype' => $areatype
         ]);
 
-        // return view('restaurant.detail')->with('restaurant', $restaurant)->with('restaurantphoto', $restaurantphoto)->with('foodtype', $foodtype)->with('areatype', $areatype)->with('feature', $feature)->with('featuretype', $featuretype)->with('all_features', $all_features)->with('all_featuretypes', $all_featuretypes);
     }
 
     /**
