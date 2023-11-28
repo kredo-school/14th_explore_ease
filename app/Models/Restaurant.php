@@ -57,14 +57,12 @@ class Restaurant extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
-        // return $this->hasMany(Review::class)->orderBy('restaurant_id')->get();
     }
 
     /** to get all the bookmarks of a restaurant */
     public function bookmarks()
     {
         return $this->hasMany(Bookmark::class);
-        // return $this->hasMany(Bookmark::class)->orderBy('restaurant_id')->get();
     }
 
     /** to get one of the seat of a restaurant */
@@ -77,41 +75,35 @@ class Restaurant extends Model
     public function courses()
     {
         return $this->hasMany(Course::class);
-        // return $this->hasMany(Course::class)->orderBy('id')->get();
     }
 
     /** to get all the restaurant_photos of a restaurant */
     public function restaurant_photos()
     {
         return $this->hasMany(RestaurantPhoto::class);
-        // return $this->hasMany(RestaurantPhoto::class)->orderBy('id')->get();
     }
 
     /** to get all the openhours of a restaurant */
     public function openhours()
     {
         return $this->hasMany(OpenHour::class);
-        // return $this->hasMany(OpenHour::class)->orderBy('restaurant_id')->get();
     }
 
     /** to get all the features of a restaurant */
     public function features()
     {
         return $this->hasMany(Feature::class);
-        // return $this->hasMany(Feature::class)->orderBy('restaurant_id')->get();
     }
 
     /** to get all the budgets of a restaurant */
     public function budgets()
     {
         return $this->hasMany(Budget::class);
-        // return $this->hasMany(Budget::class)->orderBy('restaurant_id')->get();
     }
 
     /** to get all the reservations of a restaurant */
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
-        // return $this->hasMany(Reservation::class)->orderBy('id')->get();
     }
 }
