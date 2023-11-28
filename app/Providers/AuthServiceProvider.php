@@ -26,17 +26,26 @@ class AuthServiceProvider extends ServiceProvider
     {
         // Admin user login [ @can('admin') ]
         Gate::define('admin', function(User $user) {
-            return ($user->profile->usertype_id === UserTypeEnum::Admin->value);
+            if ($user->profile != null) {
+                return ($user->profile->usertype_id === UserTypeEnum::Admin->value);
+            }
+            return false;
         });
 
         // Normal user login [ @can('user') ]
         Gate::define('user', function(User $user) {
-            return ($user->profile->usertype_id === UserTypeEnum::User->value);
+            if ($user->profile != null) {
+                return ($user->profile->usertype_id === UserTypeEnum::User->value);
+            }
+            return false;
         });
 
         // Owner user login [ @can('owner') ]
         Gate::define('owner', function(User $user) {
-            return ($user->profile->usertype_id === UserTypeEnum::Owner->value);
+            if ($user->profile != null) {
+                return ($user->profile->usertype_id === UserTypeEnum::Owner->value);
+            }
+            return false;
         });
 
         // No profile user login [ @can('no_profile') ]

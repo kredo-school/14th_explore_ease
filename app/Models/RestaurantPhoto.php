@@ -10,6 +10,9 @@ class RestaurantPhoto extends Model
     use HasFactory;
 
     protected $table = 'restaurant_photos';
+
+    protected $fillable = ['restaurant_id', 'photo'];
+
     public $timestamps = false;
 
     /**
