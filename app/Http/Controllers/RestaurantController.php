@@ -28,13 +28,13 @@ class RestaurantController extends Controller
     private $featuretype;
 
     public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype){
-        $this -> restaurant = $restaurant;
-        $this -> review = $review;
-        $this -> restaurantphoto = $restaurantphoto;
-        $this -> foodtype = $foodtype;
-        $this -> areatype = $areatype;
-        $this -> feature = $feature;
-        $this -> featuretype = $featuretype;
+        $this->restaurant = $restaurant;
+        $this->review = $review;
+        $this->restaurantphoto = $restaurantphoto;
+        $this->foodtype = $foodtype;
+        $this->areatype = $areatype;
+        $this->feature = $feature;
+        $this->featuretype = $featuretype;
     }
 
     /** Show restaurant ranking page */
