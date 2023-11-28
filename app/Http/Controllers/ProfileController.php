@@ -75,14 +75,5 @@ class ProfileController extends Controller
         //
     }
 
-    public function bookmark(Profile $profile){
-        $bookmarks = $this->bookmark->where('user_id', Auth::id());
-        $restaurant_photo = $this->restaurant_photo->findOrFail();
-        foreach($bookmarks as $bookmark){
-            $restaurant_photos[] = $this->restaurant_photo
-            ->where('restaurant_id', $bookmark->restaurant_id)
-            ->where('restaurant_name', "First Photo");
-        }
-        return view('users.bookmark')->with('bookmarks', $bookmarks);
-    }
+
 }

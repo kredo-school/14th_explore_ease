@@ -3,10 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bookmark;
+use App\Models\RestaurantPhoto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookmarkController extends Controller
 {
+    private $bookmark;
+    private $restaurant_photo;
+
+    public function __construct(Bookmark $bookmark, RestaurantPhoto $restaurant_photo){
+        $this->bookmark = $bookmark;
+        $this->restaurant_photo = $restaurant_photo;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -31,13 +42,26 @@ class BookmarkController extends Controller
         //
     }
 
-    /**
+        /**
      * Display the specified resource.
      */
-    public function show(Bookmark $bookmark)
-    {
-        //
+    public function show(){
+        $bookmarks = $this->bookmark->where('user_id', Auth::user()->id)->get();
+
+            
+        $restaurant_photos = [];
+        foreach($bookmarks as $bookmark){
+            $data = $this->restaurant_photo
+            ->where('restaurant_id', $bookmark->restaurant_id)
+            ->get()[0];
+            
+                array_push($restaurant_photos, $data);
+        }
+
+
+        return view('users.bookmark', ['bookmarks'=>$bookmarks, 'restaurant_photos'=>$restaurant_photos]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -62,4 +86,5 @@ class BookmarkController extends Controller
     {
         //
     }
+
 }

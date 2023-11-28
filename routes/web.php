@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\ProfileController;
@@ -96,4 +98,4 @@ Route::post('/restaurant/{id}/review/comment', [ReviewController::class, 'store'
 
 Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
 
-Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
+Route::get('/profile/bookmark', [BookmarkController::class, 'show'])->name('profile.bookmark');

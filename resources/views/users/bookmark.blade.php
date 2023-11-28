@@ -30,7 +30,7 @@
                 @foreach($bookmarks as $bookmark)
                         <div class="card mb-2" style="width: 265px; height: auto;">
                             <div class="card-header p-0">
-                                <img href="{{$restaurant_photos->photo}}" class="m-0" style="height: 173px; width: 265px;">
+                                <img src="{{$restaurant_photos[$loop->index]->photo}}" class="m-0" style="height: 173px; width: 265px;">
                             </div>
                             <div class="card-body w-100 border p-0">
                                 <div class="row ps-2">
