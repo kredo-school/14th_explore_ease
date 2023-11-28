@@ -7,6 +7,7 @@ use App\Models\Review;
 use App\Models\RestaurantPhoto;
 use App\Models\FoodType;
 use App\Models\AreaType;
+use App\Models\Feature;
 use App\Models\FeatureType;
 use Illuminate\Http\Request;
 
@@ -17,14 +18,16 @@ class RestaurantController extends Controller
     private $restaurantphoto;
     private $foodtype;
     private $areatype;
+    private $feature;
     private $featuretype;
 
-    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, FeatureType $featuretype){
+    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype){
         $this -> restaurant = $restaurant;
         $this -> review = $review;
         $this -> restaurantphoto = $restaurantphoto;
         $this -> foodtype = $foodtype;
         $this -> areatype = $areatype;
+        $this -> feature = $feature;
         $this -> featuretype = $featuretype;
     }
 
@@ -40,11 +43,23 @@ class RestaurantController extends Controller
                          //↑restaurant Model.    //↑function on restaurant Model.
         $foodtype = $this->foodtype->findOrFail($restaurant->foodtype->id);
         $areatype = $this->areatype->findOrFail($restaurant->areatype->id);
-        // $featuretype = $this->featuretype->findOrFail($restaurant->featuretype->id);
 
+        // featuretype
+        $feature = $restaurant->features;
+        // dd($feature);
+
+
+
+        // $feature = $this->restaurant->findOrFail($restaurant->id);
+        // $all_features = $this->feature->all();
+        // foreach ($all_features as $featuretype) {
+        //     $featuretype[] = $feature->featuretype;
+        // }
+        // $all_featuretypes = $this->featuretype->all();
 
         return view('restaurant.detail')->with('restaurant', $restaurant)->with('restaurantphoto', $restaurantphoto)->with('foodtype', $foodtype)->with('areatype', $areatype);
-    // ->with('featuretype', $featuretype)
+
+        // return view('restaurant.detail')->with('restaurant', $restaurant)->with('restaurantphoto', $restaurantphoto)->with('foodtype', $foodtype)->with('areatype', $areatype)->with('feature', $feature)->with('featuretype', $featuretype)->with('all_features', $all_features)->with('all_featuretypes', $all_featuretypes);
     }
 
     /**

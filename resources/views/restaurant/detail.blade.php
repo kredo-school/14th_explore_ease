@@ -67,18 +67,11 @@
                 <!-- Feature -->
                 <!-- to be update: create route&function to feature !!! -->
                 <div class="row mt-3">
-                    <div class="col-1">
-                        <div href="" class="btn btn-light border-dark">{{-- $featuretype->name --}}</div>
-                    </div>
-                    <div class="col-1">
-                        <div href="" class="btn btn-light border-dark">feature</div>
-                    </div>
-                    <div class="col-1">
-                        <div href="" class="btn btn-light border-dark">feature</div>
-                    </div>
-                    <div class="col-1">
-                        <div href="" class="btn btn-light border-dark">feature</div>
-                    </div>
+                    {{-- @foreach ($all_featuretypes as $featuretype) --}}
+                        <div class="col-1">
+                            <div href="" class="btn btn-light border-dark">{{-- $featuretype->name --}}</div>
+                        </div>
+                    {{-- @endforeach --}}
                 </div>
 
                 <!-- Time zone -->
