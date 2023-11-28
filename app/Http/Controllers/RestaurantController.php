@@ -67,7 +67,13 @@ class RestaurantController extends Controller
         // }
         // $all_featuretypes = $this->featuretype->all();
 
-        return view('restaurant.detail')->with('restaurant', $restaurant)->with('restaurantphoto', $restaurantphoto)->with('foodtype', $foodtype)->with('areatype', $areatype);
+        return view('restaurant.detail'
+        [
+            'restaurant' => $restaurant,
+            'restaurantphoto' => $restaurantphoto,
+            'foodtype' => $foodtype,
+            'areatype' => $areatype
+        ]);
 
         // return view('restaurant.detail')->with('restaurant', $restaurant)->with('restaurantphoto', $restaurantphoto)->with('foodtype', $foodtype)->with('areatype', $areatype)->with('feature', $feature)->with('featuretype', $featuretype)->with('all_features', $all_features)->with('all_featuretypes', $all_featuretypes);
     }
