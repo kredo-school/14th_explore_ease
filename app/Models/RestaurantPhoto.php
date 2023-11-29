@@ -15,7 +15,7 @@ class RestaurantPhoto extends Model
 
     public $timestamps = false;
 
-    /** 
+    /**
      * RestaurantPhoto-Restaurant
      * a RestaurantPhoto belongs to a Restaurant
      * to get the owner of the RestaurantPhoto

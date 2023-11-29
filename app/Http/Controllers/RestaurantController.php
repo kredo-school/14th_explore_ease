@@ -12,6 +12,7 @@ use App\Models\Restaurant;
 use App\Models\RestaurantPhoto;
 use App\Models\Review;
 use App\Models\Seat;
+use App\Models\FeatureType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,10 +21,47 @@ class RestaurantController extends Controller
 
     private $restaurant;
     private $review;
+    private $restaurantphoto;
+    private $foodtype;
+    private $areatype;
+    private $feature;
+    private $featuretype;
 
-    public function __construct(Restaurant $restaurant, Review $review){
-        $this -> restaurant = $restaurant;
-        $this -> review = $review;
+    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype){
+        $this->restaurant = $restaurant;
+        $this->review = $review;
+        $this->restaurantphoto = $restaurantphoto;
+        $this->foodtype = $foodtype;
+        $this->areatype = $areatype;
+        $this->feature = $feature;
+        $this->featuretype = $featuretype;
+    }
+
+    /** Show restaurant ranking page */
+    public function restaurantRanking(){
+        return view('restaurant.ranking');
+    }
+
+    /** Show restaurant detail page */
+    public function ShowRestaurantDetail($id){
+        $restaurant = $this->restaurant->findOrFail($id);
+        $restaurantphoto = $restaurant->restaurant_photos;
+                         //↑restaurant Model.    //↑function on restaurant Model.
+        $foodtype = $this->foodtype->findOrFail($restaurant->foodtype->id);
+        $areatype = $this->areatype->findOrFail($restaurant->areatype->id);
+
+        // featuretype
+        $feature = $restaurant->features;
+        // dd($feature);
+
+        return view('restaurant.detail',
+        [
+            'restaurant' => $restaurant,
+            'restaurantphoto' => $restaurantphoto,
+            'foodtype' => $foodtype,
+            'areatype' => $areatype
+        ]);
+
     }
 
     /**
@@ -52,11 +90,11 @@ class RestaurantController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {   
+    {
 
         $days_of_week = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Holiday'];
 
-        
+
         $restaurant = new Restaurant();
         //store to the db
         $restaurant->user_id = Auth::id();
@@ -72,7 +110,7 @@ class RestaurantController extends Controller
 
         $restaurant->save();
 
-        
+
         for($i = 0; $i < 8; $i++)
         {
             $openhour = new OpenHour();
@@ -98,7 +136,7 @@ class RestaurantController extends Controller
                 $course->save();
             }
         }
-        
+
         $seat = new Seat();
         if($request->seat = "available"){
             $seat->restaurant_id = $restaurant->id;
@@ -107,9 +145,16 @@ class RestaurantController extends Controller
         }
 
         for($i = 0; $i < 3; $i++){
-            if($request->{"photo_".$i+1}){ 
+            if($request->{"photo_".$i+1}){
                 $restaurant_photo = new RestaurantPhoto();
                 $restaurant_photo->restaurant_id = $restaurant->id;
+                if($i = 0){
+                    $restaurant_photo->name = "First photo";
+                } elseif($i = 1){
+                    $restaurant_photo->name = "Second photo";
+                } elseif($i = 2){
+                    $restaurant_photo->name = "Third photo";
+                }
                 $restaurant_photo->photo = 'data:image/' . $request->{"photo_".$i+1}->extension().
                 ';base64,'. base64_encode(file_get_contents($request->{"photo_".$i+1}));
 
@@ -154,7 +199,7 @@ class RestaurantController extends Controller
                 } elseif ($i=3){
                     $budget->budgetvalue = "￥￥￥￥";
                 }
-                
+
                 $budget->save();
             }
         }
@@ -208,15 +253,5 @@ class RestaurantController extends Controller
         //
     }
 
-    /** Show restaurant ranking page */
-    public function restaurantRanking(){
-        return view('restaurant.ranking');
-    }
 
-    /** Show restaurant ranking page */
-    public function ShowRestaurantDetail($id){
-        $restaurant = $this->restaurant->findOrFail($id);
-
-        return view('restaurant.detail')->with('restaurant', $restaurant);
-    }
 }
