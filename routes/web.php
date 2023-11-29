@@ -3,6 +3,7 @@ use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\RestaurantPhotoController;
 use App\Http\Controllers\Reservation;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Auth;
