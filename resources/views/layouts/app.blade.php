@@ -85,12 +85,12 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">English</a>
-                                <a class="dropdown-item" href="#">Chinese</a>
-                                <a class="dropdown-item" href="#">Korean</a>
-                                <a class="dropdown-item" href="#">Spanish</a>
-                                <a class="dropdown-item" href="#">French</a>
-                                <a class="dropdown-item" href="#">Japanesee</a>
+                                <a class="dropdown-item" href="/setlocale/en">English</a>
+                                <a class="dropdown-item" href="/setlocale/zh">Chinese</a>
+                                <a class="dropdown-item" href="/setlocale/ko">Korean</a>
+                                <a class="dropdown-item" href="/setlocale/es">Spanish</a>
+                                <a class="dropdown-item" href="/setlocale/fr">French</a>
+                                <a class="dropdown-item" href="/setlocale/ja">Japanese</a>
                             </div>
                         </li>
 
@@ -111,7 +111,7 @@
                                 </button>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a href="{{ route('profile') }}" class="dropdown-item">Profile</a>
+                                    <a href="{{ route('profile.show', Auth::user()->id) }}" class="dropdown-item">Profile</a>
                                     @can('admin')
                                         <a href="{{-- route('admin.show') --}}" class="dropdown-item">Dashboard</a>
                                     @endcan
