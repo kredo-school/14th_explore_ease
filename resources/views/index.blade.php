@@ -6,11 +6,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 p-lg-5 mx-auto my-5 text-white text-center">
-                    <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, magni?</h3>
+                    <h3>{{ __('messages.search_copy') }}</h3>
                     
                     {{-- search form --}}
                     <form method="GET" action="http://www.google.co.jp/search" class="text-center">
-                        <input type="search" name="search" class="btn btn-light btn-lg text-start" placeholder="Search">
+                        <input type="search" name="search" class="btn btn-light btn-lg text-start" placeholder="{{ __('messages.search_placeholder') }}">
                         {{-- search button --}}
                         <button type="submit" class="btn btn-light btn-lg" name="submit" alt="search" value="search"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>

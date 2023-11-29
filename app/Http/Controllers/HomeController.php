@@ -30,9 +30,6 @@ class HomeController extends Controller
         return view('restaurants.show');
     }
 
-    public function profileBase(){
-        return view('users/profile');
-    }
 
     public function profileReservation(){
         return view('users.profilereservation');

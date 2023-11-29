@@ -1,55 +1,49 @@
+    <!--for datepicker-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-@yield('reservations.create')
-<form action="{{ route('restaurant.reservations.store')}}" method="post">
-    @csrf
-    @method
+<form action="" method="post">
+
         <div class="container" id="reservasion_area">
             {{-- Select Box --}}
-            <div class="container row mb-4">
-                <div class="container row col-4">
-                <div class="container col-2">
-                    <i class="fa-solid fa-user fs-3"></i>
+            <div class="container">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <div class='container'>
+                            <select class="form-selectx" name="reservation_ppl" aria-label="Default select example">
+                                <option value="---"> --- </option>
+                                    @for($i = 0; $i < 10; $i++)
+                                        <option value="{{$i + 1}}">{{$i + 1}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="container col">
-                    <select class="form-selectx" name="reservation_ppl" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
+              </div>
 
-                        <option value="1">1</option>
-
-                    </select>
-                </div>
-                </div>
-                <div class="container row col-4">
-                <div class="container col-2 fs-3">
-                    <i class="fa-solid fa-calendar-days"></i>
-                </div>
-                <div class="container col">
-                    <select class="form-selectx" name="reservation_data" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-
-                    </select>
-                </div>
-                </div>
-                <div class="container row col-4">
-                <div class="container col-2 fs-3 pb-1">
-                    <i class="fa-solid fa-clock"></i>
-                </div>
-                <div class="container col">
-                    <select class="form-selectx" name="reservation_time" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                </div>
+                <div class="container">
+                        {{-- <i class="fa-solid fa-calendar-days"></i> --}}
+                    <div class='col-sm-6'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetime'>
+                                <input type='text' class="form-control" name="reservation_start_date"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  
+                  <script>
+                  $(function () {
+                    $('#datetime').datetimepicker();
+                  });
+                  </script>
 
             {{-- Check Box  --}}
             <div class="form-check">
@@ -61,60 +55,29 @@
         </div>
 
         {{-- Couse Area --}}
-        <h2 class="mb-4">Couse</h2>
-        <div class="container mb-6">
-            <div class="container mb-5 border-bottom">
-                <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                    <h5 class="card-title">Couse1 <span>¥ 6,000</span></h5>
-                    <p class="card-text">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<a href="#">>Read More</a></p>
-                    <button type="button" class="btn btn-warning mb-3">Select</button>
+        <h2 class="mb-4">Course</h2>
+         @foreach($course as $course)
+            <div class="container mb-6">
+                <div class="container mb-5 border-bottom">
+                    <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ $course->photo }}"  class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                        <h4 class="card-title">{{ $course->name }} <span>¥ {{ $course->price }} </span></h4>
+                        <p class="card-text">{{ $course->description }}<a href="#">>Read More</a></p>
+                        <button type="button" class="btn btn-warning mb-3">Select</button>
+                        </div>
+                    </div>
                     </div>
                 </div>
-                </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="container mb-6 border-bottom">
-                <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                    <h5 class="card-title">Couse2 <span>¥ 12,000</span></h5>
-                    <p class="card-text">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<a href="#">>Read More</a></p>
-                    <button type="button" class="btn btn-warning mb-3">Select</button>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="container mb-4 border-bottom">
-                <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                    <h5 class="card-title">Couse3 <span>¥ 18,000</span></h5>
-                    <p class="card-text">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<a href="#">>Read More</a></p>
-                    <button type="button" class="btn btn-warning mb-3">Select</button>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-
+            @endforeach
         {{-- Request --}}
         <h2 class="mb-4">Requests</h2>
         <div class="form-group  mb-5">
-            <textarea class="form-control" placeholder="leave a comment such as a special requests" id="floatingTextarea" rows="5"></textarea>
+            <textarea class="form-control" placeholder="leave a comment such as a special requests" id="requests" rows="5"></textarea>
         </div>
         </div>
         </div>
