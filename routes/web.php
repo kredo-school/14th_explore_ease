@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\ProfileController;
@@ -106,8 +108,8 @@ Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase
     Route::post('/restaurant/{id}/review/comment', [ReviewController::class, 'store'])->name('restaurant.review.store');
 
     Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
+    Route::get('/profile/bookmark', [BookmarkController::class, 'show'])->name('profile.bookmark');
 
-    Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
     #Profile(Kazuya)
     Route::get('/profile/{id}/show', [ProfileController::class, 'show'])->name('profile.show');
     Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
