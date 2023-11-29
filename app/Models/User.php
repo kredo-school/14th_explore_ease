@@ -53,24 +53,28 @@ class User extends Authenticatable
     /** to get all the restaurants of a user */
     public function restaurants()
     {
-        return $this->hasMany(Restaurant::class)->latest();
+        return $this->hasMany(Restaurant::class);
+        // return $this->hasMany(Restaurant::class)->latest();
     }
 
     /** to get all the reviews of a user */
     public function reviews()
     {
-        return $this->hasMany(Review::class)->latest();
+        return $this->hasMany(Review::class);
+        // return $this->hasMany(Review::class)->latest();
     }
 
     /** to get all the bookmarks of a user */
     public function bookmarks()
     {
-        return $this->hasMany(Bookmark::class)->latest();
+        return $this->hasMany(Bookmark::class);
+        // return $this->hasMany(Bookmark::class)->latest();
     }
 
     /** to get all the reservations of a user */
     public function reservations()
     {
-        return $this->hasMany(Reservation::class)->latest();
+        return $this->hasMany(Reservation::class);
+        // return $this->hasMany(Reservation::class)->latest();
     }
 }
