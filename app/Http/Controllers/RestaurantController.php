@@ -168,6 +168,13 @@ class RestaurantController extends Controller
             if($request->{"photo_".$i+1}){
                 $restaurant_photo = new RestaurantPhoto();
                 $restaurant_photo->restaurant_id = $restaurant->id;
+                if($i = 0){
+                    $restaurant_photo->name = "First photo";
+                } elseif($i = 1){
+                    $restaurant_photo->name = "Second photo";
+                } elseif($i = 2){
+                    $restaurant_photo->name = "Third photo";
+                }
                 $restaurant_photo->photo = 'data:image/' . $request->{"photo_".$i+1}->extension().
                 ';base64,'. base64_encode(file_get_contents($request->{"photo_".$i+1}));
 
