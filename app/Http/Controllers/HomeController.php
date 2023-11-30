@@ -13,7 +13,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // prevent from authentication on every view
+        // $this->middleware('auth');
     }
 
     /**
@@ -30,9 +31,6 @@ class HomeController extends Controller
         return view('restaurants.show');
     }
 
-    public function profileBase(){
-        return view('users/profile');
-    }
 
     public function profileReservation(){
         return view('users.profilereservation');

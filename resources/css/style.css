@@ -10,11 +10,8 @@
 }
 
 /* For reservations.blade.php */
-.main_v_reservation{
-    height: 560px;
-}
-
 .main_v_reservation img {
     width: 100%; 
-    height: auto;
+    height: 16rem;
+    justify-content:center;
 }

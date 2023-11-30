@@ -6,7 +6,9 @@ use App\Models\Reservation;
 use App\Models\Restaurant;
 use App\Models\RestaurantPhoto;
 use App\Models\Seat;
+use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -17,12 +19,17 @@ class ReservationController extends Controller
     private $reservation;
     private $restaurant;
     private $restaurantphoto;
+    private $booking_data;
+    private $massage;
+    private $course;
 
-    public function __construct(Restaurant $restaurant, Reservation $reservation, RestaurantPhoto $restaurantphoto)
+    public function __construct(Restaurant $restaurant, Restaurant $massage, Reservation $reservation, RestaurantPhoto $restaurantphoto, Course $course)
     {
         $this->restaurant = $restaurant;
+        $this->massage = $massage;
         $this->reservation = $reservation;
         $this->restaurantphoto = $restaurantphoto;
+        $this->course = $course;
     }
     /**
      * Display the specified resource.
@@ -31,13 +38,22 @@ class ReservationController extends Controller
     {
         $restaurant = $this->restaurant->findOrFail($id);
         $restaurantphoto =  $this->restaurantphoto->findOrFail($restaurant->id);
+        $course =  $this->course->findOrFail($id);
         /*dd($restaurantphoto->photo);*/
-        return view('restaurant.reservations', ['restaurant'=>$restaurant, 'restaurantphoto'=> $restaurantphoto]);
+        return view('restaurant.reservation.show', ['restaurant'=>$restaurant, 'restaurantphoto'=> $restaurantphoto], ['course'=>$course]);
+    }
+
+    public function show_message($id)
+    {
+        $restaurant = $this->restaurant->findOrFail($id);
+        $massage = $this->restaurant->findOrFail($restaurant->massage);
+        dd($massage);
+        return view('restaurant.reservation.show')->with('$massage');
     }
     
     public function index()
     {
-        
+        //
     }
 
     /**
@@ -53,7 +69,21 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        # 1. Validate all form data
+        $data = $request->validate([
+            'reservation_ppl' => 'required',
+            'reservation_start_date' => 'required',
+            'reservation_start_time' => 'required'
+        ]);
+        dd($request);
+
+        # 2. Save the post
+        $this->booking_data->user_id        = Auth::user()->id;
+        //$this->booking_data->description   = $request->description;
+        $this->booking_data->save();
+
+        #3. go back to the homepage
+        return redirect()->route('index');
     }
 
 
