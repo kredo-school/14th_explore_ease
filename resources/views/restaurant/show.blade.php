@@ -14,7 +14,7 @@
                     @if(count($restaurant_photos[$loop->index]) > 0)
                         <img src="{{$restaurant_photos[$loop->index][0]->photo}}" class="m-0" style="height: 402px; width: 549px;">
                     @else
-                        <img src="{{asset('assets/no-image.png')}}" class="m-0" style="height: 402px; width: 549px;">
+                        <img src="{{asset('assets/no-image.png')}}" class="m-0" style="height: 402px; width: 549px; padding: 100px">
                     @endif
                 </div>
                 <div class="card-body w-100 border">
