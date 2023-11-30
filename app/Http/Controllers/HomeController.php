@@ -13,7 +13,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // prevent from authentication on every view
+        // $this->middleware('auth');
     }
 
     /**
