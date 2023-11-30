@@ -22,7 +22,7 @@ class ReservationController extends Controller
     private $booking_data;
     private $massage;
     private $course;
-    /*private $all_courses;*/
+    private $all_courses;
 
     public function __construct(Restaurant $restaurant, Restaurant $massage, Reservation $reservation, RestaurantPhoto $restaurantphoto, Course $course)
     {
@@ -40,11 +40,14 @@ class ReservationController extends Controller
         $restaurant = $this->restaurant->findOrFail($id);
         $restaurantphoto =  $this->restaurantphoto->findOrFail($restaurant->id);
         $course =  $this->course->findOrFail($id);
-        $all_courses = $this->course->all();
-        /*$all_courses =  $this->course->findOrFail($course->id); 11/25 cant retreave only restaurant_id #4*/ 
-        /*dd($all_courses);*/
+        $all_courses = $restaurant->courses();
+        /*dd($all_courses);
+        $all_courses =  $this->course->findOrFail($course->id); 11/25 cant retreave only restaurant_id #4 
+        dd($all_courses);*/
 
-        return view('restaurant.reservation.show', ['restaurant'=>$restaurant, 'restaurantphoto'=> $restaurantphoto, 'course'=>$course, 'all_courses'=> $all_courses]);
+        return view('restaurant.reservation.show',
+         ['restaurant'=> $restaurant, 'restaurantphoto' => $restaurantphoto,
+          'course' => $course, 'all_courses' => $all_courses]);
     }
 
     public function show_message($id)
@@ -63,9 +66,9 @@ class ReservationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        $all_courses = $this->course->all();
+        $all_courses = $this->course->findOrFail($id);
         return view('restaurant.reservation.show')->with('all_course', $all_courses);
         dd($all_courses);
     }

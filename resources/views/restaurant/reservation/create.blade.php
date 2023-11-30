@@ -1,9 +1,4 @@
     <!--for datepicker-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script> 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <form action="" method="post">
@@ -27,23 +22,18 @@
 
                 <div class="container">
                         {{-- <i class="fa-solid fa-calendar-days"></i> --}}
-                    <div class='col-sm-6'>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetime'>
-                                <input type='text' class="form-control" name="reservation_start_date"/>
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
+                        <div class="container">
+                            <div class="col-md-3 py-4">
+                              <form class="card p-4">
+                                <div class="input-group date mb-3" id="datetimepicker1" data-target-input="nearest">
+                                  <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+                                  <div class="input-group-text" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                    <i class="far fa-calendar-alt"></i>
+                                  </div>
+                                </div>
+                              </form>
                             </div>
-                        </div>
-                    </div>
-                  </div>
-                  
-                  <script>
-                  $(function () {
-                    $('#datetime').datetimepicker();
-                  });
-                  </script>
+                          </div>
 
             {{-- Check Box  --}}
             <div class="form-check">
@@ -79,7 +69,7 @@
         <div class="form-group  mb-5">
             <textarea class="form-control" placeholder="leave a comment such as a special requests" id="requests" rows="5"></textarea>
         </div>
-        <div class="align-items-center">
+        <div class="align-items-center mb-5">
             <button type="button" class="btn btn-warning mb-3"><a href="{{ route('home')}}"></a>Cancel</button>
             <input type="submit" value="Submit" class="btn btn-warning mb-3">
         </div>
