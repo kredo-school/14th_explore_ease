@@ -6,8 +6,8 @@
 @vite(['public/css/style.css'])
 
 <div class="container">
-    <div class="h1">SHOWING</div>
-    <div class="rcards">
+    <div class="h1"  style="margin-left: 100px; padding: 0px; margin-top: 20px;">RESTAURANTS</div>
+    <div class="scards">
         @foreach($restaurants as $restaurant)
             <div class="card border" style="width: 549px;">
                 <div class="card-header p-0">
@@ -20,7 +20,7 @@
                 <div class="card-body w-100 border">
                     <div class="row">
                         <div class="col-9">
-                            <a href="{{ route('restaurant.detail', $restaurant->id) }}"><p class="h3">Restaurant name</p></a>
+                            <a href="{{ route('restaurant.detail', $restaurant->id) }}" class="text-black text-bold text-decoration-none"><p class="h3">{{$restaurant->name}}</p></a>
                         </div>
                         <div class="col-auto h3">
                             <p class="border border-dark">
@@ -30,12 +30,12 @@
                     </div>
                     <div class="row">
                         <div class="col-9">
-                            <p class="h4">Place here</p>
+                            <p class="h4">{{$restaurant->address}}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-auto">
-                            <p class="h4">Features here</p>
+                            <p class="h4">{{$}}</p>
                         </div>
                         <div class="col text-end" style="font-size: 16px;">
                             ￥￥￥

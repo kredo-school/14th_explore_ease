@@ -71,13 +71,26 @@ class RestaurantController extends Controller
     {
         $restaurants = $this->restaurant->all();
         $restaurant_photos = [];
+        $features = [];
         foreach($restaurants as $restaurant){
             $data = $this->restaurantphoto->where('restaurant_id', $restaurant->id)->get();
             array_push($restaurant_photos, $data);
+
+            
+            // if($this->restaurant->features)
+            // {
+                //dd($restaurant->features->featuretype);
+                $fdata = $this->feature->where('restaurant_id', $restaurant->id);
+                
+            // } else {
+            //     $fdata = "No features";
+            // }
+            array_push($features, $fdata);
         }
+        
 
         return view('restaurant.show', ['restaurants'
-        =>$restaurants, 'restaurant_photos'=>$restaurant_photos]);
+        =>$restaurants, 'restaurant_photos'=>$restaurant_photos, 'features'=>$features]);
     }
 
     /**
@@ -146,7 +159,7 @@ class RestaurantController extends Controller
         }
 
         $seat = new Seat();
-        if($request->seat = "available"){
+        if($request->seat == "available"){
             $seat->restaurant_id = $restaurant->id;
             $seat->reservation_minutes = 60;
             $seat->save();
