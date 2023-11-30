@@ -12,6 +12,10 @@
 /* For reservations.blade.php */
 .main_v_reservation img {
     width: 100%; 
-    height: 16rem;
-    justify-content:center;
+    height: 20rem;
+    object-fit: cover;
 }
+
+.input-group-append {
+    cursor: pointer;
+  }
