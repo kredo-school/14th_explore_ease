@@ -122,7 +122,7 @@ class RestaurantController extends Controller
             if($request->{"L_budget".$i+1}){
                 $budget = new Budget();
                 $budget->restaurant_id = $restaurant->id;
-                $budget->timezonetype = "0";
+                $budget->timezonetype = "1";
                 $budget->budgetindex = $i+1;
                 if($i = 0){
                     $budget->budgetvalue = "￥";
@@ -143,7 +143,7 @@ class RestaurantController extends Controller
             if($request->{"D_budget".$i+1}){
                 $budget = new Budget();
                 $budget->restaurant_id = $restaurant->id;
-                $budget->timezonetype = "1";
+                $budget->timezonetype = "2";
                 $budget->budgetindex = $i+1;
                 if($i = 0){
                     $budget->budgetvalue = "￥";
