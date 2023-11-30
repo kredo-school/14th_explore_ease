@@ -3,6 +3,7 @@
 @section('title', 'restaurants.detail')
 
 @section('content')
+
 <!-- pass latitude and longitude data to mapForDetail.js -->
 <script type="text/javascript">
     var latitude =  {{ $restaurant->latitude }};
@@ -65,24 +66,37 @@
                 <h5 class="mt-3">{{ $foodtype->name }}</h5>
 
                 <!-- Feature -->
-                <!-- to be update: create route&function to feature !!! -->
-                <div class="row mt-3">
-                    {{-- @foreach ($all_featuretypes as $featuretype) --}}
-                        <div class="col-1">
-                            <div href="" class="btn btn-light border-dark">{{-- $featuretype->name --}}</div>
-                        </div>
-                    {{-- @endforeach --}}
+                <div class="mt-3">
+                    @foreach ($featureTypes as $featureType)
+                    <div>
+                        <div href="" class="btn btn-light border-dark me-3" style="float:left;">{{ $featureType }}</div>
+                    </div>
+                    @endforeach
                 </div>
+                <br>
 
                 <!-- Time zone -->
-                <!-- to be update: create route&function to Timezone !!! -->
                 <div class="row mt-4">
-                    <div class="col-1">
-                        <i class="fa-regular fa-sun h4"></i>
-                    </div>
-                    <div class="col-1">
-                        <i class="fa-regular fa-moon h4"></i>
-                    </div>
+                    @foreach ($budgetItems as $timezone)
+                        @if ($timezone == 1)
+                            <div class="col-1">
+                                <i class="fa-regular fa-sun h4"></i>
+                            </div>
+                        @elseif($timezone == 2)
+                            <div class="col-1">
+                                <i class="fa-regular fa-moon h4"></i>
+                            </div>
+                        @elseif($timezone == 3)
+                            <div class="col-1">
+                                <i class="fa-regular fa-sun h4"></i>
+                            </div>
+                            <div class="col-1">
+                                <i class="fa-regular fa-moon h4"></i>
+                            </div>
+                        @else
+                            <!-- Empty -->
+                        @endif
+                    @endforeach
                 </div>
 
                 <!-- Open hours -->
@@ -154,7 +168,7 @@
                         <a href="" class="btn btn-light border-dark">Course</a>
                     </div>
                     <div class="col-2 text-end">
-                        <a href="" class="btn btn-secondary border-dark">Reservation</a>
+                        <a href="{{ route('restaurant.reservations', $restaurant->id) }}" class="btn btn-secondary border-dark">Reservation</a>
                     </div>
                 </div>
                 <hr>
@@ -222,43 +236,26 @@
                 </div>
                 <hr>
 
-                <table class="table table-borderless">
-                    <tr>
-                        <td scope="col" style="width: 10%"><i class="fa-solid fa-circle-user h4"></i></td>
-                        <td scope="col" style="width: 10%" >
-                            <a href="" class="text-decoration-none text-dark h5">
-                            4.5 <i class="fa-solid fa-star"></i>
-                            {{-- {{ $post->user->name }} --}}
-                            </a>
-                        </td>
-                        <td scope="col" style="width: 60%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 0;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi aliquam magni Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi aliquam magni Lorem ipsum dolor s</td>
-                        <td scope="col" style="width: 20%" class="text-end">18:23 21/0ct/2023</td>
-                    </tr>
+                <div>
+                    <table class="table table-borderless">
+                        @foreach ($review as $eachReview)
+                        <tr>
+                            <td scope="col" style="width: 10%"><i class="fa-solid fa-circle-user h4"></i></td>
+                            <td scope="col" style="width: 10%" >
+                                <div class="text-decoration-none text-dark h5">
+                                {{ $eachReview->star }} <i class="fa-solid fa-star"></i>
+                                </div>
+                            </td>
+                            <td scope="col" style="width: 60%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 0;">{{ $eachReview->comment }} </td>
+                            <td scope="col" style="width: 20%" class="text-end">{{ $eachReview->created_at }}</td>
+                        </tr>
+                        @endforeach
+                    </table>
+                    <div class="d-flex justify-content-center">
+                        {{ $review->links() }}
+                    </div>
+                </div>
 
-                    <tr>
-                        <td scope="col" style="width: 10%"><i class="fa-solid fa-circle-user h4"></i></td>
-                        <td scope="col" style="width: 10%">
-                            <a href="" class="text-decoration-none text-dark h5">
-                            4.5 <i class="fa-solid fa-star"></i>
-                            {{-- {{ $post->user->name }} --}}
-                            </a>
-                        </td>
-                        <td scope="col" style="width: 60%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 0;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi aliquam magni Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi aliquam magni Lorem ipsum dolor s</td>
-                        <td scope="col" style="width: 20%" class="text-end">18:23 21/0ct/2023</td>
-                    </tr>
-
-                    <tr>
-                        <td scope="col" style="width: 10%"><i class="fa-solid fa-circle-user h4"></i></td>
-                        <td scope="col" style="width: 10%">
-                            <a href="" class="text-decoration-none text-dark h5">
-                            4.5 <i class="fa-solid fa-star"></i>
-                            {{-- {{ $post->user->name }} --}}
-                            </a>
-                        </td>
-                        <td scope="col" style="width: 60%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 0;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi aliquam magni Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi aliquam magni Lorem ipsum dolor s</td>
-                        <td scope="col" style="width: 20%" class="text-end">18:23 21/0ct/2023</td>
-                    </tr>
-                </table>
             </div>
         </div>
 

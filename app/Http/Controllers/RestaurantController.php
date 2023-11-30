@@ -26,8 +26,9 @@ class RestaurantController extends Controller
     private $areatype;
     private $feature;
     private $featuretype;
+    private $budget;
 
-    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype){
+    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype, Budget $budget){
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->restaurantphoto = $restaurantphoto;
@@ -35,6 +36,7 @@ class RestaurantController extends Controller
         $this->areatype = $areatype;
         $this->feature = $feature;
         $this->featuretype = $featuretype;
+        $this->budget = $budget;
     }
 
     /** Show restaurant ranking page */
@@ -47,19 +49,37 @@ class RestaurantController extends Controller
         $restaurant = $this->restaurant->findOrFail($id);
         $restaurantphoto = $restaurant->restaurant_photos;
                          //↑restaurant Model.    //↑function on restaurant Model.
+
+        $review = Review::where('restaurant_id', $restaurant->id)->latest()->paginate(10);
+
         $foodtype = $this->foodtype->findOrFail($restaurant->foodtype->id);
         $areatype = $this->areatype->findOrFail($restaurant->areatype->id);
 
-        // featuretype
-        $feature = $restaurant->features;
-        // dd($feature);
+        /** Features */
+        $restaurantFeatures = $restaurant->features; // Gets all the features of the restaurant
+        $featureTypes = []; // Declaration of the featureTypes that we'll populate below;
+        foreach($restaurantFeatures as $feature){
+            // For each feature of the restaurant, we get the featuretype name and add it to the array
+            $featureTypes[] = $feature->featuretype->name;
+        }
+
+        /** Budget */
+        $budget = $restaurant->budgets;
+        $budgetItems = [];
+        foreach ($budget as $budgetItem) {
+            $budgetItems[] = $budgetItem->timezonetype;
+        }
+
 
         return view('restaurant.detail',
         [
             'restaurant' => $restaurant,
             'restaurantphoto' => $restaurantphoto,
+            'review' => $review,
             'foodtype' => $foodtype,
-            'areatype' => $areatype
+            'areatype' => $areatype,
+            'featureTypes' => $featureTypes,
+            'budgetItems' => $budgetItems
         ]);
 
     }
