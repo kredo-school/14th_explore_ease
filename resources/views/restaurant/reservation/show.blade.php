@@ -27,7 +27,6 @@
               </form>
             </div>
           </div>
-          
           @include('restaurant.reservation.create')
 </div>
 @endsection
