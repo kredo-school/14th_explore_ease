@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Nationarity;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\RestaurantPhoto;
 
 class ProfileController extends Controller
@@ -27,7 +25,7 @@ class ProfileController extends Controller
         $this->user = $user;
         $this->nationarity = $nationarity;
         $this->bookmark = $bookmark;
-        $this->restaurant_photo = $restaurant_photo
+        $this->restaurant_photo = $restaurant_photo;
     }
 
 
