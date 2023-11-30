@@ -138,7 +138,7 @@ class RestaurantController extends Controller
         }
 
         $seat = new Seat();
-        if($request->seat = "available"){
+        if($request->seat == "available"){
             $seat->restaurant_id = $restaurant->id;
             $seat->reservation_minutes = 60;
             $seat->save();
@@ -148,11 +148,11 @@ class RestaurantController extends Controller
             if($request->{"photo_".$i+1}){
                 $restaurant_photo = new RestaurantPhoto();
                 $restaurant_photo->restaurant_id = $restaurant->id;
-                if($i = 0){
+                if($i == 0){
                     $restaurant_photo->name = "First photo";
-                } elseif($i = 1){
+                } elseif($i == 1){
                     $restaurant_photo->name = "Second photo";
-                } elseif($i = 2){
+                } elseif($i == 2){
                     $restaurant_photo->name = "Third photo";
                 }
                 $restaurant_photo->photo = 'data:image/' . $request->{"photo_".$i+1}->extension().
@@ -167,15 +167,15 @@ class RestaurantController extends Controller
             if($request->{"L_budget".$i+1}){
                 $budget = new Budget();
                 $budget->restaurant_id = $restaurant->id;
-                $budget->timezonetype = "0";
+                $budget->timezonetype = "1";
                 $budget->budgetindex = $i+1;
-                if($i = 0){
+                if($i == 0){
                     $budget->budgetvalue = "￥";
-                } elseif ($i=1){
+                } elseif ($i == 1){
                     $budget->budgetvalue = "￥￥";
-                } elseif ($i=2){
+                } elseif ($i == 2){
                     $budget->budgetvalue = "￥￥￥";
-                } elseif ($i=3){
+                } elseif ($i == 3){
                     $budget->budgetvalue = "￥￥￥￥";
                 }
 
@@ -188,15 +188,15 @@ class RestaurantController extends Controller
             if($request->{"D_budget".$i+1}){
                 $budget = new Budget();
                 $budget->restaurant_id = $restaurant->id;
-                $budget->timezonetype = "1";
+                $budget->timezonetype = "2";
                 $budget->budgetindex = $i+1;
-                if($i = 0){
+                if($i == 0){
                     $budget->budgetvalue = "￥";
-                } elseif ($i=1){
+                } elseif ($i == 1){
                     $budget->budgetvalue = "￥￥";
-                } elseif ($i=2){
+                } elseif ($i == 2){
                     $budget->budgetvalue = "￥￥￥";
-                } elseif ($i=3){
+                } elseif ($i == 3){
                     $budget->budgetvalue = "￥￥￥￥";
                 }
 
