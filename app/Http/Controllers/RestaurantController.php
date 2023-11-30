@@ -72,11 +72,9 @@ class RestaurantController extends Controller
         $restaurants = $this->restaurant->all();
         $restaurant_photos = [];
         foreach($restaurants as $restaurant){
-            $data = $this->restaurantphoto->where('restaurant_id', $restaurant->id)->get()[0];
+            $data = $this->restaurantphoto->where('restaurant_id', $restaurant->id)->get();
             array_push($restaurant_photos, $data);
         }
-
-        dd($restaurant_photos);
 
         return view('restaurant.show', ['restaurants'
         =>$restaurants, 'restaurant_photos'=>$restaurant_photos]);

@@ -11,7 +11,11 @@
         @foreach($restaurants as $restaurant)
             <div class="card border" style="width: 549px;">
                 <div class="card-header p-0">
-                    <img src="{{$restaurant_photos[$loop->index]->photo}}" class="m-0" style="height: 402px; width: 549px;">
+                    @if(count($restaurant_photos[$loop->index]) > 0)
+                        <img src="{{$restaurant_photos[$loop->index][0]->photo}}" class="m-0" style="height: 402px; width: 549px;">
+                    @else
+                        <img src="{{asset('assets/no-image.png')}}" class="m-0" style="height: 402px; width: 549px;">
+                    @endif
                 </div>
                 <div class="card-body w-100 border">
                     <div class="row">
