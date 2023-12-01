@@ -9,6 +9,8 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected $table = 'courses';
+    protected $fillable = ['restaurant_id', 'photo', 'name', 'description', 'reservation_minutes'];
     public $timestamps = false;
 
     /** 

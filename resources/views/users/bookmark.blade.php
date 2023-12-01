@@ -27,15 +27,15 @@
                 </div>
             </div>
             <div class="rcards">
-                @for($i=1; $i<=5; $i++)
+                @foreach($bookmarks as $bookmark)
                         <div class="card mb-2" style="width: 265px; height: auto;">
                             <div class="card-header p-0">
-                                <p class="bg-warning m-0" style="height: 173px; width: 265px;">image here</p>
+                                <img src="{{$restaurant_photos[$loop->index]->photo}}" class="m-0" style="height: 173px; width: 265px;">
                             </div>
                             <div class="card-body w-100 border p-0">
                                 <div class="row ps-2">
                                     <div class="col-9">
-                                        <a href="{{ route('restaurant.detail') }}"><p class="h4">Restaurant name</p></a>
+                                        <a href="{{ route('restaurant.detail', $bookmark->restaurant_id) }}"><p class="h4">Restaurant name</p></a>
                                     </div>
                                     <div class="col h3 rowspan='2'">
                                         <a href="" class="text-decoration-none text-black h1">
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                         </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </div>

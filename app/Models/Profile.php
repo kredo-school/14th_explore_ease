@@ -10,7 +10,7 @@ class Profile extends Model
     use HasFactory;
 
     protected $fillable = ['user_id', 'first_name', 'last_name', 'avatar', 'phone', 'usertype_id', 'nationarity_id'];
-
+    protected $primaryKey = 'user_id';
     /** 
      * Profile-User
      * a Profile belongs to a User
