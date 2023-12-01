@@ -4,17 +4,40 @@ namespace App\Http\Controllers;
 
 use App\Models\Review;
 use App\Models\Restaurant;
+use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
     private $restaurant;
     private $review;
+    private $user;
+    private $profile;
 
-    public function __construct(Restaurant $restaurant, Review $review){
-        $this -> restaurant = $restaurant;
-        $this -> review = $review;
+    public function __construct(Restaurant $restaurant, Review $review, User $user, Profile $profile){
+        $this->restaurant = $restaurant;
+        $this->review = $review;
+        $this->user = $user;
+        $this->profile = $profile;
     }
+
+    /** Show restaurant review page */
+    public function ShowRestaurantReview($id){
+    $restaurant = $this->restaurant->findOrFail($id);
+    $user = $this->user->findOrFail(Auth::user()->id);
+    $profile = $user->profile;
+
+    return view('restaurant.review',[
+        'restaurant' => $restaurant,
+        'user' => $user,
+        'profile' => $profile
+    ]);
+    }
+
+
+
 
     public function store(Request $request, $restaurant_id){
         $request->validate([
@@ -82,12 +105,6 @@ class ReviewController extends Controller
         //
     }
 
-    /** Show restaurant review page */
-    public function ShowRestaurantReview($id){
-        $restaurant = $this->restaurant->findOrFail($id);
-        // $review = $this->review->findOrFail($id);
 
-        return view('restaurant.review')->with('restaurant', $restaurant);
-    }
 
 }

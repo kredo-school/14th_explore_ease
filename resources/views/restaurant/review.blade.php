@@ -20,19 +20,23 @@
         <div class="card mt-3">
             <div class="card-body">
                 <div class="row justify-content-center">
-                    <div class="col-3 my-3">
-                        <a href="" class="ms-5">
-                            <i class="fa-solid fa-circle-user text-dark" style="font-size:15em;"></i>
+                    <div class="col-2 my-3">
+                        <a href="{{ route('profile.show', Auth::user()->id) }}" class="">
+                            @if(Auth::user()->profile->avatar)
+                                <img src="{{ $profile->avatar }}" class="header-image img-thumbnail rounded-circle ms-5">
+                            @else
+                                <i class="fa-solid fa-circle-user icon-user text-secondary mx-5" style="font-size:9rem;"></i>
+                            @endif
                         </a>
                     </div>
 
-                    <div class="col-3 my-auto">
-                        <h2>UserName</h2>
+                    <div class="col-4 my-auto">
+                        <h2 class="mx-5 ">{{ $user->name }}</h2>
                     </div>
 
                     <div class="col-6 my-auto text-start">
                         <div>
-                            <h2>Start your review of <a href="#" style="color:pink" class="text-decoration-none"> Restaurant Name </a></h2>
+                            <h2>Start your review of <a href="#" style="color:pink" class="text-decoration-none"> {{ $restaurant->name }} </a></h2>
                         </div>
                         <br>
                         <div>
