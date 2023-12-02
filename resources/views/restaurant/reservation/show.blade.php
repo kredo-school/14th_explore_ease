@@ -13,9 +13,9 @@
         <div class="container mb-5">
             <h2 class="mb-4">{{ $restaurant->name }}</h2>
             <h3 class="mb-2">Message from Venue</h3>
-            {{-- <p>
-              For this part of data base coming soon...
-            </p> --}}
+              <p>
+              {{ $restaurant->description }}
+              </p>
 
             {{-- Check Box  --}}
             <div class="form-check mb-4">
@@ -27,8 +27,7 @@
               </form>
             </div>
           </div>
-          
-          @include('reservation.create')
+          @include('restaurant.reservation.create')
 </div>
 @endsection
 
