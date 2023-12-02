@@ -28,7 +28,7 @@ class ProfileController extends Controller
         $this->user = $user;
         $this->nationarity = $nationarity;
         $this->bookmark = $bookmark;
-        $this->restaurant_photo = $restaurant_photo
+        $this->restaurant_photo = $restaurant_photo;
     }
 
 
