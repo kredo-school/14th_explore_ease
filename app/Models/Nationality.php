@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Nationarity extends Model
+class Nationality extends Model
 {
     use HasFactory;
 
-    protected $table = 'nationarities';
+    protected $table = 'nationalities';
     public $timestamps = false;
 }

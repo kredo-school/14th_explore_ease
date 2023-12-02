@@ -76,8 +76,8 @@
                   <div class="row ">
                     <div class="col">
                       <label for="username" class="fw-bold">Nationality</label>
-                      <select class="form-select" name="nationarity" id="#" autofocus>
-                          <option value="{{ $user->profile->nationarity->name }}">{{ $user->profile->nationarity->name }}</option>
+                      <select class="form-select" name="nationality" id="#" autofocus>
+                          <option value="{{ $user->profile->nationality->name }}">{{ $user->profile->nationality->name }}</option>
                       </select>
                       @error('nationality')
                         <div class="error">{{ $message }}</div>
