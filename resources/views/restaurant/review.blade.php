@@ -9,6 +9,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 @endsection
 
+<!-- pass data to review.js -->
+<script type="text/javascript">
+    var countstar5 =  {{ $countStar5 }};
+    var countstar4 =  {{ $countStar4 }};
+    var countstar3 =  {{ $countStar3 }};
+    var countstar2 =  {{ $countStar2 }};
+    var countstar1 =  {{ $countStar1 }};
+</script>
+
+@vite(['resources/js/review_StarGraph.js'])
+
 <main class="container">
     <div class="row justify-content-center">
         <h1>REVIEWING</h1>
@@ -20,10 +31,10 @@
         <div class="card mt-3">
             <div class="card-body">
                 <div class="row justify-content-center">
-                    <div class="col-2 my-3">
+                    <div class="col-2 my-auto">
                         <a href="{{ route('profile.show', Auth::user()->id) }}" class="">
                             @if(Auth::user()->profile->avatar)
-                                <img src="{{ $profile->avatar }}" class="header-image img-thumbnail rounded-circle ms-5">
+                                <img src="{{ $profile->avatar }}" class="header-image img-thumbnail rounded-circle mx-5 w-100 h-100">
                             @else
                                 <i class="fa-solid fa-circle-user icon-user text-secondary mx-5" style="font-size:9rem;"></i>
                             @endif
@@ -31,12 +42,12 @@
                     </div>
 
                     <div class="col-4 my-auto">
-                        <h2 class="mx-5 ">{{ $user->name }}</h2>
+                        <h2 class="mx-5">{{ $user->name }}</h2>
                     </div>
 
                     <div class="col-6 my-auto text-start">
                         <div>
-                            <h2>Start your review of <a href="#" style="color:pink" class="text-decoration-none"> {{ $restaurant->name }} </a></h2>
+                            <h2>Start your review of <a href="#" style="color:#F8B0A6" class="text-decoration-none"> {{ $restaurant->name }} </a></h2>
                         </div>
                         <br>
                         <div>
@@ -69,7 +80,7 @@
         <!--Comment area -->
             <div class="mt-5">
                 <label for="comment"><h3>COMMENT AREA</h3></label>
-                <textarea name="comment" id="comment" rows="10" class="form-control w-100 bg-transparent"></textarea>
+                <textarea name="comment" id="comment" rows="5" class="form-control w-100 bg-transparent"></textarea>
                 {{-- Error --}}
                 @error('comment')
                     <div class="text-danger small">{{ $message }}</div>
@@ -95,60 +106,19 @@
                 <!--Graph -->
                 <div class="col-6">
                     <canvas id="ReviewChart" class="h-75"></canvas>
-
-                    <!-- Pass data to Chart.js -->
-                    <script>
-                    var ctx = document.getElementById("ReviewChart");
-                    var ReviewChart = new Chart(ctx, {
-                        type: 'horizontalBar',
-                        data: {
-                            labels: ['5', '4', '3', '2', '1'],
-                            datasets: [
-                            {
-                                label: '',
-                                data: [91, 45, 121, 100, 98],
-                                backgroundColor: "rgba(255,183,76,0.5)"
-                            }
-                            ]
-                        },
-                        options: {
-                            legend: {
-                            display: false,
-                            },
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        suggestedMax: 100,
-                                        suggestedMin: 0,
-                                        stepSize: 10,
-                                callback: function(value, index, values){
-                                    return  value
-                                }
-                                }
-                            }]
-                            },
-                        }
-                        });
-                    </script>
                 </div>
 
                 <!--Number -->
                 <div class="col-3 text-center">
-                    <div>
-                        <span style="font-size: 6rem;">3.9</span>
-                    </div>
-                    <div>
-                        <a href="" class="text-decoration-none"><i class="fa-regular fa-star text-dark" style="font-size:2em;"></i>
-                        <a href="" class="text-decoration-none"><i class="fa-regular fa-star text-dark" style="font-size:2em;"></i>
-                        <a href="" class="text-decoration-none"><i class="fa-regular fa-star text-dark" style="font-size:2em;"></i>
-                        <a href="" class="text-decoration-none"><i class="fa-regular fa-star text-dark" style="font-size:2em;"></i>
-                        <a href="" class="text-decoration-none"><i class="fa-regular fa-star text-dark" style="font-size:2em;"></i>
-                    </div>
-                    <div class="mt-1">
+                        <div style="font-size: 5rem;">{{ $averageAllStars }}</div>
+
+                        <div class="result-rating-rate">
+                            <span class="star5_rating" data-rate="{{ $averageAllStars }}"></span>
+                        </div>
+
                         <p style="font-size: 1.5rem;" class="text-decoration-none text-dark">
-                            <span>225</span> reviews
+                            <span>{{ $countAllStars }}</span> reviews
                         </p>
-                    </div>
                 </div>
 
             </div>

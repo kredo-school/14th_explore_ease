@@ -8,12 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Nationarity;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\RestaurantPhoto;
 
 class ProfileController extends Controller
-{   
+{
     private $profile;
     private $user;
     private $nationarity;
@@ -27,7 +25,7 @@ class ProfileController extends Controller
         $this->user = $user;
         $this->nationarity = $nationarity;
         $this->bookmark = $bookmark;
-        $this->restaurant_photo = $restaurant_photo
+        $this->restaurant_photo = $restaurant_photo;
     }
 
 
@@ -37,7 +35,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -53,11 +51,11 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        
+
     }
 
     public function show($id)
-    {   
+    {
         $user = $this->user->findOrFail($id);
         return view('users.profile')->with('user', $user);
     }
@@ -83,7 +81,7 @@ class ProfileController extends Controller
             'email' => 'required|email|unique:users',
             'image' => 'image|mimes:jpg,jpeg,gif,png',
         ]);
-        
+
         $user = $this->user->findOrFail(Auth::user()->id);
         $user->profile->first_name = $request->firstname;
         $user->profile->last_name = $request->lastname;
