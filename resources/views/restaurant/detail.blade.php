@@ -60,13 +60,22 @@
 
                 <!-- Price -->
                 <!-- to be discussed & update: need to change budgets table on database?-->
-                <h5 class="mt-3">¥ ¥ ¥ ¥</h5>
+                <h5 class="mt-5">Lunch:&ensp;
+                    @foreach ($LunchValues as $LunchValue)
+                    {{ $LunchValue }}&emsp;
+                    @endforeach
+                </h5>
+                <h5 class="">Dinner:&ensp;
+                    @foreach ($DinnerValues as $DinnerValue)
+                    {{ $DinnerValue }}&emsp;
+                    @endforeach
+                </h5>
 
                 <!-- Food type -->
-                <h5 class="mt-3">{{ $foodtype->name }}</h5>
+                <h5 class="mt-4">{{ $foodtype->name }}</h5>
 
                 <!-- Feature -->
-                <div class="mt-3">
+                <div class="mt-4">
                     @foreach ($featureTypes as $featureType)
                     <div>
                         <div href="" class="btn btn-light border-dark me-3" style="float:left;">{{ $featureType }}</div>
@@ -76,17 +85,16 @@
                 <br>
 
                 <!-- Time zone -->
-                <div class="row mt-4">
-                    @foreach ($budgetItems as $timezone)
-                        @if ($timezone == 1)
+                <div class="row mt-5">
+                        @if ($sumTimezones == 1)
                             <div class="col-1">
                                 <i class="fa-regular fa-sun h4"></i>
                             </div>
-                        @elseif($timezone == 2)
+                        @elseif($sumTimezones == 2)
                             <div class="col-1">
                                 <i class="fa-regular fa-moon h4"></i>
                             </div>
-                        @elseif($timezone == 3)
+                        @elseif($sumTimezones == 3)
                             <div class="col-1">
                                 <i class="fa-regular fa-sun h4"></i>
                             </div>
@@ -96,7 +104,6 @@
                         @else
                             <!-- Empty -->
                         @endif
-                    @endforeach
                 </div>
 
                 <!-- Open hours -->

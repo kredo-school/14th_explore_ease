@@ -49,26 +49,52 @@ class RestaurantController extends Controller
         $restaurant = $this->restaurant->findOrFail($id);
         $restaurantphoto = $restaurant->restaurant_photos;
                          //↑restaurant Model.    //↑function on restaurant Model.
-
         $review = Review::where('restaurant_id', $restaurant->id)->latest()->paginate(10);
-
         $foodtype = $this->foodtype->findOrFail($restaurant->foodtype->id);
         $areatype = $this->areatype->findOrFail($restaurant->areatype->id);
 
-        /** Features */
+        /** FeatureTypes via Features table */
         $restaurantFeatures = $restaurant->features; // Gets all the features of the restaurant
-        $featureTypes = []; // Declaration of the featureTypes that we'll populate below;
-        foreach($restaurantFeatures as $feature){
+            $featureTypes = []; // Declaration of the featureTypes that we'll populate below;
+            foreach($restaurantFeatures as $feature){
             // For each feature of the restaurant, we get the featuretype name and add it to the array
-            $featureTypes[] = $feature->featuretype->name;
-        }
+                $featureTypes[] = $feature->featuretype->name;
+            }
 
-        /** Budget */
-        $budget = $restaurant->budgets;
-        $budgetItems = [];
-        foreach ($budget as $budgetItem) {
-            $budgetItems[] = $budgetItem->timezonetype;
-        }
+        /** Timezone from Budget table */
+        $budgets = $restaurant->budgets;
+            $Timezones = [];
+            foreach ($budgets as $budgetItem) {
+                $Timezones[] = $budgetItem->timezonetype;
+            }
+        $timezonesUnique = array_unique($Timezones);
+        $sumTimezones = array_sum($timezonesUnique);
+
+        /** Bugetvalue from Budget table */
+            /** Lunch */
+            $budgetLunch = Budget::where('restaurant_id', $restaurant->id)->where('timezonetype', 1)->get();
+                $LunchValues = [];
+                foreach ($budgetLunch as $budgetItemLunch) {
+                    $LunchValues[] = $budgetItemLunch->budgetvalue;
+                }
+
+            //     $BudgetValueLunch = [];
+            //         foreach($LunchValues as $LunchValue){
+            //             $BudgetValueLunch[] = strlen($LunchValue);
+            //         }
+            // $maxLunchValue = max($BudgetValueLunch);
+            // $minLunchValue = min($BudgetValueLunch);
+
+            /** Dinner */
+            $budgetDinner = Budget::where('restaurant_id', $restaurant->id)->where('timezonetype', 1)->get();
+                $DinnerValues = [];
+                foreach ($budgetDinner as $budgetItemDinner) {
+                    $DinnerValues[] = $budgetItemDinner->budgetvalue;
+                }
+
+
+        /** Opening and Closing hours*/
+        $openhours = 
 
 
         return view('restaurant.detail',
@@ -79,7 +105,9 @@ class RestaurantController extends Controller
             'foodtype' => $foodtype,
             'areatype' => $areatype,
             'featureTypes' => $featureTypes,
-            'budgetItems' => $budgetItems
+            'sumTimezones' => $sumTimezones,
+            'LunchValues' => $LunchValues,
+            'DinnerValues' => $DinnerValues
         ]);
 
     }
