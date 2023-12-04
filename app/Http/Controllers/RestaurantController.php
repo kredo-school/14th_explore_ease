@@ -26,8 +26,9 @@ class RestaurantController extends Controller
     private $areatype;
     private $feature;
     private $featuretype;
+    private $budget;
 
-    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype){
+    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype, Budget $budget){
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->restaurantphoto = $restaurantphoto;
@@ -35,6 +36,7 @@ class RestaurantController extends Controller
         $this->areatype = $areatype;
         $this->feature = $feature;
         $this->featuretype = $featuretype;
+        $this->budget = $budget;
     }
 
     /** Show restaurant ranking page */
@@ -72,26 +74,76 @@ class RestaurantController extends Controller
         $restaurants = $this->restaurant->all();
         $restaurant_photos = [];
         $features = [];
+        $finalBudget = [];
+
         foreach($restaurants as $restaurant){
             $data = $this->restaurantphoto->where('restaurant_id', $restaurant->id)->get();
             array_push($restaurant_photos, $data);
 
-            
-            // if($this->restaurant->features)
-            // {
-                //dd($restaurant->features->featuretype);
-                $fdata = $this->feature->where('restaurant_id', $restaurant->id);
-                
-            // } else {
-            //     $fdata = "No features";
-            // }
+
+            $fdata = $this->feature->where('restaurant_id', $restaurant->id)->get();
             array_push($features, $fdata);
+
+            $bdata = $this->budget->where('restaurant_id', $restaurant->id)->get();
+            array_push($finalBudget, $bdata);
         }
         
+        // foreach($budget as $data){
+        //     $filteredData = $this->filteredBudget($data);
+        //     array_push($finalBudget, $filteredData);
+        // }        
+
 
         return view('restaurant.show', ['restaurants'
-        =>$restaurants, 'restaurant_photos'=>$restaurant_photos, 'features'=>$features]);
+        =>$restaurants, 'restaurant_photos'=>$restaurant_photos, 'features'=>$features, 'finalBudget'=>$finalBudget]);
     }
+
+    // private function filteredBudget($data){
+    //     $filteredData = [];
+    //     $cheapLunch = null;
+    //     $expensiveLunch = null;
+    //     $cheapDinner = null;
+    //     $expensiveDinner = null;
+
+    //     for($i = 0; $i < count($data); $i++)
+    //     {
+    //         for($j = 0; $j < count($data); $j++)
+    //         {
+    //             //lunch timezone
+    //             if($data[$i]->timezonetype == $data[$j]->timezonetype && $data[$i]->timezonetype == 1)
+    //             {   
+    //                 //cheap lunch
+    //                 if($data[$i]->budgetindex < $data[$j]->budgetindex && $cheapLunch == null)
+    //                     $cheapLunch = $data[$i];
+    //                 elseif($cheapLunch != null && $data[$j]->budgetindex < $cheapLunch->budgetindex)
+    //                     $cheapLunch = $data[$j];
+
+    //                 //expensive lunch
+    //                 if($data[$i]->budgetindex > $data[$j]->budgetindex)
+    //                     $expensiveLunch = $data[$i];
+    //             }
+
+    //             //dinner timezone
+    //             if($data[$i]->timezonetype == $data[$j]->timezonetype && $data[$i]->timezonetype == 2)
+    //             {   
+    //                 //cheap dinner
+    //                 if($data[$i]->budgetindex < $data[$j]->budgetindex)
+    //                     $cheapDinner = $data[$i];
+    //                 elseif($cheapDinner != null && $data[$j]->budgetindex < $cheapDinner->budgetindex)
+    //                     $cheapDinner = $data[$j];
+
+    //                 //expensive dinner
+    //                 if($data[$i]->budgetindex > $data[$j]->budgetindex)
+    //                     $expensiveDinner = $data[$i];
+    //             }
+
+    //         }
+    //     }
+
+    //     array_push($filteredData, $cheapLunch, $expensiveLunch, $cheapDinner, $expensiveDinner);
+
+    //     return $filteredData;
+    // }
 
     /**
      * Show the form for creating a new resource.

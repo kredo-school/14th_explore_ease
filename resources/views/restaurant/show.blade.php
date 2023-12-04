@@ -35,10 +35,27 @@
                     </div>
                     <div class="row">
                         <div class="col-auto">
-                            <p class="h4">{{$}}</p>
+                            @foreach($features[$loop->index] as $feature)
+                                <span class="h4 border border-dark me-2 rounded">
+                                    {{$feature->featuretype->name}}
+                                </span>
+                            @endforeach
                         </div>
                         <div class="col text-end" style="font-size: 16px;">
-                            ￥￥￥
+                            Lunch:
+                                @foreach($finalBudget[$loop->index] as $budget)
+                                    @if($budget->timezonetype == 1)
+                                        <span class="border border-dark">{{$budget->budgetvalue}}</span>
+                                    @endif
+                                @endforeach <br>
+                            Dinner:
+                                @foreach($finalBudget[$loop->index] as $budget)                              
+                                    @if($budget->timezonetype == 2)
+                                        <span class="border border-dark">
+                                            {{$budget->budgetvalue}}
+                                        </span>
+                                    @endif
+                                @endforeach
                         </div>
                     </div>
                 </div>
