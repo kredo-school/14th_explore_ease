@@ -16,6 +16,37 @@
     object-fit: cover;
 }
 
-.input-group-append {
-    cursor: pointer;
+
+.text-block {
+    padding: 40px;
+    margin: 0 auto;
+    width: 600px;
+    
+    p {
+      color: #fefefe;
+      display: none;
+      font: 400 28px/38px "Helvtica Neue", "Helvetica", Arial;
+      text-align: center;
+      
+      &:first-of-type {
+        display: block;
+      }
+    }
+    
+    &.text-block--expanded {
+      p {
+        display: block;
+      }
+    }
+    
+    a {
+      border: 1px solid #fefefe;
+      color: #fefefe;
+      display: block;
+      font: 400 20px/60px "Helvtica Neue", "Helvetica", Arial;
+      height: 60px;
+      text-decoration: none;
+      text-align: center;
+      width: 100%;
+    }
   }
