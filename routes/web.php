@@ -26,17 +26,21 @@ Auth::routes();
 // Set Locale Middleware
 Route::group(['middleware'=>'set.locale'], function () {
 
-    // Locale Change Root
+    // Locale Change Route
     Route::get('/setlocale/{locale}', function($locale) {
         session()->put('locale', $locale);
         return redirect()->back();
     })->name('locale');
 
+    // Show index page with 'existprofile' check middleware
     Route::get('/', function () {
         return view('index');
     })->middleware('existprofile');
 
-    // Authenticate exclude root page
+    // Show searched list in index page
+    Route::get('/restaurant/search', [RestaurantController::class, 'search'])->name('restaurant.search');
+
+    // Authenticate exclude index page
     Route::group(['middleware'=>'auth'], function () {
 
         Route::get('/admin/dashboard', function () {
