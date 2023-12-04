@@ -171,15 +171,19 @@ class RestaurantController extends Controller
                 $budget->budgetindex = $i+1;
                 if($i == 0){
                     $budget->budgetvalue = "￥";
+                    $budget->save();
                 } elseif ($i == 1){
                     $budget->budgetvalue = "￥￥";
+                    $budget->save();
                 } elseif ($i == 2){
                     $budget->budgetvalue = "￥￥￥";
+                    $budget->save();
                 } elseif ($i == 3){
                     $budget->budgetvalue = "￥￥￥￥";
+                    $budget->save();
                 }
 
-                $budget->save();
+                
             }
         }
 
