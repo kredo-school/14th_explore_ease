@@ -15,6 +15,7 @@ use App\Models\Seat;
 use App\Models\FeatureType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RestaurantController extends Controller
 {
@@ -326,5 +327,19 @@ class RestaurantController extends Controller
         //
     }
 
+    /** 
+     * Search restaurants and return list.
+     */
+    public function search(Request $request)
+    {
+        $keyword = $request->search;
 
+        $totalList = DB::table('restaurants')
+                ->where('name', 'like', "%{$keyword}%")
+                ->orWhere('description', 'like', "%{$keyword}%")
+                ->orWhere('address', 'like', "%{$keyword}%")
+                ->get();
+
+        return $totalList;
+    }
 }

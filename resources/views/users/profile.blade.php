@@ -60,65 +60,68 @@
                             </div>
                         </div>
 
-                        {{-- Restaurant Profile for Owners --}}
-                        <div class="row mt-5">
-                            <div class="col-6">
-                                <h1>Restaurant Profile</h1>
-                            </div>
-                            <div class="col-6 text-end">
-                               <a href="#" class="btn btn-primary" role="button">Add Restaurant</a> 
-                            {{-- {{ route('restaurant.adding') }}  <- will put instead of #--}}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <table class="table table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th>Restaurant Name</th>
-                                        <th>Registration Date</th>
-                                        <th>Rate</th>
-                                        <th>Area</th>
-                                        <th>Foodtype</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr style="vertical-align: middle">
-                                        <td>Jyojyo-en Tokyo </td>
-                                        <td>
-                                            <p style="line-height:24px;" class="text-limit"></p>
-                                        </td>
-                                        <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                        <td>Tokyo</td>
-                                        <td>Japanese</td>
-                                        <td>
-                                            <a href="#" class="btn btn-primary">Edit</a>
-                                            {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                            <button class="btn btn-secondary">
-                                            Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-    
-                                    <tr style="vertical-align: middle">
-                                        <td>Gyoza-no-osho</td>
-                                        <td>
-                                            <p style="line-height:24px;" class="text-limit"></p>
-                                        </td>
-                                        <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                        <td>Tokyo</td>
-                                        <td>Chinese</td>
-                                        <td>
-                                            <a href="#" class="btn btn-primary">Edit</a>
-                                             {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                            <button class="btn btn-secondary">
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            {{-- Restaurant Profile for Owners --}}
+                            {{-- If user is an owner, the owner can see own restaurant profiles --}}
+                            @if(Auth::user()->profile->usertype_id == 3)
+                                <div class="row mt-5">
+                                    <div class="col-6">
+                                        <h1>Restaurant Profile</h1>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                    <a href="#" class="btn btn-primary" role="button">Add Restaurant</a> 
+                                    {{-- {{ route('restaurant.adding') }}  <- will put instead of #--}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <table class="table table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>Restaurant Name</th>
+                                                <th>Registration Date</th>
+                                                <th>Rate</th>
+                                                <th>Area</th>
+                                                <th>Foodtype</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="vertical-align: middle">
+                                                <td>Jyojyo-en Tokyo </td>
+                                                <td>
+                                                    <p style="line-height:24px;" class="text-limit"></p>
+                                                </td>
+                                                <td>4.5 <i class="fa-solid fa-star"></i></td>
+                                                <td>Tokyo</td>
+                                                <td>Japanese</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-primary">Edit</a>
+                                                    {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                                    <button class="btn btn-secondary">
+                                                    Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+            
+                                            <tr style="vertical-align: middle">
+                                                <td>Gyoza-no-osho</td>
+                                                <td>
+                                                    <p style="line-height:24px;" class="text-limit"></p>
+                                                </td>
+                                                <td>4.5 <i class="fa-solid fa-star"></i></td>
+                                                <td>Tokyo</td>
+                                                <td>Chinese</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-primary">Edit</a>
+                                                    {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                                    <button class="btn btn-secondary">
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endif
                     </div>
                 </div>
             </div>

@@ -32,43 +32,56 @@
                   </div>
                   <div class="row ">
                     <div class="col-6">
-                        <label for="firstname" class="col-md-4 col-form-label">FirstName</label>
+                        <label for="firstname" class="col-md-4 col-form-label fw-bold">FirstName</label>
                         <input type="text" class="form-control" name="firstname" value="{{ $user->profile->first_name }}" autofocus>
+                        @error('firstname')
+                          <div class="error">{{ $message }}</div>
+                        @enderror    
                     </div>
                     <div class="col-6">
-                        <label for="lastname" class="col-md-4 col-form-label">LastName</label>
-                        <input type="text" class="form-control" name="lastname" value="{{ $user->profile->last_name }}" autofocus>
+                      <label for="lastname" class="col-md-4 col-form-label fw-bold">LastName</label>
+                      <input type="text" class="form-control" name="lastname" value="{{ $user->profile->last_name }}" autofocus>
+                      @error('lastname')
+                        <div class="error">{{ $message }}</div>
+                      @enderror 
                     </div>
                   </div>
                   <div class="row ">
                     <div class="col">
-                        <label for="username">Username</label>
+                        <label for="username" class="fw-bold">Username</label>
                         <input type="text" class="form-control" name="username" value="{{ $user->name }}" autofocus>
+                        @error('username')
+                          <div class="error">{{ $message }}</div>
+                        @enderror 
                     </div>
                   </div>
                   <div class="row ">
                     <div class="col">
-                      <label for="email">Email</label>
+                      <label for="email" class="fw-bold">Email</label>
                       <input type="email" class="form-control" name="email" value="{{ $user->email }}" autofocus>
+                      @error('email')
+                        <div class="error">{{ $message }}</div>
+                      @enderror 
                     </div>
                   </div>
                   <div class="row ">
                     <div class="col">
-                      <label for="phone">Phone</label>
+                      <label for="phone" class="fw-bold">Phone</label>
                       <input type="tel" class="form-control" name="phonenumber" value="{{ $user->profile->phone }}" autofocus>
+                      @error('phonenumber')
+                        <div class="error">{{ $message }}</div>
+                      @enderror 
                     </div>
                   </div>
                   <div class="row ">
                     <div class="col">
-                      <label for="username">Nationality</label>
-                      <select class="form-select" id="#">
-                        <option selected>{{ $user->profile->nationarity->name }}</option>
-                          
-                        {{-- @foreach( $user->profile->nationarity->names as $name)
-                            <option value="1">{{ $name }}</option>
-                        @endforeach --}}
+                      <label for="username" class="fw-bold">Nationality</label>
+                      <select class="form-select" name="nationarity" id="#" autofocus>
+                          <option value="{{ $user->profile->nationarity->name }}">{{ $user->profile->nationarity->name }}</option>
                       </select>
-                      {{-- <input type="country" class="form-control" name="nationality" value="{{ $user->profile->nationarity->name }}" autofocus> --}}
+                      @error('nationality')
+                        <div class="error">{{ $message }}</div>
+                      @enderror 
                   </div>
                 </div>
               </div>
