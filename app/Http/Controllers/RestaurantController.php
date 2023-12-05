@@ -27,8 +27,9 @@ class RestaurantController extends Controller
     private $areatype;
     private $feature;
     private $featuretype;
+    private $budget;
 
-    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype){
+    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype, Budget $budget){
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->restaurantphoto = $restaurantphoto;
@@ -36,6 +37,7 @@ class RestaurantController extends Controller
         $this->areatype = $areatype;
         $this->feature = $feature;
         $this->featuretype = $featuretype;
+        $this->budget = $budget;
     }
 
     /** Show restaurant ranking page */
@@ -70,8 +72,28 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        return view('restaurant.show');
+        $restaurants = $this->restaurant->all();
+        $restaurant_photos = [];
+        $features = [];
+        $finalBudget = [];
+
+        foreach($restaurants as $restaurant){
+            $data = $this->restaurantphoto->where('restaurant_id', $restaurant->id)->get();
+            array_push($restaurant_photos, $data);
+
+
+            $fdata = $this->feature->where('restaurant_id', $restaurant->id)->get();
+            array_push($features, $fdata);
+
+            $bdata = $this->budget->where('restaurant_id', $restaurant->id)->get();
+            array_push($finalBudget, $bdata);
+        }
+        
+
+        return view('restaurant.show', ['restaurants'
+        =>$restaurants, 'restaurant_photos'=>$restaurant_photos, 'features'=>$features, 'finalBudget'=>$finalBudget]);
     }
+
 
     /**
      * Show the form for creating a new resource.
