@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bookmark;
 use App\Models\RestaurantPhoto;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,10 +12,12 @@ class BookmarkController extends Controller
 {
     private $bookmark;
     private $restaurant_photo;
+    private $user;
 
-    public function __construct(Bookmark $bookmark, RestaurantPhoto $restaurant_photo){
+    public function __construct(Bookmark $bookmark, RestaurantPhoto $restaurant_photo, User $user){
         $this->bookmark = $bookmark;
         $this->restaurant_photo = $restaurant_photo;
+        $this->user = $user;
     }
 
 
@@ -58,8 +61,9 @@ class BookmarkController extends Controller
                 array_push($restaurant_photos, $data);
         }
 
+        $user = $this->user->where('id', Auth::user()->id)->get();
 
-        return view('users.bookmark', ['bookmarks'=>$bookmarks, 'restaurant_photos'=>$restaurant_photos]);
+        return view('users.bookmark', ['bookmarks'=>$bookmarks, 'restaurant_photos'=>$restaurant_photos, 'user'=>$user]);
     }
 
 
