@@ -89,62 +89,11 @@ class RestaurantController extends Controller
             array_push($finalBudget, $bdata);
         }
         
-        // foreach($budget as $data){
-        //     $filteredData = $this->filteredBudget($data);
-        //     array_push($finalBudget, $filteredData);
-        // }        
-
 
         return view('restaurant.show', ['restaurants'
         =>$restaurants, 'restaurant_photos'=>$restaurant_photos, 'features'=>$features, 'finalBudget'=>$finalBudget]);
     }
 
-    // private function filteredBudget($data){
-    //     $filteredData = [];
-    //     $cheapLunch = null;
-    //     $expensiveLunch = null;
-    //     $cheapDinner = null;
-    //     $expensiveDinner = null;
-
-    //     for($i = 0; $i < count($data); $i++)
-    //     {
-    //         for($j = 0; $j < count($data); $j++)
-    //         {
-    //             //lunch timezone
-    //             if($data[$i]->timezonetype == $data[$j]->timezonetype && $data[$i]->timezonetype == 1)
-    //             {   
-    //                 //cheap lunch
-    //                 if($data[$i]->budgetindex < $data[$j]->budgetindex && $cheapLunch == null)
-    //                     $cheapLunch = $data[$i];
-    //                 elseif($cheapLunch != null && $data[$j]->budgetindex < $cheapLunch->budgetindex)
-    //                     $cheapLunch = $data[$j];
-
-    //                 //expensive lunch
-    //                 if($data[$i]->budgetindex > $data[$j]->budgetindex)
-    //                     $expensiveLunch = $data[$i];
-    //             }
-
-    //             //dinner timezone
-    //             if($data[$i]->timezonetype == $data[$j]->timezonetype && $data[$i]->timezonetype == 2)
-    //             {   
-    //                 //cheap dinner
-    //                 if($data[$i]->budgetindex < $data[$j]->budgetindex)
-    //                     $cheapDinner = $data[$i];
-    //                 elseif($cheapDinner != null && $data[$j]->budgetindex < $cheapDinner->budgetindex)
-    //                     $cheapDinner = $data[$j];
-
-    //                 //expensive dinner
-    //                 if($data[$i]->budgetindex > $data[$j]->budgetindex)
-    //                     $expensiveDinner = $data[$i];
-    //             }
-
-    //         }
-    //     }
-
-    //     array_push($filteredData, $cheapLunch, $expensiveLunch, $cheapDinner, $expensiveDinner);
-
-    //     return $filteredData;
-    // }
 
     /**
      * Show the form for creating a new resource.
