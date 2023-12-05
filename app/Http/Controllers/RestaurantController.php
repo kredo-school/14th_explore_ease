@@ -13,6 +13,8 @@ use App\Models\RestaurantPhoto;
 use App\Models\Review;
 use App\Models\Seat;
 use App\Models\FeatureType;
+use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,8 +29,11 @@ class RestaurantController extends Controller
     private $feature;
     private $featuretype;
     private $budget;
+    private $user;
+    private $profile;
+    private $openHour;
 
-    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype, Budget $budget){
+    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype, Budget $budget, User $user, Profile $profile, OpenHour $openHour,){
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->restaurantphoto = $restaurantphoto;
@@ -37,6 +42,9 @@ class RestaurantController extends Controller
         $this->feature = $feature;
         $this->featuretype = $featuretype;
         $this->budget = $budget;
+        $this->user = $user;
+        $this->profile = $profile;
+        $this->openHour = $openHour;
     }
 
     /** Show restaurant ranking page */
@@ -52,6 +60,8 @@ class RestaurantController extends Controller
         $review = Review::where('restaurant_id', $restaurant->id)->latest()->paginate(10);
         $foodtype = $this->foodtype->findOrFail($restaurant->foodtype->id);
         $areatype = $this->areatype->findOrFail($restaurant->areatype->id);
+        $user = $this->user->findOrFail(Auth::user()->id);
+        $profile = $user->profile;
 
         /** FeatureTypes via Features table */
         $restaurantFeatures = $restaurant->features; // Gets all the features of the restaurant
@@ -78,13 +88,6 @@ class RestaurantController extends Controller
                     $LunchValues[] = $budgetItemLunch->budgetvalue;
                 }
 
-            //     $BudgetValueLunch = [];
-            //         foreach($LunchValues as $LunchValue){
-            //             $BudgetValueLunch[] = strlen($LunchValue);
-            //         }
-            // $maxLunchValue = max($BudgetValueLunch);
-            // $minLunchValue = min($BudgetValueLunch);
-
             /** Dinner */
             $budgetDinner = Budget::where('restaurant_id', $restaurant->id)->where('timezonetype', 1)->get();
                 $DinnerValues = [];
@@ -94,8 +97,32 @@ class RestaurantController extends Controller
 
 
         /** Opening and Closing hours*/
-        $openhours = 
+            // Monday
+            $allOpenHours1 = OpenHour::where('restaurant_id', $restaurant->id)->where('daytype', 1)->get();
+            $openHours1 = [];
+            foreach ($allOpenHours1 as $openHour1){
+                $openHours1[] = $openHour1;
+            }
+            // Tuesday
+            $allOpenHours2 = OpenHour::where('restaurant_id', $restaurant->id)->where('daytype', 2)->get();
+            $openHours2 = [];
+            foreach ($allOpenHours2 as $openHour2){
+                $openHours2[] = $openHour2;
+            }
 
+
+        /** Call $averageAllStars from ReviewController */
+        $reviewController = new ReviewController(
+            new Restaurant(),
+            new Review(),
+            new User(),
+            new Profile(),
+        );
+        $reviewData = $reviewController->ShowRestaurantReview($id)->getData();
+            $averageAllStars = [];
+            foreach ($reviewData as $averageAllStar) {
+                $averageAllStars[] = $averageAllStar;
+            }
 
         return view('restaurant.detail',
         [
@@ -107,9 +134,18 @@ class RestaurantController extends Controller
             'featureTypes' => $featureTypes,
             'sumTimezones' => $sumTimezones,
             'LunchValues' => $LunchValues,
-            'DinnerValues' => $DinnerValues
+            'DinnerValues' => $DinnerValues,
+            'averageAllStar' => $averageAllStar,
+            'user' => $user,
+            'profile' => $profile,
+            'openHours1' => $openHours1,
+            'openHours2' => $openHours2,
+            // 'openHours3' => $openHours3,
+            // 'openHours4' => $openHours4,
+            // 'openHours5' => $openHours5,
+            // 'openHours6' => $openHours6,
+            // 'openHours0' => $openHours0,
         ]);
-
     }
 
     /**

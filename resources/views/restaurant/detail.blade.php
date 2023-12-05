@@ -33,10 +33,9 @@
                     </div>
 
                     <!-- Rating -->
-                    <!-- to be update: create route&function to review!!!! -->
                     <div class="col-2 text-center">
                         <a href="" class="text-decoration-none text-dark h5">
-                            4.5 <i class="fa-solid fa-star"></i>
+                            {{ $averageAllStar }} <i class="fa-solid fa-star"></i>
                         </a>
                     </div>
 
@@ -55,19 +54,20 @@
                     </div>
                 </div>
 
-                <!-- Address -->
+                <!-- Postal Address -->
                 <p>{{ $restaurant->address }}</p>
 
-                <!-- Price -->
-                <!-- to be discussed & update: need to change budgets table on database?-->
-                <h5 class="mt-5">Lunch:&ensp;
+                <!-- Budget -->
+                <h5 class="mt-4">
+                    <span style="display:inline-block; width:60px;">Lunch :</span>
                     @foreach ($LunchValues as $LunchValue)
-                    {{ $LunchValue }}&emsp;
+                    <div class="border border-black rounded-1 px-1" style="display:inline-block;">{!! str_replace('\\', '¥', e($LunchValue)) !!}</div>&nbsp;
                     @endforeach
                 </h5>
-                <h5 class="">Dinner:&ensp;
+                <h5>
+                    <span style="display:inline-block; width:60px;">Dinner:</span>
                     @foreach ($DinnerValues as $DinnerValue)
-                    {{ $DinnerValue }}&emsp;
+                    <div class="border border-black rounded-1 px-1" style="display:inline-block;">{!! str_replace('\\', '¥', e($DinnerValue)) !!}</div>&nbsp;
                     @endforeach
                 </h5>
 
@@ -111,11 +111,27 @@
                 <table style="width: 25%;" class="mt-3">
                     <tr>
                         <td>Mon</td>
-                        <td>11:00 - 20:00</td>
+                        <td>
+                        @foreach ($openHours1 as $openHour1)
+                            @if ($openHour1->openinghours)
+                            {{ date('H:i', strtotime($openHour1->openinghours)) }} ~ {{$openHour1->closinghours }}
+                            @else
+                                closed
+                            @endif
+                        @endforeach
+                        </td>
                     </tr>
                     <tr>
                         <td>Tue</td>
-                        <td>11:00 - 20:00</td>
+                        <td>
+                            @foreach ($openHours2 as $openHour2)
+                                @if ($openHour2->openinghours)
+                                    {{ $openHour2->openinghours }} - {{$openHour2->closinghours }}
+                                @else
+                                    closed
+                                @endif
+                            @endforeach
+                            </td>
                     </tr><tr>
                         <td>Wed</td>
                         <td>closed</td>
@@ -247,10 +263,18 @@
                     <table class="table table-borderless">
                         @foreach ($review as $eachReview)
                         <tr>
-                            <td scope="col" style="width: 10%"><i class="fa-solid fa-circle-user h4"></i></td>
-                            <td scope="col" style="width: 10%" >
+                            <td scope="col" style="width: 10%">
+                                    @if(Auth::user()->profile->avatar)
+                                    <a href="{{ route('profile.show', Auth::user()->id) }}" >
+                                        <img src="{{ $profile->avatar }}" class="img-thumbnail rounded-circle w-50">
+                                    </a>
+                                    @else
+                                        <i class="fa-solid fa-circle-user text-secondary fs-3"></i>
+                                    @endif
+                            </td>
+                            <td scope="col" style="width: 10%">
                                 <div class="text-decoration-none text-dark h5">
-                                {{ $eachReview->star }} <i class="fa-solid fa-star"></i>
+                                    {{ $eachReview->star }} <i class="fa-solid fa-star"></i>
                                 </div>
                             </td>
                             <td scope="col" style="width: 60%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 0;">{{ $eachReview->comment }} </td>
