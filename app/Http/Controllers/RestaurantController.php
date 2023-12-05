@@ -17,6 +17,7 @@ use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RestaurantController extends Controller
 {
@@ -153,8 +154,28 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        return view('restaurant.show');
+        $restaurants = $this->restaurant->all();
+        $restaurant_photos = [];
+        $features = [];
+        $finalBudget = [];
+
+        foreach($restaurants as $restaurant){
+            $data = $this->restaurantphoto->where('restaurant_id', $restaurant->id)->get();
+            array_push($restaurant_photos, $data);
+
+
+            $fdata = $this->feature->where('restaurant_id', $restaurant->id)->get();
+            array_push($features, $fdata);
+
+            $bdata = $this->budget->where('restaurant_id', $restaurant->id)->get();
+            array_push($finalBudget, $bdata);
+        }
+
+
+        return view('restaurant.show', ['restaurants'
+        =>$restaurants, 'restaurant_photos'=>$restaurant_photos, 'features'=>$features, 'finalBudget'=>$finalBudget]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -337,5 +358,19 @@ class RestaurantController extends Controller
         //
     }
 
+    /**
+     * Search restaurants and return list.
+     */
+    public function search(Request $request)
+    {
+        $keyword = $request->search;
 
+        $totalList = DB::table('restaurants')
+                ->where('name', 'like', "%{$keyword}%")
+                ->orWhere('description', 'like', "%{$keyword}%")
+                ->orWhere('address', 'like', "%{$keyword}%")
+                ->get();
+
+        return $totalList;
+    }
 }

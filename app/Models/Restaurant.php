@@ -11,15 +11,16 @@ class Restaurant extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'id',
         'user_id',
         'name',
         'description',
+        'message',
         'menu',
         'areatype_id',
         'address',
         'latitude',
         'longitude',
-        'seat',
         'foodtype_id',
     ];
 
