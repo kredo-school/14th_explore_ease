@@ -20,8 +20,8 @@
             {{-- Check Box  --}}
             <div class="form-check mb-4">
               <form action="#" method="post">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                <label class="form-check-label" for="flexCheckChecked"> 
+                <input class="form-check-input" type="checkbox" id="with-consent">
+                <label class="form-check-label" for="with-consent"> 
                 I confirm I've read the Message from Venue above
                 </label>
               </form>
