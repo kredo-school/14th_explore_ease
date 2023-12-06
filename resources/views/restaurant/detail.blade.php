@@ -40,7 +40,6 @@
                     </div>
 
                     <!-- Bookmark -->
-                    <!-- to be update: create route&function to bookmark !!! -->
                     <div class="col-2">
                         @if($restaurant->is_bookmarked())
                             <form action="{{ route('bookmark.destroy', $restaurant->id) }}" method="post">
@@ -120,7 +119,6 @@
                 </div>
 
                 <!-- Open hours -->
-                <!-- to be update: create route&function to openhors !!! -->
                 <table style="width: 25%;" class="mt-3">
                     <tr>
                         <td>Mon</td>
@@ -318,7 +316,7 @@
                         <tr>
                             <td scope="col" style="width: 10%">
                                     @if(Auth::user()->profile->avatar)
-                                    <a href="{{ route('profile.show', Auth::user()->id) }}" >
+                                    <a href="{{ route('profile.show', Auth::user()->id) }}" style="margin-top: ">
                                         <img src="{{ $profile->avatar }}" class="img-thumbnail rounded-circle w-50">
                                     </a>
                                     @else
@@ -326,12 +324,16 @@
                                     @endif
                             </td>
                             <td scope="col" style="width: 10%">
-                                <div class="text-decoration-none text-dark h5">
+                                <div class="text-decoration-none text-dark h5" style="margin-top:4px;">
                                     {{ $eachReview->star }} <i class="fa-solid fa-star"></i>
                                 </div>
                             </td>
-                            <td scope="col" style="width: 60%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 0;">{{ $eachReview->comment }} </td>
-                            <td scope="col" style="width: 20%" class="text-end">{{ $eachReview->created_at }}</td>
+                            <td scope="col" style="width: 60%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 0;">
+                                <span class="d-flex align-items-center">{{ $eachReview->comment }}</span>
+                            </td>
+                            <td scope="col" style="width: 20%" class="text-end">
+                                <span class="d-flex align-items-center">{{ $eachReview->created_at }}</span>
+                            </td>
                         </tr>
                         @endforeach
                     </table>
