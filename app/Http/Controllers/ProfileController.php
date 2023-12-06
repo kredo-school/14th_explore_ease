@@ -56,11 +56,12 @@ class ProfileController extends Controller
     {
         
     }
-
+    // Show profile page
     public function show($id)
     {   
         $user = $this->user->findOrFail($id);
-        return view('users.profile')->with('user', $user);
+        $nationalities = $this->nationarity->get();
+        return view('users.profile')->with('user', $user)->with('nationalities',$nationalities);
     }
 
     /**
@@ -74,6 +75,7 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    //  Update profile (with modal)
     public function update(Request $request)
     {
         $request->validate([
@@ -92,6 +94,7 @@ class ProfileController extends Controller
         $user->profile->phone = $request->phonenumber;
         $user->name = $request->username;
         $user->email = $request->email;
+        $user->profile->nationarity_id = $request->nationarity;
         if($request->image){
             $user->profile->avatar = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
         }
