@@ -55,7 +55,7 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('admin/all_reviews', function () {
             return view('admin/all_reviews');
         });
-    
+
         Route::get('/admin/dashboard', function () {
             return view('/admin/dashboard');
         });
@@ -120,6 +120,13 @@ Route::group(['middleware'=>'set.locale'], function () {
         #Profile(Kazuya)
         Route::get('/profile/{id}/show', [ProfileController::class, 'show'])->name('profile.show');
         Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+        // Bookmark Controller
+        Route::post('/bookmark/{id}/store',[BookmarkController::class, 'store'])->name('bookmark.store');
+        Route::delete('/bookmark/{id}/destroy',[BookmarkController::class, 'destroy'])->name('bookmark.destroy');
+
     });
+
+
 
 });
