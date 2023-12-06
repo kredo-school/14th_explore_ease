@@ -76,8 +76,15 @@
                   <div class="row ">
                     <div class="col">
                       <label for="username" class="fw-bold">Nationality</label>
-                      <select class="form-select" name="nationality" id="#" autofocus>
-                          <option value="{{ $user->profile->nationality->name }}">{{ $user->profile->nationality->name }}</option>
+                      <select class="form-select" name="nationality" id="nationality" autofocus>
+                          @foreach( $nationalities as $nationality)
+                            @if($user->profile->nationality->id == $nationality->id)
+                              <option value={{$nationality->id}} selected>{{$nationality->name}}</option>
+                            @else
+                              <option value={{$nationality->id}}>{{$nationality->name}}</option>
+                            @endif 
+
+                          @endforeach
                       </select>
                       @error('nationality')
                         <div class="error">{{ $message }}</div>

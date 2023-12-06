@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/restaurant.js',
                 'resources/css/style.css',
+                
                 'resources/js/bootstrap.js',
                 'resources/js/dashboard_graph.js',
                 'resources/js/mapForDetail.js',
