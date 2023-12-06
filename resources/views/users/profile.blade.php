@@ -56,7 +56,7 @@
                         <div class="row ">
                             <div class="col">
                                 <label for="username">Nationality</label>
-                                <input type="country" class="form-control" name="nationality" value="{{ $user->profile->nationarity->name }}" disabled>
+                                <input type="country" class="form-control" name="nationality" value="{{ $user->profile->nationality->name }}" disabled>
                             </div>
                         </div>
 

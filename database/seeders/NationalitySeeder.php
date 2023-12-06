@@ -4,15 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Nationarity;
+use App\Models\Nationality;
 
-class NationaritySeeder extends Seeder
+class NationalitySeeder extends Seeder
 {
-    private $nationarity;
+    private $nationality;
 
-    public function __construct(Nationarity $nationarity)
+    public function __construct(Nationality $nationality)
     {
-        $this->nationarity = $nationarity;
+        $this->nationality = $nationality;
     }
 
     /**
@@ -20,7 +20,7 @@ class NationaritySeeder extends Seeder
      */
     public function run(): void
     {
-        $nationarities = [
+        $nationalities = [
             ['name' => 'Iceland', 'description' => 'アイスランド共和国', 'countrycode' => 'IS'],
             ['name' => 'Ireland', 'description' => 'アイルランド', 'countrycode' => 'IE'],
             ['name' => 'Azerbaijan', 'description' => 'アゼルバイジャン共和国', 'countrycode' => 'AZ'],
@@ -234,6 +234,6 @@ class NationaritySeeder extends Seeder
             ['name' => 'Lebanon', 'description' => 'レバノン共和国', 'countrycode' => 'LB'],
             ['name' => 'Russian Federation', 'description' => 'ロシア連邦', 'countrycode' => 'RU'],
         ];
-        $this->nationarity->insert($nationarities);
+        $this->nationality->insert($nationalities);
     }
 }
