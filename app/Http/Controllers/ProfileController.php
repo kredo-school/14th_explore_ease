@@ -60,7 +60,7 @@ class ProfileController extends Controller
     public function show($id)
     {   
         $user = $this->user->findOrFail($id);
-        $nationalities = $this->nationarity->get();
+        $nationalities = $this->nationality->get();
         return view('users.profile')->with('user', $user)->with('nationalities',$nationalities);
     }
 
@@ -94,7 +94,7 @@ class ProfileController extends Controller
         $user->profile->phone = $request->phonenumber;
         $user->name = $request->username;
         $user->email = $request->email;
-        $user->profile->nationarity_id = $request->nationarity;
+        $user->profile->nationality_id = $request->nationality;
         if($request->image){
             $user->profile->avatar = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
         }
