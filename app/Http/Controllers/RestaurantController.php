@@ -13,6 +13,8 @@ use App\Models\RestaurantPhoto;
 use App\Models\Review;
 use App\Models\Seat;
 use App\Models\FeatureType;
+use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -28,8 +30,11 @@ class RestaurantController extends Controller
     private $feature;
     private $featuretype;
     private $budget;
+    private $user;
+    private $profile;
+    private $openHour;
 
-    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype, Budget $budget){
+    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype, Budget $budget, User $user, Profile $profile, OpenHour $openHour,){
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->restaurantphoto = $restaurantphoto;
@@ -38,6 +43,9 @@ class RestaurantController extends Controller
         $this->feature = $feature;
         $this->featuretype = $featuretype;
         $this->budget = $budget;
+        $this->user = $user;
+        $this->profile = $profile;
+        $this->openHour = $openHour;
     }
 
     /** Show restaurant ranking page */
@@ -50,21 +58,95 @@ class RestaurantController extends Controller
         $restaurant = $this->restaurant->findOrFail($id);
         $restaurantphoto = $restaurant->restaurant_photos;
                          //↑restaurant Model.    //↑function on restaurant Model.
+        $review = Review::where('restaurant_id', $restaurant->id)->latest()->paginate(10);
         $foodtype = $this->foodtype->findOrFail($restaurant->foodtype->id);
         $areatype = $this->areatype->findOrFail($restaurant->areatype->id);
+        $user = $this->user->findOrFail(Auth::user()->id);
+        $profile = $user->profile;
 
-        // featuretype
-        $feature = $restaurant->features;
-        // dd($feature);
+        /** FeatureTypes via Features table */
+        $restaurantFeatures = $restaurant->features; // Gets all the features of the restaurant
+            $featureTypes = []; // Declaration of the featureTypes that we'll populate below;
+            foreach($restaurantFeatures as $feature){
+            // For each feature of the restaurant, we get the featuretype name and add it to the array
+                $featureTypes[] = $feature->featuretype->name;
+            }
+
+        /** Timezone from Budget table */
+        $budgets = $restaurant->budgets;
+            $Timezones = [];
+            foreach ($budgets as $budgetItem) {
+                $Timezones[] = $budgetItem->timezonetype;
+            }
+        $timezonesUnique = array_unique($Timezones);
+        $sumTimezones = array_sum($timezonesUnique);
+
+        /** Bugetvalue from Budget table */
+            /** Lunch */
+            $budgetLunch = Budget::where('restaurant_id', $restaurant->id)->where('timezonetype', 1)->get();
+                $LunchValues = [];
+                foreach ($budgetLunch as $budgetItemLunch) {
+                    $LunchValues[] = $budgetItemLunch->budgetvalue;
+                }
+
+            /** Dinner */
+            $budgetDinner = Budget::where('restaurant_id', $restaurant->id)->where('timezonetype', 1)->get();
+                $DinnerValues = [];
+                foreach ($budgetDinner as $budgetItemDinner) {
+                    $DinnerValues[] = $budgetItemDinner->budgetvalue;
+                }
+
+
+        /** Opening and Closing hours*/
+            // Monday
+            $allOpenHours1 = OpenHour::where('restaurant_id', $restaurant->id)->where('daytype', 1)->get();
+            $openHours1 = [];
+            foreach ($allOpenHours1 as $openHour1){
+                $openHours1[] = $openHour1;
+            }
+            // Tuesday
+            $allOpenHours2 = OpenHour::where('restaurant_id', $restaurant->id)->where('daytype', 2)->get();
+            $openHours2 = [];
+            foreach ($allOpenHours2 as $openHour2){
+                $openHours2[] = $openHour2;
+            }
+
+
+        /** Call $averageAllStars from ReviewController */
+        $reviewController = new ReviewController(
+            new Restaurant(),
+            new Review(),
+            new User(),
+            new Profile(),
+        );
+        $reviewData = $reviewController->ShowRestaurantReview($id)->getData();
+            $averageAllStars = [];
+            foreach ($reviewData as $averageAllStar) {
+                $averageAllStars[] = $averageAllStar;
+            }
 
         return view('restaurant.detail',
         [
             'restaurant' => $restaurant,
             'restaurantphoto' => $restaurantphoto,
+            'review' => $review,
             'foodtype' => $foodtype,
-            'areatype' => $areatype
+            'areatype' => $areatype,
+            'featureTypes' => $featureTypes,
+            'sumTimezones' => $sumTimezones,
+            'LunchValues' => $LunchValues,
+            'DinnerValues' => $DinnerValues,
+            'averageAllStar' => $averageAllStar,
+            'user' => $user,
+            'profile' => $profile,
+            'openHours1' => $openHours1,
+            'openHours2' => $openHours2,
+            // 'openHours3' => $openHours3,
+            // 'openHours4' => $openHours4,
+            // 'openHours5' => $openHours5,
+            // 'openHours6' => $openHours6,
+            // 'openHours0' => $openHours0,
         ]);
-
     }
 
     /**
@@ -88,7 +170,7 @@ class RestaurantController extends Controller
             $bdata = $this->budget->where('restaurant_id', $restaurant->id)->get();
             array_push($finalBudget, $bdata);
         }
-        
+
 
         return view('restaurant.show', ['restaurants'
         =>$restaurants, 'restaurant_photos'=>$restaurant_photos, 'features'=>$features, 'finalBudget'=>$finalBudget]);
@@ -276,7 +358,7 @@ class RestaurantController extends Controller
         //
     }
 
-    /** 
+    /**
      * Search restaurants and return list.
      */
     public function search(Request $request)
