@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Restaurant extends Model
 {
@@ -64,6 +65,13 @@ class Restaurant extends Model
     public function bookmarks()
     {
         return $this->hasMany(Bookmark::class);
+    }
+
+    /** Returns TRUE if the Auth user already Bookmarked the restaurant */
+    public function is_bookmarked()
+    {
+        return $this->bookmarks()->where('user_id', Auth::user()->id)->exists();
+        // Will retrun TRUE
     }
 
     /** to get one of the seat of a restaurant */

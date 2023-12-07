@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Nationarity;
+use App\Models\Nationality;
 use Illuminate\Http\Request;
 
-class NationarityController extends Controller
+class NationalityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class NationarityController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Nationarity $nationarity)
+    public function show(Nationality $nationality)
     {
         //
     }
@@ -42,7 +42,7 @@ class NationarityController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Nationarity $nationarity)
+    public function edit(Nationality $nationality)
     {
         //
     }
@@ -50,7 +50,7 @@ class NationarityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Nationarity $nationarity)
+    public function update(Request $request, Nationality $nationality)
     {
         //
     }
@@ -58,7 +58,7 @@ class NationarityController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Nationarity $nationarity)
+    public function destroy(Nationality $nationality)
     {
         //
     }
