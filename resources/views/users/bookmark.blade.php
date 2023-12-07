@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="rcards">
-                if(!empty($bookmarks)){
+                @if(!empty($bookmarks))
                     @foreach($bookmarks as $bookmark)
                         <div class="card mb-2" style="width: 265px; height: auto;">
                             <div class="card-header p-0">
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                     @endforeach
-                }
+                
             </div>
         </div>
     </div>
