@@ -24,10 +24,10 @@ class ReservationController extends Controller
     private $course;
     private $all_courses;
 
-    public function __construct(Restaurant $restaurant, Restaurant $massage, Reservation $reservation, RestaurantPhoto $restaurantphoto, Course $course)
+    public function __construct(Restaurant $restaurant, Restaurant $message, Reservation $reservation, RestaurantPhoto $restaurantphoto, Course $course)
     {
         $this->restaurant = $restaurant;
-        $this->massage = $massage;
+        $this->message = $message;
         $this->reservation = $reservation;
         $this->restaurantphoto = $restaurantphoto;
         $this->course = $course;
@@ -40,10 +40,9 @@ class ReservationController extends Controller
         $restaurant = $this->restaurant->findOrFail($id);
         $restaurantphoto =  $this->restaurantphoto->findOrFail($restaurant->id);
         $course =  $this->course->findOrFail($id);
-        $all_courses = $restaurant->courses();
-        /*dd($all_courses);
-        $all_courses =  $this->course->findOrFail($course->id); 11/25 cant retreave only restaurant_id #4 
-        dd($all_courses);*/
+        $all_courses = $restaurant->courses->all();
+        //$all_courses = $restaurant->courses();
+        //dd($all_courses);
 
         return view('restaurant.reservation.show',
          ['restaurant'=> $restaurant, 'restaurantphoto' => $restaurantphoto,
@@ -53,9 +52,8 @@ class ReservationController extends Controller
     public function show_message($id)
     {
         $restaurant = $this->restaurant->findOrFail($id);
-        $massage = $this->restaurant->findOrFail($restaurant->massage);
-        dd($massage);
-        return view('restaurant.reservation.show')->with('$massage');
+        $massage = $this->restaurant->findOrFail($restaurant->message);
+        return view('restaurant.reservation.show')->with('$message');
     }
     
     public function index()
@@ -70,7 +68,6 @@ class ReservationController extends Controller
     {
         $all_courses = $this->course->findOrFail($id);
         return view('restaurant.reservation.show')->with('all_course', $all_courses);
-        dd($all_courses);
     }
 
     /**
@@ -79,16 +76,20 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         # 1. Validate all form data
-        $data = $request->validate([
-            'reservation_ppl' => 'required',
-            'reservation_start_date' => 'required',
-            'reservation_start_time' => 'required'
+        $request->validate([
+            'number_of_people' => 'required',
+            'datepicker' => 'required',
+            'reservation_start_time' => 'required',
+            
+
         ]);
-        dd($request);
 
         # 2. Save the post
-        $this->booking_data->user_id        = Auth::user()->id;
-        //$this->booking_data->description   = $request->description;
+        $this->reservation->user_id        = Auth::user()->id;
+
+        $this->reservation->number_of_people         = $request->number_of_people;
+        $this->reservation->reservation_start_date   = $request->datepicker;
+        $this->reservation->reservation_start_time   = $request->reservation_start_time;
         $this->booking_data->save();
 
         #3. go back to the homepage
@@ -123,5 +124,14 @@ class ReservationController extends Controller
     public function admin_show(Reservation $reservation)
     {
         return view('admin.dashboard_all_reservations');
+    }
+
+    public function rules()
+    {
+        return [
+            'reservation_ppl' => ['required'],
+            'reservation_start_date' => ['required'],
+            'reservation_start_time' => ['required'],
+        ];
     }
 }
