@@ -92,7 +92,6 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
 
 
-        Route::get('/profile/bookmark', [ProfileController::class, 'bookmark'])->name('profile.bookmark');
 
         // Restaurant Controller
         // ranking
