@@ -40,11 +40,23 @@
                     </div>
 
                     <!-- Bookmark -->
-                    <!-- to be update: create route&function to bookmark !!! -->
                     <div class="col-2">
-                        <a href="" class="text-decoration-none text-black h5">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
+                        @if($restaurant->is_bookmarked())
+                            <form action="{{ route('bookmark.destroy', $restaurant->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                                <button type="submit" class="btn p-0">
+                                    <i class="fa-solid fa-bookmark fa-lg"></i>
+                                </button>
+                            </form>
+                        @else
+                            <form action="{{ route('bookmark.store', $restaurant->id) }}" method="post">
+                            @csrf
+                                <button type="submit" class="btn p-0">
+                                    <i class="fa-regular fa-bookmark text-black fa-lg"></i>
+                                </button>
+                            </form>
+                        @endif
                     </div>
 
                     <!-- Restaurant edit page -->
@@ -107,14 +119,13 @@
                 </div>
 
                 <!-- Open hours -->
-                <!-- to be update: create route&function to openhors !!! -->
                 <table style="width: 25%;" class="mt-3">
                     <tr>
                         <td>Mon</td>
                         <td>
                         @foreach ($openHours1 as $openHour1)
                             @if ($openHour1->openinghours)
-                            {{ date('H:i', strtotime($openHour1->openinghours)) }} ~ {{$openHour1->closinghours }}
+                            {{ substr($openHour1->openinghours, 0, 5) }} ~ {{ substr($openHour1->closinghours, 0, 5) }}
                             @else
                                 closed
                             @endif
@@ -126,31 +137,71 @@
                         <td>
                             @foreach ($openHours2 as $openHour2)
                                 @if ($openHour2->openinghours)
-                                    {{ $openHour2->openinghours }} - {{$openHour2->closinghours }}
+                                   {{ substr($openHour2->openinghours, 0, 5) }} -  {{ substr($openHour2->closinghours, 0, 5) }}
                                 @else
                                     closed
                                 @endif
                             @endforeach
-                            </td>
+                        </td>
                     </tr><tr>
                         <td>Wed</td>
-                        <td>closed</td>
+                        <td>
+                            @foreach ($openHours3 as $openHour3)
+                                @if ($openHour3->openinghours)
+                                   {{ substr($openHour3->openinghours, 0, 5) }} -  {{ substr($openHour3->closinghours, 0, 5) }}
+                                @else
+                                    closed
+                                @endif
+                            @endforeach
+                        </td>
                     </tr>
                     <tr>
                         <td>Thr</td>
-                        <td>11:00 - 20:00</td>
+                        <td>
+                            @foreach ($openHours4 as $openHour4)
+                                @if ($openHour4->openinghours)
+                                   {{ substr($openHour4->openinghours, 0, 5) }} -  {{ substr($openHour4->closinghours, 0, 5) }}
+                                @else
+                                    closed
+                                @endif
+                            @endforeach
+                        </td>
                     </tr>
                     <tr>
                         <td>Fri</td>
-                        <td>11:00 - 20:00</td>
+                        <td>
+                            @foreach ($openHours5 as $openHour5)
+                                @if ($openHour5->openinghours)
+                                   {{ substr($openHour5->openinghours, 0, 5) }} -  {{ substr($openHour5->closinghours, 0, 5) }}
+                                @else
+                                    closed
+                                @endif
+                            @endforeach
+                        </td>
                     </tr>
                     <tr>
                         <td class="text-primary">Sat</td>
-                        <td>11:00 - 20:00</td>
+                        <td>
+                            @foreach ($openHours6 as $openHour6)
+                                @if ($openHour6->openinghours)
+                                   {{ substr($openHour6->openinghours, 0, 5) }} -  {{ substr($openHour6->closinghours, 0, 5) }}
+                                @else
+                                    closed
+                                @endif
+                            @endforeach
+                        </td>
                     </tr>
                     <tr>
                         <td class="text-danger">Mon</td>
-                        <td>11:00 - 20:00</td>
+                        <td>
+                            @foreach ($openHours0 as $openHour0)
+                                @if ($openHour0->openinghours)
+                                   {{ substr($openHour0->openinghours, 0, 5) }} -  {{ substr($openHour0->closinghours, 0, 5) }}
+                                @else
+                                    closed
+                                @endif
+                            @endforeach
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -265,7 +316,7 @@
                         <tr>
                             <td scope="col" style="width: 10%">
                                     @if(Auth::user()->profile->avatar)
-                                    <a href="{{ route('profile.show', Auth::user()->id) }}" >
+                                    <a href="{{ route('profile.show', Auth::user()->id) }}" style="margin-top: ">
                                         <img src="{{ $profile->avatar }}" class="img-thumbnail rounded-circle w-50">
                                     </a>
                                     @else
@@ -273,12 +324,16 @@
                                     @endif
                             </td>
                             <td scope="col" style="width: 10%">
-                                <div class="text-decoration-none text-dark h5">
+                                <div class="text-decoration-none text-dark h5" style="margin-top:4px;">
                                     {{ $eachReview->star }} <i class="fa-solid fa-star"></i>
                                 </div>
                             </td>
-                            <td scope="col" style="width: 60%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 0;">{{ $eachReview->comment }} </td>
-                            <td scope="col" style="width: 20%" class="text-end">{{ $eachReview->created_at }}</td>
+                            <td scope="col" style="width: 60%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 0;">
+                                <span class="d-flex align-items-center">{{ $eachReview->comment }}</span>
+                            </td>
+                            <td scope="col" style="width: 20%" class="text-end">
+                                <span class="d-flex align-items-center">{{ $eachReview->created_at }}</span>
+                            </td>
                         </tr>
                         @endforeach
                     </table>

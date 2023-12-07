@@ -110,7 +110,36 @@ class RestaurantController extends Controller
             foreach ($allOpenHours2 as $openHour2){
                 $openHours2[] = $openHour2;
             }
-
+            // Wednesday
+            $allOpenHours3 = OpenHour::where('restaurant_id', $restaurant->id)->where('daytype', 3)->get();
+            $openHours3 = [];
+            foreach ($allOpenHours3 as $openHour3){
+                $openHours3[] = $openHour3;
+            }
+            // Thursday
+            $allOpenHours4 = OpenHour::where('restaurant_id', $restaurant->id)->where('daytype', 4)->get();
+            $openHours4 = [];
+            foreach ($allOpenHours4 as $openHour4){
+                $openHours4[] = $openHour4;
+            }
+            // Friday
+            $allOpenHours5 = OpenHour::where('restaurant_id', $restaurant->id)->where('daytype', 5)->get();
+            $openHours5 = [];
+            foreach ($allOpenHours5 as $openHour5){
+                $openHours5[] = $openHour5;
+            }
+            // Saturday
+            $allOpenHours6 = OpenHour::where('restaurant_id', $restaurant->id)->where('daytype', 6)->get();
+            $openHours6 = [];
+            foreach ($allOpenHours6 as $openHour6){
+                $openHours6[] = $openHour6;
+            }
+            // Sunday
+            $allOpenHours0 = OpenHour::where('restaurant_id', $restaurant->id)->where('daytype', 0)->get();
+            $openHours0 = [];
+            foreach ($allOpenHours0 as $openHour0){
+                $openHours0[] = $openHour0;
+            }
 
         /** Call $averageAllStars from ReviewController */
         $reviewController = new ReviewController(
@@ -141,11 +170,11 @@ class RestaurantController extends Controller
             'profile' => $profile,
             'openHours1' => $openHours1,
             'openHours2' => $openHours2,
-            // 'openHours3' => $openHours3,
-            // 'openHours4' => $openHours4,
-            // 'openHours5' => $openHours5,
-            // 'openHours6' => $openHours6,
-            // 'openHours0' => $openHours0,
+            'openHours3' => $openHours3,
+            'openHours4' => $openHours4,
+            'openHours5' => $openHours5,
+            'openHours6' => $openHours6,
+            'openHours0' => $openHours0,
         ]);
     }
 
