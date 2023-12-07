@@ -43,17 +43,6 @@ class BookmarkController extends Controller
     /**
      * Create(Store) bookmark.
      */
-    public function store($id){
-        $this->bookmark->user_id = Auth::user()->id;
-        $this->bookmark->restaurant_id = $id;
-        $this->bookmark->save();
-
-        return back();
-    }
-
-    /**
-     * Delete(Remove) bookmark.
-     */
     public function store($restaurant_id)
     {
         $this->bookmark->user_id = Auth::user()->id;
@@ -61,6 +50,11 @@ class BookmarkController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * Delete(Remove) bookmark.
+     */
+
     public function destroy($id){
         $this->bookmark->where('user_id', Auth::user()->id)
                         ->where('restaurant_id', $id)
