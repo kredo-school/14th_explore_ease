@@ -60,7 +60,7 @@ class BookmarkController extends Controller
                         ->where('restaurant_id', $id)
                         ->delete();
 
-        return back();
+        return redirect()->back();
     }
 
 
@@ -103,16 +103,6 @@ class BookmarkController extends Controller
     public function update(Request $request, Bookmark $bookmark)
     {
         //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($restaurant_id)
-    {
-        $this->bookmark->where('user_id', Auth::user()->id)->where('restaurant_id', $restaurant_id)->delete();
-
-        return redirect()->back();
     }
 
 }

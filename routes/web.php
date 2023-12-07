@@ -117,12 +117,6 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
         Route::get('/profile/bookmark', [BookmarkController::class, 'show'])->name('profile.bookmark');
 
-        //bookmark restaurants
-        Route::post('/bookmark/store', [BookmarkController::class, 'store'])->name('bookmark.store');
-
-        //unbookmark restaurants
-        Route::delete('bookmark/{id}/delete', [BookmarkController::class, 'destroy'])->name('bookmark.delete');
-
         #Profile(Kazuya)
         Route::get('/profile/{id}/show', [ProfileController::class, 'show'])->name('profile.show');
         Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');

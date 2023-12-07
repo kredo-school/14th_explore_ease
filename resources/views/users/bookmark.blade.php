@@ -40,7 +40,7 @@
                                             </a>
                                     </div>
                                     <div class="col h3 rowspan='2'">
-                                        <form action="{{route('bookmark.delete', $bookmark->restaurant_id)}}" method="post">
+                                        <form action="{{route('bookmark.destroy', $bookmark->restaurant_id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="border border-white bg-white"><i class="fa-solid fa-bookmark"></i></button>
