@@ -29,7 +29,7 @@
                 <div class="row">
                     <!-- Resturant name -->
                     <div class="col-6">
-                        <h2>{{ $restaurant->name }} Test</h2>
+                        <h2>{{ $restaurant->name }}</h2>
                     </div>
 
                     <!-- Rating -->
