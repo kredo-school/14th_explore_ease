@@ -27,7 +27,8 @@
                 </div>
             </div>
             <div class="rcards">
-                @foreach($bookmarks as $bookmark)
+                if(!empty($bookmarks)){
+                    @foreach($bookmarks as $bookmark)
                         <div class="card mb-2" style="width: 265px; height: auto;">
                             <div class="card-header p-0">
                                 <img src="{{$restaurant_photos[$loop->index]->photo}}" class="m-0" style="height: 173px; width: 265px;">
@@ -61,7 +62,8 @@
                                 </div>
                             </div>
                         </div>
-                @endforeach
+                    @endforeach
+                }
             </div>
         </div>
     </div>
