@@ -9,8 +9,8 @@ class Profile extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'first_name', 'last_name', 'avatar', 'phone', 'usertype_id', 'nationarity_id'];
-
+    protected $fillable = ['user_id', 'first_name', 'last_name', 'avatar', 'phone', 'usertype_id', 'nationality_id'];
+    protected $primaryKey = 'user_id';
     /** 
      * Profile-User
      * a Profile belongs to a User
@@ -32,12 +32,12 @@ class Profile extends Model
     }
 
     /** 
-     * Profile-Nationarity
-     * a Profile belongs to a Nationarity
+     * Profile-Nationality
+     * a Profile belongs to a Nationality
      * to get the owner of the Profile
      */
-    public function nationarity()
+    public function nationality()
     {
-        return $this->belongsTo(Nationarity::class);
+        return $this->belongsTo(Nationality::class);
     }
 }

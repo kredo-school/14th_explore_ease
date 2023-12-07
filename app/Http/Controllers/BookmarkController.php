@@ -3,10 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bookmark;
+use App\Models\RestaurantPhoto;
+use App\Models\Restaurant;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookmarkController extends Controller
 {
+    private $bookmark;
+    private $restaurant_photo;
+    private $user;
+    private $restaurant;
+
+    public function __construct(Bookmark $bookmark, RestaurantPhoto $restaurant_photo, User $user, Restaurant $restaurant){
+        $this->bookmark = $bookmark;
+        $this->restaurant_photo = $restaurant_photo;
+        $this->user = $user;
+        $this->restaurant = $restaurant;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -24,20 +41,49 @@ class BookmarkController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create(Store) bookmark.
      */
-    public function store(Request $request)
-    {
-        //
+    public function store($id){
+        $this->bookmark->user_id = Auth::user()->id;
+        $this->bookmark->restaurant_id = $id;
+        $this->bookmark->save();
+
+        return back();
     }
 
     /**
+     * Delete(Remove) bookmark.
+     */
+    public function destroy($id){
+        $this->bookmark->where('user_id', Auth::user()->id)
+                        ->where('restaurant_id', $id)
+                        ->delete();
+
+        return back();
+    }
+
+
+        /**
      * Display the specified resource.
      */
-    public function show(Bookmark $bookmark)
-    {
-        //
+    public function show(){
+        $bookmarks = $this->bookmark->where('user_id', Auth::user()->id)->get();
+
+
+        $restaurant_photos = [];
+        foreach($bookmarks as $bookmark){
+            $data = $this->restaurant_photo
+            ->where('restaurant_id', $bookmark->restaurant_id)
+            ->get()[0];
+
+                array_push($restaurant_photos, $data);
+        }
+
+        $user = $this->user->where('id', Auth::user()->id)->get();
+
+        return view('users.bookmark', ['bookmarks'=>$bookmarks, 'restaurant_photos'=>$restaurant_photos, 'user'=>$user]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -55,11 +101,6 @@ class BookmarkController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Bookmark $bookmark)
-    {
-        //
-    }
+
+
 }

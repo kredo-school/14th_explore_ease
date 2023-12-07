@@ -9,7 +9,7 @@ class Budget extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['restaurant_id', 'timezonetype', 'budget'];
+    protected $fillable = ['restaurant_id', 'timezonetype'];
     public $timestamps = false;
 
     /** 

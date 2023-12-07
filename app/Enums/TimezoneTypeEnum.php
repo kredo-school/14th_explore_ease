@@ -16,8 +16,8 @@ namespace App\Enums;
  */
 enum TimezoneTypeEnum: int
 {
-    case Lunch = 0;
-    case Dinner = 1;
+    case Lunch = 1;
+    case Dinner = 2;
 
     /** 表示用のテキストを取得 */
     public function text(): string

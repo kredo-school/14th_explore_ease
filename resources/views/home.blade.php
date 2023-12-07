@@ -16,7 +16,9 @@
 
                     {{ __('You are logged in!') }}
 
-                    Thank you!
+                    <div class="alert alert-warning">
+                        Caution!! You don't have profile.
+                    </div>
                 </div>
             </div>
         </div>
