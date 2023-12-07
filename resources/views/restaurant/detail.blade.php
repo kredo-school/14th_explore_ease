@@ -28,7 +28,7 @@
             <div class="col-8">
                 <div class="row">
                     <!-- Resturant name -->
-                    <div class="col-6">
+                    <div class="col-6"></div>
                         <h2>{{ $restaurant->name }} Test</h2>
                     </div>
 
