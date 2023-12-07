@@ -92,6 +92,7 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
 
 
+       
 
         // Restaurant Controller
         // ranking
@@ -124,6 +125,7 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::post('/bookmark/{id}/store',[BookmarkController::class, 'store'])->name('bookmark.store');
         Route::delete('/bookmark/{id}/destroy',[BookmarkController::class, 'destroy'])->name('bookmark.destroy');
 
+    
     });
 
 

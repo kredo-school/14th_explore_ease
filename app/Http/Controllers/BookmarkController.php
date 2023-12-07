@@ -43,23 +43,24 @@ class BookmarkController extends Controller
     /**
      * Create(Store) bookmark.
      */
-    public function store($id){
+    public function store($restaurant_id)
+    {
         $this->bookmark->user_id = Auth::user()->id;
-        $this->bookmark->restaurant_id = $id;
-        $this->bookmark->save();
+        $this->bookmark->restaurant_id = $restaurant_id;
 
-        return back();
+        return redirect()->back();
     }
 
     /**
      * Delete(Remove) bookmark.
      */
+
     public function destroy($id){
         $this->bookmark->where('user_id', Auth::user()->id)
                         ->where('restaurant_id', $id)
                         ->delete();
 
-        return back();
+        return redirect()->back();
     }
 
 
@@ -71,17 +72,20 @@ class BookmarkController extends Controller
 
 
         $restaurant_photos = [];
+        $features = [];
         foreach($bookmarks as $bookmark){
             $data = $this->restaurant_photo
             ->where('restaurant_id', $bookmark->restaurant_id)
             ->get()[0];
+            array_push($restaurant_photos, $data);
 
-                array_push($restaurant_photos, $data);
+            $data_f = $bookmark->restaurant->features;
+            array_push($features, $data_f);
         }
 
-        $user = $this->user->where('id', Auth::user()->id)->get();
+        $user = $this->user->findOrFail(Auth::user()->id);
 
-        return view('users.bookmark', ['bookmarks'=>$bookmarks, 'restaurant_photos'=>$restaurant_photos, 'user'=>$user]);
+        return view('users.bookmark', ['bookmarks'=>$bookmarks, 'restaurant_photos'=>$restaurant_photos, 'user'=>$user, 'features'=>$features]);
     }
 
 
@@ -100,7 +104,5 @@ class BookmarkController extends Controller
     {
         //
     }
-
-
 
 }
