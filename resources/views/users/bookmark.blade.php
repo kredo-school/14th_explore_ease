@@ -35,11 +35,17 @@
                             <div class="card-body w-100 border p-0">
                                 <div class="row ps-2">
                                     <div class="col-9">
-                                        <a href="{{ route('restaurant.detail', $bookmark->restaurant_id) }}"><p class="h4">Restaurant name</p></a>
+                                        <form action="{{ route('restaurant.detail', $bookmark->restaurant_id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <p class="h4">
+                                                {{$bookmark->restaurant->name}}
+                                            </p>
+                                        </form>
                                     </div>
                                     <div class="col h3 rowspan='2'">
-                                        <a href="" class="text-decoration-none text-black h1">
-                                            <i class="fa-regular fa-bookmark"></i>
+                                        <a href="{{route('bookmark.delete', $bookmark->restaurant_id)}}" class="text-decoration-none text-black h1">
+                                            <i class="fa-solid fa-bookmark"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -49,8 +55,10 @@
                                             4.5 <i class="fa-solid fa-star"></i>
                                         </p>
                                     </div>
-                                    <div class="col-4">
-                                        <p>Food Type</p>
+                                    <div class="col">
+                                        @foreach($features[$loop->index] as $feature)
+                                            <span class="border border-dark">{{$feature->featuretype->name}}</span>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

@@ -40,9 +40,12 @@ class BookmarkController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($restaurant_id)
     {
-        //
+        $this->bookmark->user_id = Auth::user()->id;
+        $this->bookmark->restaurant_id = $restaurant_id;
+
+        return redirect()->back();
     }
 
         /**
@@ -53,17 +56,20 @@ class BookmarkController extends Controller
 
             
         $restaurant_photos = [];
+        $features = [];
         foreach($bookmarks as $bookmark){
             $data = $this->restaurant_photo
             ->where('restaurant_id', $bookmark->restaurant_id)
             ->get()[0];
-            
-                array_push($restaurant_photos, $data);
+            array_push($restaurant_photos, $data);
+
+            $data_f = $bookmark->restaurant->features;
+            array_push($features, $data_f);
         }
 
-        $user = $this->user->where('id', Auth::user()->id)->get();
+        $user = $this->user->findOrFail(Auth::user()->id);
 
-        return view('users.bookmark', ['bookmarks'=>$bookmarks, 'restaurant_photos'=>$restaurant_photos, 'user'=>$user]);
+        return view('users.bookmark', ['bookmarks'=>$bookmarks, 'restaurant_photos'=>$restaurant_photos, 'user'=>$user, 'features'=>$features]);
     }
 
 
@@ -86,9 +92,11 @@ class BookmarkController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Bookmark $bookmark)
+    public function destroy($restaurant_id)
     {
-        //
+        $this->bookmark->where('user_id', Auth::user()->id)->where('restaurant_id', $restaurant_id)->delete();
+
+        return redirect()->back();
     }
 
 }
