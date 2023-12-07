@@ -35,18 +35,16 @@
                             <div class="card-body w-100 border p-0">
                                 <div class="row ps-2">
                                     <div class="col-9">
-                                        <form action="{{ route('restaurant.detail', $bookmark->restaurant_id) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <p class="h4">
+                                            <a href="{{ route('restaurant.detail', $bookmark->restaurant_id) }}" class="text-decoration-none text-black h4">
                                                 {{$bookmark->restaurant->name}}
-                                            </p>
-                                        </form>
+                                            </a>
                                     </div>
                                     <div class="col h3 rowspan='2'">
-                                        <a href="{{route('bookmark.delete', $bookmark->restaurant_id)}}" class="text-decoration-none text-black h1">
-                                            <i class="fa-solid fa-bookmark"></i>
-                                        </a>
+                                        <form action="{{route('bookmark.delete', $bookmark->restaurant_id)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="border border-white bg-white"><i class="fa-solid fa-bookmark"></i></button>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="row ps-2">
