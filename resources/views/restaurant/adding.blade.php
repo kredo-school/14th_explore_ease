@@ -134,16 +134,16 @@
                     </div>
                     <div class="col-auto">
                         <div class="btn-group" style="width: 800px;" role="group" aria-label="Basic checkbox toggle button group">
-                            <input type="checkbox" class="btn-check" id="L_budget1" autocomplete="off" name="L_budget1" value="1">
+                            <input type="checkbox" class="btn-check" id="L_budget1" autocomplete="off" name="L_budget1">
                             <label class="btn btn-outline-dark" for="L_budget1">￥</label>
 
-                            <input type="checkbox" class="btn-check" id="L_budget2" autocomplete="off" name="L_budget2" value="2">
+                            <input type="checkbox" class="btn-check" id="L_budget2" autocomplete="off" name="L_budget2">
                             <label class="btn btn-outline-dark" for="L_budget2">￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="L_budget3" autocomplete="off" name="L_budget3" value="3">
+                            <input type="checkbox" class="btn-check" id="L_budget3" autocomplete="off" name="L_budget3">
                             <label class="btn btn-outline-dark" for="L_budget3">￥￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="L_budget4" autocomplete="off" name="L_budget4" value="4">
+                            <input type="checkbox" class="btn-check" id="L_budget4" autocomplete="off" name="L_budget4">
                             <label class="btn btn-outline-dark" for="L_budget4">￥￥￥￥</label>
                         </div>
                     </div>
@@ -157,13 +157,13 @@
                             <input type="checkbox" class="btn-check" id="D_budget1" autocomplete="off" name="D_budget1">
                             <label class="btn btn-outline-dark" for="D_budget1">￥</label>
 
-                            <input type="checkbox" class="btn-check" id="D_budget2" autocomplete="off" name="D_budget1">
+                            <input type="checkbox" class="btn-check" id="D_budget2" autocomplete="off" name="D_budget2">
                             <label class="btn btn-outline-dark" for="D_budget2">￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="D_budget3" autocomplete="off" name="D_budget1">
+                            <input type="checkbox" class="btn-check" id="D_budget3" autocomplete="off" name="D_budget3">
                             <label class="btn btn-outline-dark" for="D_budget3">￥￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="D_budget4" autocomplete="off" name="D_budget1">
+                            <input type="checkbox" class="btn-check" id="D_budget4" autocomplete="off" name="D_budget4">
                             <label class="btn btn-outline-dark" for="D_budget4">￥￥￥￥</label>
                         </div>
                     </div>
