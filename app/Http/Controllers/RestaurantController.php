@@ -192,21 +192,8 @@ class RestaurantController extends Controller
                 $budget->restaurant_id = $restaurant->id;
                 $budget->timezonetype = "1";
                 $budget->budgetindex = $i+1;
-                if($i == 0){
-                    $budget->budgetvalue = "￥";
-                    $budget->save();
-                } elseif ($i == 1){
-                    $budget->budgetvalue = "￥￥";
-                    $budget->save();
-                } elseif ($i == 2){
-                    $budget->budgetvalue = "￥￥￥";
-                    $budget->save();
-                } elseif ($i == 3){
-                    $budget->budgetvalue = "￥￥￥￥";
-                    $budget->save();
-                }
-
-                
+                $budget->budgetvalue = str_repeat("￥", ($i + 1));
+                $budget->save();
             }
         }
 
@@ -217,19 +204,8 @@ class RestaurantController extends Controller
                 $budget->restaurant_id = $restaurant->id;
                 $budget->timezonetype = "2";
                 $budget->budgetindex = $i+1;
-                if($i == 0){
-                    $budget->budgetvalue = "￥";
-                    $budget->save();
-                } elseif ($i == 1){
-                    $budget->budgetvalue = "￥￥";
-                    $budget->save();
-                } elseif ($i == 2){
-                    $budget->budgetvalue = "￥￥￥";
-                    $budget->save();
-                } elseif ($i == 3){
-                    $budget->budgetvalue = "￥￥￥￥";
-                    $budget->save();
-                }
+                $budget->budgetvalue = str_repeat("￥", ($i + 1));
+                $budget->save();
             }
         }
 
