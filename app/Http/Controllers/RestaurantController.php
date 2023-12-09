@@ -61,8 +61,13 @@ class RestaurantController extends Controller
         $review = Review::where('restaurant_id', $restaurant->id)->latest()->paginate(10);
         $foodtype = $this->foodtype->findOrFail($restaurant->foodtype->id);
         $areatype = $this->areatype->findOrFail($restaurant->areatype->id);
-        $user = $this->user->findOrFail(Auth::user()->id);
-        $profile = $user->profile;
+        if (Auth::check()) {
+            $user = $this->user->findOrFail(Auth::user()->id);
+            $profile = $user->profile;
+        } else {
+            $user = new User();
+            $profile = new Profile();
+        }
 
         /** FeatureTypes via Features table */
         $restaurantFeatures = $restaurant->features; // Gets all the features of the restaurant

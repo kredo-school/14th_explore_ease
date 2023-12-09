@@ -315,8 +315,8 @@
                         @foreach ($review as $eachReview)
                         <tr>
                             <td scope="col" style="width: 10%">
-                                    @if(Auth::user()->profile->avatar)
-                                    <a href="{{ route('profile.show', Auth::user()->id) }}" style="margin-top: ">
+                                    @if($profile->avatar)
+                                    <a href="{{ route('profile.show', $user->id) }}" style="margin-top: ">
                                         <img src="{{ $profile->avatar }}" class="img-thumbnail rounded-circle w-50">
                                     </a>
                                     @else

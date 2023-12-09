@@ -28,9 +28,11 @@
                     </ion-searchbar>
                     <div class="list-group main-searched-content is-hidden">
                         <!--
-                        <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                          The current button
-                        </button>
+                        <a href="/restaurant/1/detail" class="text-decoration-none">
+                            <button type="button" class="list-group-item list-group-item-action">
+                            The current button
+                            </button>
+                        </a>
                         <button type="button" class="list-group-item list-group-item-action">A second button item</button>
                         <button type="button" class="list-group-item list-group-item-action">A third button item</button>
                         <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
@@ -66,12 +68,18 @@
 
             // add button element
             restaurants.forEach(restaurant => {
+                let anchor = document.createElement('a');
+                anchor.href = `/restaurant/${restaurant.id}/detail`;
+                anchor.classList.add("text-decoration-none");
+
                 let button = document.createElement('button');
                 button.innerHTML = restaurant.name;
                 button.setAttribute("type", "button");
                 button.classList.add("list-group-item");
                 button.classList.add("list-group-item-action");
-                searchedContentDiv.appendChild(button);
+
+                anchor.appendChild(button);
+                searchedContentDiv.appendChild(anchor);
             });
 
             // set position

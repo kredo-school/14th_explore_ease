@@ -26,8 +26,13 @@ class ReviewController extends Controller
     /** Show restaurant review page */
     public function ShowRestaurantReview($id){
     $restaurant = $this->restaurant->findOrFail($id);
-    $user = $this->user->findOrFail(Auth::user()->id);
-    $profile = $user->profile;
+    if (Auth::check()) {
+        $user = $this->user->findOrFail(Auth::user()->id);
+        $profile = $user->profile;
+    } else {
+        $user = new User();
+        $profile = new Profile();
+    }
 
     // [ Graph of reviews ]
     $reviewOfStar5s = Review::where('restaurant_id', $restaurant->id)->where('star', 5)->get();
