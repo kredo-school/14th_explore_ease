@@ -54,6 +54,7 @@ class RestaurantController extends Controller
         $restaurant_photos = [];
         $features = [];
         $finalBudget = [];
+        $stars = [];
 
         foreach($restaurants as $restaurant){
             $data = $this->restaurantphoto->where('restaurant_id', $restaurant->id)->get();
@@ -64,14 +65,25 @@ class RestaurantController extends Controller
 
             $bdata = $this->budget->where('restaurant_id', $restaurant->id)->get();
             array_push($finalBudget, $bdata);
+
+            $sdata = $this->review->where('restaurant_id', $restaurant->id)->get()->pluck('star');
+            array_push($stars, $sdata);
+
+            // $sdata = $this->review->where('restaurant_id', $restaurant->id)->get()->pluck('star')->toArray();
+            // $stars = array_merge($stars, $sdata);
+            // $countStars = count($stars);
+            // $averageStars = array_sum($stars)/$countStars;
+            // dd($averageStars);
         }
+        // dd($stars);
 
         return view('restaurant.ranking',
         [
             'restaurants'=>$restaurants,
             'restaurant_photos'=>$restaurant_photos,
             'features'=>$features,
-            'finalBudget'=>$finalBudget
+            'finalBudget'=>$finalBudget,
+            'stars'=>$stars,
         ]);
     }
 

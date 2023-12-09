@@ -47,11 +47,13 @@
                     <div class="card-body w-100 border">
                         <div class="row">
                             <div class="col-6 ">
-                                <p class="h3">{{ $restaurant->name }}</p>
+                                <a href="{{ route('restaurant.detail', $restaurant->id) }}" class="h3 text-black text-bold text-decoration-none">{{ $restaurant->name }}</a>
                             </div>
                             <div class="col-6 text-end h3">
                                 <a href="" class="text-decoration-none text-dark">
-                                    {{-- $averageAllStar->star --}} <i class="fa-solid fa-star"></i>
+                                    @foreach($stars[$loop->index] as $star)
+                                    {{ $star }} <i class="fa-solid fa-star"></i>
+                                    @endforeach
                                 </a>
                             </div>
                         </div>
