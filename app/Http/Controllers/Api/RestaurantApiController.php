@@ -8,6 +8,7 @@ use App\Http\Resources\RestaurantResource;
 use App\Http\Requests\RestaurantRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Mockery\Undefined;
 
 class RestaurantApiController extends Controller
 {
@@ -55,8 +56,12 @@ class RestaurantApiController extends Controller
     {
         $keyword = $request->search;
 
+        if ($keyword == null || $keyword == "") {
+            return [];
+        }
+
         $totalList = DB::table('restaurants')
-                ->select('name', 'address')
+                ->select('id', 'name', 'address')
                 ->where('name', 'like', "%{$keyword}%")
                 ->orWhere('description', 'like', "%{$keyword}%")
                 ->orWhere('address', 'like', "%{$keyword}%")
