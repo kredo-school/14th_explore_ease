@@ -20,7 +20,7 @@ class ReservationController extends Controller
     private $restaurant;
     private $restaurantphoto;
     private $booking_data;
-    private $massage;
+    private $message;
     private $course;
     private $all_courses;
 
@@ -41,12 +41,13 @@ class ReservationController extends Controller
         $restaurantphoto =  $this->restaurantphoto->findOrFail($restaurant->id);
         $course =  $this->course->findOrFail($id);
         $all_courses = $restaurant->courses->all();
+
         //$all_courses = $restaurant->courses();
         //dd($all_courses);
 
         return view('restaurant.reservation.show',
          ['restaurant'=> $restaurant, 'restaurantphoto' => $restaurantphoto,
-          'course' => $course, 'all_courses' => $all_courses]);
+          'course' => $course, 'all_courses' => $all_courses, ]);
     }
 
     public function show_message($id)
@@ -76,21 +77,37 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         # 1. Validate all form data
-        $request->validate([
-            'number_of_people' => 'required',
-            'datepicker' => 'required',
-            'reservation_start_time' => 'required',
+        // $request->validate([
+        //     'number_of_people' . $restaurant_id . '.required' => 'You cannot submit an empty comment.',
+        //     'reservation_start_date' . $restaurant_id . '.required' => 'You cannot submit an empty comment.',
+        //     'reservation_start_time' . $restaurant_id . '.required' => 'You cannot submit an empty comment.',
+        //     'seat_id' . $restaurant_id  => '.required',
+        //     'course_id' . $restaurant_id  => '.required',
+        //     'requests' . $restaurant_id  => '.required',
             
 
-        ]);
+        // ]);
 
-        # 2. Save the post
+        # 2. Save the post ???? 
         $this->reservation->user_id        = Auth::user()->id;
+        $this->reservation->restaurant_id            = Auth::user()->id;
 
-        $this->reservation->number_of_people         = $request->number_of_people;
-        $this->reservation->reservation_start_date   = $request->datepicker;
+        $this->reservation->reservation_start_date   = $request->reservation_start_date;
         $this->reservation->reservation_start_time   = $request->reservation_start_time;
-        $this->booking_data->save();
+        $this->reservation->reservation_end_date   =  $request->reservation_start_date;
+        $this->reservation->reservation_end_time   = $request->reservation_end_time;
+        $this->reservation->reservation_minutes   = $request->reservation_minutes;
+        
+        $this->reservation->seat_id   = $request->seat_id;
+        $this->reservation->course_id   = $request->course_id;
+        $this->reservation->number_of_people         = $request->number_of_people;
+        $this->reservation->requests         = $request->requests;
+
+        $this->reservation->timestamps         = $request->timestamps;
+
+
+
+        $this->reservation->save();
 
         #3. go back to the homepage
         return redirect()->route('index');

@@ -14,6 +14,8 @@ class Reservation extends Model
      * a Reservation belongs to a User
      * to get the owner of the Reservation
      */
+
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -48,4 +50,5 @@ class Reservation extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
 }

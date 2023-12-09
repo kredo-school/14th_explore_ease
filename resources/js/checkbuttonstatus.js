@@ -1,20 +1,61 @@
-/**If user dont check the check-box blow "Message from Venue", cant hit a submit button */
+//If user dont check the check-box blow "Message from Venue", cant hit a submit button
 
-    //#with-consent"というIDを持つ要素をドキュメントから取得し、consentという定数に保存します */ 
+
     const consent = document.querySelector("#with-consent");
 
-    // "#submit"というIDを持つ要素をドキュメントから取得し、buttonという定数に保存します
     const button = document.querySelector("#submit");
 
-    // consent要素の状態が変化したときに実行されるイベントリスナーを追加します
     consent.addEventListener('change', () => {
 
-        // consent要素がチェックされているかどうかを確認します
         if (consent.checked === true) {
-            // チェックが入っていれば、submitボタンを有効化します
             button.disabled = false;
         } else {
-            // チェックが入っていなければ、submitボタンを無効化します
             button.disabled = true;
         }
     });
+
+
+
+    
+//for create form
+    const form = document.getElementById("form-reservation");
+    form.addEventListener('input', (event) => {
+        console.log(event.target.name);
+        switch(event.target.id)
+        {
+            case 'number_of_people':
+                document.getElementById('confirmation_number_of_people').innerHTML = `Number of people: ${event.target.value}`;
+                document.getElementById('hidden_number_of_people').value = event.target.value;
+                break;
+
+            case 'reservation_start_time':
+                document.getElementById('confirmation_reservation_start_time').innerHTML = `Reservation time: ${event.target.value}`; 
+                document.getElementById('hidden_reservation_start_time').value = event.target.value;
+                break;
+
+            case 'requests':
+                document.getElementById('hidden_requests').value = event.target.value;
+                break;
+
+            default:
+                if(event.target.name == 'course')
+                    document.getElementById('hidden_course').value = event.target.value;
+                break;
+                
+        }
+    });
+
+    function reservationSubmit()
+        {
+            const inputReservationDate = document.getElementById('datepicker').value.split('/');
+            const reservationDate = `${inputReservationDate[2]}-${inputReservationDate[0]}-${inputReservationDate[1]}`;
+            
+            document.getElementById('confirmation_reservation_start_date').innerHTML = reservationDate;
+
+            document.getElementById('hidden_reservation_start_date').value = reservationDate;
+        }
+
+    window.reservationSubmit = reservationSubmit;
+
+
+    
