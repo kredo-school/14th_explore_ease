@@ -27,7 +27,8 @@
                 </div>
             </div>
             <div class="rcards">
-                @foreach($bookmarks as $bookmark)
+                @if(!empty($bookmarks))
+                    @foreach($bookmarks as $bookmark)
                         <div class="card mb-2" style="width: 265px; height: auto;">
                             <div class="card-header p-0">
                                 <img src="{{$restaurant_photos[$loop->index]->photo}}" class="m-0" style="height: 173px; width: 265px;">
@@ -35,12 +36,16 @@
                             <div class="card-body w-100 border p-0">
                                 <div class="row ps-2">
                                     <div class="col-9">
-                                        <a href="{{ route('restaurant.detail', $bookmark->restaurant_id) }}"><p class="h4">Restaurant name</p></a>
+                                            <a href="{{ route('restaurant.detail', $bookmark->restaurant_id) }}" class="text-decoration-none text-black h4">
+                                                {{$bookmark->restaurant->name}}
+                                            </a>
                                     </div>
                                     <div class="col h3 rowspan='2'">
-                                        <a href="" class="text-decoration-none text-black h1">
-                                            <i class="fa-regular fa-bookmark"></i>
-                                        </a>
+                                        <form action="{{route('bookmark.destroy', $bookmark->restaurant_id)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="border border-white bg-white"><i class="fa-solid fa-bookmark"></i></button>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="row ps-2">
@@ -49,13 +54,16 @@
                                             4.5 <i class="fa-solid fa-star"></i>
                                         </p>
                                     </div>
-                                    <div class="col-4">
-                                        <p>Food Type</p>
+                                    <div class="col">
+                                        @foreach($features[$loop->index] as $feature)
+                                            <span class="border border-dark">{{$feature->featuretype->name}}</span>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>
