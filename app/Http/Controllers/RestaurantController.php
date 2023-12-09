@@ -50,7 +50,29 @@ class RestaurantController extends Controller
 
     /** Show restaurant ranking page */
     public function restaurantRanking(){
-        return view('restaurant.ranking');
+        $restaurants = $this->restaurant->all();
+        $restaurant_photos = [];
+        $features = [];
+        $finalBudget = [];
+
+        foreach($restaurants as $restaurant){
+            $data = $this->restaurantphoto->where('restaurant_id', $restaurant->id)->get();
+            array_push($restaurant_photos, $data);
+
+            $fdata = $this->feature->where('restaurant_id', $restaurant->id)->get();
+            array_push($features, $fdata);
+
+            $bdata = $this->budget->where('restaurant_id', $restaurant->id)->get();
+            array_push($finalBudget, $bdata);
+        }
+
+        return view('restaurant.ranking',
+        [
+            'restaurants'=>$restaurants,
+            'restaurant_photos'=>$restaurant_photos,
+            'features'=>$features,
+            'finalBudget'=>$finalBudget
+        ]);
     }
 
     /** Show restaurant detail page */

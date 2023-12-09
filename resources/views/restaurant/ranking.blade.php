@@ -14,202 +14,85 @@
         <ul class="col slider">
 
             <!-- Card of restaurant 1-->
+            @foreach ($restaurants as $restaurant)
             <li>
                 <div class="card border">
                     <!-- Card header -->
                     <div class="card-header p-0" style="position: relative; height: 402px;">
-                        <img src="https://www.parisselectbook.com/wp-content/uploads/2023/04/4912_3.jpg" alt="" class=" m-0 img-fluid" style="object-fit:cover; position:absolute; height: 100%; width: 100%;">
-                        <a href="" class="text-decoration-none text-black h5" style="position:absolute; top:5%; left:95%;">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
+                        @if(count($restaurant_photos[$loop->index]) > 0)
+                            <img src="{{ $restaurant_photos[$loop->index][0]->photo }}" alt="{{ $restaurant_photos[$loop->index][0]->name }}" class=" m-0 img-fluid" style="object-fit:cover; position:absolute; height: 100%; width: 100%;">
+                            <a href="" class="text-decoration-none text-black h5" style="position:absolute; top:5%; left:95%;">
+                                @if($restaurant->is_bookmarked())
+                                <form action="{{ route('bookmark.destroy', $restaurant->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                    <button type="submit" class="btn p-0">
+                                        <i class="fa-solid fa-bookmark fa-lg"></i>
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('bookmark.store', $restaurant->id) }}" method="post">
+                                @csrf
+                                    <button type="submit" class="btn p-0">
+                                        <i class="fa-regular fa-bookmark text-black fa-lg"></i>
+                                    </button>
+                                </form>
+                            @endif
+                            </a>
+                        @else
+                            <img src="{{asset('assets/no-image.png')}}" class="m-0" style="height: 402px; width: 549px; padding: 100px">
+                        @endif
                     </div>
                     <!-- Card body -->
                     <div class="card-body w-100 border">
                         <div class="row">
                             <div class="col-6 ">
-                                <p class="h3">Restaurant name</p>
+                                <p class="h3">{{ $restaurant->name }}</p>
                             </div>
                             <div class="col-6 text-end h3">
                                 <a href="" class="text-decoration-none text-dark">
-                                    4.5 <i class="fa-solid fa-star"></i>
+                                    {{-- $averageAllStar->star --}} <i class="fa-solid fa-star"></i>
                                 </a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <p class="h4">Place here</p>
+                                <p class="h4">{{$restaurant->address}}</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <p class="h4">Features here</p>
+                                @foreach($features[$loop->index] as $feature)
+                                <span class="h4 border border-dark me-2 rounded">
+                                    {{$feature->featuretype->name}}
+                                </span>
+                                @endforeach
                             </div>
                             <div class="col-6 text-end" style="font-size: 16px;">
-                                ￥￥￥
+                                Lunch:
+                                @foreach($finalBudget[$loop->index] as $budget)
+                                    @if($budget->timezonetype == 1)
+                                        <span class="border border-black rounded-1 px-1">
+                                            {!! str_replace('\\', '¥', e($budget->budgetvalue)) !!}
+                                        </span>
+                                    @endif
+                                @endforeach <br>
+                                Dinner:
+                                @foreach($finalBudget[$loop->index] as $budget)
+                                    @if($budget->timezonetype == 2)
+                                        <span class="border border-black rounded-1 px-1">
+                                            {!! str_replace('\\', '¥', e($budget->budgetvalue)) !!}
+                                        </span>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
             </li>
+            @endforeach
 
-
-            <!-- Card of restaurant 2-->
-            <li>
-                <div class="card border">
-                    <!-- Card header -->
-                    <div class="card-header p-0" style="position: relative; height: 402px;">
-                        <img src="https://assets.architecturaldigest.in/photos/6385cf3311f0276636badfb6/16:9/w_1600,c_limit/DSC_8367-Edit-W.png" alt="" class=" m-0 img-fluid" style="object-fit:cover; position:absolute; height: 100%; width: 100%;">
-                        <a href="" class="text-decoration-none text-black h5" style="position:absolute; top:5%; left:95%;">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
-                    </div>
-                    <!-- Card body -->
-                    <div class="card-body w-100 border">
-                        <div class="row">
-                            <div class="col-6 ">
-                                <p class="h3">Restaurant name</p>
-                            </div>
-                            <div class="col-6 text-end h3">
-                                <a href="" class="text-decoration-none text-dark">
-                                    4.5 <i class="fa-solid fa-star"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <p class="h4">Place here</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <p class="h4">Features here</p>
-                            </div>
-                            <div class="col-6 text-end" style="font-size: 16px;">
-                                ￥￥￥
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Card of restaurant 3-->
-            <li>
-                <div class="card border">
-                    <!-- Card header -->
-                    <div class="card-header p-0" style="position: relative; height: 402px;">
-                        <img src="https://media.timeout.com/images/106047598/1920/1080/image.jpg" alt="" class=" m-0 img-fluid" style="object-fit:cover; position:absolute; height: 100%; width: 100%;">
-                        <a href="" class="text-decoration-none text-black h5" style="position:absolute; top:5%; left:95%;">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
-                    </div>
-                    <!-- Card body -->
-                    <div class="card-body w-100 border">
-                        <div class="row">
-                            <div class="col-6 ">
-                                <p class="h3">Restaurant name</p>
-                            </div>
-                            <div class="col-6 text-end h3">
-                                <a href="" class="text-decoration-none text-dark">
-                                    4.5 <i class="fa-solid fa-star"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <p class="h4">Place here</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <p class="h4">Features here</p>
-                            </div>
-                            <div class="col-6 text-end" style="font-size: 16px;">
-                                ￥￥￥
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Card of restaurant 4-->
-            <li>
-                <div class="card border">
-                    <!-- Card header -->
-                    <div class="card-header p-0" style="position: relative; height: 402px;">
-                        <img src="https://www.japan-guide.com/g20/2036_01.jpg" alt="" class=" m-0 img-fluid" style="object-fit:cover; position:absolute; height: 100%; width: 100%;">
-                        <a href="" class="text-decoration-none text-black h5" style="position:absolute; top:5%; left:95%;">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
-                    </div>
-                    <!-- Card body -->
-                    <div class="card-body w-100 border">
-                        <div class="row">
-                            <div class="col-6 ">
-                                <p class="h3">Restaurant name</p>
-                            </div>
-                            <div class="col-6 text-end h3">
-                                <a href="" class="text-decoration-none text-dark">
-                                    4.5 <i class="fa-solid fa-star"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <p class="h4">Place here</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <p class="h4">Features here</p>
-                            </div>
-                            <div class="col-6 text-end" style="font-size: 16px;">
-                                ￥￥￥
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Card of restaurant 5-->
-            <li>
-                <div class="card border">
-                    <!-- Card header -->
-                    <div class="card-header p-0" style="position: relative; height: 402px;">
-                        <img src="https://media.timeout.com/images/105316388/1920/1080/image.jpg" alt="" class=" m-0 img-fluid" style="object-fit:cover; position:absolute; height: 100%; width: 100%;">
-                        <a href="" class="text-decoration-none text-black h5" style="position:absolute; top:5%; left:95%;">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
-                    </div>
-                    <!-- Card body -->
-                    <div class="card-body w-100 border">
-                        <div class="row">
-                            <div class="col-6 ">
-                                <p class="h3">Restaurant name</p>
-                            </div>
-                            <div class="col-6 text-end h3">
-                                <a href="" class="text-decoration-none text-dark">
-                                    4.5 <i class="fa-solid fa-star"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <p class="h4">Place here</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <p class="h4">Features here</p>
-                            </div>
-                            <div class="col-6 text-end" style="font-size: 16px;">
-                                ￥￥￥
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-        <!--/slider--></ul>
+        </ul>
 
     </div>
 </div>
