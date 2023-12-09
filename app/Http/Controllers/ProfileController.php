@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Nationality;
 use App\Models\Restaurant;
 use App\Models\RestaurantPhoto;
+use App\Models\Foodtype;
 use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
@@ -19,16 +20,18 @@ class ProfileController extends Controller
     private $nationality;
     private $bookmark;
     private $restaurant_photo;
-
+    private $foodtype;
     private $restaurant;
 
-    public function __construct(Profile $profile, User $user, Nationality $nationality, Bookmark $bookmark, RestaurantPhoto $restaurant_photo)
+    public function __construct(Profile $profile, User $user, Nationality $nationality, Bookmark $bookmark, RestaurantPhoto $restaurant_photo, Restaurant $restaurant, Foodtype $foodtype)
     {
         $this->profile = $profile;
         $this->user = $user;
         $this->nationality = $nationality;
         $this->bookmark = $bookmark;
         $this->restaurant_photo = $restaurant_photo;
+        $this->restaurant = $restaurant;
+        $this->foodtype = $foodtype;
     }
 
 
@@ -38,7 +41,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        
+        // 
     }
 
     /**
@@ -60,8 +63,13 @@ class ProfileController extends Controller
     public function show($id)
     {   
         $user = $this->user->findOrFail($id);
-        $nationalities = $this->nationality->get();
-        return view('users.profile')->with('user', $user)->with('nationalities',$nationalities);
+        $nationalities = $this->nationality->get(); // We use $nationalities at nationality selction on profile modal.
+        $restaurants = $this->restaurant->latest()->get();  
+        $foodtype = $this->foodtype->get(); ////We use $restaurants and $foodtype at restaurant profile for owners.
+        return view('users.profile')->with('user', $user)
+        ->with('nationalities',$nationalities)
+        ->with('restaurants', $restaurants);
+
     }
 
     /**
