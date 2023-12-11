@@ -51,9 +51,9 @@
                             </div>
                             <div class="col-6 text-end h3">
                                 <a href="" class="text-decoration-none text-dark">
-                                    @foreach($stars[$loop->index] as $star)
-                                    {{ $star }} <i class="fa-solid fa-star"></i>
-                                    @endforeach
+                                    {{-- @foreach($stars as $star) --}}
+                                    {{ $stars[$loop->index] }} <i class="fa-solid fa-star"></i>
+                                    {{-- @endforeach --}}
                                 </a>
                             </div>
                         </div>

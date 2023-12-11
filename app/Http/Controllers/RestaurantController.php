@@ -66,16 +66,12 @@ class RestaurantController extends Controller
             $bdata = $this->budget->where('restaurant_id', $restaurant->id)->get();
             array_push($finalBudget, $bdata);
 
-            $sdata = $this->review->where('restaurant_id', $restaurant->id)->get()->pluck('star');
-            array_push($stars, $sdata);
-
-            // $sdata = $this->review->where('restaurant_id', $restaurant->id)->get()->pluck('star')->toArray();
-            // $stars = array_merge($stars, $sdata);
-            // $countStars = count($stars);
-            // $averageStars = array_sum($stars)/$countStars;
-            // dd($averageStars);
+            $sdata = $this->review->where('restaurant_id', $restaurant->id)->get()->pluck('star')->toArray();
+            $sdatalength = count($sdata);
+            $sdatasum = array_sum($sdata);
+            $sdatasum /= $sdatalength;
+            array_push($stars, $sdatasum);
         }
-        // dd($stars);
 
         return view('restaurant.ranking',
         [
