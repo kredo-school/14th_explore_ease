@@ -60,10 +60,11 @@
                     </div>
 
                     <!-- Restaurant edit page -->
-                    <!-- to be update: display this only for Restaurant ORNER !!!!-->
+                    @if(Auth::user()->profile->usertype_id == 3)
                     <div class="col-2 text-end">
                         <a href="{{route('restaurant.edit')}}" class="btn btn-secondary border-dark w-75">Edit</a>
                     </div>
+                    @endif
                 </div>
 
                 <!-- Postal Address -->
