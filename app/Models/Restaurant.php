@@ -70,6 +70,10 @@ class Restaurant extends Model
     /** Returns TRUE if the Auth user already Bookmarked the restaurant */
     public function is_bookmarked()
     {
+        if (!Auth::check()) {
+            return false;
+        }
+
         return $this->bookmarks()->where('user_id', Auth::user()->id)->exists();
         // Will retrun TRUE
     }
