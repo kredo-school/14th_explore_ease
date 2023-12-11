@@ -60,10 +60,11 @@
                     </div>
 
                     <!-- Restaurant edit page -->
-                    <!-- to be update: display this only for Restaurant ORNER !!!!-->
+                    @if(Auth::user()->profile->usertype_id == 3)
                     <div class="col-2 text-end">
                         <a href="{{route('restaurant.edit')}}" class="btn btn-secondary border-dark w-75">Edit</a>
                     </div>
+                    @endif
                 </div>
 
                 <!-- Postal Address -->
@@ -315,8 +316,8 @@
                         @foreach ($review as $eachReview)
                         <tr>
                             <td scope="col" style="width: 10%">
-                                    @if(Auth::user()->profile->avatar)
-                                    <a href="{{ route('profile.show', Auth::user()->id) }}" style="margin-top: ">
+                                    @if($profile->avatar)
+                                    <a href="{{ route('profile.show', $user->id) }}" style="margin-top: ">
                                         <img src="{{ $profile->avatar }}" class="img-thumbnail rounded-circle w-50">
                                     </a>
                                     @else
