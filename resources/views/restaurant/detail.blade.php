@@ -60,7 +60,7 @@
                     </div>
 
                     <!-- Restaurant edit page -->
-                    @if(Auth::user()->profile->usertype_id == 3)
+                    @if($profile->usertype_id == 3)
                     <div class="col-2 text-end">
                         <a href="{{route('restaurant.edit')}}" class="btn btn-secondary border-dark w-75">Edit</a>
                     </div>
