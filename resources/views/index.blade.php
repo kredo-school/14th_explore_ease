@@ -56,11 +56,10 @@
             try {
                 const searchKeyWord = getSearchKeyWord();
                 const restautants = await fetchSearchApi(searchKeyWord);
-                console.log(restautants);
                 const searchedList = createSearchedList(restautants);
                 showSearchedList(searchedList);
             } catch(error) {
-                console.error(`エラーが発生しました (${error})`);
+                console.error(`It has an error (${error})`);
             }
         }
 
