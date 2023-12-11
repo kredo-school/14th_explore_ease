@@ -26,7 +26,7 @@
                         class="main-searchbar px-0 py-0"
                         placeholder="{{ __('messages.search_placeholder') }}">
                     </ion-searchbar>
-                    <div class="list-group main-searched-content is-hidden">
+                    <div class="list-group main-searched-content is-hidden overflow-y-auto">
                         <!--
                         <a href="/restaurant/1/detail" class="text-decoration-none">
                             <button type="button" class="list-group-item list-group-item-action">
@@ -50,16 +50,52 @@
          * Search Restaurants Script at index.blade.php
          */
         const searchbar = document.querySelector('.main-searchbar');
-        searchbar.addEventListener("ionInput", callSearchApi);
+        searchbar.addEventListener("ionInput", main);
 
-        function showSearchedList(restaurants) {
-            const searchedContentDiv = document.querySelector('.main-searched-content');
-
-            // hide list panel if there are no data
-            if (restaurants == null || restaurants.length == 0) {
-                searchedContentDiv.classList.add("is-hidden");
-                return;
+        async function main() {
+            try {
+                const searchKeyWord = getSearchKeyWord();
+                const restautants = await fetchSearchApi(searchKeyWord);
+                console.log(restautants);
+                const searchedList = createSearchedList(restautants);
+                showSearchedList(searchedList);
+            } catch(error) {
+                console.error(`エラーが発生しました (${error})`);
             }
+        }
+
+        function getSearchKeyWord() {
+            return document.querySelector('.main-searchbar').value;
+        }
+
+        function fetchSearchApi(searchKeyWord) {
+            const url = "/api/restaurants/search?search=" + searchKeyWord;
+            const method = "GET";
+            const headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            };
+
+            return fetch(
+                url, {
+                method,
+                headers
+            }).then(response => {
+                if (!response.ok) {
+                    // APIレスポンスエラー時
+                    console.log('search response error!');
+                    return Promise.reject(new Error(`${response.status}:${response.statusText}`));
+                } else {
+                    // APIレスポンス成功時
+                    // JSONオブジェクトで解決されるPromiseを返す
+                    console.log('search response success.');
+                    return response.json();
+                }
+            });
+        }
+
+        function createSearchedList(restaurants) {
+            const searchedContentDiv = document.querySelector('.main-searched-content');
 
             // remove old list
             while (searchedContentDiv.firstChild){
@@ -73,60 +109,42 @@
                 anchor.classList.add("text-decoration-none");
 
                 let button = document.createElement('button');
-                button.innerHTML = restaurant.name;
+                button.innerHTML = `
+                    <div class="restaurant-name">${restaurant.name}</div>
+                    <div class="restaurant-address">${restaurant.address}</div>`;
                 button.setAttribute("type", "button");
                 button.classList.add("list-group-item");
                 button.classList.add("list-group-item-action");
-
+                button.classList.add("searched-list-group-button");
                 anchor.appendChild(button);
+
                 searchedContentDiv.appendChild(anchor);
             });
 
             // set position
             const searchbar = document.querySelector('.main-searchbar');
             const rect = searchbar.getBoundingClientRect();
-            const contentHeight = 46.4 * restaurants.length;
+            const baseHeight = 58.54;
+            let contentHeight = 0;
+            if (restaurants.length <= 5) {
+                contentHeight = baseHeight * restaurants.length;
+            } else {
+                contentHeight = baseHeight * 5;
+            }
             searchedContentDiv.style.height = contentHeight + "px";
             searchedContentDiv.style.width = rect.width + "px";
             searchedContentDiv.style.top = rect.bottom + 3;
             searchedContentDiv.style.left = rect.left;
 
-            searchedContentDiv.classList.remove("is-hidden");
+            return searchedContentDiv;
         }
 
-        function callSearchApi(event) {
-            // イベント抑止
-            event.preventDefault();
-            event.stopPropagation();
-
-            const searchbar = document.querySelector('.main-searchbar');
-            const url = "/api/restaurants/search?search=" + searchbar.value;
-            const method = "GET";
-            const headers = {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            };
-
-            // RestaurantApiController呼び出し
-            fetch(url, {
-                method,
-                headers
-            }).then(response => {
-                if (!response.ok) {
-                    // APIレスポンスエラー時
-                    console.log('search response error!');
-                } else {
-                    // APIレスポンス成功時
-                    console.log('search response success.');
-                    return response.json().then(data => {
-                        // 検索結果候補リスト表示
-                        showSearchedList(data);
-                    });
-                }
-            }).catch(error => {
-                // 通信エラー時
-                console.log(error);
-            });
+        function showSearchedList(searchedList) {
+            if (searchedList.childElementCount < 1) {
+                searchedList.classList.add("is-hidden");
+            } else {
+                searchedList.classList.remove("is-hidden");
+            }
         }
     </script>
 @endsection
