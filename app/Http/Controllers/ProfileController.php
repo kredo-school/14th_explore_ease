@@ -63,13 +63,49 @@ class ProfileController extends Controller
     public function show($id)
     {   
         $user = $this->user->findOrFail($id);
-        $nationalities = $this->nationality->get(); // We use $nationalities at nationality selction on profile modal.
+        // We use $nationalities at nationality selction on profile modal.
+        $nationalities = $this->nationality->get(); 
+
+        //parts of count on header.blade.php
+        $count_restaurant = $user->restaurants->count();
+        if(Auth::user()->profile->usertype_id == 3){
+            
+        }else{
+            $count_restaurant = "ー";
+        }
+
+        $count_reservation = $user->reservations->count();
+        if(Auth::user()->profile->usertype_id == 2){
+            
+        }else{
+            $count_reservation = "ー";
+        }
+
+        $count_review = $user->reviews->count();
+        if(Auth::user()->profile->usertype_id == 2){
+            
+        }else{
+            $count_review = "ー";
+        }
+
+        $count_bookmark = $user->bookmarks->count();
+        if(Auth::user()->profile->usertype_id == 2){
+            
+        }else{
+            $count_bookmark = "ー";
+        }
+
+        //We use $restaurants and $foodtype at restaurant profile for owners.
         $restaurants = $this->restaurant->latest()->get();  
-        $foodtype = $this->foodtype->get(); ////We use $restaurants and $foodtype at restaurant profile for owners.
+        $foodtype = $this->foodtype->get(); 
+
         return view('users.profile')->with('user', $user)
         ->with('nationalities',$nationalities)
-        ->with('restaurants', $restaurants);
-
+        ->with('restaurants', $restaurants)
+        ->with('count_restaurant', $count_restaurant)
+        ->with('count_reservation', $count_reservation)
+        ->with('count_review', $count_review)
+        ->with('count_bookmark', $count_bookmark);
     }
 
     /**
