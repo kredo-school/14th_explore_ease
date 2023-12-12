@@ -5,30 +5,34 @@
 @vite(['resources/js/restaurant.js', 'resources/js/restaurantmap.js'])
 
 <div class="container" style="width: 1000px;">
-    <form action="{{ route('restaurant.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('restaurant.update', $restaurant->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="h1">RESTAURANT INFORMATION</div>
         <div class="border border-dark p-5">
             <div class="mb-3">
                 <label for="restaurant_name" class="form-label h3">Restaurant name</label>
-                <input type="text" id="restaurant_name" class="form-control" placeholder="Restaurant name" name="restaurant_name">
+                <input type="text" id="restaurant_name" class="form-control" placeholder="{{$restaurant->name}}" name="restaurant_name">
             </div>
             <div class="mb-3">
                 <label for="area" class="form-label h3">Area type</label>
                 <select id="area" class="form-select" name="area">
                     <option value="0">Select area</option>
                     @foreach($areatypes as $area)
-                        <option value="{{$area->id}}">{{$area->station_name}}({{$area->line_name}})</option>
+                        @if($area == $restaurant->areatype)
+                            <option value="{{$area->id}}" selected>{{$area->station_name}}({{$area->line_name}})</option>
+                        @else
+                            <option value="{{$area->id}}">{{$area->station_name}}({{$area->line_name}})</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
             <div class="mb-3">
                 <label for="restaurant_address" class="form-label h3">Restaurant address</label>
-                <input type="text" id="restaurant_address" class="form-control" placeholder="Restaurant address" name="restaurant_address">
+                <input type="text" id="restaurant_address" class="form-control" placeholder="{{$restaurant->address}}" name="restaurant_address">
             </div>
             <div class="mb-3">
                 <label for="restaurant_location" class="form-label h3">Please place the pin accurately at your outlet's location on the map</label>
-                <div id="map" class="py-5 bg-secondary" style='width: 100%; height: 300px;'></div>
+                <div id="map" lat="{{$restaurant->latitude}}" lng="{{$restaurant->longitude}}" class="py-5 bg-secondary" style='width: 100%; height: 300px;' onload="initializeMarker()"></div>
                 <input type="hidden" id="marker-input-latitude" name="latitude"/>
                 <input type="hidden" id="marker-input-longitude" name="longitude"/>
             </div>
@@ -45,12 +49,20 @@
                         </div>
                         <div class="col ms-3">
                             <select id="open_{{$day}}" class="form-select h4" name="open_{{$day}}">
-                                @for($i=0; $i<12; $i++)
-                                <option value="{{$i}}:00">{{$i}}:00 a.m.</option>
-                                @endfor
-                                @for($i=0; $i<12; $i++)
-                                <option value="{{$i+12}}:00">{{$i}}:00 p.m.</option>
-                                @endfor
+                                    @for($i=0; $i<12; $i++)
+                                        @if(!empty($openhours[$loop->index]->openinghours) && $openhours[$loop->index]->openinghours ==  $i.":00:00")
+                                            <option value="{{$i}}:00" selected>{{$i}}:00 a.m.</option>
+                                        @else
+                                            <option value="{{$i}}:00">{{$i}}:00 a.m.</option>
+                                        @endif
+                                    @endfor
+                                    @for($i=0; $i<12; $i++)
+                                        @if(!empty($openhours[$loop->index]->openinghours) && $openhours[$loop->index]->openinghours == $i+12 .":00:00")
+                                            <option value="{{$i+12}}:00" selected>{{$i}}:00 p.m.</option>
+                                        @else
+                                            <option value="{{$i+12}}:00">{{$i}}:00 p.m.</option>
+                                        @endif
+                                    @endfor
                             </select>
                         </div>
                         <div class="col-auto">
@@ -59,35 +71,67 @@
                         <div class="col me-5">
                             <select id="close_{{$day}}" class="form-select h4" name="close_{{$day}}">
                                 @for($i=0; $i<12; $i++)
-                                <option value="{{$i}}:00">{{$i}}:00 a.m.</option>
+                                    @if(!empty($openhours[$loop->index]->closinghours) && $openhours[$loop->index]->closinghours == $i.":00:00")
+                                        <option value="{{$i}}:00" selected>{{$i}}:00 a.m.</option>
+                                    @else
+                                        <option value="{{$i}}:00">{{$i}}:00 a.m.</option>
+                                    @endif
                                 @endfor
                                 @for($i=0; $i<12; $i++)
-                                <option value="{{$i+12}}:00">{{$i}}:00 p.m.</option>
+                                    @if(!empty($openhours[$loop->index]->closinghours) && $openhours[$loop->index]->closinghours == $i+12 .":00:00")
+                                        <option value="{{$i+12}}:00" selected>{{$i}}:00 p.m.</option>
+                                    @else
+                                        <option value="{{$i+12}}:00">{{$i}}:00 p.m.</option>
+                                    @endif
                                 @endfor
                             </select>
                         </div>
                         <div class="col">
+                            @if(!empty($openhours[$loop->index]->closed && $openhours[$loop->index]->closed == 1))
+                                <input type="checkbox" name="closed_checkbox_{{$day}}"  value="1" id="closed_{{$day}}" checked>
+                                <label for="closed_{{$day}}" class="h4">Closed</label>
+                            @else
                                 <input type="checkbox" name="closed_checkbox_{{$day}}"  value="1" id="closed_{{$day}}">
                                 <label for="closed_{{$day}}" class="h4">Closed</label>
+                            @endif
                         </div>
                     </div>
                 @endforeach
             </div>
             <div class="mb-3">
                 <label for="Menu" class="form-label h3">Menu</label><br>
-                <textarea type="textarea" id="Menu" rows="4" name="menu" class="form-control"></textarea>
+                @if(!empty($restaurant->menu))
+                    <textarea type="textarea" id="Menu" rows="4" name="menu" class="form-control">{{$restaurant->menu}}</textarea>
+                @else
+                    <textarea type="textarea" id="Menu" rows="4" name="menu" class="form-control">Menu</textarea>
+                @endif
             </div>
+
             <div class="mb-3" id="course-menu-parent">
                 <label for="Course_menu" class="form-label h3">Course Menu</label><br>
-                <div class="row mb-3">
-                    <div class="col-3">
+                @if(!empty($restaurant->courses))
+                    @foreach($courses as $course)
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                <input type="file" name="course_photo1" href="{{$course->photo}}">
+                            </div>
+                            <div class="col-9">
+                                <input type="text" placeholder="{{$course->name}}" name="course_name1" class="form-control course-name">
+                                <textarea type="textarea" id="Course_menu" rows="4" name="course_description1" class="form-control" Placeholder="{{$course->description}}"></textarea>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="row mb-3">
+                        <div class="col-3">
                             <input type="file" name="course_photo1">
+                        </div>
+                        <div class="col-9">
+                            <input type="text" placeholder="Course Name" name="course_name1" class="form-control course-name">
+                            <textarea type="textarea" id="Course_menu" rows="4" name="course_description1" class="form-control" Placeholder="Description"></textarea>
+                        </div>
                     </div>
-                    <div class="col-9">
-                        <input type="text" placeholder="Course Name" name="course_name1" class="form-control course-name">
-                        <textarea type="textarea" id="Course_menu" rows="4" name="course_description1" class="form-control" Placeholder="Description"></textarea>
-                    </div>
-                </div>
+                @endif
                 <div class="row mb-3">
                     <div class="rounded d-flex justify-content-center align-items-center flex-column" style="height: 150px; background-color: rgba(0,0,0,0.3); cursor: pointer;" onclick="addCourseMenu()">
                         <i class="fa-solid fa-circle-plus h1"></i>Add more
@@ -134,16 +178,16 @@
                     </div>
                     <div class="col-auto">
                         <div class="btn-group" style="width: 800px;" role="group" aria-label="Basic checkbox toggle button group">
-                            <input type="checkbox" class="btn-check" id="L_budget1" autocomplete="off" name="L_budget1" value="1">
+                            <input type="checkbox" class="btn-check" id="L_budget1" autocomplete="off" name="L_budget1">
                             <label class="btn btn-outline-dark" for="L_budget1">￥</label>
 
-                            <input type="checkbox" class="btn-check" id="L_budget2" autocomplete="off" name="L_budget2" value="2">
+                            <input type="checkbox" class="btn-check" id="L_budget2" autocomplete="off" name="L_budget2">
                             <label class="btn btn-outline-dark" for="L_budget2">￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="L_budget3" autocomplete="off" name="L_budget3" value="3">
+                            <input type="checkbox" class="btn-check" id="L_budget3" autocomplete="off" name="L_budget3">
                             <label class="btn btn-outline-dark" for="L_budget3">￥￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="L_budget4" autocomplete="off" name="L_budget4" value="4">
+                            <input type="checkbox" class="btn-check" id="L_budget4" autocomplete="off" name="L_budget4">
                             <label class="btn btn-outline-dark" for="L_budget4">￥￥￥￥</label>
                         </div>
                     </div>
@@ -157,13 +201,13 @@
                             <input type="checkbox" class="btn-check" id="D_budget1" autocomplete="off" name="D_budget1">
                             <label class="btn btn-outline-dark" for="D_budget1">￥</label>
 
-                            <input type="checkbox" class="btn-check" id="D_budget2" autocomplete="off" name="D_budget1">
+                            <input type="checkbox" class="btn-check" id="D_budget2" autocomplete="off" name="D_budget2">
                             <label class="btn btn-outline-dark" for="D_budget2">￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="D_budget3" autocomplete="off" name="D_budget1">
+                            <input type="checkbox" class="btn-check" id="D_budget3" autocomplete="off" name="D_budget3">
                             <label class="btn btn-outline-dark" for="D_budget3">￥￥￥</label>
 
-                            <input type="checkbox" class="btn-check" id="D_budget4" autocomplete="off" name="D_budget1">
+                            <input type="checkbox" class="btn-check" id="D_budget4" autocomplete="off" name="D_budget4">
                             <label class="btn btn-outline-dark" for="D_budget4">￥￥￥￥</label>
                         </div>
                     </div>

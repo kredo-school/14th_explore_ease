@@ -62,7 +62,7 @@
                     <!-- Restaurant edit page -->
                     <!-- to be update: display this only for Restaurant ORNER !!!!-->
                     <div class="col-2 text-end">
-                        <a href="{{route('restaurant.edit')}}" class="btn btn-secondary border-dark w-75">Edit</a>
+                        <a href="{{route('restaurant.edit', $restaurant->id)}}" class="btn btn-secondary border-dark w-75">Edit</a>
                     </div>
                 </div>
 

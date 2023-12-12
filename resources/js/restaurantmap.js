@@ -25,3 +25,33 @@ map.on('click', (data) =>
     markerInputLongitude.value = coordinates.lng;
 
 });
+
+function initializeMarker()
+{
+    const latitude = document.getElementById('map').getAttribute('lat');
+    const longitude = document.getElementById('map').getAttribute('lng');
+
+    map.on('load', () => 
+    {
+        const markerInputLatitude = document.getElementById('marker-input-latitude');
+        const markerInputLongitude = document.getElementById('marker-input-longitude');
+    
+    
+        if (markers.length > 0)
+            markers[0].remove();
+    
+        markers[0] = new mapboxgl.Marker()
+            .setLngLat([longitude, latitude])
+            .addTo(map);
+    
+        markerInputLatitude.value = latitude;
+        markerInputLongitude.value = longitude;
+        
+        map.flyTo({
+            center:[longitude, latitude]
+        })
+    });
+    
+}
+
+window.initializeMarker = initializeMarker();
