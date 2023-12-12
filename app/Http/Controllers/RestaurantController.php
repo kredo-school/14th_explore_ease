@@ -56,22 +56,47 @@ class RestaurantController extends Controller
         $finalBudget = [];
         $stars = [];
 
+        $restaurant_names = [];
+        $restaurant_addresses = [];
+        $restaurant_id = [];
+
+        $timezoneLunch = [];
+        $timezoneDinner = [];
+
         foreach($restaurants as $restaurant){
-            $data = $this->restaurantphoto->where('restaurant_id', $restaurant->id)->get();
-            array_push($restaurant_photos, $data);
+            //get data from restaurantPhoto table, feature table, budget table.
+                $data = $this->restaurantphoto->where('restaurant_id', $restaurant->id)->get();
+                array_push($restaurant_photos, $data);
 
-            $fdata = $this->feature->where('restaurant_id', $restaurant->id)->get();
-            array_push($features, $fdata);
+                $fdata = $this->feature->where('restaurant_id', $restaurant->id)->get();
+                array_push($features, $fdata);
 
-            $bdata = $this->budget->where('restaurant_id', $restaurant->id)->get();
-            array_push($finalBudget, $bdata);
+                $bdata = $this->budget->where('restaurant_id', $restaurant->id)->get();
+                array_push($finalBudget, $bdata);
 
-            $sdata = $this->review->where('restaurant_id', $restaurant->id)->get()->pluck('star')->toArray();
-            $sdatalength = count($sdata);
-            $sdatasum = array_sum($sdata);
-            $sdatasum /= $sdatalength;
-            array_push($stars, $sdatasum);
+            //get rating data from review table, then calculate the average of stars.
+                $sdata = $this->review->where('restaurant_id', $restaurant->id)->get()->pluck('star')->toArray();
+                $sdatalength = count($sdata);
+                $sdatasum = array_sum($sdata);
+                $sdatasum /= $sdatalength;
+                array_push($stars, $sdatasum);
+
+            //get data from restaurant table.
+                $restaurant_names[] = $restaurant->name;
+                $restaurant_addresses[] = $restaurant->address;
+                $restaurant_id[] = $restaurant->id;
+
+            //get timezone data from budget table for if component on blade.php.
+                // lunch
+                $Ldata = $this->budget->where('restaurant_id', $restaurant->id)->where('timezonetype', 1)->get()->pluck('timezonetype')->toArray();
+                array_push($timezoneLunch, $Ldata);
+                // Dinner
+                $Ddata = $this->budget->where('restaurant_id', $restaurant->id)->where('timezonetype', 2)->get()->pluck('timezonetype')->toArray();
+                array_push($timezoneDinner, $Ddata);
         }
+        // dd($timezoneLunch);
+
+        array_multisort($stars, SORT_DESC, $restaurant_photos, $features, $finalBudget, $restaurant_names, $restaurant_addresses, $restaurant_id, $timezoneLunch, $timezoneDinner);
 
         return view('restaurant.ranking',
         [
@@ -80,6 +105,11 @@ class RestaurantController extends Controller
             'features'=>$features,
             'finalBudget'=>$finalBudget,
             'stars'=>$stars,
+            'restaurant_names'=>$restaurant_names,
+            'restaurant_addresses'=>$restaurant_addresses,
+            'restaurant_id'=>$restaurant_id,
+            'timezoneLunch'=>$timezoneLunch,
+            'timezoneDinner'=>$timezoneDinner,
         ]);
     }
 
