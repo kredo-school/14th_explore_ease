@@ -67,31 +67,19 @@ class ProfileController extends Controller
         $nationalities = $this->nationality->get(); 
 
         //parts of count on header.blade.php
+        // 1. count restaurants for the owner
         $count_restaurant = $user->restaurants->count();
-        if(Auth::user()->profile->usertype_id == 3){
-            
-        }else{
+        if(Auth::user()->profile->usertype_id != 3){
             $count_restaurant = "ー";
         }
-
+        
+        // 2. count reservations, reviews, bookmarks for the user
         $count_reservation = $user->reservations->count();
-        if(Auth::user()->profile->usertype_id == 2){
-            
-        }else{
-            $count_reservation = "ー";
-        }
-
         $count_review = $user->reviews->count();
-        if(Auth::user()->profile->usertype_id == 2){
-            
-        }else{
-            $count_review = "ー";
-        }
-
         $count_bookmark = $user->bookmarks->count();
-        if(Auth::user()->profile->usertype_id == 2){
-            
-        }else{
+        if(Auth::user()->profile->usertype_id != 2){
+            $count_reservation = "ー";
+            $count_review = "ー";
             $count_bookmark = "ー";
         }
 
