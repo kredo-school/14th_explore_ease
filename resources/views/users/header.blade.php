@@ -12,22 +12,22 @@
             </div>
             <div class="col-auto">
                 <div class="vertical-line mt-4">
-                    <h3>5</h3><p class="p-1">Restaurant</p>
+                    <h3>{{ $count_restaurant }}</h3><p class="p-1">Restaurant</p>
                 </div>
             </div>
             <div class="col-auto">
                 <div class="vertical-line mt-4">
-                    <h3>5</h3><p class="p-1">Resevation</p>
+                    <h3>{{ $count_reservation }}</h3><p class="p-1">Resevation</p>
                 </div>
             </div>
             <div class="col-auto">
                 <div class="vertical-line mt-4">
-                    <h3>5</h3><p class="p-1">Reviews</p>
+                    <h3>{{ $count_review }}</h3><p class="p-1">Reviews</p>
                 </div>
             </div>
             <div class="col-auto">
                 <div class="vertical-line mt-4">
-                    <h3>5</h3><p class="p-1">Bookmarks</p>
+                    <h3>{{ $count_bookmark }}</h3><p class="p-1">Bookmarks</p>
                 </div>
             </div>
             
