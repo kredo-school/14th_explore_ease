@@ -42,11 +42,11 @@
 <body>
     <div id="app">
         <!-- navigation bar -->
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #E7DA3D;">
+        <nav id="app-nav" class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #E7DA3D; height: 60px">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img class="logo" src="{{ asset('assets/Logo_ExploreEase_fin.png') }}" alt="Logo" style="width:32px; height:32px;">
-                    Explore-Ease
+                <a class="navbar-brand d-flex" href="{{ url('/') }}">
+                    <img class="logo justify-content-center" src="{{ asset('assets/Logo_ExploreEase_fin.png') }}" alt="Logo" style="width:32px; height:32px;">
+                    <span style="display: inline-block; line-height: 32px; margin-left: 5px;" class="justify-content-center">Explore-Ease</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -153,12 +153,12 @@
             @yield('content')
         </main>
 
-        <footer class="text-center text-dark mt-5 d-flex align-items-center"  style="background-color: #E7DA3D; height:168.51px">
+        <footer id="app-footer" class="text-center text-dark mt-5 d-flex align-items-center" style="background-color: #E7DA3D; height: 130px">
             <div class="container">
-                <a href="https://www.instagram.com/" class="text-decoration-none text-black me-3"><i class="fa-brands fa-instagram  fs-5"></i></a>
-                <a href="https://www.facebook.com/" class="text-decoration-none text-black me-3"><i class="fa-brands fa-square-facebook fs-5"></i></a>
-                <a href="https://www.snapchat.com/" class="text-decoration-none text-black"><i class="fa-brands fa-snapchat fs-5"></i></a>
-                <p class="fs- mt-3">Copyright ©️ 2023</p>
+                <a href="https://www.instagram.com/" class="text-decoration-none text-black me-3"><i class="fa-brands fa-instagram fa-3x"></i></a>
+                <a href="https://www.facebook.com/" class="text-decoration-none text-black me-3"><i class="fa-brands fa-square-facebook fa-3x"></i></a>
+                <a href="https://www.snapchat.com/" class="text-decoration-none text-black"><i class="fa-brands fa-snapchat fa-3x"></i></a>
+                <p class="mt-2 mb-0 fs-5">Copyright ©️ 2023</p>
             </div>
         </footer>
     </div>
