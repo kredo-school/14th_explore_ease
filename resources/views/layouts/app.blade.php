@@ -76,7 +76,7 @@
                         @else
                             <!-- Link to Restaurant page -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="restaurant-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle text-black" href="#" id="restaurant-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Restaurant
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="restaurant-dropdown">
@@ -86,8 +86,8 @@
                             </li>
 
                             <!-- Link to Ranking page -->
-                            <li class="nav-item my-auto me-3">
-                                <a href="#" class="text-decoration-none text-black">Ranking</a>
+                            <li class="nav-item my-auto ms-3 me-3">
+                                <a href="{{ route('restaurant.ranking') }}" class="text-decoration-none text-black">Ranking</a>
                             </li>
 
                             <!-- Language selector-->
