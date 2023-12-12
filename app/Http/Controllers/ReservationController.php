@@ -55,7 +55,7 @@ class ReservationController extends Controller
         $massage = $this->restaurant->findOrFail($restaurant->message);
         return view('restaurant.reservation.show')->with('$message');
     }
-    
+
     public function index()
     {
         //
@@ -80,7 +80,7 @@ class ReservationController extends Controller
             'number_of_people' => 'required',
             'datepicker' => 'required',
             'reservation_start_time' => 'required',
-            
+
 
         ]);
 
