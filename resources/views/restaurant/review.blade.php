@@ -20,9 +20,9 @@
 
 @vite(['resources/js/review_StarGraph.js'])
 
-<main class="container">
+<main class="container w-50">
     <div class="row justify-content-center">
-        <h1>REVIEWING</h1>
+        <h1 class="mt-5">Reviewing</h1>
         <form action="{{ route('restaurant.review.store', $restaurant->id) }}" method="post">
             @csrf
 
@@ -34,24 +34,22 @@
                     <div class="col-2 my-auto">
                         <a href="{{ route('profile.show', Auth::user()->id) }}" class="">
                             @if(Auth::user()->profile->avatar)
-                                <img src="{{ $profile->avatar }}" class="header-image img-thumbnail rounded-circle mx-5 w-100 h-100">
+                                <img src="{{ $profile->avatar }}" class="header-image img-thumbnail rounded-circle w-100 h-100">
                             @else
-                                <i class="fa-solid fa-circle-user icon-user text-secondary mx-5" style="font-size:9rem;"></i>
+                                <i class="fa-solid fa-circle-user icon-user text-secondary" style="font-size:9rem;"></i>
                             @endif
                         </a>
                     </div>
 
-                    <div class="col-4 my-auto">
-                        <h2 class="mx-5">{{ $user->name }}</h2>
+                    <div class="col-2 my-auto">
+                        <h4>{{ $user->name }}</h4>
                     </div>
 
-                    <div class="col-6 my-auto text-start">
+                    <div class="col-7 text-start">
                         <div>
-                            <h2>Start your review of <a href="#" style="color:#F8B0A6" class="text-decoration-none"> {{ $restaurant->name }} </a></h2>
-                        </div>
-                        <br>
-                        <div>
-                            <h3>Select rating</h3>
+                            <h3>Start your review of <a href="{{ route('restaurant.detail', $restaurant->id) }}" style="color:#F8B0A6" class="text-decoration-none"> {{ $restaurant->name }} </a></h3>
+                            <br>
+                            <h5>Select rating</h5>
                         </div>
 
                         <!-- Stars -->
@@ -67,7 +65,6 @@
                             <input id="star1" type="radio" name="star" value="1">
                             <label for="star1">★</label>
                         </div>
-                        <br>
                         {{-- Error --}}
                         @error('star')
                             <div class="text-danger small">{{ $message }}</div>
@@ -78,9 +75,9 @@
         </div>
 
         <!--Comment area -->
-            <div class="mt-5">
-                <label for="comment"><h3>COMMENT AREA</h3></label>
-                <textarea name="comment" id="comment" rows="5" class="form-control w-100 bg-transparent"></textarea>
+            <div class="mt-4">
+                <label for="comment"><h3>Comment Area</h3></label>
+                <textarea name="comment" id="comment" rows="3" class="form-control w-100 bg-transparent"></textarea>
                 {{-- Error --}}
                 @error('comment')
                     <div class="text-danger small">{{ $message }}</div>
@@ -88,7 +85,7 @@
             </div>
 
         <!--BUTTONS -->
-            <div class="row justify-content-center mt-3">
+            <div class="row justify-content-center mt-4">
                 <div class="col-6 text-end">
                     <a href="{{ route('restaurant.detail', $restaurant->id) }}" class="btn btn-light btn-outline-dark" style="width: 30%">Cancel</a>
                 </div>
@@ -104,13 +101,13 @@
             <div class="row justify-content-center">
 
                 <!--Graph -->
-                <div class="col-6">
+                <div class="col-8 my-auto">
                     <canvas id="ReviewChart" class="h-75"></canvas>
                 </div>
 
                 <!--Number -->
-                <div class="col-3 text-center">
-                        <div style="font-size: 5rem;">{{ $averageAllStars }}</div>
+                <div class="col-3 text-center my-auto">
+                        <div style="font-size: 4rem;">{{ $averageAllStars }}</div>
 
                         <div class="result-rating-rate">
                             <span class="star5_rating" data-rate="{{ $averageAllStars }}"></span>

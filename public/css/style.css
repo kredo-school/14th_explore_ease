@@ -83,10 +83,10 @@
 }
 .rate-form label {
   position: relative;
-  padding: 0 5px;
+  padding: 3px;
   color: #CAC2C7;
   cursor: pointer;
-  font-size: 50px;
+  font-size: 40px;
 }
 .rate-form label:hover {
   color: #E7DA3D;
