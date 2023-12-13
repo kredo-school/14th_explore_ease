@@ -246,9 +246,20 @@ class RestaurantController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $restaurants = $this->restaurant->all();
+        $keyword = $request->search;
+        $restaurant = [];
+        if ($keyword == null || $keyword == "") {
+            $restaurants = $this->restaurant->all();
+        } else {
+            $restaurants = $this->restaurant
+                    ->where('name', 'like', "%{$keyword}%")
+                    ->orWhere('description', 'like', "%{$keyword}%")
+                    ->orWhere('address', 'like', "%{$keyword}%")
+                    ->get();
+        }
+
         $restaurant_photos = [];
         $features = [];
         $finalBudget = [];
@@ -265,9 +276,13 @@ class RestaurantController extends Controller
             array_push($finalBudget, $bdata);
         }
 
-
-        return view('restaurant.show', ['restaurants'
-        =>$restaurants, 'restaurant_photos'=>$restaurant_photos, 'features'=>$features, 'finalBudget'=>$finalBudget]);
+        return view('restaurant.show', 
+            [
+                'restaurants' => $restaurants,
+                'restaurant_photos' => $restaurant_photos,
+                'features' => $features,
+                'finalBudget'=> $finalBudget
+            ]);
     }
 
 
@@ -432,21 +447,5 @@ class RestaurantController extends Controller
     public function destroy(Restaurant $restaurant)
     {
         //
-    }
-
-    /**
-     * Search restaurants and return list.
-     */
-    public function search(Request $request)
-    {
-        $keyword = $request->search;
-
-        $totalList = DB::table('restaurants')
-                ->where('name', 'like', "%{$keyword}%")
-                ->orWhere('description', 'like', "%{$keyword}%")
-                ->orWhere('address', 'like', "%{$keyword}%")
-                ->get();
-
-        return $totalList;
     }
 }
