@@ -43,22 +43,15 @@
 
                 {{-- Check Box  --}}
                 <div class="form-check mb-4">
-                    <input class="form-check-input" type="checkbox" id="flexCheckChecked">
-                    <label class="form-check-label" for="flexCheckChecked">
+                    <input class="form-check-input" name="seat_only" type="checkbox" id="reservation_minutes" value="60">
+                    <label class="form-check-label" for="reservation_minutes">
                     Seat only
                     </label>
-                    {{-- for send a munite of seat reservation --}}
-                    <script>
-                        jQuery('input[type=checkbox], #flexCheckChecked').change(function() {
-                            if(jQuery(this).prop('checked')){
-                                return(60);
-                            }else{
-                                return('120');
-                            }
-                        });
-                    </script>
                 </div>
 
+                {{-- test --}}
+
+                
                 {{-- Couse Area --}}
                 <h2 class="mb-4">Course</h2>
                     @foreach($all_courses as $course)
