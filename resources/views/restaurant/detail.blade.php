@@ -34,7 +34,7 @@
 
                     <!-- Rating -->
                     <div class="col-2 text-center">
-                        <a href="" class="text-decoration-none text-dark h5">
+                        <a href="" class="text-decoration-none text-dark h4">
                             {{ $averageAllStar }} <i class="fa-solid fa-star"></i>
                         </a>
                     </div>
@@ -46,14 +46,14 @@
                             @csrf
                             @method('DELETE')
                                 <button type="submit" class="btn p-0">
-                                    <i class="fa-solid fa-bookmark fa-lg"></i>
+                                    <i class="fa-solid fa-bookmark fa-lg" style="color:#E7DA3D; font-size:25px;"></i>
                                 </button>
                             </form>
                         @else
                             <form action="{{ route('bookmark.store', $restaurant->id) }}" method="post">
                             @csrf
                                 <button type="submit" class="btn p-0">
-                                    <i class="fa-regular fa-bookmark text-black fa-lg"></i>
+                                    <i class="fa-regular fa-bookmark text-black fa-lg" style="font-size:25px;"></i>
                                 </button>
                             </form>
                         @endif

@@ -15,14 +15,18 @@
 
 @section('content')
     {{-- MainV --}}
-    <div class="main vh-100 d-flex align-items-center">
+    <div class="main d-flex align-items-center" style="height: 75vh">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 p-lg-5 mx-auto my-5 text-white">
                     <h3>{{ __('messages.search_copy1') }}<br>{{ __('messages.search_copy2') }}</h3>
 
+                    {{-- hidden form --}}
+                    <form action="#" method="GET" class="main-form is-hidden">
+                        <input type="hidden" name="search" value="" class="main-hidden-search">
+                    </form>
                     {{-- search bar --}}
-                    <ion-searchbar type="text" inputmode="search" name="search" debounce="300" animated="true"
+                    <ion-searchbar type="text" inputmode="search" name="search_bar" debounce="300" animated="true"
                         class="main-searchbar px-0 py-0"
                         placeholder="{{ __('messages.search_placeholder') }}">
                     </ion-searchbar>
@@ -33,10 +37,6 @@
                             The current button
                             </button>
                         </a>
-                        <button type="button" class="list-group-item list-group-item-action">A second button item</button>
-                        <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                        <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-                        <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
                         -->
                     </div>
                 </div>
@@ -44,15 +44,24 @@
         </div>
     </div>
 
-
     <script>
         /**
          * Search Restaurants Script at index.blade.php
          */
         const searchbar = document.querySelector('.main-searchbar');
-        searchbar.addEventListener("ionInput", main);
+        searchbar.addEventListener("ionInput", showList);
+        searchbar.addEventListener("ionChange", moveList);
 
-        async function main() {
+        function moveList() {
+            try {
+                const searchKeyWord = getSearchKeyWord();
+                submitForm(searchKeyWord);
+            } catch (error) {
+                console.error(`It has an error (${error})`);
+            }
+        }
+
+        async function showList() {
             try {
                 const searchKeyWord = getSearchKeyWord();
                 const restautants = await fetchSearchApi(searchKeyWord);
@@ -65,6 +74,23 @@
 
         function getSearchKeyWord() {
             return document.querySelector('.main-searchbar').value;
+        }
+
+        function getFormElement() {
+            return document.querySelector('.main-form')
+        }
+
+        function getHiddenSearchElement() {
+            return document.querySelector('.main-hidden-search')
+        }
+
+        function submitForm(searchKeyWord) {
+            const url = "/restaurant/show";
+            const form = getFormElement();
+            const hidden = getHiddenSearchElement();
+            form.action = url;
+            hidden.value = searchKeyWord;
+            form.submit();
         }
 
         function fetchSearchApi(searchKeyWord) {
