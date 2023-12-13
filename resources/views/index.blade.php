@@ -19,7 +19,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 p-lg-5 mx-auto my-5 text-white">
-                    <h3>{{ __('messages.search_copy1') }}<br>{{ __('messages.search_copy2') }}</h3>
+                    <h2>{{ __('messages.search_copy1') }}<br>{{ __('messages.search_copy2') }}</h2>
 
                     {{-- hidden form --}}
                     <form action="#" method="GET" class="main-form is-hidden">
