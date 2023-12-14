@@ -50,7 +50,67 @@ class RestaurantController extends Controller
 
     /** Show restaurant ranking page */
     public function restaurantRanking(){
-        return view('restaurant.ranking');
+        $restaurants = $this->restaurant->all();
+        $restaurant_photos = [];
+        $features = [];
+        $finalBudget = [];
+        $stars = [];
+
+        $restaurant_names = [];
+        $restaurant_addresses = [];
+        $restaurant_id = [];
+
+        $timezoneLunch = [];
+        $timezoneDinner = [];
+
+        foreach($restaurants as $restaurant){
+            //get data from restaurantPhoto table, feature table, budget table.
+                $data = $this->restaurantphoto->where('restaurant_id', $restaurant->id)->get();
+                array_push($restaurant_photos, $data);
+
+                $fdata = $this->feature->where('restaurant_id', $restaurant->id)->get();
+                array_push($features, $fdata);
+
+                $bdata = $this->budget->where('restaurant_id', $restaurant->id)->get();
+                array_push($finalBudget, $bdata);
+
+            //get rating data from review table, then calculate the average of stars.
+                $sdata = $this->review->where('restaurant_id', $restaurant->id)->get()->pluck('star')->toArray();
+                $sdatalength = count($sdata);
+                $sdatasum = array_sum($sdata);
+                $sdatasum /= $sdatalength;
+                array_push($stars, $sdatasum);
+
+            //get data from restaurant table.
+                $restaurant_names[] = $restaurant->name;
+                $restaurant_addresses[] = $restaurant->address;
+                $restaurant_id[] = $restaurant->id;
+
+            //get timezone data from budget table for if component on blade.php.
+                // lunch
+                $Ldata = $this->budget->where('restaurant_id', $restaurant->id)->where('timezonetype', 1)->get()->pluck('timezonetype')->toArray();
+                array_push($timezoneLunch, $Ldata);
+                // Dinner
+                $Ddata = $this->budget->where('restaurant_id', $restaurant->id)->where('timezonetype', 2)->get()->pluck('timezonetype')->toArray();
+                array_push($timezoneDinner, $Ddata);
+        }
+        // dd($timezoneLunch);
+
+        array_multisort($stars, SORT_DESC, $restaurant_photos, $features, $finalBudget, $restaurant_names, $restaurant_addresses, $restaurant_id, $timezoneLunch, $timezoneDinner);
+
+        return view('restaurant.ranking',
+        [
+            'restaurants'=>$restaurants,
+            'restaurant_photos'=>$restaurant_photos,
+            'features'=>$features,
+            'finalBudget'=>$finalBudget,
+            'stars'=>$stars,
+            'restaurant_names'=>$restaurant_names,
+            'restaurant_addresses'=>$restaurant_addresses,
+            'restaurant_id'=>$restaurant_id,
+            'timezoneLunch'=>$timezoneLunch,
+            'timezoneDinner'=>$timezoneDinner,
+        ]);
     }
 
     /** Show restaurant detail page */
@@ -186,9 +246,20 @@ class RestaurantController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $restaurants = $this->restaurant->all();
+        $keyword = $request->search;
+        $restaurant = [];
+        if ($keyword == null || $keyword == "") {
+            $restaurants = $this->restaurant->all();
+        } else {
+            $restaurants = $this->restaurant
+                    ->where('name', 'like', "%{$keyword}%")
+                    ->orWhere('description', 'like', "%{$keyword}%")
+                    ->orWhere('address', 'like', "%{$keyword}%")
+                    ->get();
+        }
+
         $restaurant_photos = [];
         $features = [];
         $finalBudget = [];
@@ -205,9 +276,13 @@ class RestaurantController extends Controller
             array_push($finalBudget, $bdata);
         }
 
-
-        return view('restaurant.show', ['restaurants'
-        =>$restaurants, 'restaurant_photos'=>$restaurant_photos, 'features'=>$features, 'finalBudget'=>$finalBudget]);
+        return view('restaurant.show', 
+            [
+                'restaurants' => $restaurants,
+                'restaurant_photos' => $restaurant_photos,
+                'features' => $features,
+                'finalBudget'=> $finalBudget
+            ]);
     }
 
 
@@ -372,21 +447,5 @@ class RestaurantController extends Controller
     public function destroy(Restaurant $restaurant)
     {
         //
-    }
-
-    /**
-     * Search restaurants and return list.
-     */
-    public function search(Request $request)
-    {
-        $keyword = $request->search;
-
-        $totalList = DB::table('restaurants')
-                ->where('name', 'like', "%{$keyword}%")
-                ->orWhere('description', 'like', "%{$keyword}%")
-                ->orWhere('address', 'like', "%{$keyword}%")
-                ->get();
-
-        return $totalList;
     }
 }
