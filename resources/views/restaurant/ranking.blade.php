@@ -66,21 +66,21 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-4 pe-0">
                                 @foreach($features[$loop->index] as $feature)
-                                    <span class="h5 border-0 me-2 rounded text-center px-2" style="background-color: rgb(231, 52, 8); color: white">
+                                    <span class="h6 border-0 me-1 rounded text-center px-1" style="background-color: rgb(231, 52, 8); color: white">
                                         {{$feature->featuretype->name}}
                                     </span>
                                 @endforeach
                             </div>
-                            <div class="col-6 text-start">
+                            <div class="col-8 text-end">
                                 @if (array_sum($timezoneLunch[$loop->index]) == 0)
                                     Lunch&nbsp;: --- <br>
                                 @else
                                     Lunch&nbsp;:
                                     @foreach($finalBudget[$loop->index] as $budget)
                                         @if($budget->timezonetype == 1)
-                                            <div class="border-0 rounded-1 px-1 text-center mb-1" style="display:inline-block; width: 50px; background-color: #E7DA3D; color: black">
+                                            <div class="border-0 rounded-1 px-1 text-center mb-1" style="display:inline-block; width: 40px; background-color: #E7DA3D; color: black; font-size: 10pt">
                                                 {!! str_replace('\\', '¥', e($budget->budgetvalue)) !!}
                                             </div>
                                         @endif
@@ -91,7 +91,7 @@
                                     Dinner:
                                     @foreach($finalBudget[$loop->index] as $budget)
                                         @if($budget->timezonetype == 2)
-                                            <div class="border-0 rounded-1 px-1 text-center mb-1" style="display:inline-block; width: 50px; background-color: #E7DA3D; color: black">
+                                            <div class="border-0 rounded-1 px-1 text-center mb-1" style="display:inline-block; width: 40px; background-color: #E7DA3D; color: black; font-size: 10pt">
                                                 {!! str_replace('\\', '¥', e($budget->budgetvalue)) !!}
                                             </div>
                                         @endif

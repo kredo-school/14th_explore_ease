@@ -29,12 +29,12 @@
                 <div class="row">
                     <!-- Resturant name -->
                     <div class="col-8">
-                        <h2>{{ $restaurant->name }}</h2>
+                        <h2 style="line-height: 42.55px">{{ $restaurant->name }}</h2>
                     </div>
 
                     <!-- Rating -->
                     <div class="col-2 text-center">
-                        <a href="" class="text-decoration-none text-dark h4">
+                        <a href="" class="text-decoration-none text-dark h4" style="line-height: 42.55px">
                             <span>{{ $averageAllStar }}</span>
                             <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 35px; height: 35px">
                                 <i class="fa-solid fa-star"></i>
@@ -48,15 +48,16 @@
                             <form action="{{ route('bookmark.destroy', $restaurant->id) }}" method="post">
                             @csrf
                             @method('DELETE')
-                                <button type="submit" class="btn p-0">
-                                    <i class="fa-solid fa-bookmark fa-lg" style="color:#E7DA3D; font-size:25px;"></i>
+                                <button type="submit" class="btn p-0" style="line-height: 42.55px">
+                                    <i class="fa-solid fa-bookmark fa-2x" style="color: #E7DA3D; font-size: 25px; line-height: 42.55px"></i> 
                                 </button>
+                                <span class="text-decoration-none text-dark h4" style="line-height: 42.55px">  Saved</span>
                             </form>
                         @else
                             <form action="{{ route('bookmark.store', $restaurant->id) }}" method="post">
                             @csrf
-                                <button type="submit" class="btn p-0">
-                                    <i class="fa-regular fa-bookmark text-black fa-lg" style="font-size:25px;"></i>
+                                <button type="submit" class="btn p-0" style="line-height: 42.55px">
+                                    <i class="fa-regular fa-bookmark text-black fa-2x" style="font-size: 25px; line-height: 42.55px"></i>
                                 </button>
                             </form>
                         @endif
