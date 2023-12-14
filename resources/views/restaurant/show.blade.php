@@ -46,7 +46,7 @@
                             Lunch:
                                 @foreach($finalBudget[$loop->index] as $budget)
                                     @if($budget->timezonetype == 1)
-                                        <div class="border-0 rounded-1 px-1 text-center mb-1" style="display:inline-block; width: 50px; background-color: rgb(176, 127, 4); color: white">
+                                        <div class="border-0 rounded-1 px-1 text-center mb-1" style="display:inline-block; width: 50px; background-color: #E7DA3D; color: black">
                                             {!! str_replace('\\', '¥', e($budget->budgetvalue)) !!}
                                         </div>
                                     @endif
@@ -54,7 +54,7 @@
                             Dinner:
                                 @foreach($finalBudget[$loop->index] as $budget)                              
                                     @if($budget->timezonetype == 2)
-                                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block;; width: 50px; background-color: rgb(176, 127, 4); color: white">
+                                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block;; width: 50px; background-color: #E7DA3D; color: black">
                                             {!! str_replace('\\', '¥', e($budget->budgetvalue)) !!}
                                         </div>
                                     @endif

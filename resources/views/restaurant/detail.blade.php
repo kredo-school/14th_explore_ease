@@ -77,7 +77,7 @@
                 <h5 class="mt-4">
                     <span style="display:inline-block; width:60px;">Lunch :</span>
                     @foreach ($LunchValues as $LunchValue)
-                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block; width: 70px; background-color: rgb(176, 127, 4); color: white"">
+                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block; width: 70px; background-color: #E7DA3D; color: black">
                             {!! str_replace('\\', '¥', e($LunchValue)) !!}
                         </div>&nbsp;
                     @endforeach
@@ -85,7 +85,7 @@
                 <h5>
                     <span style="display:inline-block; width:60px;">Dinner:</span>
                     @foreach ($DinnerValues as $DinnerValue)
-                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block; width: 70px; background-color: rgb(176, 127, 4); color: white"">
+                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block; width: 70px; background-color: #E7DA3D; color: black">
                             {!! str_replace('\\', '¥', e($DinnerValue)) !!}
                         </div>&nbsp;
                     @endforeach
@@ -97,9 +97,9 @@
                 <!-- Feature -->
                 <div class="mt-4">
                     @foreach ($featureTypes as $featureType)
-                    <div>
-                        <div class="btn btn-light border-0 me-3" style="float:left; background-color: rgb(231, 52, 8); color: white">{{ $featureType }}</div>
-                    </div>
+                        <span class="h5 border-0 me-2 rounded text-center px-2" style="background-color: rgb(231, 52, 8); color: white">
+                            {{ $featureType }}
+                        </span>
                     @endforeach
                 </div>
                 <br>
