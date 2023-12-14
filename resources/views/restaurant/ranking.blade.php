@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/ranking.css')}}">
 
 <div class="container">
-    <div class="h1 mt-5">FOREIGNERS FRIENDLY RANKING</div>
+    <div class="h1 mt-5">Foreigners Friendly Ranking</div>
 
     <div class="row my-5">
         <ul class="col slider">
