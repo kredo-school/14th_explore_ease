@@ -37,10 +37,10 @@ Route::group(['middleware'=>'set.locale'], function () {
         return view('index');
     })->middleware('existprofile');
 
-    // Show searched list in index page
-    Route::get('/restaurant/search', [RestaurantController::class, 'search'])->name('restaurant.search');
+    // Show restaurant list
+    Route::get('/restaurant/show', [App\Http\Controllers\RestaurantController::class, 'index'])->name('restaurant.show');
     // Show restaurant detail
-    Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
+    Route::get('/restaurant/{id}/detail', [App\Http\Controllers\RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
 
     // Authenticate exclude index page
     Route::group(['middleware'=>'auth'], function () {
@@ -84,7 +84,6 @@ Route::group(['middleware'=>'set.locale'], function () {
        
 
         // Restaurant Controller
-        Route::get('/restaurant/show', [App\Http\Controllers\RestaurantController::class, 'index'])->name('restaurant.show');
         Route::get('/restaurant/adding', [App\Http\Controllers\RestaurantController::class, 'create'])->name('restaurant.adding');
         Route::get('/restaurant/edit', [App\Http\Controllers\RestaurantController::class, 'edit'])->name('restaurant.edit');
         Route::post('/restaurant/store', [App\Http\Controllers\RestaurantController::class, 'store'])->name('restaurant.store');

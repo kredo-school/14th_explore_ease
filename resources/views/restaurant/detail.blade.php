@@ -28,13 +28,13 @@
             <div class="col-8">
                 <div class="row">
                     <!-- Resturant name -->
-                    <div class="col-6">
+                    <div class="col-8">
                         <h2>{{ $restaurant->name }}</h2>
                     </div>
 
                     <!-- Rating -->
                     <div class="col-2 text-center">
-                        <a href="" class="text-decoration-none text-dark h5">
+                        <a href="" class="text-decoration-none text-dark h4">
                             {{ $averageAllStar }} <i class="fa-solid fa-star"></i>
                         </a>
                     </div>
@@ -46,14 +46,14 @@
                             @csrf
                             @method('DELETE')
                                 <button type="submit" class="btn p-0">
-                                    <i class="fa-solid fa-bookmark fa-lg"></i>
+                                    <i class="fa-solid fa-bookmark fa-lg" style="color:#E7DA3D; font-size:25px;"></i>
                                 </button>
                             </form>
                         @else
                             <form action="{{ route('bookmark.store', $restaurant->id) }}" method="post">
                             @csrf
                                 <button type="submit" class="btn p-0">
-                                    <i class="fa-regular fa-bookmark text-black fa-lg"></i>
+                                    <i class="fa-regular fa-bookmark text-black fa-lg" style="font-size:25px;"></i>
                                 </button>
                             </form>
                         @endif
@@ -62,7 +62,7 @@
                     <!-- Restaurant edit page -->
                     @if($profile->usertype_id == 3)
                     <div class="col-2 text-end">
-                        <a href="{{route('restaurant.edit', $restaurant->id)}}" class="btn btn-secondary border-dark w-75">Edit</a>
+                        <a href="{{route('restaurant.edit', $restaurant->id)}}" class="btn b-color w-75">Edit</a>
                     </div>
                     @endif
                 </div>
@@ -91,7 +91,7 @@
                 <div class="mt-4">
                     @foreach ($featureTypes as $featureType)
                     <div>
-                        <div href="" class="btn btn-light border-dark me-3" style="float:left;">{{ $featureType }}</div>
+                        <div href="" class="border rounded-3 p-1 border-dark me-3" style="float:left;">{{ $featureType }}</div>
                     </div>
                     @endforeach
                 </div>
@@ -221,8 +221,8 @@
                     <div class="col-10">
                         <h5>Location</h5>
                     </div>
-                    <div class="col-2 text-end">
-                        <div class="btn btn-secondary border-dark">{{ $areatype->station_name }}</div>
+                    <div class="col-2 text-center">
+                        <div class="border border-dark rounded-3 p-1">{{ $areatype->station_name }}</div>
                     </div>
                 </div>
                 <hr>
@@ -243,7 +243,7 @@
                         <a href="" class="btn btn-light border-dark">Course</a>
                     </div>
                     <div class="col-2 text-end">
-                        <a href="{{ route('restaurant.reservations', $restaurant->id) }}" class="btn btn-secondary border-dark">Reservation</a>
+                        <a href="{{ route('restaurant.reservations', $restaurant->id) }}" class="btn b-color">Reservation</a>
                     </div>
                 </div>
                 <hr>
@@ -306,7 +306,7 @@
                         <h5>Review</h5>
                     </div>
                     <div class="col-2 text-end">
-                        <a href="{{ route('restaurant.review',$restaurant->id) }}" class="btn btn-secondary border-dark">Reiview</a>
+                        <a href="{{ route('restaurant.review',$restaurant->id) }}" class="btn b-color">Reiview</a>
                     </div>
                 </div>
                 <hr>
@@ -347,6 +347,6 @@
         </div>
 
     </main>
-
+    @vite(['resources/js/checkbuttonstatus.js'])
 
 @endsection

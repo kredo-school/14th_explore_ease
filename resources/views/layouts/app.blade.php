@@ -42,11 +42,11 @@
 <body>
     <div id="app">
         <!-- navigation bar -->
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #E7DA3D;">
+        <nav id="app-nav" class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #E7DA3D; height: 60px">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img class="logo" src="{{ asset('assets/Logo_ExploreEase_fin.png') }}" alt="Logo" style="width:32px; height:32px;">
-                    Explore-Ease
+                <a class="navbar-brand d-flex" href="{{ url('/') }}">
+                    <img class="logo justify-content-center" src="{{ asset('assets/Logo_ExploreEase_fin.png') }}" alt="Logo" style="width: 42px; height: 42px;">
+                    <span style="display: inline-block; line-height: 42px; margin-left: 5px;" class="justify-content-center">Explore-Ease</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -59,7 +59,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto h5">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -77,7 +77,7 @@
                             <!-- Link to Restaurant page -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-black" href="#" id="restaurant-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Restaurant
+                                    <span style="display: inline-block; line-height: 42px;">Restaurant</span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="restaurant-dropdown">
                                     <li><a class="dropdown-item" href="{{ route('restaurant.show') }}">See Restaurants</a></li>
@@ -87,13 +87,15 @@
 
                             <!-- Link to Ranking page -->
                             <li class="nav-item my-auto ms-3 me-3">
-                                <a href="{{ route('restaurant.ranking') }}" class="text-decoration-none text-black">Ranking</a>
+                                <a href="{{ route('restaurant.ranking') }}" class="text-decoration-none text-black">
+                                    <span style="display: inline-block; line-height: 42px;">Ranking</span>
+                                </a>
                             </li>
 
                             <!-- Language selector-->
-                            <li class="nav-item dropdown my-auto me-3">
-                                <a class="nav-link dropdown-toggle my-auto me-3 text-black" href="#" id="dropdown" data-bs-toggle="dropdown">
-                                    <i class="fa-solid fa-globe"></i> Language
+                            <li class="nav-item dropdown my-auto me-1">
+                                <a class="nav-link dropdown-toggle my-auto text-black" href="#" id="dropdown" data-bs-toggle="dropdown">
+                                    <span style="display: inline-block; line-height: 42px;"><i class="fa-solid fa-globe"></i> Language</span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -118,7 +120,9 @@
                                     @if(Auth::user()->avatar)
                                         <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}" class="rounded-circle avatar-sm">
                                     @else
-                                        <i class="fa-regular fa-circle-user" style="color: #000000; "></i>
+                                        <span style="display: inline-block; line-height: 42px;">
+                                            <i class="fa-regular fa-circle-user fa-lg" style="color: #000000; "></i>
+                                        </span>
                                     @endif
                                 </button>
 
@@ -153,12 +157,12 @@
             @yield('content')
         </main>
 
-        <footer class="text-center text-dark mt-5 d-flex align-items-center"  style="background-color: #E7DA3D; height:168.51px">
+        <footer id="app-footer" class="text-center text-dark mt-5 d-flex align-items-center" style="background-color: #E7DA3D; height: 130px">
             <div class="container">
-                <a href="https://www.instagram.com/" class="text-decoration-none text-black me-3"><i class="fa-brands fa-instagram  fs-5"></i></a>
-                <a href="https://www.facebook.com/" class="text-decoration-none text-black me-3"><i class="fa-brands fa-square-facebook fs-5"></i></a>
-                <a href="https://www.snapchat.com/" class="text-decoration-none text-black"><i class="fa-brands fa-snapchat fs-5"></i></a>
-                <p class="fs- mt-3">Copyright ©️ 2023</p>
+                <a href="https://www.instagram.com/" class="text-decoration-none text-black me-5"><i class="fa-brands fa-instagram fa-3x"></i></a>
+                <a href="https://www.facebook.com/" class="text-decoration-none text-black me-5"><i class="fa-brands fa-square-facebook fa-3x"></i></a>
+                <a href="https://www.snapchat.com/" class="text-decoration-none text-black"><i class="fa-brands fa-snapchat fa-3x"></i></a>
+                <p class="mt-2 mb-0 fs-5">Copyright ©️ 2023</p>
             </div>
         </footer>
     </div>
