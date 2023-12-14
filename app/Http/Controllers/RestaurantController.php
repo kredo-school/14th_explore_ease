@@ -423,16 +423,23 @@ class RestaurantController extends Controller
         $foodtype = new FoodType();
         $foodtypes = $foodtype->all();
 
+        $features = new Feature();
+        $features = $features->all();
+
         $openhour = new OpenHour();
         $openhours = $openhour->where('restaurant_id', $id)->get();
 
         $course = new Course();
         $courses = $course->where('restaurant_id', $id)->get();
 
+        $s_feature = new Feature();
+        $s_features = $s_feature->where('restaurant_id', $id)->get();
+        
+
         // dd($openhours[1]->openinghours);
 
         return view('restaurant.edit')->with('areatypes', $areatypes)->with('foodtypes', $foodtypes)->with('restaurant', $restaurant)->with('openhours', $openhours)
-        ->with('courses', $courses);
+        ->with('courses', $courses)->with('s_features', $s_features)->with('features', $features);
     }
 
     /**
