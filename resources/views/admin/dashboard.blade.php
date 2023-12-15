@@ -8,10 +8,10 @@
 
 @section('content')
 
-<div class="container w-75">
-  <h2>Dashboards</h2>
+<div class="container w-50">
+  <h2 class="mt-5">Dashboards</h2>
 {{-- Number of users, reviews, and reservations --}}
-        <div class="row border">
+        <div class="row border mt-3">
             <div class="col-4 themed-grid-col text-center">
                 <h4 class="text-center">Users</h4>
                 <span>
