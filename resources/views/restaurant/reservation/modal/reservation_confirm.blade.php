@@ -10,11 +10,14 @@
           <div class="modal-body">
               <p>Are you sure you want to confirm this</p>
               <div class="mt-3">
-                  <p id="confirmation_number_of_people" class="mt-1 text-muted"></p>
-                  <p id="confirmation_reservation_start_date" class="mt-1 text-muted"></p>
-                  <p id="confirmation_reservation_start_time" class="mt-1 text-muted"></p>
-                  <p id="confirmation_reservation_requests" class="mt-1 text-muted"></p>
-              </div>
+                <p id="confirmation_number_of_people" class="mt-1 text-muted"></p>
+                <p id="confirmation_reservation_start_date" class="mt-1 text-muted"></p>
+                <p id="confirmation_reservation_start_time" class="mt-1 text-muted"></p>
+                <p id="confirmation_reservation_seats" class="mt-1 text-muted"></p>
+                <p id="confirmation_course" class="mt-1 text-muted"></p>
+                <p id="confirmation_reservation_requests" class="mt-1 text-muted"></p>
+            </div>
+
           </div>
 
           <div class="modal-footer border-0">
@@ -23,11 +26,11 @@
                   <input name="number_of_people" id="hidden_number_of_people" type="hidden" >
                   <input name="reservation_start_date" id="hidden_reservation_start_date" type="hidden" >
                   <input name="reservation_start_time" id="hidden_reservation_start_time" type="hidden" >
-                  
-                  <input name="reservation_start_date" id="hidden_reservation_start_date" type="hidden" >
-                  <input name="reservation_end_time" id="reservation_end_time" type="hidden" >
-                  <input name="reservation_minutes" id="reservation_minutes" type="hidden" >
+                  <input name="reservation_seats_only" id="hidden_reservation_seats_only" type="hidden" >
+                  <input name="reservation_end_date" id="hidden_reservation_end_date" type="hidden">
 
+                  <input name="reservation_end_time" id="reservation_end_time" type="hidden">
+                  <input name="reservation_minutes" id="reservation_minutes" type="hidden" >
                   <input name="course" id="hidden_course" type="hidden" >
                   <input name="requests" id="hidden_requests" type="hidden" >
                   <button class="btn  b-color btn-sm" type="button" data-bs-dismiss="modal">Cancel</button>

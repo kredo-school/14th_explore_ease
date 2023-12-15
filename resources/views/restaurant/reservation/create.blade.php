@@ -23,7 +23,7 @@
                             @enderror
                     </div>
                     <div class='container mb-4'>
-                        <label for="">Date</label>
+                        <label for="datepicker">Date</label>
                         <input id="datepicker" name="reservation_start_date" required/>
                         <script>
                             $('#datepicker').datepicker({
@@ -43,8 +43,8 @@
 
                 {{-- Check Box  --}}
                 <div class="form-check mb-4">
-                    <input class="form-check-input" name="seat_only" type="checkbox" id="reservation_minutes" value="60">
-                    <label class="form-check-label" for="reservation_minutes">
+                    <input class="form-check-input" name="reservation_seats_only" type="checkbox" id="reservation_seats_only" value="60">
+                    <label class="form-check-label" for="reservation_seats_only">
                     Seat only
                     </label>
                 </div>
@@ -66,7 +66,7 @@
                                     <div class="card-body">
                                         <h4 class="card-title">{{ $course->name }} <span>¥ {{ $course->price }} </span></h4>
                                             <p class="card-text">{{ $course->description }}<a href="#">>Read More</a></p>
-                                            <input type="radio" class="btn-check b-color" name="course" id="{{ $course->id }}" value="{{ $course->id }}" autocomplete="off">
+                                            <input type="radio" class="btn-check b-color" name="course" course_name="{{ $course->name }}" id="{{ $course->id }}" value="{{ $course->id }}" autocomplete="off">
                                             <label class="btn b-color" for="{{ $course->id }}">Select</label>
                                     </div>
                                 </div>

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reservation extends Model
 {
     use HasFactory;
-
+    public $timestamps = true;
     /** 
      * Reservation-User
      * a Reservation belongs to a User
