@@ -35,7 +35,10 @@
                     <!-- Rating -->
                     <div class="col-2 text-center">
                         <a href="" class="text-decoration-none text-dark h4">
-                            {{ $averageAllStar }} <i class="fa-solid fa-star"></i>
+                            <span>{{ $averageAllStar }}</span>
+                            <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 35px; height: 35px">
+                                <i class="fa-solid fa-star"></i>
+                            </span>
                         </a>
                     </div>
 
@@ -74,13 +77,17 @@
                 <h5 class="mt-4">
                     <span style="display:inline-block; width:60px;">Lunch :</span>
                     @foreach ($LunchValues as $LunchValue)
-                    <div class="border border-black rounded-1 px-1" style="display:inline-block;">{!! str_replace('\\', '¥', e($LunchValue)) !!}</div>&nbsp;
+                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block; width: 70px; background-color: rgb(176, 127, 4); color: white"">
+                            {!! str_replace('\\', '¥', e($LunchValue)) !!}
+                        </div>&nbsp;
                     @endforeach
                 </h5>
                 <h5>
                     <span style="display:inline-block; width:60px;">Dinner:</span>
                     @foreach ($DinnerValues as $DinnerValue)
-                    <div class="border border-black rounded-1 px-1" style="display:inline-block;">{!! str_replace('\\', '¥', e($DinnerValue)) !!}</div>&nbsp;
+                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block; width: 70px; background-color: rgb(176, 127, 4); color: white"">
+                            {!! str_replace('\\', '¥', e($DinnerValue)) !!}
+                        </div>&nbsp;
                     @endforeach
                 </h5>
 
@@ -91,7 +98,7 @@
                 <div class="mt-4">
                     @foreach ($featureTypes as $featureType)
                     <div>
-                        <div href="" class="border rounded-3 p-1 border-dark me-3" style="float:left;">{{ $featureType }}</div>
+                        <div class="btn btn-light border-0 me-3" style="float:left; background-color: rgb(231, 52, 8); color: white">{{ $featureType }}</div>
                     </div>
                     @endforeach
                 </div>
