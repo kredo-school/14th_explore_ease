@@ -16,21 +16,21 @@
                 <h4 class="text-center">Users</h4>
                 <span>
                     <i class="fa-solid fa-circle-user fa-3x"></i>
-                    <p class="d-inline display-5">19,281</p>
+                    <p class="d-inline display-5">{{ count($profileUsers) }}</p>
                 </span>
             </div>
             <div class="col-4 themed-grid-col text-center">
                 <h4 class="text-center">Owners</h4>
                 <span>
                     <i class="fa-solid fa-house-user fa-3x"></i>
-                    <p class="d-inline display-5">4,698</p>
+                    <p class="d-inline display-5">{{ count($profileOwners) }}</p>
                 </span>
             </div>
             <div class="col-4 themed-grid-col text-center">
                 <h4 class="text-center">Restaurants</h4>
                 <span>
                     <i class="fa-solid fa-utensils fa-3x"></i>
-                    <p class="d-inline display-5">5,289</p>
+                    <p class="d-inline display-5">{{ count($restaurants) }}</p>
                 </span>
             </div>
          </div>
@@ -39,14 +39,14 @@
                     <h4 class="text-center">Reviews</h4>
                     <span>
                         <i class="fa-solid fa-clipboard fa-3x"></i>
-                        <p class="d-inline display-5">289,543</p>
+                        <p class="d-inline display-5">{{ count($reviews) }}</p>
                     </span>
                 </div>
                 <div class="col-6 themed-grid-col text-center">
                     <h4 class="text-center">Reservations</h4>
                     <span>
                     <i class="fa-solid fa-calendar-check fa-3x"></i>
-                    <p class="d-inline display-5">156,987</p>
+                    <p class="d-inline display-5">{{ count($reservations) }}</p>
                 </span>
             </div>
         </div>
