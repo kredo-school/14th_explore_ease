@@ -91,10 +91,12 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/restaurant/ranking', [App\Http\Controllers\RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
 
         // Reservation Controller
-        //Tommie working on here:)
         Route::get('/restaurant/{id}/reservasions', [App\Http\Controllers\ReservationController::class, 'show'])->name('restaurant.reservations');
         Route::get('/restaurant/{id}/reservasions/create', [App\Http\Controllers\ReservationController::class, 'create'])->name('restaurant.reservation.create');
-        Route::post('/restaurant/reservasions/store', [App\Http\Controllers\ReservationController::class, 'store'])->name('restaurant.reservation.store');
+        Route::post('/restaurant/reservasions/store/{restaurant_id}', [App\Http\Controllers\ReservationController::class, 'store'])->name('restaurant.reservation.store');
+        // detail
+        Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
+
 
         // Review Controller
         // show review page
