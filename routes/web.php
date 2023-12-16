@@ -70,6 +70,19 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/profile/reservation', [App\Http\Controllers\HomeController::class, 'profileReservation'])->name('profile.reservation');
         Route::get('/profile/review', [App\Http\Controllers\HomeController::class, 'profileReview'])->name('profile.review');
 
+
+        Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
+
+        Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
+
+        Route::get('/restaurant/{id}/review', [App\Http\Controllers\RestaurantController::class, 'restaurantReview'])->name('restaurant.review');
+
+
+        Route::get('/restaurant/{id}/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
+
+        Route::get('restaurant/{id}/update', [RestaurantController::class, 'update'])->name('restaurant.update');
+       
+
         // Restaurant Controller
         Route::get('/restaurant/adding', [App\Http\Controllers\RestaurantController::class, 'create'])->name('restaurant.adding');
         Route::get('/restaurant/edit', [App\Http\Controllers\RestaurantController::class, 'edit'])->name('restaurant.edit');
