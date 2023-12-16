@@ -22,10 +22,11 @@
                         <div class="col-9">
                             <a href="{{ route('restaurant.detail', $restaurant->id) }}" class="text-black text-bold text-decoration-none"><p class="h3">{{$restaurant->name}}</p></a>
                         </div>
-                        <div class="col-auto h3">
-                            <p class="border border-dark">
-                                4.5 <i class="fa-solid fa-star"></i>
-                            </p>
+                        <div class="col-3 h3 text-end">
+                            <span>4.5</span>
+                            <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 35px; height: 35px">
+                                <i class="fa-solid fa-star"></i>
+                            </span>
                         </div>
                     </div>
                     <div class="row">
@@ -36,7 +37,7 @@
                     <div class="row">
                         <div class="col-auto">
                             @foreach($features[$loop->index] as $feature)
-                                <span class="h4 border border-dark me-2 rounded">
+                                <span class="h5 border-0 me-2 rounded text-center px-2" style="background-color: rgb(231, 52, 8); color: white">
                                     {{$feature->featuretype->name}}
                                 </span>
                             @endforeach
@@ -45,15 +46,17 @@
                             Lunch:
                                 @foreach($finalBudget[$loop->index] as $budget)
                                     @if($budget->timezonetype == 1)
-                                        <span class="border border-dark">{{$budget->budgetvalue}}</span>
+                                        <div class="border-0 rounded-1 px-1 text-center mb-1" style="display:inline-block; width: 50px; background-color: #E7DA3D; color: black">
+                                            {!! str_replace('\\', '¥', e($budget->budgetvalue)) !!}
+                                        </div>
                                     @endif
                                 @endforeach <br>
                             Dinner:
                                 @foreach($finalBudget[$loop->index] as $budget)                              
                                     @if($budget->timezonetype == 2)
-                                        <span class="border border-dark">
-                                            {{$budget->budgetvalue}}
-                                        </span>
+                                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block;; width: 50px; background-color: #E7DA3D; color: black">
+                                            {!! str_replace('\\', '¥', e($budget->budgetvalue)) !!}
+                                        </div>
                                     @endif
                                 @endforeach
                         </div>

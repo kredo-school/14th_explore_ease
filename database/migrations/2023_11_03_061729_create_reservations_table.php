@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('seat_id')->nullable();
             $table->unsignedBigInteger('course_id')->nullable();
-            $table->integer('number_of_people')->nullable();
+            $table->integer('number_of_people');
             $table->text('requests')->nullable();
 
             $table->timestamps();

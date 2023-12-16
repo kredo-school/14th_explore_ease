@@ -29,13 +29,16 @@
                 <div class="row">
                     <!-- Resturant name -->
                     <div class="col-8">
-                        <h2>{{ $restaurant->name }}</h2>
+                        <h2 style="line-height: 42.55px">{{ $restaurant->name }}</h2>
                     </div>
 
                     <!-- Rating -->
                     <div class="col-2 text-center">
-                        <a href="" class="text-decoration-none text-dark h4">
-                            {{ $averageAllStar }} <i class="fa-solid fa-star"></i>
+                        <a href="" class="text-decoration-none text-dark h4" style="line-height: 42.55px">
+                            <span>{{ $averageAllStar }}</span>
+                            <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 35px; height: 35px">
+                                <i class="fa-solid fa-star"></i>
+                            </span>
                         </a>
                     </div>
 
@@ -45,15 +48,16 @@
                             <form action="{{ route('bookmark.destroy', $restaurant->id) }}" method="post">
                             @csrf
                             @method('DELETE')
-                                <button type="submit" class="btn p-0">
-                                    <i class="fa-solid fa-bookmark fa-lg" style="color:#E7DA3D; font-size:25px;"></i>
+                                <button type="submit" class="btn p-0" style="line-height: 42.55px">
+                                    <i class="fa-solid fa-bookmark fa-2x" style="color: #E7DA3D; font-size: 25px; line-height: 42.55px"></i> 
                                 </button>
+                                <span class="text-decoration-none text-dark h4" style="line-height: 42.55px">  Saved</span>
                             </form>
                         @else
                             <form action="{{ route('bookmark.store', $restaurant->id) }}" method="post">
                             @csrf
-                                <button type="submit" class="btn p-0">
-                                    <i class="fa-regular fa-bookmark text-black fa-lg" style="font-size:25px;"></i>
+                                <button type="submit" class="btn p-0" style="line-height: 42.55px">
+                                    <i class="fa-regular fa-bookmark text-black fa-2x" style="font-size: 25px; line-height: 42.55px"></i>
                                 </button>
                             </form>
                         @endif
@@ -62,7 +66,7 @@
                     <!-- Restaurant edit page -->
                     @if($profile->usertype_id == 3)
                     <div class="col-2 text-end">
-                        <a href="{{route('restaurant.edit')}}" class="btn b-color w-75">Edit</a>
+                        <a href="{{route('restaurant.edit', $restaurant->id)}}" class="btn b-color w-75">Edit</a>
                     </div>
                     @endif
                 </div>
@@ -74,13 +78,17 @@
                 <h5 class="mt-4">
                     <span style="display:inline-block; width:60px;">Lunch :</span>
                     @foreach ($LunchValues as $LunchValue)
-                    <div class="border border-black rounded-1 px-1" style="display:inline-block;">{!! str_replace('\\', '¥', e($LunchValue)) !!}</div>&nbsp;
+                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block; width: 70px; background-color: #E7DA3D; color: black">
+                            {!! str_replace('\\', '¥', e($LunchValue)) !!}
+                        </div>&nbsp;
                     @endforeach
                 </h5>
                 <h5>
                     <span style="display:inline-block; width:60px;">Dinner:</span>
                     @foreach ($DinnerValues as $DinnerValue)
-                    <div class="border border-black rounded-1 px-1" style="display:inline-block;">{!! str_replace('\\', '¥', e($DinnerValue)) !!}</div>&nbsp;
+                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block; width: 70px; background-color: #E7DA3D; color: black">
+                            {!! str_replace('\\', '¥', e($DinnerValue)) !!}
+                        </div>&nbsp;
                     @endforeach
                 </h5>
 
@@ -90,9 +98,9 @@
                 <!-- Feature -->
                 <div class="mt-4">
                     @foreach ($featureTypes as $featureType)
-                    <div>
-                        <div href="" class="border rounded-3 p-1 border-dark me-3" style="float:left;">{{ $featureType }}</div>
-                    </div>
+                        <span class="h5 border-0 me-2 rounded text-center px-2" style="background-color: rgb(231, 52, 8); color: white">
+                            {{ $featureType }}
+                        </span>
                     @endforeach
                 </div>
                 <br>
