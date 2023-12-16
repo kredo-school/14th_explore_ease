@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
+@section('content')
+
 <!-- Chart.js for graph -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 @vite(['resources/js/dashboard_graph.js'])
-
-@section('content')
 
 <div class="container w-50">
   <h2 class="mt-5">Dashboards</h2>
