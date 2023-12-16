@@ -56,7 +56,7 @@ class ReservationController extends Controller
         $massage = $this->restaurant->findOrFail($restaurant->message);
         return view('restaurant.reservation.show')->with('$message');
     }
-    
+
     public function index()
     {
         //
@@ -76,8 +76,6 @@ class ReservationController extends Controller
      */
     public function store(Request $request, $restaurant_id)
     {
-        # 1. Validate all form data
-
         # 2. Save the post ???? 
         $this->reservation->user_id        = Auth::user()->id;
         $this->reservation->restaurant_id            = $restaurant_id;

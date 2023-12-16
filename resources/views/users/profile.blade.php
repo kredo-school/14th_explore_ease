@@ -56,7 +56,7 @@
                         <div class="row ">
                             <div class="col">
                                 <label for="username">Nationality</label>
-                                <input type="country" class="form-control" name="nationality" value="{{ $user->profile->nationarity->name }}" disabled>
+                                <input type="country" class="form-control" name="nationality" value="{{ $user->profile->nationality->name }}" disabled>
                             </div>
                         </div>
 
@@ -68,8 +68,7 @@
                                         <h1>Restaurant Profile</h1>
                                     </div>
                                     <div class="col-6 text-end">
-                                    <a href="#" class="btn btn-primary" role="button">Add Restaurant</a> 
-                                    {{-- {{ route('restaurant.adding') }}  <- will put instead of #--}}
+                                        <a href="{{ route('restaurant.adding') }}" class="btn btn-primary" role="button">Add Restaurant</a> 
                                     </div>
                                 </div>
                                 <div class="row">
@@ -84,40 +83,29 @@
                                                 <th></th>
                                             </tr>
                                         </thead>
+                                        {{-- display restaurants that the owner has with @foreach, @if --}}
                                         <tbody>
-                                            <tr style="vertical-align: middle">
-                                                <td>Jyojyo-en Tokyo </td>
-                                                <td>
-                                                    <p style="line-height:24px;" class="text-limit"></p>
-                                                </td>
-                                                <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                                <td>Tokyo</td>
-                                                <td>Japanese</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-primary">Edit</a>
-                                                    {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                                    <button class="btn btn-secondary">
-                                                    Delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-            
-                                            <tr style="vertical-align: middle">
-                                                <td>Gyoza-no-osho</td>
-                                                <td>
-                                                    <p style="line-height:24px;" class="text-limit"></p>
-                                                </td>
-                                                <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                                <td>Tokyo</td>
-                                                <td>Chinese</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-primary">Edit</a>
-                                                    {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                                    <button class="btn btn-secondary">
-                                                        Delete
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            @foreach($restaurants as $restaurant)
+                                                @if($restaurant->user_id == Auth::user()->id)
+                                                    <tr style="vertical-align: middle">
+                                                        <td>{{ $restaurant->name }}</td>
+                                                        <td>
+                                                            <p style="line-height:24px;" class="text-limit">{{ $restaurant->updated_at }}</p>
+                                                        </td>
+                                                        <td>4.5 <i class="fa-solid fa-star"></i></td>
+                                                        <td>{{ $restaurant->address }}</td>
+                                                        <td>{{ $restaurant->foodtype->name }}</td>
+                                                        <td>
+                                                            <a href="#" class="btn btn-primary">Edit</a>
+                                                            {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                                            <button class="btn btn-secondary">
+                                                            Delete
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                            
                                         </tbody>
                                     </table>
                                 </div>
