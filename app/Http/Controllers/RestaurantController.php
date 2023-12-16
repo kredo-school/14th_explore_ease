@@ -438,7 +438,7 @@ class RestaurantController extends Controller
         $foodtype = new FoodType();
         $foodtypes = $foodtype->all();
 
-        $features = new Feature();
+        $features = new FeatureType();
         $features = $features->all();
 
         $openhour = new OpenHour();
@@ -450,11 +450,13 @@ class RestaurantController extends Controller
         $s_feature = new Feature();
         $s_features = $s_feature->where('restaurant_id', $id)->get();
         
+        $budget = new Budget();
+        $budgets = $budget->where('restaurant_id', $id)->get();
 
-        // dd($openhours[1]->openinghours);
+         //dd($features);
 
         return view('restaurant.edit')->with('areatypes', $areatypes)->with('foodtypes', $foodtypes)->with('restaurant', $restaurant)->with('openhours', $openhours)
-        ->with('courses', $courses)->with('s_features', $s_features)->with('features', $features);
+        ->with('courses', $courses)->with('s_features', $s_features)->with('features', $features)->with('budgets', $budgets);
     }
 
     /**

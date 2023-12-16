@@ -173,7 +173,7 @@
             <div class="mb-3">
                 <label for="foodtype" class="form-label h3">Food type</label>
                 <select id="foodtype" class="form-select" name="foodtype">
-                    <option value="">Select</option>
+                    <option value="0">Select</option>
                     @foreach($foodtypes as $foodtype)
                         @if($foodtype == $restaurant->foodtype)
                             <option value="{{$foodtype->id}}" selected>{{$foodtype->name}}</option>
@@ -191,17 +191,15 @@
                     </div><br>
                     <div class="col-8">
                         <div class="btn-group" style="width: 125%;" role="group" aria-label="Basic checkbox toggle button group">
-                            <input type="checkbox" class="btn-check" id="L_budget1" autocomplete="off" name="L_budget1">
-                            <label class="btn btn-outline-dark" for="L_budget1">￥</label>
-
-                            <input type="checkbox" class="btn-check" id="L_budget2" autocomplete="off" name="L_budget2">
-                            <label class="btn btn-outline-dark" for="L_budget2">￥￥</label>
-
-                            <input type="checkbox" class="btn-check" id="L_budget3" autocomplete="off" name="L_budget3">
-                            <label class="btn btn-outline-dark" for="L_budget3">￥￥￥</label>
-
-                            <input type="checkbox" class="btn-check" id="L_budget4" autocomplete="off" name="L_budget4">
-                            <label class="btn btn-outline-dark" for="L_budget4">￥￥￥￥</label>
+                            @foreach($budgets as $key => $budget)
+                                @if($budget->timezonetype == 1 && $budget->budget_index == $key+1)
+                                    <input type="checkbox" class="btn-check" id="L_budget".$key+1 autocomplete="off" name="L_budget".$key+1 checked>
+                                    <label class="btn btn-outline-dark" for="L_budget".$key+1>str_repeat("\", $key+1)</label>
+                                @else
+                                    <input type="checkbox" class="btn-check" id="L_budget".$key+1 autocomplete="off" name="L_budget".$key+1>
+                                    <label class="btn btn-outline-dark" for="L_budget".$key+1>str_repeat("\", $key+1)</label>
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -210,19 +208,19 @@
                         <div class="h4">Dinner</div>
                     </div><br>
                     <div class="col-8">
-                        <div class="btn-group" style="width: 125%" role="group" aria-label="Basic checkbox toggle button group">
-                            <input type="checkbox" class="btn-check" id="D_budget1" autocomplete="off" name="D_budget1">
-                            <label class="btn btn-outline-dark" for="D_budget1">￥</label>
-
-                            <input type="checkbox" class="btn-check" id="D_budget2" autocomplete="off" name="D_budget2">
-                            <label class="btn btn-outline-dark" for="D_budget2">￥￥</label>
-
-                            <input type="checkbox" class="btn-check" id="D_budget3" autocomplete="off" name="D_budget3">
-                            <label class="btn btn-outline-dark" for="D_budget3">￥￥￥</label>
-
-                            <input type="checkbox" class="btn-check" id="D_budget4" autocomplete="off" name="D_budget4">
-                            <label class="btn btn-outline-dark" for="D_budget4">￥￥￥￥</label>
-                        </div>
+                        @foreach($budgets as $key => $budget)
+                            @if($budget->timezonetype == 1 && $budget->budget_index == $key+1)                    
+                                <div class="btn-group" style="width: 125%" role="group" aria-label="Basic checkbox toggle button group">
+                                    <input type="checkbox" class="btn-check" id="D_budget{{$key+1}}" autocomplete="off" name="D_budget{{$key+1}}" checked>
+                                    <label class="btn btn-outline-dark" for="D_budget{{$key+1}}">{{str_repeat("\", $key+1)}}</label>
+                                </div>
+                            @else
+                                <div class="btn-group" style="width: 125%" role="group" aria-label="Basic checkbox toggle button group">
+                                    <input type="checkbox" class="btn-check" id="D_budget{{$key+1}}" autocomplete="off" name="D_budget{{$key+1}}">
+                                    <label class="btn btn-outline-dark" for="D_budget{{$key+1}}">{{str_repeat("\", $key+1)}}</label>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -231,13 +229,15 @@
                 <label for="features" class="form-label h3">Features</label><br>
                 @foreach($features as $key => $feature)
                     <div class="form-check-inline h4">
-                        @if($feature->featuretype->feature_id == $key+1)
-                            <input class="form-check-input" type="checkbox" id="{{$feature}}" name="features".$key+1 value="1" checked="checked">
-                            <label class="form-check-label" for="gluten_free">{{$feature}}</label>
-                        @else
-                            <input class="form-check-input" type="checkbox" id="{{$feature}}" name="features".$key+1 value="1">
-                            <label class="form-check-label" for="gluten_free">{{$feature}}</label>
-                        @endif
+                        @foreach($s_features as $s_feature)
+                            @if($s_feature->featuretype->feature_id == $key+1)
+                                <input class="form-check-input" type="checkbox" id="{{$feature->name}}" name="features".$key+1 value="1" checked>
+                                <label class="form-check-label" for="{{$feature->name}}">{{$feature->name}}</label>
+                            @else
+                                <input class="form-check-input" type="checkbox" id="{{$feature->name}}" name="features".$key+1 value="1">
+                                <label class="form-check-label" for="{{$feature->name}}">{{$feature->name}}</label>
+                            @endif
+                        @endforeach
                     </div>
                 @endforeach
             </div>
