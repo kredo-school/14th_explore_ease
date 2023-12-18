@@ -159,13 +159,23 @@
             <div class="mb-3">
                 <label for="photo" class="form-label h3">Photo</label><br>
                 <div class="row">
-                    @if(!empty($restaurant->restaurant_photos))
-                        @foreach($restaurant->restaurant_photos as $key => $photo)
+                    @if(!empty($restaurant_photos))
+                        @foreach($restaurant_photos as $key => $photo)
                             <div class="col-4">
-                                <img src="{{$photo}}" alt="">
+                                <img src="{{$photo->photo}}" alt="" class="w-75">
                                 <input type="file" name="photo_".$key+1>
                             </div>
                         @endforeach
+                    @else
+                        <div class="col-4">
+                            <input type="file" name="photo_1">
+                        </div>
+                        <div class="col-4">
+                            <input type="file" name="photo_2">
+                        </div>
+                        <div class="col-4">
+                            <input type="file" name="photo_3">
+                        </div>
                     @endif
                 </div>
             </div>
@@ -190,16 +200,26 @@
                         <div class="h4">Lunch</div>
                     </div><br>
                     <div class="col-8">
-                        <div class="btn-group" style="width: 125%;" role="group" aria-label="Basic checkbox toggle button group">
-                            @foreach($budgets as $key => $budget)
-                                @if($budget->timezonetype == 1 && $budget->budget_index == $key+1)
-                                    <input type="checkbox" class="btn-check" id="L_budget".$key+1 autocomplete="off" name="L_budget".$key+1 checked>
-                                    <label class="btn btn-outline-dark" for="L_budget".$key+1>str_repeat("\", $key+1)</label>
-                                @else
-                                    <input type="checkbox" class="btn-check" id="L_budget".$key+1 autocomplete="off" name="L_budget".$key+1>
-                                    <label class="btn btn-outline-dark" for="L_budget".$key+1>str_repeat("\", $key+1)</label>
+                        <div class="btn-group ms-4" style="width: 125%;" role="group" aria-label="Basic checkbox toggle button group">
+                            @php
+                                $index = 0;
+                                $isFound = false;
+                            @endphp
+                            @while($index < 4)
+                                @php($isFound = false)
+                                @foreach($budgets as $key => $budget)
+                                    @if($budget->timezonetype == 1 && $budget->budgetindex == $index+1)
+                                        <input type="checkbox" class="btn-check" id="{{'L_budget'.$key+1}}" autocomplete="off" name="{{'L_budget'.$key+1}}" checked>
+                                        <label class="btn btn-outline-dark" for="{{'L_budget'.$key+1}}">{!! str_replace("\\",'￥', $budget->budgetvalue) !!}</label>
+                                        @php($isFound = true)
+                                    @endif 
+                                @endforeach
+                                @php($index++)
+                                @if(!$isFound)
+                                    <input type="checkbox" class="btn-check" id="L_budget".$key+1 autocomplete="off" name="{{'L_budget'.$key+1}}">
+                                    <label class="btn btn-outline-dark" for="{{'L_budget'.$key+1}}">{{ Str::limit("￥￥￥￥", $index*2, '') }}</label>
                                 @endif
-                            @endforeach
+                            @endwhile
                         </div>
                     </div>
                 </div>
@@ -208,35 +228,45 @@
                         <div class="h4">Dinner</div>
                     </div><br>
                     <div class="col-8">
-                        @foreach($budgets as $key => $budget)
-                            @if($budget->timezonetype == 1 && $budget->budget_index == $key+1)                    
-                                <div class="btn-group" style="width: 125%" role="group" aria-label="Basic checkbox toggle button group">
-                                    <input type="checkbox" class="btn-check" id="D_budget{{$key+1}}" autocomplete="off" name="D_budget{{$key+1}}" checked>
-                                    <label class="btn btn-outline-dark" for="D_budget{{$key+1}}">{{str_repeat("\", $key+1)}}</label>
-                                </div>
-                            @else
-                                <div class="btn-group" style="width: 125%" role="group" aria-label="Basic checkbox toggle button group">
-                                    <input type="checkbox" class="btn-check" id="D_budget{{$key+1}}" autocomplete="off" name="D_budget{{$key+1}}">
-                                    <label class="btn btn-outline-dark" for="D_budget{{$key+1}}">{{str_repeat("\", $key+1)}}</label>
-                                </div>
-                            @endif
-                        @endforeach
+                        <div class="btn-group ms-4" style="width: 125%;" role="group" aria-label="Basic checkbox toggle button group">
+                            @php($index=0)
+                            @while($index < 4)
+                                @php($isFound = false)
+                                @foreach($budgets as $key => $budget)
+                                    @if($budget->timezonetype == 2 && $budget->budgetindex == $index+1)
+                                        <input type="checkbox" class="btn-check" id="{{'D_budget'.$key+1}}" autocomplete="off" name="{{'D_budget'.$key+1}}" checked>
+                                        <label class="btn btn-outline-dark" for="{{'D_budget'.$key+1}}">{!! str_replace("\\",'￥', $budget->budgetvalue) !!}</label>
+                                        @php($isFound = true)
+                                    @endif 
+                                @endforeach
+                                @php($index++)
+                                @if(!$isFound)
+                                    <input type="checkbox" class="btn-check" id="D_budget".$key+1 autocomplete="off" name="{{'D_budget'.$key+1}}">
+                                    <label class="btn btn-outline-dark" for="{{'D_budget'.$key+1}}">{{ Str::limit("￥￥￥￥", $index*2, '') }}</label>
+                                @endif
+                            @endwhile
+                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="features" class="form-label h3">Features</label><br>
+                @php
+                    $isFound = false;
+                @endphp
                 @foreach($features as $key => $feature)
                     <div class="form-check-inline h4">
                         @foreach($s_features as $s_feature)
+                            @php($isFound = false)
                             @if($s_feature->featuretype->feature_id == $key+1)
                                 <input class="form-check-input" type="checkbox" id="{{$feature->name}}" name="features".$key+1 value="1" checked>
-                                <label class="form-check-label" for="{{$feature->name}}">{{$feature->name}}</label>
-                            @else
-                                <input class="form-check-input" type="checkbox" id="{{$feature->name}}" name="features".$key+1 value="1">
-                                <label class="form-check-label" for="{{$feature->name}}">{{$feature->name}}</label>
+                                <label class="form-check-label" for="{{$feature->name}}">{{$feature->name}}</label>            
+                            @php($isFound = true)
                             @endif
+                            @php(!$isFound)
+                                <input class="form-check-input" type="checkbox" id="{{$feature->name}}" name="features".$key+1 value="1">
+                                <label class="form-check-label" for="{{$feature->name}}">{{$feature->name}}</label>                     
                         @endforeach
                     </div>
                 @endforeach

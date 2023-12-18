@@ -453,10 +453,20 @@ class RestaurantController extends Controller
         $budget = new Budget();
         $budgets = $budget->where('restaurant_id', $id)->get();
 
-         //dd($features);
+        $restaurant_photo = new RestaurantPhoto();
+        $restaurant_photos = $restaurant_photo->where('restaurant_id', $id)->get();
 
-        return view('restaurant.edit')->with('areatypes', $areatypes)->with('foodtypes', $foodtypes)->with('restaurant', $restaurant)->with('openhours', $openhours)
-        ->with('courses', $courses)->with('s_features', $s_features)->with('features', $features)->with('budgets', $budgets);
+         //dd($restaurant_photos);
+
+        return view('restaurant.edit')->with('areatypes', $areatypes)
+        ->with('foodtypes', $foodtypes)
+        ->with('restaurant', $restaurant)
+        ->with('openhours', $openhours)
+        ->with('courses', $courses)
+        ->with('s_features', $s_features)
+        ->with('features', $features)
+        ->with('budgets', $budgets)
+        ->with('restaurant_photos', $restaurant_photos);
     }
 
     /**
