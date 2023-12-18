@@ -6,15 +6,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
 use App\Models\Restaurant;
+use App\Models\User;
 use App\Models\Review;
 use App\Models\Reservation;
 
 class AdminController extends Controller
 {
     private $profile;
-
-    public function __construct(Profile $profile, Restaurant $restaurant, Review $review, Reservation $reservation,){
+    private $user;
+    private $restaurant;
+    private $review;
+    private $reservation;
+    
+    
+    public function __construct(Profile $profile, User $user, Restaurant $restaurant, Review $review, Reservation $reservation,){
         $this->profile = $profile;
+        $this->user = $user;
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->reservation = $reservation;
@@ -28,7 +35,7 @@ class AdminController extends Controller
         $restaurants = $this->restaurant->all();
         $reviews = $this->review->all();
         $reservations = $this->reservation->all();
-
+        
         return view('admin.dashboard',
         [
             'profileUsers'  => $profileUsers,
@@ -38,69 +45,43 @@ class AdminController extends Controller
             'reservations'  => $reservations,
         ]);
     }
+    
+    public function userChart(){
 
+        $users = User::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+                        ->whereYear('created_at',date('Y'))
+                        ->groupBy('month')
+                        ->orderBy('month')
+                        ->get();
 
-        /** Show restaurant review page */
-    public function ShowRestaurantReview($id){
+        $labels = [];
+        $data   = [];
+        $colors = ['#CAC2C7'];
 
-        // [ Graph of reviews ]
-        $reviewOfStar5s = Review::where('restaurant_id', $restaurant->id)->where('star', 5)->get();
-        $star5s = [];
-            foreach($reviewOfStar5s as $star5){
-                $star5s[] = $star5->star;
+        for ($i=1; $i < 12; $i++){
+            $month = date('F',mktime(0,0,0,$i,1));
+            $count = 0;
+
+            foreach($users as $user){
+                if($user->month == $i)
+                $count = $user->count;
+                break;
             }
-            $countStar5 = count($star5s);
+            
+                    array_push($labels,$month);
+                    array_push($data,$count);
+        }
 
-    $reviewOfStar4s = Review::where('restaurant_id', $restaurant->id)->where('star', 4)->get();
-        $star4s = [];
-            foreach($reviewOfStar4s as $star4){
-                $star4s[] = $star4->star;
-            }
-            $countStar4 = count($star4s);
+        $datasets = [
+            [
+            'label' => 'users',
+            'data'  => $data,
+            'backgroundColors' => $colors
+            ]
+        ];
 
-    $reviewOfStar3s = Review::where('restaurant_id', $restaurant->id)->where('star', 3)->get();
-        $star3s = [];
-            foreach($reviewOfStar3s as $star3){
-                $star3s[] = $star3->star;
-            }
-            $countStar3 = count($star3s);
+        return view('admin.dashboard',compact('datasets', 'labels'));
 
-    $reviewOfStar2s = Review::where('restaurant_id', $restaurant->id)->where('star', 2)->get();
-        $star2s = [];
-            foreach($reviewOfStar2s as $star2){
-                $star2s[] = $star2->star;
-            }
-            $countStar2 = count($star2s);
-
-    $reviewOfStar1s = Review::where('restaurant_id', $restaurant->id)->where('star', 1)->get();
-        $star1s = [];
-            foreach($reviewOfStar1s as $star1){
-                $star1s[] = $star1->star;
-            }
-            $countStar1 = count($star1s);
-
-
-    // [ Summary of reviews ]
-    $allReviews = Review::where('restaurant_id', $restaurant->id)->get();
-        $allStars = [];
-            foreach($allReviews as $allStar){
-                $allStars[] = $allStar->star;
-            }
-    $countAllStars = count($allStars);
-    $averageAllStars = array_sum($allStars) / $countAllStars;
-
-
-    return view('restaurant.review',[
-        'restaurant' => $restaurant,
-        'user' => $user,
-        'profile' => $profile,
-        'countStar5' => $countStar5,
-        'countStar4' => $countStar4,
-        'countStar3' => $countStar3,
-        'countStar2' => $countStar2,
-        'countStar1' => $countStar1,
-        'countAllStars' => $countAllStars,
-        'averageAllStars' => $averageAllStars,
-    ]);
     }
+
 }

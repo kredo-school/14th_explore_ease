@@ -1,39 +1,5 @@
   //User
-var ctx = document.getElementById("userChart");
-var userId = document.getElementById("id");
-var userChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
-    datasets: [
-    {
-        label: 'users',
 
-        // Need to put $profileUsers/ per month data for each
-
-        data: [55, 45, 73, 75, 41, 45, 58, 73, 75, 41, 45, 58],
-        backgroundColor: "#CAC2C7"
-      }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-    },
-    scales: {
-      yAxes: [{
-        ticks: {
-          suggestedMax: 100,
-          suggestedMin: 0,
-          stepSize: 10,
-          callback: function(value, index, values){
-            return  value
-          }
-        }
-      }]
-    },
-  }
-});
 
 //Owner
 var ctx = document.getElementById("ownersChart");

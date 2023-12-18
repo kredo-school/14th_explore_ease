@@ -48,9 +48,7 @@ Route::group(['middleware'=>'set.locale'], function () {
     Route::group(['middleware'=>'auth'], function () {
 
         Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
-        // Route::get('/admin/dashboard', function () {
-        //     return view('admin/dashboard');
-        // });
+        //Route::get('/admin/dashboard_graph', [App\Http\Controllers\AdminController::class, 'userChart'])->name('admin.dashboard_graph');
 
         Route::get('/admin/dashboard_all_users', [App\Http\Controllers\AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
         // Route::get('/admin/dashboard_all_users', function () {
@@ -68,10 +66,6 @@ Route::group(['middleware'=>'set.locale'], function () {
         // });
 
         Route::get('/admin/dashboard_all_owners', [App\Http\Controllers\AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
-        // Route::get('admin/dashboard_all_owners', function () {
-        //     return view('admin/dashboard_all_owners');
-        // });
-
         Route::get('/admin/dashboard_all_reservations', [App\Http\Controllers\AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
 
         // HomeController
@@ -88,7 +82,6 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/restaurant/ranking', [App\Http\Controllers\RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
 
         // Reservation Controller
-        //Tommie working on here:)
         Route::get('/restaurant/{id}/reservasions', [App\Http\Controllers\ReservationController::class, 'show'])->name('restaurant.reservations');
         Route::get('/restaurant/{id}/reservasions/create', [App\Http\Controllers\ReservationController::class, 'create'])->name('restaurant.reservation.create');
         Route::post('/restaurant/reservasions/store', [App\Http\Controllers\ReservationController::class, 'store'])->name('restaurant.reservation.store');

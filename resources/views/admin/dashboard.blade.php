@@ -1,10 +1,15 @@
 @extends('layouts.app')
 
+@section('content')
+
 <!-- Chart.js for graph -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 @vite(['resources/js/dashboard_graph.js'])
+<<<<<<< HEAD
 
 @section('content')
+=======
+>>>>>>> da1c98692444e330505a25217d64d6d33544b287
 
 <div class="container w-75">
   <h2 class="mt-5">Dashboards</h2>
@@ -54,7 +59,7 @@
         <div class="row border border-bottom-0 py-5">
             <div class="col-4 themed-grid-col">
                 <h5 class="text-center">Users</h5>
-                <canvas id="userChart">{{ count($profileUsers) }}</canvas>
+                <canvas id="userChart"></canvas>
             </div>
             <div class="col-4 themed-grid-col">
                 <h5 class="text-center">Owners</h5>
@@ -84,4 +89,15 @@
 
         </div>
 </div>
+
+<script>
+var ctx = document.getElementById("userChart").getContext('2d');
+var userChart = new Chart(ctx,{
+    type: 'bar',
+    data: {
+        labels: {!! json_encode($labels) !!},
+        datasets: {!! json_encode($datasets) !!}
+      },
+})
+</script>
 @endsection
