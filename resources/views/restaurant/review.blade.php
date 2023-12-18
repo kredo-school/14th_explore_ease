@@ -107,7 +107,7 @@
 
                 <!--Number -->
                 <div class="col-3 text-center my-auto">
-                        <div style="font-size: 4rem;">{{ $averageAllStars }}</div>
+                        <div style="font-size: 4rem;">{{ round($averageAllStars,1) }}</div>
 
                         <div class="result-rating-rate">
                             <span class="star5_rating" data-rate="{{ $averageAllStars }}"></span>

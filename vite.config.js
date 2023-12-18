@@ -17,6 +17,7 @@ export default defineConfig({
                 'resources/js/restaurantmap.js',
                 'resources/js/review_StarGraph.js',
                 'resources/js/textlimit.js',
+                'resources/js/checkbuttonstatus.js',
                 'public/css/style.css',
             ],
             refresh: true,
