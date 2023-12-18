@@ -51,19 +51,10 @@ Route::group(['middleware'=>'set.locale'], function () {
         //Route::get('/admin/dashboard_graph', [App\Http\Controllers\AdminController::class, 'userChart'])->name('admin.dashboard_graph');
 
         Route::get('/admin/dashboard_all_users', [App\Http\Controllers\AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
-        // Route::get('/admin/dashboard_all_users', function () {
-        //     return view('/admin/dashboard_all_users');
-        // });
 
         Route::get('/admin/dashboard_all_restaurants', [App\Http\Controllers\AdminController::class, 'dashboardAllRestaurants'])->name('admin.allRestaurants');
-        // Route::get('admin/all_restaurants', function () {
-        //     return view('admin/all_restaurants');
-        // });
 
         Route::get('/admin/dashboard_all_reviews', [App\Http\Controllers\AdminController::class, 'dashboardAllReviews'])->name('admin.allReviews');
-        // Route::get('admin/all_reviews', function () {
-        //     return view('admin/all_reviews');
-        // });
 
         Route::get('/admin/dashboard_all_owners', [App\Http\Controllers\AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
         Route::get('/admin/dashboard_all_reservations', [App\Http\Controllers\AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
@@ -73,6 +64,19 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
         Route::get('/profile/reservation', [App\Http\Controllers\HomeController::class, 'profileReservation'])->name('profile.reservation');
         Route::get('/profile/review', [App\Http\Controllers\HomeController::class, 'profileReview'])->name('profile.review');
+
+
+        Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
+
+        Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
+
+        Route::get('/restaurant/{id}/review', [App\Http\Controllers\RestaurantController::class, 'restaurantReview'])->name('restaurant.review');
+
+
+        Route::get('/restaurant/{id}/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
+
+        Route::get('restaurant/{id}/update', [RestaurantController::class, 'update'])->name('restaurant.update');
+       
 
         // Restaurant Controller
         Route::get('/restaurant/adding', [App\Http\Controllers\RestaurantController::class, 'create'])->name('restaurant.adding');
@@ -84,7 +88,10 @@ Route::group(['middleware'=>'set.locale'], function () {
         // Reservation Controller
         Route::get('/restaurant/{id}/reservasions', [App\Http\Controllers\ReservationController::class, 'show'])->name('restaurant.reservations');
         Route::get('/restaurant/{id}/reservasions/create', [App\Http\Controllers\ReservationController::class, 'create'])->name('restaurant.reservation.create');
-        Route::post('/restaurant/reservasions/store', [App\Http\Controllers\ReservationController::class, 'store'])->name('restaurant.reservation.store');
+        Route::post('/restaurant/reservasions/store/{restaurant_id}', [App\Http\Controllers\ReservationController::class, 'store'])->name('restaurant.reservation.store');
+        // detail
+        Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
+
 
         // Review Controller
         // show review page
@@ -96,7 +103,9 @@ Route::group(['middleware'=>'set.locale'], function () {
         //Kazuya working on here:)
         Route::get('/profile/{id}/show', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
         Route::patch('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
-        Route::get('/bookmark/{id}/show', [App\Http\Controllers\ProfileController::class, 'bookmarkShow'])->name('bookmark.show');//connect bookmark page from menu bar
+        Route::get('/bookmark/{id}/show', [App\Http\Controllers\ProfileController::class, 'bookmarkShow'])->name('bookmark.show');//connect user bookmark page from menu bar
+        Route::get('/review/{id}/show', [App\Http\Controllers\ProfileController::class, 'reviewShow'])->name('review.show');//connect user review page from menu bar
+        Route::get('/reservation/{id}/show', [App\Http\Controllers\ProfileController::class, 'reservationShow'])->name('reservation.show');//connect user reservation page from menu bar
 
         // Bookmark Controller
         Route::get('/profile/bookmark', [App\Http\Controllers\BookmarkController::class, 'show'])->name('profile.bookmark');

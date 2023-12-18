@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Reservation extends Model
 {
     use HasFactory;
-
+    public $timestamps = true;
     /** 
      * Reservation-User
      * a Reservation belongs to a User
      * to get the owner of the Reservation
      */
+
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -48,4 +50,5 @@ class Reservation extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
 }

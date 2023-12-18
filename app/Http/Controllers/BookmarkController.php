@@ -47,6 +47,7 @@ class BookmarkController extends Controller
     {
         $this->bookmark->user_id = Auth::user()->id;
         $this->bookmark->restaurant_id = $restaurant_id;
+        $this->bookmark->save();
 
         return redirect()->back();
     }

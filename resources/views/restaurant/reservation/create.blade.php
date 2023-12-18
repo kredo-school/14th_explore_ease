@@ -5,35 +5,37 @@
 
     {{-- After comp to make all function on this page, the style blow will put on style.css --}}
 
-        <form action="{{ route('restaurant.reservation.store') }}" method="post" enctype="multipart/form-data">
+        <form id="form-reservation">
             @csrf
             <div class="container" id="reservasion_area">
-                {{-- Select Box --}}
                 <div class="containaer d-flex flex-row">
                     <div class='container mb-4'>
-                        <label for="reservation_ppl">Number of people</label>
-                        <select class="form-select" name="reservation_ppl" required>
+                        <label for="number_of_people">Number of people</label>
+                        <select class="form-select" name="number_of_people" id="number_of_people" required>
                             <option value="---"> --- </option>
                             @for($i = 0; $i < 10; $i++)
-                            <option value="{{$i + 1}}" name="" required>{{$i + 1}}</option>
+                            <option id="number_of_people" value="{{$i + 1}}" name="" required>{{$i + 1}}</option>
                             @endfor
                         </select>
-                        
+                                    {{-- Error --}}
+                            @error('number_of_people')
+                                <div class="text-danger small">{{ $message }}</div>
+                            @enderror
                     </div>
-                    {{-- <i class="fa-solid fa-calendar-days"></i> --}}
                     <div class='container mb-4'>
-                        <label for="">Date</label>
-                        <input id="datepicker" required/>
+                        <label for="datepicker">Date</label>
+                        <input id="datepicker" name="reservation_start_date" required/>
                         <script>
                             $('#datepicker').datepicker({
                                 uiLibrary: 'bootstrap5'
                             });
-                            </script>
+
+                        </script>
                     </div>
                     <div class='container mb-4'>
                         <div class="cs-form">
                             <label for="">Time</label>
-                            <input type="time" class="form-control" id="reservation_start_time" value="" required/>
+                            <input type="time" class="form-control" id="reservation_start_time" required/>
                         </div>
                     </div>
                 </div>
@@ -41,12 +43,15 @@
 
                 {{-- Check Box  --}}
                 <div class="form-check mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                    <label class="form-check-label" for="flexCheckChecked">
+                    <input class="form-check-input" name="reservation_seats_only" type="checkbox" id="reservation_seats_only" value="60">
+                    <label class="form-check-label" for="reservation_seats_only">
                     Seat only
                     </label>
                 </div>
 
+                {{-- test --}}
+
+                
                 {{-- Couse Area --}}
                 <h2 class="mb-4">Course</h2>
                     @foreach($all_courses as $course)
@@ -61,7 +66,7 @@
                                     <div class="card-body">
                                         <h4 class="card-title">{{ $course->name }} <span>¥ {{ $course->price }} </span></h4>
                                             <p class="card-text">{{ $course->description }}<a href="#">>Read More</a></p>
-                                            <input type="radio" class="btn-check b-color" name="options" id="{{ $course->id }}" autocomplete="off">
+                                            <input type="radio" class="btn-check b-color" name="course" course_name="{{ $course->name }}" id="{{ $course->id }}" value="{{ $course->id }}" autocomplete="off">
                                             <label class="btn b-color" for="{{ $course->id }}">Select</label>
                                     </div>
                                 </div>
@@ -76,13 +81,16 @@
                 <h2 class="mt-4">Requests</h2>
                 <div class="form-group mb-4
                 ">
-                    <textarea class="form-control" placeholder="leave a comment such as a special requests" id="requests" rows="5"></textarea>
+                    <textarea class="form-control" placeholder="leave a comment such as a special requests" name="requests" id="requests" rows="5"></textarea>
                 </div>
                 <div class="text-center">
                     <button type="button" class="btn b-color mb-3 mx-3 px-5"><a href="{{ route('home')}}"></a>Cancel</button>
-                    <button type="submit" value="submit" id="submit" for="with-consent"name="submit_reservation" class="button btn b-color mb-3 px-5" disabled>Submit</button>
+                    <button id="submit" type="button" for="with-consent" name="submit_reservation" class="button btn b-color mb-3 px-5" data-bs-toggle="modal" data-bs-target="#confirm-reservation" data-bs-target="confirm-reservation" onclick="reservationSubmit()" disabled>Submit</button>
                 </div>
             </div>
         </form>
+        {{-- profile_edit modal --}}
+        @include('restaurant.reservation.modal.reservation_confirm')
+
         {{-- Check the check-box status. If the it wasn't checked, submit button is anaible to hit --}}
         @vite(['resources/js/checkbuttonstatus.js'])
