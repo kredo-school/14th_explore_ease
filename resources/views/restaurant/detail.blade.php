@@ -34,7 +34,7 @@
 
                     <!-- Rating -->
                     <div class="col-2 text-center">
-                        <a href="" class="text-decoration-none text-dark h4">
+                        <a href="" class="text-decoration-none text-dark h4" style="line-height: 42.55px">
                             <span>{{ round($averageAllStar,1) }}</span>
                             <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 35px; height: 35px">
                                 <i class="fa-solid fa-star"></i>
