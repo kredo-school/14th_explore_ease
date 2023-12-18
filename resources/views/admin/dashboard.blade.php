@@ -1,12 +1,10 @@
 @extends('layouts.app')
 
+@section('content')
+
 <!-- Chart.js for graph -->
-@section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 @vite(['resources/js/dashboard_graph.js'])
-@endsection
-
-@section('content')
 
 <div class="container w-50">
   <h2 class="mt-5">Dashboards</h2>
@@ -14,10 +12,10 @@
         <div class="row border mt-3">
             <div class="col-4 themed-grid-col text-center">
                 <h4 class="text-center">Users</h4>
-                <span>
+                <a href="{{ route('admin.allUsers') }}" class="text-decoration-none text-black">
                     <i class="fa-solid fa-circle-user fa-3x"></i>
                     <p class="d-inline display-5">{{ count($profileUsers) }}</p>
-                </span>
+                </a>
             </div>
             <div class="col-4 themed-grid-col text-center">
                 <h4 class="text-center">Owners</h4>

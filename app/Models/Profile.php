@@ -11,17 +11,17 @@ class Profile extends Model
 
     protected $fillable = ['user_id', 'first_name', 'last_name', 'avatar', 'phone', 'usertype_id', 'nationality_id'];
     protected $primaryKey = 'user_id';
-    /** 
+    /**
      * Profile-User
      * a Profile belongs to a User
      * to get the owner of the Profile
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
 
-    /** 
+    /**
      * Profile-UserType
      * a Profile belongs to a UserType
      * to get the owner of the Profile
@@ -31,7 +31,7 @@ class Profile extends Model
         return $this->belongsTo(UserType::class);
     }
 
-    /** 
+    /**
      * Profile-Nationality
      * a Profile belongs to a Nationality
      * to get the owner of the Profile
