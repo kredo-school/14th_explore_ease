@@ -94,8 +94,8 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-primary">Edit profile <i class="fa-solid fa-pen-to-square icon-edit"></i></button>
+              <button type="button" class="btn b-color" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn b-color">Edit profile <i class="fa-solid fa-pen-to-square icon-edit"></i></button>
             </div>
         </div>
       </div>

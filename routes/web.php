@@ -108,7 +108,9 @@ Route::group(['middleware'=>'set.locale'], function () {
         //Kazuya working on here:)
         Route::get('/profile/{id}/show', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
         Route::patch('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
-        Route::get('/bookmark/{id}/show', [App\Http\Controllers\ProfileController::class, 'bookmarkShow'])->name('bookmark.show');//connect bookmark page from menu bar
+        Route::get('/bookmark/{id}/show', [App\Http\Controllers\ProfileController::class, 'bookmarkShow'])->name('bookmark.show');//connect user bookmark page from menu bar
+        Route::get('/review/{id}/show', [App\Http\Controllers\ProfileController::class, 'reviewShow'])->name('review.show');//connect user review page from menu bar
+        Route::get('/reservation/{id}/show', [App\Http\Controllers\ProfileController::class, 'reservationShow'])->name('reservation.show');//connect user reservation page from menu bar
 
         // Bookmark Controller
         Route::get('/profile/bookmark', [App\Http\Controllers\BookmarkController::class, 'show'])->name('profile.bookmark');
