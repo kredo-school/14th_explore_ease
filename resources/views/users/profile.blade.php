@@ -17,7 +17,7 @@
                             <h1>Profile</h1>
                         </div>
                         <div class="col-6 text-end">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Profile    
+                            <button class="btn b-color" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Profile    
                                 <i class="fa-solid fa-pen-to-square icon-edit"></i>
                             </button>
                         </div>
@@ -68,7 +68,7 @@
                                         <h1>Restaurant Profile</h1>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <a href="{{ route('restaurant.adding') }}" class="btn btn-primary" role="button">Add Restaurant</a> 
+                                        <a href="{{ route('restaurant.adding') }}" class="btn b-color" role="button">Add Restaurant</a> 
                                     </div>
                                 </div>
                                 <div class="row">
@@ -92,13 +92,13 @@
                                                         <td>
                                                             <p style="line-height:24px;" class="text-limit">{{ $restaurant->updated_at }}</p>
                                                         </td>
-                                                        <td>4.5 <i class="fa-solid fa-star"></i></td>
+                                                        <td>4.5<i class="fa-solid fa-star"></i></td>
                                                         <td>{{ $restaurant->address }}</td>
                                                         <td>{{ $restaurant->foodtype->name }}</td>
                                                         <td>
-                                                            <a href="#" class="btn btn-primary">Edit</a>
+                                                            <a href="#" class="btn b-color">Edit</a>
                                                             {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                                            <button class="btn btn-secondary">
+                                                            <button class="btn b-color">
                                                             Delete
                                                             </button>
                                                         </td>
@@ -110,6 +110,10 @@
                                     </table>
                                 </div>
                             @endif
+                            <!--paginate_area-->
+                            <div class= "d-flex justify-content-center">
+                                {{ $restaurants->links() }}
+                            </div>
                     </div>
                 </div>
             </div>

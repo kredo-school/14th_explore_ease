@@ -103,7 +103,7 @@ class AdminController extends Controller
 
         return back();
     }
-    
+
 
     public function unhide($id)
     {

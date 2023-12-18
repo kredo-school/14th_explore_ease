@@ -2,6 +2,8 @@
 
 @section('content')
 
+@section('content')
+
 <!-- Chart.js for graph -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 @vite(['resources/js/dashboard_graph.js'])
@@ -28,6 +30,7 @@
                 <h4 class="text-center">Restaurants</h4>
                 <span>
                     <i class="fa-solid fa-utensils fa-3x"></i>
+                    <p class="d-inline display-5">{{ count($restaurants) }}</p>
                     <p class="d-inline display-5">{{ count($restaurants) }}</p>
                 </span>
             </div>

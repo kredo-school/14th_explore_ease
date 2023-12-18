@@ -29,13 +29,13 @@
                 <div class="row">
                     <!-- Resturant name -->
                     <div class="col-8">
-                        <h2>{{ $restaurant->name }}</h2>
+                        <h2 style="line-height: 42.55px">{{ $restaurant->name }}</h2>
                     </div>
 
                     <!-- Rating -->
                     <div class="col-2 text-center">
                         <a href="" class="text-decoration-none text-dark h4">
-                            <span>{{ $averageAllStar }}</span>
+                            <span>{{ round($averageAllStar,1) }}</span>
                             <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 35px; height: 35px">
                                 <i class="fa-solid fa-star"></i>
                             </span>
@@ -48,15 +48,16 @@
                             <form action="{{ route('bookmark.destroy', $restaurant->id) }}" method="post">
                             @csrf
                             @method('DELETE')
-                                <button type="submit" class="btn p-0">
-                                    <i class="fa-solid fa-bookmark fa-lg" style="color:#E7DA3D; font-size:25px;"></i>
+                                <button type="submit" class="btn p-0" style="line-height: 42.55px">
+                                    <i class="fa-solid fa-bookmark fa-2x" style="color: #E7DA3D; font-size: 25px; line-height: 42.55px"></i>
                                 </button>
+                                <span class="text-decoration-none text-dark h4" style="line-height: 42.55px">  Saved</span>
                             </form>
                         @else
                             <form action="{{ route('bookmark.store', $restaurant->id) }}" method="post">
                             @csrf
-                                <button type="submit" class="btn p-0">
-                                    <i class="fa-regular fa-bookmark text-black fa-lg" style="font-size:25px;"></i>
+                                <button type="submit" class="btn p-0" style="line-height: 42.55px">
+                                    <i class="fa-regular fa-bookmark text-black fa-2x" style="font-size: 25px; line-height: 42.55px"></i>
                                 </button>
                             </form>
                         @endif
@@ -65,7 +66,7 @@
                     <!-- Restaurant edit page -->
                     @if($profile->usertype_id == 3)
                     <div class="col-2 text-end">
-                        <a href="{{route('restaurant.edit')}}" class="btn b-color w-75">Edit</a>
+                        <a href="{{route('restaurant.edit', $restaurant->id)}}" class="btn b-color w-75">Edit</a>
                     </div>
                     @endif
                 </div>
@@ -77,7 +78,7 @@
                 <h5 class="mt-4">
                     <span style="display:inline-block; width:60px;">Lunch :</span>
                     @foreach ($LunchValues as $LunchValue)
-                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block; width: 70px; background-color: rgb(176, 127, 4); color: white"">
+                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block; width: 70px; background-color: #E7DA3D; color: black">
                             {!! str_replace('\\', '¥', e($LunchValue)) !!}
                         </div>&nbsp;
                     @endforeach
@@ -85,7 +86,7 @@
                 <h5>
                     <span style="display:inline-block; width:60px;">Dinner:</span>
                     @foreach ($DinnerValues as $DinnerValue)
-                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block; width: 70px; background-color: rgb(176, 127, 4); color: white"">
+                        <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block; width: 70px; background-color: #E7DA3D; color: black">
                             {!! str_replace('\\', '¥', e($DinnerValue)) !!}
                         </div>&nbsp;
                     @endforeach
@@ -97,9 +98,9 @@
                 <!-- Feature -->
                 <div class="mt-4">
                     @foreach ($featureTypes as $featureType)
-                    <div>
-                        <div class="btn btn-light border-0 me-3" style="float:left; background-color: rgb(231, 52, 8); color: white">{{ $featureType }}</div>
-                    </div>
+                        <span class="h5 border-0 me-2 rounded text-center px-2" style="background-color: rgb(231, 52, 8); color: white">
+                            {{ $featureType }}
+                        </span>
                     @endforeach
                 </div>
                 <br>
@@ -242,68 +243,42 @@
             <!--  Course section -->
             <div class="col-8 mt-5">
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-6">
                         <h5>Course</h5>
                     </div>
-                    <div class="col-8">
-                        <a href="" class="btn btn-light border-dark">Main menu</a>
-                        <a href="" class="btn btn-light border-dark">Course</a>
-                    </div>
-                    <div class="col-2 text-end">
+                    <div class="col-6 text-end">
                         <a href="{{ route('restaurant.reservations', $restaurant->id) }}" class="btn b-color">Reservation</a>
                     </div>
                 </div>
                 <hr>
             </div>
 
-            <!--  Main menu -->
-
             <!--  Course menu -->
             <div class="col-8 mb-6">
-                <!--  Course 1 -->
-                <div class="mb-5 border-bottom">
+                @foreach($all_courses as $course)
+                <div class="mb-4 border-bottom">
                     <div class="row g-0">
                       <div class="col-md-4">
-                        <img src="https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/305990626_403997255192763_1264677505506611830_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=Rw8b-V_tTKgAX-ziRMO&_nc_ht=scontent-nrt1-2.xx&oh=00_AfBb6wrXpKFUcRqFDbiE8EUDozLrlJMAmsN_FkwwsMlLSQ&oe=654A1B93" class="img-fluid rounded-start" alt="...">
+                        <img src="{{ $course->photo }}" class="img-fluid" alt="...">
                       </div>
                       <div class="col-md-8">
                         <div class="card-body ms-4">
-                          <h5 class="card-title">Couse1 <span>¥ 6,000</span></h5>
-                          <p class="card-text">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<a href="#">>Read More</a></p>
+                          <h5 class="card-title">{{ $course->name }} <span>¥ {{ $course->price }} </span></h5>
+                          <p class="card-text">{{ $course->description }}<a href="#">>Read More</a></p>
                         </div>
                       </div>
                     </div>
                 </div>
+                @endforeach
+            </div>
 
-                <!--  Course 2 -->
-                <div class="mb-5 border-bottom">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/305990626_403997255192763_1264677505506611830_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=Rw8b-V_tTKgAX-ziRMO&_nc_ht=scontent-nrt1-2.xx&oh=00_AfBb6wrXpKFUcRqFDbiE8EUDozLrlJMAmsN_FkwwsMlLSQ&oe=654A1B93" class="img-fluid rounded-start" alt="...">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body ms-4">
-                          <h5 class="card-title">Couse1 <span>¥ 6,000</span></h5>
-                          <p class="card-text">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<a href="#">>Read More</a></p>
-                        </div>
-                      </div>
-                    </div>
+            <!--  Main menu -->
+            <div class="col-8 mt-5 mb-5">
+                <div class="col">
+                     <h5>Main menu</h5>
                 </div>
-
-                <!--  Course 3 -->
-                <div class="mb-5 border-bottom">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/305990626_403997255192763_1264677505506611830_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=Rw8b-V_tTKgAX-ziRMO&_nc_ht=scontent-nrt1-2.xx&oh=00_AfBb6wrXpKFUcRqFDbiE8EUDozLrlJMAmsN_FkwwsMlLSQ&oe=654A1B93" class="img-fluid rounded-start" alt="...">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body ms-4">
-                          <h5 class="card-title">Couse1 <span>¥ 6,000</span></h5>
-                          <p class="card-text">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<a href="#">>Read More</a></p>
-                        </div>
-                      </div>
-                    </div>
-                </div>
+                <hr>
+                <span>{{ $restaurant->menu }}</span>
             </div>
 
             <!-- Review section -->
