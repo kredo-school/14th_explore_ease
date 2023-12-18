@@ -1,36 +1,34 @@
 @extends('layouts.app')
 
-<!-- Chart.js for graph -->
-@section('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-@vite(['resources/js/dashboard_graph.js'])
-@endsection
-
 @section('content')
 
-<div class="container w-75">
-  <h2>Dashboards</h2>
+<!-- Chart.js for graph -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+@vite(['resources/js/dashboard_graph.js'])
+
+<div class="container w-50">
+  <h2 class="mt-5">Dashboards</h2>
 {{-- Number of users, reviews, and reservations --}}
-        <div class="row border">
+        <div class="row border mt-3">
             <div class="col-4 themed-grid-col text-center">
                 <h4 class="text-center">Users</h4>
                 <span>
                     <i class="fa-solid fa-circle-user fa-3x"></i>
-                    <p class="d-inline display-5">19,281</p>
+                    <p class="d-inline display-5">{{ count($profileUsers) }}</p>
                 </span>
             </div>
             <div class="col-4 themed-grid-col text-center">
                 <h4 class="text-center">Owners</h4>
                 <span>
                     <i class="fa-solid fa-house-user fa-3x"></i>
-                    <p class="d-inline display-5">4,698</p>
+                    <p class="d-inline display-5">{{ count($profileOwners) }}</p>
                 </span>
             </div>
             <div class="col-4 themed-grid-col text-center">
                 <h4 class="text-center">Restaurants</h4>
                 <span>
                     <i class="fa-solid fa-utensils fa-3x"></i>
-                    <p class="d-inline display-5">5,289</p>
+                    <p class="d-inline display-5">{{ count($restaurants) }}</p>
                 </span>
             </div>
          </div>
@@ -39,14 +37,14 @@
                     <h4 class="text-center">Reviews</h4>
                     <span>
                         <i class="fa-solid fa-clipboard fa-3x"></i>
-                        <p class="d-inline display-5">289,543</p>
+                        <p class="d-inline display-5">{{ count($reviews) }}</p>
                     </span>
                 </div>
                 <div class="col-6 themed-grid-col text-center">
                     <h4 class="text-center">Reservations</h4>
                     <span>
                     <i class="fa-solid fa-calendar-check fa-3x"></i>
-                    <p class="d-inline display-5">156,987</p>
+                    <p class="d-inline display-5">{{ count($reservations) }}</p>
                 </span>
             </div>
         </div>
