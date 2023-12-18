@@ -64,14 +64,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-4 pe-0">
                                 @foreach($features[$loop->index] as $feature)
                                 <span class="h6 rounded me-1" style="padding: 2.5px; line-height:2rem; background-color: rgb(231, 52, 8); color: white">
                                     {{$feature->featuretype->name}}
                                 </span>
                                 @endforeach
                             </div>
-                            <div class="col-6 text-start">
+                            <div class="col-8 text-end">
                                 @if (array_sum($timezoneLunch[$loop->index]) == 0)
                                     Lunch&nbsp;: --- <br>
                                 @else
@@ -80,7 +80,7 @@
                                         @if($budget->timezonetype == 1)
                                             <span class="h6 rounded-1" style="padding: 1px; margin-right: 3px; line-height:2rem;background-color: rgb(176, 127, 4); color: white">
                                                 {!! str_replace('\\', '¥', e($budget->budgetvalue)) !!}
-                                            </span>
+                                            </div>
                                         @endif
                                     @endforeach <br>
                                 @endif
@@ -91,7 +91,7 @@
                                         @if($budget->timezonetype == 2)
                                             <span class="h6 rounded-1" style="padding: 1px; margin-right: 3px; background-color: rgb(176, 127, 4); color: white">
                                                 {!! str_replace('\\', '¥', e($budget->budgetvalue)) !!}
-                                            </span>
+                                            </div>
                                         @endif
                                     @endforeach
                                 @endif

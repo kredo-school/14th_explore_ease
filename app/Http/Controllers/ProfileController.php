@@ -47,7 +47,6 @@ class ProfileController extends Controller
         if(Auth::user()->profile->usertype_id != 3){
             $count_restaurant = "ー";
         }
-        
         // 2. count reservations, reviews, bookmarks for the user
         $count_reservation = $user->reservations->count();
         $count_review = $user->reviews->count();
@@ -79,36 +78,18 @@ class ProfileController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    //  Display user review page from menu bar
+    public function reviewShow($id)
     {
-        
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        
-    }
-    // Show profile page
-    public function show($id)
-    {   
         $user = $this->user->findOrFail($id);
-        // We use $nationalities at nationality selction on profile modal.
-        $nationalities = $this->nationality->get(); 
+        //get user review data from database and paginate
+        $reviews = $user->reviews()->latest()->paginate(3);
 
-        //parts of count on header.blade.php
-        // 1. count restaurants for the owner
         $count_restaurant = $user->restaurants->count();
         if(Auth::user()->profile->usertype_id != 3){
             $count_restaurant = "ー";
         }
-        
-        // 2. count reservations, reviews, bookmarks for the user
+
         $count_reservation = $user->reservations->count();
         $count_review = $user->reviews->count();
         $count_bookmark = $user->bookmarks->count();
@@ -118,9 +99,70 @@ class ProfileController extends Controller
             $count_bookmark = "ー";
         }
 
-        //We use $restaurants and $foodtype at restaurant profile for owners.
-        $restaurants = $this->restaurant->latest()->get();  
-        $foodtype = $this->foodtype->get(); 
+        return view('users.profile_review')->with('user', $user)
+        ->with('count_restaurant', $count_restaurant)
+        ->with('count_reservation', $count_reservation)
+        ->with('count_review', $count_review)
+        ->with('count_bookmark', $count_bookmark)
+        ->with('reviews', $reviews);
+    }
+
+    // Display user reservation page from menu bar
+    public function reservationShow($id)
+    {
+        $user = $this->user->findOrFail($id);
+        //get user reservation data from database and paginate
+        $reservations = $user->reservations()->latest()->paginate(3);
+
+        $count_restaurant = $user->restaurants->count();
+        if(Auth::user()->profile->usertype_id != 3){
+            $count_restaurant = "ー";
+        }
+
+        $count_reservation = $user->reservations->count();
+        $count_review = $user->reviews->count();
+        $count_bookmark = $user->bookmarks->count();
+        if(Auth::user()->profile->usertype_id != 2){
+            $count_reservation = "ー";
+            $count_review = "ー";
+            $count_bookmark = "ー";
+        }
+
+        return view('users.profilereservation')->with('user', $user)
+        ->with('count_restaurant', $count_restaurant)
+        ->with('count_reservation', $count_reservation)
+        ->with('count_review', $count_review)
+        ->with('count_bookmark', $count_bookmark)
+        ->with('reservations', $reservations);
+
+
+    }
+
+    // Show profile page
+    public function show($id)
+    {   
+        $user = $this->user->findOrFail($id);
+        // We use $nationalities at nationality selction on profile modal.
+        $nationalities = $this->nationality->get(); 
+
+        $count_restaurant = $user->restaurants->count();
+        if(Auth::user()->profile->usertype_id != 3){
+            $count_restaurant = "ー";
+        }
+        
+        $count_reservation = $user->reservations->count();
+        $count_review = $user->reviews->count();
+        $count_bookmark = $user->bookmarks->count();
+        if(Auth::user()->profile->usertype_id != 2){
+            $count_reservation = "ー";
+            $count_review = "ー";
+            $count_bookmark = "ー";
+        }
+
+        //We use $restaurants and $foodtype at restaurant profile for owners and paginate.
+        $restaurants = $this->restaurant->latest()->get();
+        $restaurants = $user->restaurants()->latest()->paginate(2);  
+        $foodtype = $this->foodtype->get();
 
         return view('users.profile')->with('user', $user)
         ->with('nationalities',$nationalities)
