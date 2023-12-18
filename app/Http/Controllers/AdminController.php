@@ -43,13 +43,13 @@ class AdminController extends Controller
     }
 
     public function dashboardAllUsers(){
+        // $profiles = Profile::where('usertype_id', 2)->latest()->paginate(3);
         $profiles = Profile::where('usertype_id', 2)->withTrashed()->latest()->paginate(3);
         // Data from Users table
         $userIds = [];
         $userNames = [];
         $registDates = [];
         $emails = [];
-        $deleted_ats = [];
 
         // Data from Profiles table
         $firstNames = [];
@@ -69,10 +69,6 @@ class AdminController extends Controller
 
             $emData = $this->user->where('id', $profile->user_id)->get()->pluck('email')->toArray();
             array_push($emails, $emData);
-
-            // $deData = $this->user->where('id', $profile->user_id)->get()->pluck('deleted_at')->toArray();
-            // array_push($deleted_ats, $deData);
-
 
             // Data from Profiles table
             $firstNames[] = $profile->first_name;
@@ -95,18 +91,28 @@ class AdminController extends Controller
             'registDates'=>$registDates,
             'emails'=>$emails,
             'phones'=>$phones,
-            // 'deleted_ats'=>$deleted_ats,
         ]);
     }
 
     public function hide($id){
         $this->user->destroy($id);
+
+        $user = $this->user->findOrFail($id);
+        $user_id = $user->profile->pluck('user_id');
+        $this->profile->destroy($user_id);
+
         return back();
     }
+    
 
     public function unhide($id)
     {
         $this->user->onlyTrashed()->findOrFail($id)->restore();
+
+        $user = $this->user->findOrFail($id);
+        $user_id = $user->profile->pluck('user_id');
+        $this->profile->onlyTrashed()->findOrFail($user_id)->restore();
+
         return back();
     }
 }
