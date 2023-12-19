@@ -9,7 +9,6 @@ use App\Models\Restaurant;
 use App\Models\User;
 use App\Models\Review;
 use App\Models\Reservation;
-use App\Models\User;
 
 class AdminController extends Controller
 {
