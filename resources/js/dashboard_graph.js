@@ -1,35 +1,5 @@
-  //User 
-var ctx = document.getElementById("userChart");
-var userChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
-    datasets: [
-    {
-        label: 'users',
-        data: [55, 45, 73, 75, 41, 45, 58, 73, 75, 41, 45, 58],
-        backgroundColor: "rgba(255,183,76,0.5)"
-      }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-    },
-    scales: {
-      yAxes: [{
-        ticks: {
-          suggestedMax: 100,
-          suggestedMin: 0,
-          stepSize: 10,
-          callback: function(value, index, values){
-            return  value
-          }
-        }
-      }]
-    },
-  }
-});
+  //User
+
 
 //Owner
 var ctx = document.getElementById("ownersChart");
@@ -41,7 +11,7 @@ var ctx = document.getElementById("ownersChart");
           {
               label: 'Owners',
               data: [55, 45, 73, 75, 41, 45, 58, 73, 75, 41, 45, 58],
-              backgroundColor: "rgba(255,183,76,0.5)"
+              backgroundColor: "#CAC2C7"
             }
           ]
         },
@@ -74,7 +44,7 @@ var ctx = document.getElementById("ownersChart");
           {
               label: 'Restaurant pages',
               data: [55, 45, 73, 75, 41, 45, 58, 73, 75, 41, 45, 58],
-              backgroundColor: "rgba(255,183,76,0.5)"
+              backgroundColor: "#CAC2C7"
             }
           ]
         },
@@ -107,7 +77,7 @@ var ctx = document.getElementById("ownersChart");
       {
           label: 'Number of reviews',
           data: [55, 45, 73, 75, 41, 45, 58, 73, 75, 41, 45, 58],
-          backgroundColor: "rgba(255,183,76,0.5)"
+          backgroundColor: "#CAC2C7"
         }
       ]
     },
@@ -140,7 +110,7 @@ var ctx = document.getElementById("ownersChart");
       {
           label: 'Number of booking',
           data: [55, 45, 73, 75, 41, 45, 58, 73, 75, 41, 45, 58],
-          backgroundColor: "rgba(255,183,76,0.5)"
+          backgroundColor: "#CAC2C7"
         }
       ]
     },
@@ -173,7 +143,7 @@ var ctx = document.getElementById("ownersChart");
       {
           label: 'number of people',
           data: [500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000],
-          backgroundColor: "rgba(255,183,76,0.5)"
+          backgroundColor: "#CAC2C7"
         }
       ]
     },

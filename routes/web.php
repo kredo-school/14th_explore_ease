@@ -48,6 +48,7 @@ Route::group(['middleware'=>'set.locale'], function () {
     Route::group(['middleware'=>'auth'], function () {
 
         Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
+        //Route::get('/admin/dashboard_graph', [App\Http\Controllers\AdminController::class, 'userChart'])->name('admin.dashboard_graph');
 
         Route::get('/admin/dashboard_all_users', [App\Http\Controllers\AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
 
@@ -56,7 +57,6 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/admin/dashboard_all_reviews', [App\Http\Controllers\AdminController::class, 'dashboardAllReviews'])->name('admin.allReviews');
 
         Route::get('/admin/dashboard_all_owners', [App\Http\Controllers\AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
-
         Route::get('/admin/dashboard_all_reservations', [App\Http\Controllers\AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
 
         // HomeController
