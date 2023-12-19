@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Profile extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = ['user_id', 'first_name', 'last_name', 'avatar', 'phone', 'usertype_id', 'nationality_id'];
     protected $primaryKey = 'user_id';
-    /** 
+    /**
      * Profile-User
      * a Profile belongs to a User
      * to get the owner of the Profile
@@ -21,7 +22,7 @@ class Profile extends Model
         return $this->belongsTo(User::class);
     }
 
-    /** 
+    /**
      * Profile-UserType
      * a Profile belongs to a UserType
      * to get the owner of the Profile
@@ -31,7 +32,7 @@ class Profile extends Model
         return $this->belongsTo(UserType::class);
     }
 
-    /** 
+    /**
      * Profile-Nationality
      * a Profile belongs to a Nationality
      * to get the owner of the Profile
