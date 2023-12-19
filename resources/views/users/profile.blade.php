@@ -12,7 +12,7 @@
                     @include('users.menu')
                 </div>
                 <div class="col-9">
-                    <div class="row ">
+                    <div class="row">
                         <div class="col-6">
                             <h1>Profile</h1>
                         </div>
@@ -25,44 +25,74 @@
                         @include('users.modal.profile_edit')
                     </div>
                     <div class="row">
-                        <div class="row ">
+                        <div class="row">
                             <div class="col-6">
                                 <label for="firstname" class="col-md-4 col-form-label">First Name</label>
-                                <input type="text" class="form-control" name="firstname" value="{{ $user->profile->first_name }}" disabled>
+                                @if($user->profile != null && $user->profile->first_name)
+                                    <input type="text" class="form-control" name="firstname" value="{{ $user->profile->first_name }}" disabled>
+                                @else
+                                    <input type="text" class="form-control" name="firstname" disabled>
+                                @endif
                             </div>
                             <div class="col-6">
                                 <label for="lastname" class="col-md-4 col-form-label">Last Name</label>
-                                <input type="text" class="form-control" name="lastname" value="{{ $user->profile->last_name }}" disabled>
+                                @if($user->profile != null && $user->profile->last_name)
+                                    <input type="text" class="form-control" name="lastname" value="{{ $user->profile->last_name }}" disabled>
+                                @else
+                                    <input type="text" class="form-control" name="lastname" disabled>
+                                @endif
                             </div>
                         </div>
-                        <div class="row ">
+                        <div class="row">
                             <div class="col">
                                 <label for="username">Username</label>
                                 <input type="text" class="form-control" name="username" value="{{ $user->name }}" disabled>
                             </div>
                         </div>
-                        <div class="row ">
+                        <div class="row">
                             <div class="col">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" name="email" value="{{ $user->email }}" disabled>
                             </div>
                         </div>
-                        <div class="row ">
+                        <div class="row">
                             <div class="col">
                                 <label for="phone">Phone</label>
-                                <input type="text" class="form-control" name="phone" value="{{ $user->profile->phone }}" disabled>
+                                @if($user->profile != null && $user->profile->phone)
+                                    <input type="text" class="form-control" name="phone" value="{{ $user->profile->phone }}" disabled>
+                                @else
+                                    <input type="text" class="form-control" name="phone" disabled>
+                                @endif
                             </div>
                         </div>
-                        <div class="row ">
+                        <div class="row">
                             <div class="col">
-                                <label for="username">Nationality</label>
-                                <input type="country" class="form-control" name="nationality" value="{{ $user->profile->nationality->name }}" disabled>
+                                <label for="nationality">Nationality</label>
+                                @if($user->profile != null && $user->profile->nationality)
+                                    <input type="country" class="form-control" name="nationality" value="{{ $user->profile->nationality->name }}" disabled>
+                                @else
+                                    <input type="country" class="form-control" name="nationality" disabled>
+                                @endif
                             </div>
                         </div>
+                        @if($user->profile != null && $user->profile->usertype_id != null)
+                            <div class="row">
+                                <div class="col">
+                                    <label for="usertype">UserType</label>
+                                    @if($user->profile->usertype_id == 1)
+                                        <input type="text" class="form-control" name="usertype" value="Admin" disabled>
+                                    @elseif ($user->profile->usertype_id == 2)
+                                        <input type="text" class="form-control" name="usertype" value="User" disabled>
+                                    @elseif ($user->profile->usertype_id == 3)
+                                        <input type="text" class="form-control" name="usertype" value="Owner" disabled>
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
 
                             {{-- Restaurant Profile for Owners --}}
                             {{-- If user is an owner, the owner can see own restaurant profiles --}}
-                            @if(Auth::user()->profile->usertype_id == 3)
+                            @if(Auth::user()->profile != null && Auth::user()->profile->usertype_id == 3)
                                 <div class="row mt-5">
                                     <div class="col-6">
                                         <h1>Restaurant Profile</h1>
