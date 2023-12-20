@@ -22,34 +22,96 @@
             <tr>
               <th scope="col">id</th>
               <th scope="col">Username</th>
-              <th  colspan="2">name</th>
+              <th colspan="2">name</th>
               <th scope="col">registration date</th>
               <th scope="col">e-mail</th>
+              <th scope="col">phone</th>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>
           </thead>
           {{-- Data starting here --}}
           <tbody>
+            @foreach ($profiles as $profile)
             <tr>
-              <td class="py-3">#</td>
-              <td class="py-3">O-Re!</td>
-              <td class="py-3">Ore</td>
-              <td class="py-3">Dayo</td>
-              <td class="py-3">11:00  12 OCT 2024</td>
-              <td class="py-3">messi@gmail,be.sp</td>
-              <td class="py-3">1234567890</td>
-              <td><button type="button" class="btn btn-secondary">Inactivate</button></td>
+                @foreach ($userIds[$loop->index] as $userId)
+                    <td class="py-3">{{$userId->id}}</td>
+                @endforeach
+
+                @foreach ($userNames[$loop->index] as $userName)
+                    <td class="py-3">{{ $userName }}</td>
+                @endforeach
+
+                <td class="py-3">{{ $firstNames[$loop->index] }}</td>
+
+                <td class="py-3">{{ $lastNames[$loop->index] }}</td>
+
+                @foreach ($registDates[$loop->index] as $registDate)
+                    <td class="py-3">{{ $registDate }}</td>
+                @endforeach
+
+                @foreach ($emails[$loop->index] as $email)
+                    <td class="py-3">{{ $email }}</td>
+                @endforeach
+
+                <td class="py-3">{{ $phones[$loop->index] }}</td>
+
+                <td class="py-3">
+                    @foreach ($userIds[$loop->index] as $userId)
+                        @if ($userId->trashed())
+                            <i class="fa-solid fa-circle-minus text-secondary"></i> &nbsp; Inactive
+                        @else
+                            <i class="fa-solid fa-circle text-primary"></i> &nbsp; Active
+                        @endif
+                    @endforeach
+                </td>
+
+                {{-- <td><button type="button" class="btn btn-secondary">Inactivate</button></td> --}}
+                <td>
+                    {{-- <div class="dropdown">
+                        <button class="btn btn-sm" data-bs-toggle="dropdown">
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+
+                        <div class="dropdown-menu">
+                        @foreach ($userIds[$loop->index] as $userId)
+                            @if ($userId->trashed())
+                            <button class="dropdown-item text-danger" data-bs-toggle= "modal" data-bs-target="#unhide-post-{{ $userId->id }}">
+                                <i class="fa-solid fa-eye"></i>
+                                Activate User {{ $userId->id }}
+                            </button>
+                            @else
+                            <button class="dropdown-item text-danger" data-bs-toggle= "modal" data-bs-target="#hide-post-{{ $userId->id }}">
+                                <i class="fa-solid fa-eye-slash"></i>
+                                Inactivate User {{ $userId->id }}
+                            </button>
+                            @endif
+                        @endforeach
+                        </div>
+                    </div> --}}
+
+                    @foreach ($userIds[$loop->index] as $userId)
+                            @if ($userId->trashed())
+                                <form action="{{ route('admin_user.unhide', $userId->id) }}" method="post">
+                                    @csrf
+                                    @method('PATCH')
+                                <button type="submit" class="btn btn-secondary">Activate User {{ $userId->id }}</button>
+                            @else
+                                <form action="{{ route('admin_user.hide', $userId->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                <button type="submit" class="btn btn-secondary">Inactivate User {{ $userId->id }}</button>
+                            @endif
+                    @endforeach
+                </td>
             </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
-      {{-- permanent_area --}}
+
         <div class="d-flex justify-content-center">
-        <!--previousry-->
-          <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="<%preventry_url>">previous &lt;&lt;</a>
-        <!--nextentry-->
-          <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover mx-5" href="<%nextentry_url>">&gt;&gt;next</a>
+            {{ $profiles->links() }}
         </div>
 </div>
 
