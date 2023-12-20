@@ -20,7 +20,6 @@
                     <img src="{{ $photo->photo }}" alt="" class="img-fluid" style="object-fit:cover; width:450px; height:450px">
                 </div>
             @endforeach
-
         </div>
 
         <div class="row justify-content-center mt-5">
@@ -28,9 +27,15 @@
             <div class="col-8">
                 <div class="row">
                     <!-- Resturant name -->
-                    <div class="col-8">
-                        <h2 style="line-height: 42.55px">{{ $restaurant->name }}</h2>
-                    </div>
+                    @if($profile->usertype_id == 3)
+                        <div class="col-6">
+                            <h2 style="line-height: 42.55px">{{ $restaurant->name }}</h2>
+                        </div>
+                    @else
+                        <div class="col-8">
+                            <h2 style="line-height: 42.55px">{{ $restaurant->name }}</h2>
+                        </div>
+                    @endif
 
                     <!-- Rating -->
                     <div class="col-2 text-center">
@@ -65,17 +70,17 @@
 
                     <!-- Restaurant edit page -->
                     @if($profile->usertype_id == 3)
-                    <div class="col-2 text-end">
-                        <a href="{{route('restaurant.edit', $restaurant->id)}}" class="btn b-color w-75">Edit</a>
-                    </div>
+                        <div class="col-2 text-end">
+                            <a href="{{route('restaurant.edit', $restaurant->id)}}" class="btn b-color w-75">Edit</a>
+                        </div>
                     @endif
                 </div>
 
                 <!-- Postal Address -->
-                <p>{{ $restaurant->address }}</p>
+                <p class="h4">{{ $restaurant->address }}</p>
 
                 <!-- Budget -->
-                <h5 class="mt-4">
+                <h5 class="mt-3">
                     <span style="display:inline-block; width:60px;">Lunch :</span>
                     @foreach ($LunchValues as $LunchValue)
                         <div class="border-0 rounded-1 px-1 text-center" style="display:inline-block; width: 70px; background-color: #E7DA3D; color: black">
@@ -93,10 +98,10 @@
                 </h5>
 
                 <!-- Food type -->
-                <h5 class="mt-4">{{ $foodtype->name }}</h5>
+                <h4 class="mt-3">FoodType: {{ $foodtype->name }}</h4>
 
                 <!-- Feature -->
-                <div class="mt-4">
+                <div class="mt-3">
                     @foreach ($featureTypes as $featureType)
                         <span class="h5 border-0 me-2 rounded text-center px-2" style="background-color: rgb(231, 52, 8); color: white">
                             {{ $featureType }}
@@ -106,21 +111,21 @@
                 <br>
 
                 <!-- Time zone -->
-                <div class="row mt-5">
+                <div class="row mt-2">
                         @if ($sumTimezones == 1)
                             <div class="col-1">
-                                <i class="fa-regular fa-sun h4"></i>
+                                <i class="fa-regular fa-sun h3"></i>
                             </div>
                         @elseif($sumTimezones == 2)
                             <div class="col-1">
-                                <i class="fa-regular fa-moon h4"></i>
+                                <i class="fa-regular fa-moon h3"></i>
                             </div>
                         @elseif($sumTimezones == 3)
                             <div class="col-1">
-                                <i class="fa-regular fa-sun h4"></i>
+                                <i class="fa-regular fa-sun h3"></i>
                             </div>
                             <div class="col-1">
-                                <i class="fa-regular fa-moon h4"></i>
+                                <i class="fa-regular fa-moon h3"></i>
                             </div>
                         @else
                             <!-- Empty -->
@@ -128,7 +133,7 @@
                 </div>
 
                 <!-- Open hours -->
-                <table style="width: 25%;" class="mt-3">
+                <table style="width: 50%;" class="mt-3 h4">
                     <tr>
                         <td>Mon</td>
                         <td>
@@ -217,17 +222,16 @@
 
             <!--  Discription section -->
             <div class="col-8 mt-5">
-                <h5>About us</h5>
+                <h4>About us</h4>
                 <hr>
-                <p>{{ $restaurant->description }}
-                </p>
+                <p class="h5">{{ $restaurant->description }}</p>
             </div>
 
             <!--  Location section -->
-            <div class="col-8 mt-5">
+            <div class="col-8 mt-5 h4">
                 <div class="row">
                     <div class="col-10">
-                        <h5>Location</h5>
+                        <h4>Location</h4>
                     </div>
                     <div class="col-2 text-center">
                         <div class="border border-dark rounded-3 p-1">{{ $areatype->station_name }}</div>
@@ -237,14 +241,13 @@
 
                 <!--  MAP -->
                 <div id="map" class="py-5 bg-secondary" style='width: 100%; height: 300px;'></div>
-
             </div>
 
             <!--  Course section -->
             <div class="col-8 mt-5">
                 <div class="row">
                     <div class="col-6">
-                        <h5>Course</h5>
+                        <h4>Course</h4>
                     </div>
                     <div class="col-6 text-end">
                         <a href="{{ route('restaurant.reservations', $restaurant->id) }}" class="btn b-color">Reservation</a>
@@ -254,17 +257,17 @@
             </div>
 
             <!--  Course menu -->
-            <div class="col-8 mb-6">
+            <div class="col-8 mt-3">
                 @foreach($all_courses as $course)
                 <div class="mb-4 border-bottom">
                     <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="{{ $course->photo }}" class="img-fluid" alt="...">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body ms-4">
-                          <h5 class="card-title">{{ $course->name }} <span>¥ {{ $course->price }} </span></h5>
-                          <p class="card-text">{{ $course->description }}<a href="#">>Read More</a></p>
+                        <div class="col-md-4">
+                            <img src="{{ $course->photo }}" class="img-fluid" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body ms-4">
+                            <h5 class="card-title">{{ $course->name }} <span>¥ {{ $course->price }} </span></h5>
+                            <p class="card-text">{{ $course->description }}<a href="#">>Read More</a></p>
                         </div>
                       </div>
                     </div>
@@ -273,19 +276,19 @@
             </div>
 
             <!--  Main menu -->
-            <div class="col-8 mt-5 mb-5">
+            <div class="col-8 mt-4">
                 <div class="col">
-                     <h5>Main menu</h5>
+                    <h4>Main menu</h4>
                 </div>
                 <hr>
-                <span>{{ $restaurant->menu }}</span>
+                <span class="h5">{{ $restaurant->menu }}</span>
             </div>
 
             <!-- Review section -->
             <div class="col-8 mt-5">
                 <div class="row">
                     <div class="col-10">
-                        <h5>Review</h5>
+                        <h4>Review</h4>
                     </div>
                     <div class="col-2 text-end">
                         <a href="{{ route('restaurant.review',$restaurant->id) }}" class="btn b-color">Reiview</a>
@@ -296,26 +299,27 @@
                 <div>
                     <table class="table table-borderless">
                         @foreach ($review as $eachReview)
-                        <tr>
-                            <td scope="col" style="width: 10%">
+                        <tr class="align-middle">
+                            <td scope="col" style="width: 100px">
                                     @if($profile->avatar)
-                                    <a href="{{ route('profile.show', $user->id) }}" style="margin-top: ">
-                                        <img src="{{ $profile->avatar }}" class="img-thumbnail rounded-circle w-50">
-                                    </a>
+                                        <a href="{{ route('profile.show', $user->id) }}">
+                                            <img src="{{ $profile->avatar }}" class="img-thumbnail rounded-circle" style="width: 50.79px; height: 50.79px">
+                                        </a>
                                     @else
                                         <i class="fa-solid fa-circle-user text-secondary fs-3"></i>
                                     @endif
                             </td>
-                            <td scope="col" style="width: 10%">
-                                <div class="text-decoration-none text-dark h5" style="margin-top:4px;">
-                                    {{ $eachReview->star }} <i class="fa-solid fa-star"></i>
-                                </div>
+                            <td scope="col" style="width: 100px" class="h4">
+                                {{ $eachReview->star }} 
+                                <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 50.79px; height: 50.79px">
+                                    <i class="fa-solid fa-star"></i>
+                                </span>
                             </td>
-                            <td scope="col" style="width: 60%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 0;">
-                                <span class="d-flex align-items-center">{{ $eachReview->comment }}</span>
+                            <td scope="col" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;" class="h5">
+                                <span class="d-flex align-items-center" style="width: 400px;">{{ $eachReview->comment }}</span>
                             </td>
-                            <td scope="col" style="width: 20%" class="text-end">
-                                <span class="d-flex align-items-center">{{ $eachReview->created_at }}</span>
+                            <td scope="col" class="text-end h5">
+                                <span class="d-flex align-items-center" style="width: 200px">{{ $eachReview->created_at }}</span>
                             </td>
                         </tr>
                         @endforeach

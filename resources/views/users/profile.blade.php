@@ -113,16 +113,21 @@
                                         <tbody>
                                             @foreach($restaurants as $restaurant)
                                                 @if($restaurant->user_id == Auth::user()->id)
-                                                    <tr style="vertical-align: middle">
+                                                    <tr class="align-middle">
                                                         <td>{{ $restaurant->name }}</td>
                                                         <td>
-                                                            <p style="line-height:24px;" class="text-limit">{{ $restaurant->updated_at }}</p>
+                                                            <span>{{ $restaurant->updated_at }}</span>
                                                         </td>
-                                                        <td>4.5<i class="fa-solid fa-star"></i></td>
+                                                        <td>
+                                                            4.5
+                                                            <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 50.79px; height: 50.79px">
+                                                                <i class="fa-solid fa-star"></i>
+                                                            </span>
+                                                        </td>
                                                         <td>{{ $restaurant->address }}</td>
                                                         <td>{{ $restaurant->foodtype->name }}</td>
                                                         <td>
-                                                            <a href="#" class="btn b-color">Edit</a>
+                                                            <a href="{{ route('restaurant.edit', $restaurant->id) }}" class="btn b-color">Edit</a>
                                                             {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
                                                             <button class="btn b-color">
                                                                 Delete

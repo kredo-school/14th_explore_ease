@@ -69,11 +69,6 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/profile/review', [HomeController::class, 'profileReview'])->name('profile.review');
 
         // Restaurant Controller
-        // show
-        Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
-        // detail
-        Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
-
         // Show the form for creating a new resource.
         Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
         // Store a newly created resource in storage.
