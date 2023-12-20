@@ -121,8 +121,8 @@
                             <!-- Avatar -->
                             <li class="nav-item dropdown">
                                 <button class="btn shadow-none nav-link" id="account-dropdown" data-bs-toggle="dropdown">
-                                    @if(Auth::user()->avatar)
-                                        <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}" class="rounded-circle avatar-sm">
+                                    @if(Auth::user()->profile != null && Auth::user()->profile->avatar)
+                                        <img src="{{ Auth::user()->profile->avatar }}" alt="{{ Auth::user()->name }}" class="img-thumbnail rounded-circle" style="width: 42px; height: 42px;">
                                     @else
                                         <span style="display: inline-block; line-height: 42px;">
                                             <i class="fa-regular fa-circle-user fa-lg" style="color: #000000; "></i>
