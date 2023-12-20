@@ -17,14 +17,15 @@ class AdminController extends Controller
     private $restaurant;
     private $review;
     private $reservation;
-    
-    
+
+
     public function __construct(Profile $profile, User $user, Restaurant $restaurant, Review $review, Reservation $reservation,){
         $this->profile = $profile;
         $this->user = $user;
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->reservation = $reservation;
+        $this->user = $user;
     }
 
     // show dashboard page
@@ -35,7 +36,7 @@ class AdminController extends Controller
         $restaurants = $this->restaurant->all();
         $reviews = $this->review->all();
         $reservations = $this->reservation->all();
-        
+
         return view('admin.dashboard',
         [
             'profileUsers'  => $profileUsers,
