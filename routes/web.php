@@ -47,16 +47,19 @@ Route::group(['middleware'=>'set.locale'], function () {
     // Authenticate exclude index page
     Route::group(['middleware'=>'auth'], function () {
 
+        // Dashboard
         Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-
+        // Dashboard_all_users
         Route::get('/admin/dashboard_all_users', [AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
-
-        Route::get('/admin/dashboard_all_restaurants', [AdminController::class, 'dashboardAllRestaurants'])->name('admin.allRestaurants');
-
-        Route::get('/admin/dashboard_all_reviews', [AdminController::class, 'dashboardAllReviews'])->name('admin.allReviews');
-
+        Route::delete('/admin/dashboard_all_users/{id}/hide', [AdminController::class, 'hide'])->name('admin_user.hide');
+        Route::patch('/admin/dashboard_all_users/{id}/unhide', [AdminController::class, 'unhide'])->name('admin_user.unhide');
+        // Dashboard_all_owners
         Route::get('/admin/dashboard_all_owners', [AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
-
+        // Dashboard_all_restaurants
+        Route::get('/admin/dashboard_all_restaurants', [AdminController::class, 'dashboardAllRestaurants'])->name('admin.allRestaurants');
+        // Dashboard_all_reviews
+        Route::get('/admin/dashboard_all_reviews', [AdminController::class, 'dashboardAllReviews'])->name('admin.allReviews');
+        // Dashboard_all_reservations
         Route::get('/admin/dashboard_all_reservations', [AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
 
         // HomeController
@@ -80,7 +83,6 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/restaurant/{id}/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
         // Update the specified resource in storage.
         Route::get('restaurant/{id}/update', [RestaurantController::class, 'update'])->name('restaurant.update');
-
         // ranking
         Route::get('/restaurant/ranking', [RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
 
