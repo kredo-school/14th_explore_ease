@@ -45,43 +45,44 @@ class AdminController extends Controller
             'reservations'  => $reservations,
         ]);
     }
-    
-    public function userChart(){
 
+    public function userChart(){
         $users = User::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
-                        ->whereYear('created_at',date('Y'))
-                        ->groupBy('month')
-                        ->orderBy('month')
-                        ->get();
+                    ->whereYear('created_at', date('Y'))
+                    ->groupBy('month')
+                    ->oderBy('month')
+                    ->get();
 
         $labels = [];
-        $data   = [];
-        $colors = ['#CAC2C7'];
+        $data = [];
 
-        for ($i=1; $i < 12; $i++){
+        for($i=1; $i < 12; $i++) {
             $month = date('F',mktime(0,0,0,$i,1));
-            $count = 0;
+            $count =0;
 
             foreach($users as $user){
-                if($user->month == $i)
-                $count = $user->count;
-                break;
+                if($user->month == $i){
+                    $count =$user->count;
+                    break;
+                }
             }
-            
-                    array_push($labels,$month);
-                    array_push($data,$count);
+
+            array_push($labels,$month);
+            array_push($data,$count);
         }
 
         $datasets = [
             [
-            'label' => 'users',
-            'data'  => $data,
-            'backgroundColors' => $colors
+                'label' => 'Users',
+                'data' => $data,
+
             ]
-        ];
-
-        return view('admin.dashboard',compact('datasets', 'labels'));
-
+            ];
+            return view('admin.dashboard',compact('datasets','labels'));
     }
 
+        public function getGraphInfo($id){
+          $fill = DB::table('explore_ease')->where('user', $id)->get();
+          return Response::jeson(['success'=>true, 'info'=>$fill]);
+        }
 }

@@ -48,7 +48,7 @@ Route::group(['middleware'=>'set.locale'], function () {
     Route::group(['middleware'=>'auth'], function () {
 
         Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
-        //Route::get('/admin/dashboard_graph', [App\Http\Controllers\AdminController::class, 'userChart'])->name('admin.dashboard_graph');
+        Route::get('graph_info','AdminController@getGraphInfo');
 
         Route::get('/admin/dashboard_all_users', [App\Http\Controllers\AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
 

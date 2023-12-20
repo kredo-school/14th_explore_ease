@@ -1,7 +1,15 @@
   //User
-
+  var ctx = document.getElementById("userChart").getContext('2d');
+  var userChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: jeson_encode($labels),
+      datasets: jeson_encode($datasets),
+    },
+  });
 
 //Owner
+/*
 var ctx = document.getElementById("ownersChart");
       var myBarChart = new Chart(ctx, {
         type: 'bar',
@@ -165,3 +173,5 @@ var ctx = document.getElementById("ownersChart");
       },
     }
   });
+
+  */
