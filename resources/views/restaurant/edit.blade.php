@@ -11,7 +11,7 @@
         <div class="border border-dark p-5">
             <div class="mb-3">
                 <label for="restaurant_name" class="form-label h3">Restaurant name</label>
-                <input type="text" id="restaurant_name" class="form-control" placeholder="{{$restaurant->name}}" name="restaurant_name">
+                <input type="text" id="restaurant_name" class="form-control" value="{{$restaurant->name}}" name="restaurant_name">
             </div>
             <div class="mb-3">
                 <label for="area" class="form-label h3">Area type</label>
@@ -28,7 +28,7 @@
             </div>
             <div class="mb-3">
                 <label for="restaurant_address" class="form-label h3">Restaurant address</label>
-                <input type="text" id="restaurant_address" class="form-control" placeholder="{{$restaurant->address}}" name="restaurant_address">
+                <input type="text" id="restaurant_address" class="form-control" value="{{$restaurant->address}}" name="restaurant_address">
             </div>
             <div class="mb-3">
                 <label for="restaurant_location" class="form-label h3">Please place the pin accurately at your outlet's location on the map</label>
@@ -87,7 +87,7 @@
                             </select>
                         </div>
                         <div class="col">
-                            @if(!empty($openhours[$loop->index]->closed && $openhours[$loop->index]->closed == 1))
+                            @if(!empty($openhours[$loop->index]->closed) && $openhours[$loop->index]->closed == 1)
                                 <input type="checkbox" name="closed_checkbox_{{$day}}"  value="1" id="closed_{{$day}}" checked>
                                 <label for="closed_{{$day}}" class="h4">Closed</label>
                             @else
@@ -159,24 +159,27 @@
             <div class="mb-3">
                 <label for="photo" class="form-label h3">Photo</label><br>
                 <div class="row">
-                    @if(!empty($restaurant_photos))
-                        @foreach($restaurant_photos as $key => $photo)
-                            <div class="col-4">
-                                <img src="{{$photo->photo}}" alt="" class="w-75">
-                                <input type="file" name="photo_".$key+1>
-                            </div>
-                        @endforeach
-                    @else
-                        <div class="col-4">
-                            <input type="file" name="photo_1">
-                        </div>
-                        <div class="col-4">
-                            <input type="file" name="photo_2">
-                        </div>
-                        <div class="col-4">
-                            <input type="file" name="photo_3">
-                        </div>
-                    @endif
+                    @php($a = 0)
+                    @while($a < 3)
+                        @php($data = false)
+                        @if($restaurant_photos == true)
+                            @foreach($restaurant_photos as $key => $photo)
+                                @if($restaurant_photo->index == $a+1)
+                                <div class="col-4">
+                                    <img src="{{$photo->photo}}" alt="" class="w-75">
+                                    <input type="file" name="photo_".$key+1>
+                                </div>
+                                @php($data = true)
+                                @endif
+                            @endforeach
+                        @endif
+                        @if($data == false)
+                                <div class="col-4">
+                                    <input type="file" name="photo_{{$a+1}}">
+                                </div>
+                        @endif
+                        @php($a++)
+                    @endwhile
                 </div>
             </div>
 
@@ -201,10 +204,8 @@
                     </div><br>
                     <div class="col-8">
                         <div class="btn-group ms-4" style="width: 125%;" role="group" aria-label="Basic checkbox toggle button group">
-                            @php
-                                $index = 0;
-                                $isFound = false;
-                            @endphp
+                            @php($index = 0)
+                            @php($isFound = false)
                             @while($index < 4)
                                 @php($isFound = false)
                                 @foreach($budgets as $key => $budget)
@@ -252,22 +253,22 @@
 
             <div class="mb-3">
                 <label for="features" class="form-label h3">Features</label><br>
-                @php
-                    $isFound = false;
-                @endphp
                 @foreach($features as $key => $feature)
                     <div class="form-check-inline h4">
+                        @php($found = false)
                         @foreach($s_features as $s_feature)
-                            @php($isFound = false)
-                            @if($s_feature->featuretype->feature_id == $key+1)
-                                <input class="form-check-input" type="checkbox" id="{{$feature->name}}" name="features".$key+1 value="1" checked>
+                            @if($s_feature->featuretype_id == $feature->id)
+                                <input class="form-check-input" type="checkbox" id="{{$feature->name}}" name="features{{$key+1}}" value="1" checked>
                                 <label class="form-check-label" for="{{$feature->name}}">{{$feature->name}}</label>            
-                            @php($isFound = true)
+                                @php($found = true)
+                                @break
                             @endif
-                            @php(!$isFound)
-                                <input class="form-check-input" type="checkbox" id="{{$feature->name}}" name="features".$key+1 value="1">
-                                <label class="form-check-label" for="{{$feature->name}}">{{$feature->name}}</label>                     
                         @endforeach
+
+                        @unless($found)
+                            <input class="form-check-input" type="checkbox" id="{{$feature->name}}" name="features{{$key+1}}" value="1">
+                            <label class="form-check-label" for="{{$feature->name}}">{{$feature->name}}</label>                     
+                        @endunless
                     </div>
                 @endforeach
             </div>

@@ -364,10 +364,13 @@ class RestaurantController extends Controller
                 $restaurant_photo->restaurant_id = $restaurant->id;
                 if($i == 0){
                     $restaurant_photo->name = "First photo";
+                    $restaurant_photo->index = 1;
                 } elseif($i == 1){
                     $restaurant_photo->name = "Second photo";
+                    $restaurant_photo->index = 2;
                 } elseif($i == 2){
                     $restaurant_photo->name = "Third photo";
+                    $restaurant_photo->index = 3;
                 }
                 $restaurant_photo->photo = 'data:image/' . $request->{"photo_".$i+1}->extension().
                 ';base64,'. base64_encode(file_get_contents($request->{"photo_".$i+1}));
@@ -456,8 +459,6 @@ class RestaurantController extends Controller
         $restaurant_photo = new RestaurantPhoto();
         $restaurant_photos = $restaurant_photo->where('restaurant_id', $id)->get();
 
-         //dd($restaurant_photos);
-
         return view('restaurant.edit')->with('areatypes', $areatypes)
         ->with('foodtypes', $foodtypes)
         ->with('restaurant', $restaurant)
@@ -472,9 +473,9 @@ class RestaurantController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $this->restaurant = 
+        $restaurant = $this->restaurant->findOrFail($id);
 
         $days_of_week = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Holiday'];
 
@@ -546,6 +547,12 @@ class RestaurantController extends Controller
             }
         }
 
+
+        
+        $budget = new Budget();
+        $budgets = $budget->where('restaurant_id', $id)->get();
+        $budgets->delete();
+
         for($i = 0; $i < 4; $i++)
         {
             if($request->{"L_budget".$i+1}){
@@ -569,6 +576,10 @@ class RestaurantController extends Controller
                 $budget->save();
             }
         }
+
+        $s_feature = new Feature();
+        $s_features = $s_feature->where('restaurant_id', $id)->get();
+        $s_features->delete();
 
         for($i = 0; $i < 7; $i++)
         {

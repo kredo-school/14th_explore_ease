@@ -80,12 +80,11 @@ Route::group(['middleware'=>'set.locale'], function () {
 
         Route::get('/restaurant/{id}/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
 
-        Route::get('restaurant/{id}/update', [RestaurantController::class, 'update'])->name('restaurant.update');
+        Route::post('restaurant/{id}/update', [RestaurantController::class, 'update'])->name('restaurant.update');
        
 
         // Restaurant Controller
         Route::get('/restaurant/adding', [App\Http\Controllers\RestaurantController::class, 'create'])->name('restaurant.adding');
-        Route::get('/restaurant/edit', [App\Http\Controllers\RestaurantController::class, 'edit'])->name('restaurant.edit');
         Route::post('/restaurant/store', [App\Http\Controllers\RestaurantController::class, 'store'])->name('restaurant.store');
         // ranking
         Route::get('/restaurant/ranking', [App\Http\Controllers\RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
