@@ -127,11 +127,15 @@
                                                         <td>{{ $restaurant->address }}</td>
                                                         <td>{{ $restaurant->foodtype->name }}</td>
                                                         <td>
-                                                            <a href="{{ route('restaurant.edit', $restaurant->id) }}" class="btn b-color">Edit</a>
-                                                            {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                                            <button class="btn b-color">
-                                                                Delete
-                                                            </button>
+                                                            <form action="{{ route('restaurant.destroy', $restaurant->id) }}" method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <a href="{{ route('restaurant.edit', $restaurant->id) }}" class="btn b-color">Edit</a>
+                                                                {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                                                <button class="btn b-color">
+                                                                    Delete
+                                                                </button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 @endif
