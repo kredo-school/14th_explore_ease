@@ -11,6 +11,8 @@ use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AdminController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,24 +47,26 @@ Route::group(['middleware'=>'set.locale'], function () {
     // Authenticate exclude index page
     Route::group(['middleware'=>'auth'], function () {
 
-        Route::get('/admin/dashboard', function () {
-            return view('admin/dashboard');
-        });
-        Route::get('/admin/dashboard_all_users', function () {
-            return view('/admin/dashboard_all_users');
-        });
-        Route::get('admin/all_restaurants', function () {
-            return view('admin/all_restaurants');
-        });
-        Route::get('admin/all_reviews', function () {
-            return view('admin/all_reviews');
-        });
-        Route::get('/admin/dashboard', function () {
-            return view('/admin/dashboard');
-        });
-        Route::get('admin/dashboard_all_owners', function () {
-            return view('admin/dashboard_all_owners');
-        });
+        // Dashboard
+        Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
+
+        // Dashboard_all_users
+        Route::get('/admin/dashboard_all_users', [App\Http\Controllers\AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
+        Route::delete('/admin/dashboard_all_users/{id}/hide', [App\Http\Controllers\AdminController::class, 'hide'])->name('admin_user.hide');
+        Route::patch('/admin/dashboard_all_users/{id}/hide', [App\Http\Controllers\AdminController::class, 'unhide'])->name('admin_user.unhide');
+
+        // Dashboard_all_owners
+        Route::get('/admin/dashboard_all_owners', [App\Http\Controllers\AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
+
+        // Dashboard_all_restaurants
+        Route::get('/admin/dashboard_all_restaurants', [App\Http\Controllers\AdminController::class, 'dashboardAllRestaurants'])->name('admin.allRestaurants');
+
+        // Dashboard_all_reviews
+        Route::get('/admin/dashboard_all_reviews', [App\Http\Controllers\AdminController::class, 'dashboardAllReviews'])->name('admin.allReviews');
+
+        // Dashboard_all_reservations
+        Route::get('/admin/dashboard_all_reservations', [App\Http\Controllers\AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
+
 
         // HomeController
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -90,10 +94,12 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/restaurant/ranking', [App\Http\Controllers\RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
 
         // Reservation Controller
-        //Tommie working on here:)
         Route::get('/restaurant/{id}/reservasions', [App\Http\Controllers\ReservationController::class, 'show'])->name('restaurant.reservations');
         Route::get('/restaurant/{id}/reservasions/create', [App\Http\Controllers\ReservationController::class, 'create'])->name('restaurant.reservation.create');
-        Route::post('/restaurant/reservasions/store', [App\Http\Controllers\ReservationController::class, 'store'])->name('restaurant.reservation.store');
+        Route::post('/restaurant/reservasions/store/{restaurant_id}', [App\Http\Controllers\ReservationController::class, 'store'])->name('restaurant.reservation.store');
+        // detail
+        Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
+
 
         // Review Controller
         // show review page
@@ -105,7 +111,9 @@ Route::group(['middleware'=>'set.locale'], function () {
         //Kazuya working on here:)
         Route::get('/profile/{id}/show', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
         Route::patch('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
-        Route::get('/bookmark/{id}/show', [App\Http\Controllers\ProfileController::class, 'bookmarkShow'])->name('bookmark.show');//connect bookmark page from menu bar
+        Route::get('/bookmark/{id}/show', [App\Http\Controllers\ProfileController::class, 'bookmarkShow'])->name('bookmark.show');//connect user bookmark page from menu bar
+        Route::get('/review/{id}/show', [App\Http\Controllers\ProfileController::class, 'reviewShow'])->name('review.show');//connect user review page from menu bar
+        Route::get('/reservation/{id}/show', [App\Http\Controllers\ProfileController::class, 'reservationShow'])->name('reservation.show');//connect user reservation page from menu bar
 
         // Bookmark Controller
         Route::get('/profile/bookmark', [App\Http\Controllers\BookmarkController::class, 'show'])->name('profile.bookmark');

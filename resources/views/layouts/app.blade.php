@@ -134,7 +134,7 @@
                                     <a href="{{ route('profile.show', Auth::user()->id) }}" class="dropdown-item">Profile</a>
 
                                     @can('admin')
-                                        <a href="{{-- route('admin.show') --}}" class="dropdown-item">Dashboard</a>
+                                        <a href="{{ route('admin.dashboard') }}" class="dropdown-item">Dashboard</a>
                                     @endcan
 
                                     <a class="dropdown-item" href="#"

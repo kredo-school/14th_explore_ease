@@ -51,12 +51,10 @@
                             </div>
                             <div class="col-6 text-end h3">
                                 <a href="" class="text-decoration-none text-dark">
-                                    {{-- @foreach($stars as $star) --}}
-                                    {{ $stars[$loop->index] }} 
+                                    {{ $stars[$loop->index] }}
                                     <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 35px; height: 35px">
-                                        <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
                                     </span>
-                                    {{-- @endforeach --}}
                                 </a>
                             </div>
                         </div>
@@ -68,9 +66,9 @@
                         <div class="row">
                             <div class="col-4 pe-0">
                                 @foreach($features[$loop->index] as $feature)
-                                    <span class="h6 border-0 me-1 rounded text-center px-1" style="background-color: rgb(231, 52, 8); color: white">
-                                        {{$feature->featuretype->name}}
-                                    </span>
+                                <span class="h6 rounded me-1" style="padding: 2.5px; line-height:2rem; background-color: rgb(231, 52, 8); color: white">
+                                    {{$feature->featuretype->name}}
+                                </span>
                                 @endforeach
                             </div>
                             <div class="col-8 text-end">
@@ -80,7 +78,7 @@
                                     Lunch&nbsp;:
                                     @foreach($finalBudget[$loop->index] as $budget)
                                         @if($budget->timezonetype == 1)
-                                            <div class="border-0 rounded-1 px-1 text-center mb-1" style="display:inline-block; width: 40px; background-color: #E7DA3D; color: black; font-size: 10pt">
+                                            <span class="h6 rounded-1" style="padding: 1px; margin-right: 3px; line-height:2rem;background-color: rgb(176, 127, 4); color: white">
                                                 {!! str_replace('\\', '¥', e($budget->budgetvalue)) !!}
                                             </div>
                                         @endif
@@ -91,7 +89,7 @@
                                     Dinner:
                                     @foreach($finalBudget[$loop->index] as $budget)
                                         @if($budget->timezonetype == 2)
-                                            <div class="border-0 rounded-1 px-1 text-center mb-1" style="display:inline-block; width: 40px; background-color: #E7DA3D; color: black; font-size: 10pt">
+                                            <span class="h6 rounded-1" style="padding: 1px; margin-right: 3px; background-color: rgb(176, 127, 4); color: white">
                                                 {!! str_replace('\\', '¥', e($budget->budgetvalue)) !!}
                                             </div>
                                         @endif

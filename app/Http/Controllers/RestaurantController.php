@@ -33,8 +33,10 @@ class RestaurantController extends Controller
     private $user;
     private $profile;
     private $openHour;
+    private $course;
+    private $all_courses;
 
-    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype, Budget $budget, User $user, Profile $profile, OpenHour $openHour,){
+    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype, Budget $budget, User $user, Profile $profile, OpenHour $openHour,Course $course){
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->restaurantphoto = $restaurantphoto;
@@ -46,6 +48,7 @@ class RestaurantController extends Controller
         $this->user = $user;
         $this->profile = $profile;
         $this->openHour = $openHour;
+        $this->course = $course;
     }
 
     /** Show restaurant ranking page */
@@ -219,6 +222,13 @@ class RestaurantController extends Controller
                 $averageAllStars[] = $averageAllStar;
             }
 
+        /** Course */
+        $course =  $this->course->findOrFail($id);
+        $all_courses = $restaurant->courses->all();
+
+        /** Main menu */
+
+
         return view('restaurant.detail',
         [
             'restaurant' => $restaurant,
@@ -240,6 +250,8 @@ class RestaurantController extends Controller
             'openHours5' => $openHours5,
             'openHours6' => $openHours6,
             'openHours0' => $openHours0,
+            'course' => $course,
+            'all_courses' => $all_courses,
         ]);
     }
 
@@ -276,7 +288,7 @@ class RestaurantController extends Controller
             array_push($finalBudget, $bdata);
         }
 
-        return view('restaurant.show', 
+        return view('restaurant.show',
             [
                 'restaurants' => $restaurants,
                 'restaurant_photos' => $restaurant_photos,
