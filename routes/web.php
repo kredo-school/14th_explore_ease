@@ -52,8 +52,8 @@ Route::group(['middleware'=>'set.locale'], function () {
 
         // Dashboard_all_users
         Route::get('/admin/dashboard_all_users', [App\Http\Controllers\AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
-        Route::delete('/admin/dashboard_all_users/{id}/hide', [App\Http\Controllers\AdminController::class, 'hide'])->name('admin_user.hide');
-        Route::patch('/admin/dashboard_all_users/{id}/hide', [App\Http\Controllers\AdminController::class, 'unhide'])->name('admin_user.unhide');
+        Route::delete('/admin/dashboard_all_users/{id}/deactivate', [App\Http\Controllers\AdminController::class, 'deactivate'])->name('admin_user.deactivate');
+        Route::patch('/admin/dashboard_all_users/{id}/activate', [App\Http\Controllers\AdminController::class, 'activate'])->name('admin_user.activate');
 
         // Dashboard_all_owners
         Route::get('/admin/dashboard_all_owners', [App\Http\Controllers\AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');

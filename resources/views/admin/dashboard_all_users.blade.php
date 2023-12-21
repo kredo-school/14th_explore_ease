@@ -66,41 +66,19 @@
                     @endforeach
                 </td>
 
-                {{-- <td><button type="button" class="btn btn-secondary">Inactivate</button></td> --}}
+                
                 <td>
-                    {{-- <div class="dropdown">
-                        <button class="btn btn-sm" data-bs-toggle="dropdown">
-                            <i class="fa-solid fa-ellipsis"></i>
-                        </button>
-
-                        <div class="dropdown-menu">
-                        @foreach ($userIds[$loop->index] as $userId)
-                            @if ($userId->trashed())
-                            <button class="dropdown-item text-danger" data-bs-toggle= "modal" data-bs-target="#unhide-post-{{ $userId->id }}">
-                                <i class="fa-solid fa-eye"></i>
-                                Activate User {{ $userId->id }}
-                            </button>
-                            @else
-                            <button class="dropdown-item text-danger" data-bs-toggle= "modal" data-bs-target="#hide-post-{{ $userId->id }}">
-                                <i class="fa-solid fa-eye-slash"></i>
-                                Inactivate User {{ $userId->id }}
-                            </button>
-                            @endif
-                        @endforeach
-                        </div>
-                    </div> --}}
-
                     @foreach ($userIds[$loop->index] as $userId)
                             @if ($userId->trashed())
-                                <form action="{{ route('admin_user.unhide', $userId->id) }}" method="post">
+                                <form action="{{ route('admin_user.activate', $userId->id) }}" method="post">
                                     @csrf
                                     @method('PATCH')
                                 <button type="submit" class="btn btn-secondary">Activate User {{ $userId->id }}</button>
                             @else
-                                <form action="{{ route('admin_user.hide', $userId->id) }}" method="post">
+                                <form action="{{ route('admin_user.deactivate', $userId->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                <button type="submit" class="btn btn-secondary">Inactivate User {{ $userId->id }}</button>
+                                <button type="submit" class="btn btn-secondary">Deactivate User {{ $userId->id }}</button>
                             @endif
                     @endforeach
                 </td>

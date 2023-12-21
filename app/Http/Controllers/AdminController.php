@@ -55,6 +55,7 @@ class AdminController extends Controller
         $firstNames = [];
         $lastNames = [];
         $phones = [];
+        
 
         foreach ($profiles as $profile) {
             // Data from Users table
@@ -94,18 +95,19 @@ class AdminController extends Controller
         ]);
     }
 
-    public function hide($id){
+    public function deactivate($id){
         $this->user->destroy($id);
 
         $user = $this->user->findOrFail($id);
         $user_id = $user->profile->pluck('user_id');
         $this->profile->destroy($user_id);
 
+        Profile::where('user_id', $id)->delete();
         return back();
     }
 
 
-    public function unhide($id)
+    public function activate($id)
     {
         $this->user->onlyTrashed()->findOrFail($id)->restore();
 
