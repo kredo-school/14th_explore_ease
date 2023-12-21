@@ -164,7 +164,7 @@
                         @php($data = false)
                         @if($restaurant_photos == true)
                             @foreach($restaurant_photos as $key => $photo)
-                                @if($restaurant_photo->index == $a+1)
+                                @if($photo->photoindex == $a+1)
                                 <div class="col-4">
                                     <img src="{{$photo->photo}}" alt="" class="w-75">
                                     <input type="file" name="photo_".$key+1>
