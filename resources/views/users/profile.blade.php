@@ -119,7 +119,7 @@
                                                             <span>{{ $restaurant->updated_at }}</span>
                                                         </td>
                                                         <td>
-                                                            4.5
+                                                            {{ $restaurant->avgstar }}
                                                             <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 50.79px; height: 50.79px">
                                                                 <i class="fa-solid fa-star"></i>
                                                             </span>
