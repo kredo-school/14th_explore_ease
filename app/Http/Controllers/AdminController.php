@@ -115,4 +115,55 @@ class AdminController extends Controller
 
         return back();
     }
+
+    public function dashboardAllOwners(){
+        $profiles = Profile::where('usertype_id', 3)->withTrashed()->latest()->paginate(3);
+        // Data from Users table
+        $userIds = [];
+        $userNames = [];
+        $registDates = [];
+        $emails = [];
+
+        // Data from Profiles table
+        $firstNames = [];
+        $lastNames = [];
+        $phones = [];
+
+        foreach ($profiles as $profile) {
+            // Data from Users table
+            $iData = $this->user->where('id', $profile->user_id)->get();
+            array_push($userIds, $iData);
+
+            $unData = $this->user->where('id', $profile->user_id)->get()->pluck('name')->toArray();
+            array_push($userNames, $unData);
+
+            $rgData = $this->user->where('id', $profile->user_id)->get()->pluck('created_at')->toArray();
+            array_push($registDates, $rgData);
+
+            $emData = $this->user->where('id', $profile->user_id)->get()->pluck('email')->toArray();
+            array_push($emails, $emData);
+
+            // Data from Profiles table
+            $firstNames[] = $profile->first_name;
+            $lastNames[] = $profile->last_name;
+            $phones[] = $profile->phone;
+
+        }
+
+        // dd($userNames);
+
+        array_multisort($userIds, SORT_ASC, $userNames, $firstNames, $lastNames, $registDates, $emails,);
+
+        return view('admin.dashboard_all_users',
+        [
+            'profiles'=>$profiles,
+            'userNames'=>$userNames,
+            'userIds'=>$userIds,
+            'firstNames'=>$firstNames,
+            'lastNames'=>$lastNames,
+            'registDates'=>$registDates,
+            'emails'=>$emails,
+            'phones'=>$phones,
+        ]);
+    }
 }
