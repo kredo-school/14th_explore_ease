@@ -1,15 +1,31 @@
-  //User
-  var ctx = document.getElementById("userChart").getContext('2d');
-  var userChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: jeson_encode($labels),
-      datasets: jeson_encode($datasets),
-    },
-  });
 
+$.ajax({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  },
+  url:'/api/admin/dashboard',
+  type:'GET',
+  data: {
+    user_type: 'user'
+  },
+  success: (data)=>{
+
+    const ctx = document.getElementById("userChart").getContext('2d');
+    const userChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: data.labels,
+        datasets: data.datasets
+        
+      },
+    });
+  },
+  error: (error)=>{
+     console.log(error);
+  }
+});
 //Owner
-/*
+
 var ctx = document.getElementById("ownersChart");
       var myBarChart = new Chart(ctx, {
         type: 'bar',
@@ -174,4 +190,3 @@ var ctx = document.getElementById("ownersChart");
     }
   });
 
-  */

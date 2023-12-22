@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Profile;
-use App\Models\Restaurant;
 use App\Models\User;
 use App\Models\Review;
+use App\Models\Profile;
+use App\Models\Restaurant;
 use App\Models\Reservation;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 
 class AdminController extends Controller
 {
@@ -82,8 +84,47 @@ class AdminController extends Controller
             return view('admin.dashboard',compact('datasets','labels'));
     }
 
-        public function getGraphInfo($id){
-          $fill = DB::table('explore_ease')->where('user', $id)->get();
-          return Response::jeson(['success'=>true, 'info'=>$fill]);
+    public function userChartApi(Request $request){
+        $user_type = $request->user_type;
+        
+        $users = [];
+        $labels = [];
+        $data = [];
+
+        switch ($user_type){
+            case 'user':
+                $users = DB::table('profiles')->where('usertype_id', '=', 2)->get();
+                break;
+            
         }
+
+        for($i=1; $i < 13; $i++) {
+            $month = date('M',mktime(0,0,0,$i,1));
+
+
+            array_push($labels,$month);
+
+        }
+
+        for($i=1; $i < 13; $i++){
+            $userCount = 0;
+
+            for($j = 0; $j < count($users); $j++){
+                $userMonthCreated = (int)explode('-', $users[$j]->created_at)[1];
+                if($userMonthCreated == $i){
+                    $userCount++;
+                }
+            }
+            array_push($data,$userCount);
+        }
+
+        $datasets = [
+            [
+                'label' => 'Users',
+                'data' => $data,
+                'backgroundColor' => "#CAC2C7"
+            ]
+        ];
+        return Response::json(['success'=>true, 'labels'=>$labels, 'datasets'=>$datasets]);
+    }
 }
