@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container w-75"></div>
+<div class="container w-75">
     <h2>All owners</h2>
     {{-- Search Box --}}
     <div class="container text-end mb-3">
@@ -70,12 +70,12 @@
                 <td>
                     @foreach ($userIds[$loop->index] as $userId)
                             @if ($userId->trashed())
-                                <form action="{{ route('admin_user.activate', $userId->id) }}" method="post">
+                                <form action="{{-- route('admin_user.activate',$userId->id) --}}" method="post">
                                     @csrf
                                     @method('PATCH')
                                 <button type="submit" class="btn btn-secondary">Activate Owner {{ $userId->id }}</button>
                             @else
-                                <form action="{{ route('admin_user.deactivate', $userId->id) }}" method="post">
+                                <form action="{{-- route('admin_user.deactivate',$userId->id) --}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                 <button type="submit" class="btn btn-secondary">Deactivate Owner {{ $userId->id }}</button>

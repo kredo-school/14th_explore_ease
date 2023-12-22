@@ -154,7 +154,7 @@ class AdminController extends Controller
 
         array_multisort($userIds, SORT_ASC, $userNames, $firstNames, $lastNames, $registDates, $emails,);
 
-        return view('admin.dashboard_all_users',
+        return view('admin.dashboard_all_owners',
         [
             'profiles'=>$profiles,
             'userNames'=>$userNames,
