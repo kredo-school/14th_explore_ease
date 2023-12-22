@@ -9,18 +9,28 @@ use App\Models\Restaurant;
 use App\Models\Review;
 use App\Models\Reservation;
 use App\Models\User;
+use App\Models\AreaType;
+use App\Models\FoodType;
 
 class AdminController extends Controller
 {
     private $profile;
     private $user;
+    private $restaurant;
+    private $review;
+    private $reservation;
+    private $areaType;
+    private $foodType;
 
-    public function __construct(Profile $profile, Restaurant $restaurant, Review $review, Reservation $reservation, User $user,){
+
+    public function __construct(Profile $profile, Restaurant $restaurant, Review $review, Reservation $reservation, User $user, AreaType $areaType, FoodType $foodType){
         $this->profile = $profile;
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->reservation = $reservation;
         $this->user = $user;
+        $this->areaType = $areaType;
+        $this->foodType = $foodType;
     }
 
     // show dashboard page
@@ -114,5 +124,57 @@ class AdminController extends Controller
         $this->profile->onlyTrashed()->findOrFail($user_id)->restore();
 
         return back();
+    }
+
+    public function dashboardAllRestaurants(){
+        $restaurants = $this->restaurant->latest()->paginate(3);
+        // Data from other tables
+        $ownerNames = [];
+        $stars = [];
+        $areaTypes = [];
+        $foodTypes = [];
+
+        // Data from Restaurants table
+        $restaurantIds = [];
+        $restaurantNames = [];
+        $registrationDates = [];
+
+
+        foreach ($restaurants as $restaurant) {
+            // Data from other table
+            $owData = $this->user->where('id', $restaurant->user_id)->get();
+            array_push($ownerNames, $owData);
+
+            $sdata = $this->review->where('restaurant_id', $restaurant->id)->get()->pluck('star')->toArray();
+            $sdatalength = count($sdata);
+            $sdatasum = array_sum($sdata);
+            $sdatasum /= $sdatalength;
+            array_push($stars, $sdatasum);
+
+            $arData = $this->areaType->where('id', $restaurant->areatype_id)->get()->pluck('station_name')->toArray();
+            array_push($areaTypes, $arData);
+
+            $foData = $this->foodType->where('id', $restaurant->foodtype_id)->get()->pluck('name')->toArray();
+            array_push($foodTypes, $foData);
+
+            // Data from Restaurants table
+            $restaurantIds[] = $restaurant->id;
+            $restaurantNames[] = $restaurant->name;
+            $registrationDates[] = $restaurant->created_at;
+        }
+
+        // array_multisort($userIds, SORT_ASC, $userNames, $firstNames, $lastNames, $registDates, $emails,);
+
+        return view('admin.all_restaurants',
+        [
+            'restaurants'=>$restaurants,
+            'ownerNames'=>$ownerNames,
+            'stars'=>$stars,
+            'areaTypes'=>$areaTypes,
+            'foodTypes'=>$foodTypes,
+            'restaurantIds'=>$restaurantIds,
+            'restaurantNames'=>$restaurantNames,
+            'registrationDates'=>$registrationDates,
+        ]);
     }
 }
