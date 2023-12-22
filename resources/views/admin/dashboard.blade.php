@@ -2,6 +2,8 @@
 
 @section('content')
 
+@section('content')
+
 <!-- Chart.js for graph -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -26,12 +28,29 @@
                     <i class="fa-solid fa-house-user fa-3x  text-secondary"></i>
                     <p class="d-inline display-5 ps-2">{{ count($profileOwners) }}</p>
                 </span>
+        <div class="row border mt-3">
+            <div class="col-4 themed-grid-col text-center">
+                <h4 class="text-center">Users</h4>
+                <a href="{{ route('admin.allUsers') }}" class="text-decoration-none text-black">
+                    <i class="fa-solid fa-circle-user fa-3x"></i>
+                    <p class="d-inline display-5">{{ count($profileUsers) }}</p>
+                </a>
             </div>
             <div class="col-4 themed-grid-col text-center">
                 <h5 class="text-center">Restaurants</h5>
                 <span>
                     <i class="fa-solid fa-utensils fa-3x  text-secondary"></i>
                     <p class="d-inline display-5 ps-2">{{ count($restaurants) }}</p>
+                    <i class="fa-solid fa-house-user fa-3x"></i>
+                    <p class="d-inline display-5">{{ count($profileOwners) }}</p>
+                </span>
+            </div>
+            <div class="col-4 themed-grid-col text-center">
+                <h4 class="text-center">Restaurants</h4>
+                <span>
+                    <i class="fa-solid fa-utensils fa-3x"></i>
+                    <p class="d-inline display-5">{{ count($restaurants) }}</p>
+                    <p class="d-inline display-5">{{ count($restaurants) }}</p>
                 </span>
             </div>
          </div>

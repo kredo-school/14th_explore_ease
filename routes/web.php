@@ -47,17 +47,28 @@ Route::group(['middleware'=>'set.locale'], function () {
     // Authenticate exclude index page
     Route::group(['middleware'=>'auth'], function () {
 
+        // Dashboard
         Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
         Route::get('/api/admin/dashboard', [App\Http\Controllers\AdminController::class, 'userChartApi'])->name('admin.userChartApi');
 
+        // Dashboard_all_users
         Route::get('/admin/dashboard_all_users', [App\Http\Controllers\AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
+        Route::delete('/admin/dashboard_all_users/{id}/hide', [App\Http\Controllers\AdminController::class, 'hide'])->name('admin_user.hide');
+        Route::patch('/admin/dashboard_all_users/{id}/hide', [App\Http\Controllers\AdminController::class, 'unhide'])->name('admin_user.unhide');
 
+        // Dashboard_all_owners
+        Route::get('/admin/dashboard_all_owners', [App\Http\Controllers\AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
+
+        // Dashboard_all_restaurants
         Route::get('/admin/dashboard_all_restaurants', [App\Http\Controllers\AdminController::class, 'dashboardAllRestaurants'])->name('admin.allRestaurants');
 
+        // Dashboard_all_reviews
         Route::get('/admin/dashboard_all_reviews', [App\Http\Controllers\AdminController::class, 'dashboardAllReviews'])->name('admin.allReviews');
 
         Route::get('/admin/dashboard_all_owners', [App\Http\Controllers\AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
+        // Dashboard_all_reservations
         Route::get('/admin/dashboard_all_reservations', [App\Http\Controllers\AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
+
 
         // HomeController
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -76,6 +87,7 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/restaurant/{id}/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
 
         Route::get('restaurant/{id}/update', [RestaurantController::class, 'update'])->name('restaurant.update');
+
 
 
         // Restaurant Controller
