@@ -9,18 +9,28 @@ use App\Models\Restaurant;
 use App\Models\Review;
 use App\Models\Reservation;
 use App\Models\User;
+use App\Models\AreaType;
+use App\Models\FoodType;
 
 class AdminController extends Controller
 {
     private $profile;
     private $user;
+    private $restaurant;
+    private $review;
+    private $reservation;
+    private $areaType;
+    private $foodType;
 
-    public function __construct(Profile $profile, Restaurant $restaurant, Review $review, Reservation $reservation, User $user,){
+
+    public function __construct(Profile $profile, Restaurant $restaurant, Review $review, Reservation $reservation, User $user, AreaType $areaType, FoodType $foodType){
         $this->profile = $profile;
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->reservation = $reservation;
         $this->user = $user;
+        $this->areaType = $areaType;
+        $this->foodType = $foodType;
     }
 
     // show dashboard page
@@ -114,5 +124,42 @@ class AdminController extends Controller
         $this->profile->onlyTrashed()->findOrFail($user_id)->restore();
 
         return back();
+    }
+
+    public function dashboardAllReviews(){
+        $reviews = $this->review->latest()->paginate(10);
+        // Data from other tables
+        $restaurantNames = [];
+        $userNames = [];
+
+        // Data from Reviews table
+        $reviewDates = [];
+        $rates = [];
+        $reviewComments = [];
+
+
+        foreach ($reviews as $review) {
+            // Data from other table
+            $reData = $this->restaurant->where('id', $review->restaurant_id)->pluck('name')->toArray();
+            array_push($restaurantNames, $reData);
+
+            $usData = $this->user->where('id', $review->user_id)->get()->pluck('name')->toArray();
+            array_push($userNames , $usData);
+
+            // Data from Restaurants table
+            $reviewDates[] = $review->created_at;
+            $rates[] = $review->star;
+            $reviewComments[] = $review->comment;
+        }
+
+        return view('admin.all_reviews',
+        [
+            'reviews'=>$reviews,
+            'restaurantNames'=>$restaurantNames,
+            'userNames'=>$userNames,
+            'reviewDates'=>$reviewDates,
+            'rates'=>$rates,
+            'reviewComments'=>$reviewComments,
+        ]);
     }
 }
