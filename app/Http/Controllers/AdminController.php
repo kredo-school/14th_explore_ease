@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
-use App\Models\User;
 use App\Models\AreaType;
 use App\Models\FoodType;
 
@@ -32,7 +31,6 @@ class AdminController extends Controller
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->reservation = $reservation;
-        $this->user = $user;
         $this->areaType = $areaType;
         $this->foodType = $foodType;
     }
@@ -210,7 +208,7 @@ class AdminController extends Controller
     }
 
     public function dashboardAllRestaurants(){
-        $restaurants = $this->restaurant->latest()->paginate(3);
+        $restaurants = $this->restaurant->withTrashed()->latest()->paginate(3);
         // Data from other tables
         $ownerNames = [];
         $stars = [];
@@ -225,7 +223,7 @@ class AdminController extends Controller
 
         foreach ($restaurants as $restaurant) {
             // Data from other table
-            $owData = $this->user->where('id', $restaurant->user_id)->get();
+            $owData = $this->user->where('id', $restaurant->user_id)->withTrashed()->get();
             array_push($ownerNames, $owData);
 
             $sdata = $this->review->where('restaurant_id', $restaurant->id)->get()->pluck('star')->toArray();
@@ -246,8 +244,6 @@ class AdminController extends Controller
             $registrationDates[] = $restaurant->created_at;
         }
 
-        // array_multisort($userIds, SORT_ASC, $userNames, $firstNames, $lastNames, $registDates, $emails,);
-
         return view('admin.all_restaurants',
         [
             'restaurants'=>$restaurants,
@@ -259,5 +255,20 @@ class AdminController extends Controller
             'restaurantNames'=>$restaurantNames,
             'registrationDates'=>$registrationDates,
         ]);
+    }
+
+    public function deactivateRestaurants($id){
+        $restaurant = $this->restaurant->findOrFail($id);
+        $restaurant->delete();
+
+        return back();
+    }
+
+
+    public function activateRestaurants($id){
+        $restaurant = Restaurant::where('id','=',$id);
+        $restaurant->restore();
+
+        return back();
     }
 }

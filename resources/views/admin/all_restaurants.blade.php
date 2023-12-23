@@ -62,8 +62,8 @@
 
 
                 <td class="py-3">
-                        @if($restaurants[$loop->index])
-                        {{-- @if ($restaurant->trashed()) --}}
+                        {{-- @if($restaurants[$loop->index]) --}}
+                        @if ($restaurant->trashed())
                             <i class="fa-solid fa-circle-minus text-secondary"></i> &nbsp; Inactive
                         @else
                             <i class="fa-solid fa-circle text-primary"></i> &nbsp; Active
@@ -72,17 +72,19 @@
 
 
                 <td>
-                            @if($restaurants[$loop->index])
-                            {{-- @if ($restaurant->trashed()) --}}
-                                <form action="{{-- route('admin_user.activate',$userId->id) --}}" method="post">
+                            {{-- @if($restaurants[$loop->index]) --}}
+                            @if ($restaurant->trashed())
+                                <form action="{{ route('admin_restaurants.activate',$restaurant->id) }}" method="post">
                                     @csrf
                                     @method('PATCH')
-                                <button type="submit" class="btn btn-secondary">Activate Owner {{-- $restaurant->id --}}</button>
+                                <button type="submit" class="btn b-color">Activate Restaurant {{ $restaurant->id }}</button>
+                                </form>
                             @else
-                                <form action="{{-- route('admin_user.deactivate',$userId->id) --}}" method="post">
+                                <form action="{{ route('admin_restaurants.deactivate',$restaurant->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                <button type="submit" class="btn btn-secondary">Deactivate Owner {{-- $restaurant->id --}}</button>
+                                <button type="submit" class="btn b-color">Deactivate Restaurant {{ $restaurant->id }}</button>
+                                </form>
                             @endif
                 </td>
             </tr>
@@ -96,5 +98,5 @@
         </div>
 </div>
 
-
+@vite(['resources/js/checkbuttonstatus.js'])
 @endsection
