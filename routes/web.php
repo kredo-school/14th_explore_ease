@@ -103,6 +103,9 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/bookmark/{id}/show', [ProfileController::class, 'bookmarkShow'])->name('bookmark.show');//connect user bookmark page from menu bar
         Route::get('/review/{id}/show', [ProfileController::class, 'reviewShow'])->name('review.show');//connect user review page from menu bar
         Route::get('/reservation/{id}/show', [ProfileController::class, 'reservationShow'])->name('reservation.show');//connect user reservation page from menu bar
+        Route::delete('/reservation/{id}/cancel', [ProfileController::class, 'reservationCancel'])->name('reservation.cancel');//can cancel reservation
+        Route::get('/reservation/{id}/edit', [ReservationController::class, 'edit'])->name('reservation.edit');//modify the reservation
+        Route::delete('review/{id}/delete', [ProfileController::class, 'reviewDelete'])->name('review.delete');//delete the review.
 
         // Bookmark Controller
         Route::get('/profile/bookmark', [BookmarkController::class, 'show'])->name('profile.bookmark');

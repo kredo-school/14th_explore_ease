@@ -9,7 +9,6 @@
     {{-- profile page --}}
     @include('users.header')
 
-    <form method="POST" action="#">
         @csrf
         <div class="container w-75 mt-4 mx-auto">
             <div class="row justify-content-center">
@@ -60,13 +59,14 @@
                                             <td>{{ $review->star }} <i class="fa-solid fa-star"></i></td>
                                             <td>{{ $review->updated_at }}</td>
                                             <td>
-                                                <a href="#" class="btn b-color">Edit</a>
+                                                <a href="{{ route('restaurant.review', $review->restaurant_id ) }}" class="btn b-color">Edit</a>
                                             </td>
                                             <td>
                                                 {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                                <button class="btn b-color">
+                                                <button class="btn b-color" data-bs-toggle="modal" data-bs-target="#reviewDelete-{{ $review->restaurant_id }}">
                                                     Delete
                                                 </button>
+                                                @include('users.modal.review_delete')
                                             </td>
                                         </tr>
                                     @endif
