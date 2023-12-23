@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminGraphController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,8 +49,8 @@ Route::group(['middleware'=>'set.locale'], function () {
     Route::group(['middleware'=>'auth'], function () {
 
         // Dashboard
-        Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
-        Route::get('/api/admin/dashboard', [App\Http\Controllers\AdminController::class, 'userChartApi'])->name('admin.userChartApi');
+        Route::get('/admin/dashboard', [App\Http\Controllers\AdminGraphController::class, 'index'])->name('admin.dashboard');
+        Route::get('/api/admin/dashboard', [App\Http\Controllers\AdminGraphController::class, 'userChartApi'])->name('admin.userChartApi');
 
         // Dashboard_all_users
         Route::get('/admin/dashboard_all_users', [App\Http\Controllers\AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
