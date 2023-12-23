@@ -9,18 +9,31 @@ use App\Models\Restaurant;
 use App\Models\Review;
 use App\Models\Reservation;
 use App\Models\User;
+use App\Models\AreaType;
+use App\Models\FoodType;
+use App\Models\Course;
 
 class AdminController extends Controller
 {
     private $profile;
     private $user;
+    private $restaurant;
+    private $review;
+    private $reservation;
+    private $areaType;
+    private $foodType;
+    private $course;
 
-    public function __construct(Profile $profile, Restaurant $restaurant, Review $review, Reservation $reservation, User $user,){
+
+    public function __construct(Profile $profile, Restaurant $restaurant, Review $review, Reservation $reservation, User $user, AreaType $areaType, FoodType $foodType, Course $course){
         $this->profile = $profile;
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->reservation = $reservation;
         $this->user = $user;
+        $this->areaType = $areaType;
+        $this->foodType = $foodType;
+        $this->course = $course;
     }
 
     // show dashboard page
@@ -114,5 +127,62 @@ class AdminController extends Controller
         $this->profile->onlyTrashed()->findOrFail($user_id)->restore();
 
         return back();
+    }
+
+    public function dashboardAllReservations(){
+        $reservations = Reservation::orderBy('id', 'desc')->paginate(10);
+        // Data from other tables
+        $userNames = [];
+        $restaurantNames = [];
+        $courseNames = [];
+        $coursePrices = [];
+
+        // Data from Reservation table
+        $reserveIds = [];
+        $startDates = [];
+        $startTimes = [];
+        $reserveMinutes = [];
+        $seatOnlys = [];
+        $numbers = [];
+
+
+
+        foreach ($reservations as $reservation) {
+            // Data from other table
+            $usData = $this->user->where('id', $reservation->user_id)->get()->pluck('name')->toArray();
+            array_push($userNames , $usData);
+
+            $reData = $this->restaurant->where('id', $reservation->restaurant_id)->pluck('name')->toArray();
+            array_push($restaurantNames, $reData);
+
+            $cnData = $this->course->where('id', $reservation->course_id)->get()->pluck('name')->toArray();
+            array_push($courseNames , $cnData);
+
+            $cpData = $this->course->where('id', $reservation->course_id)->get()->pluck('price')->toArray();
+            array_push($coursePrices , $cpData);
+
+            // Data from Restaurants table
+            $reserveIds[] = $reservation->id;
+            $startDates[] = $reservation->reservation_start_date;
+            $startTimes[] = $reservation->reservation_start_time;
+            $reserveMinutes[] = $reservation->reservation_minutes;
+            $seatOnlys[] = $reservation->seat_id;
+            $numbers[] = $reservation->number_of_people;
+        }
+
+        return view('admin.dashboard_all_reservations',
+        [
+            'reservations'=>$reservations,
+            'reserveIds'=>$reserveIds,
+            'userNames'=>$userNames,
+            'restaurantNames'=>$restaurantNames,
+            'courseNames'=>$courseNames,
+            'coursePrices'=>$coursePrices,
+            'startDates'=>$startDates,
+            'startTimes'=>$startTimes,
+            'reserveMinutes'=>$reserveMinutes,
+            'seatOnlys'=>$seatOnlys,
+            'numbers'=>$numbers,
+        ]);
     }
 }

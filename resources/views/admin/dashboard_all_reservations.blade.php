@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container w-75">
-    <h2>All Reservations</h2>
+    <h2>All reservations</h2>
     {{-- Search Box --}}
     <div class="container text-end mb-3">
         <form class="form-inline">
@@ -15,42 +15,108 @@
         </form>
     </div>
 
-    {{-- Reservation Info Date Table --}}
+    {{-- User Info Date Table --}}
     <div class="table-responsive">
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">id</th>
+              <th scope="col">Id</th>
               <th scope="col">Restaurant name</th>
-              <th scope="col">Username</th>
-              <th scope="col">Reservation date</th>
+              <th scope="col">User name</th>
+              <th colspan="2">Reservation Date/Time</th>
+              <th scope="col">Minutes</th>
               <th scope="col">Number of people</th>
-              <th scope="col">Menu</th>
+              <th scope="col">Seat only</th>
+              <th colspan="2">Course</th>
+              <th scope="col"></th>
               <th scope="col"></th>
             </tr>
           </thead>
           {{-- Data starting here --}}
           <tbody>
+            @foreach ($reservations as $reservation)
             <tr>
-              <td class="py-3">#</td>
-              <td class="py-3">O-Re!</td>
-              <td class="py-3">Ore</td>
-              <td class="py-3">11:00  12 OCT 2024</td>
-              <td class="py-3">3</td>
-              <td class="py-3">Beef Katsu Course ￥162,000</td>
-              <td><button type="button" class="btn btn-secondary">Cancel</button></td>
+                <td class="py-3">{{ $reserveIds[$loop->index] }}</td>
+
+                @foreach ($restaurantNames[$loop->index] as $restaurantName)
+                    <td class="py-3">{{$restaurantName}}</td>
+                @endforeach
+
+                @foreach ($userNames[$loop->index] as $userName)
+                    <td class="py-3">{{$userName}}</td>
+                @endforeach
+
+                <td class="py-3">{{ $startDates[$loop->index] }}</td>
+                <td class="py-3">{{ $startTimes[$loop->index] }}</td>
+
+                <td class="py-3">{{ $reserveMinutes[$loop->index] }}</td>
+
+                <td class="py-3">{{ $numbers[$loop->index] }}</td>
+
+                <td class="py-3">
+                    @if($seatOnlys[$loop->index])
+                    {{ $seatOnlys[$loop->index] }}
+                    @else
+                    --
+                    @endif
+                </td>
+
+                @foreach ($courseNames[$loop->index] as $courseName)
+                <td class="py-3">
+                    @if($courseName)
+                    {{$courseName}}
+                    @else
+                    ----
+                    @endif
+                </td>
+                @endforeach
+
+
+                @foreach ($coursePrices[$loop->index] as $coursePrice)
+                <td class="py-3">
+                    @if($coursePrice)
+                    ¥{{$coursePrice}}
+                    @else
+                    ----
+                    @endif
+                </td>
+                @endforeach
+
+
+
+                <td class="py-3">
+                        @if($reservations[$loop->index])
+                        {{-- @if ($restaurant->trashed()) --}}
+                            <i class="fa-solid fa-circle-minus text-secondary"></i> &nbsp; Inactive
+                        @else
+                            <i class="fa-solid fa-circle text-primary"></i> &nbsp; Active
+                        @endif
+                </td>
+
+
+                <td>
+                            @if($reservations[$loop->index])
+                            {{-- @if ($restaurant->trashed()) --}}
+                                <form action="{{-- route('admin_user.activate',$userId->id) --}}" method="post">
+                                    @csrf
+                                    @method('PATCH')
+                                <button type="submit" class="btn btn-secondary">Cancel Resevation {{-- $review --}}</button>
+                            @else
+                                <form action="{{-- route('admin_user.deactivate',$userId->id) --}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                <button type="submit" class="btn btn-secondary">Hide Owner {{-- $review --}}</button>
+                            @endif
+                </td>
             </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
-      {{-- permanent_area --}}
+
         <div class="d-flex justify-content-center">
-        <!--previousry-->
-          <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="<%preventry_url>">previous &lt;&lt;</a>
-        <!--nextentry-->
-          <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover mx-5" href="<%nextentry_url>">&gt;&gt;next</a>
+            {{ $reservations->links() }}
         </div>
 </div>
-
 
 @endsection
