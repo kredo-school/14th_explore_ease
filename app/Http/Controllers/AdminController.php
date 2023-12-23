@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
-use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -162,7 +161,7 @@ class AdminController extends Controller
 
     public function userChartApi(Request $request){
         $user_type = $request->user_type;
-        
+
         $users = [];
         $labels = [];
         $data = [];
@@ -171,7 +170,7 @@ class AdminController extends Controller
             case 'user':
                 $users = DB::table('profiles')->where('usertype_id', '=', 2)->get();
                 break;
-            
+
         }
 
         for($i=1; $i < 13; $i++) {
