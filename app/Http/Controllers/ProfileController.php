@@ -40,7 +40,16 @@ class ProfileController extends Controller
     public function bookmarkShow($id)
     {   
         $user = $this->user->findOrFail($id);
-        $bookmarks = $this->bookmark->where('user_id', Auth::user()->id)->get();
+        $tempbookmarks = $this->bookmark->where('user_id', Auth::user()->id)->get();
+
+        // remove softdeleted restraunt
+        $bookmarks = [];
+        foreach($tempbookmarks as $bookmark) {
+            if ($bookmark->restaurant != null) {
+                array_push($bookmarks, $bookmark);
+            }
+        }
+
         //parts of count on header.blade.php
         // 1. count restaurants for the owner
         $count_restaurant = $user->restaurants->count();

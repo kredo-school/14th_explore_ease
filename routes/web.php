@@ -105,7 +105,6 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/reservation/{id}/show', [ProfileController::class, 'reservationShow'])->name('reservation.show');//connect user reservation page from menu bar
 
         // Bookmark Controller
-        Route::get('/profile/bookmark', [BookmarkController::class, 'show'])->name('profile.bookmark');
         Route::post('/bookmark/{id}/store',[BookmarkController::class, 'store'])->name('bookmark.store');
         Route::delete('/bookmark/{id}/destroy',[BookmarkController::class, 'destroy'])->name('bookmark.destroy');
     });
