@@ -66,19 +66,21 @@
                     @endforeach
                 </td>
 
-                
+
                 <td>
                     @foreach ($userIds[$loop->index] as $userId)
                             @if ($userId->trashed())
                                 <form action="{{ route('admin_user.activate', $userId->id) }}" method="post">
                                     @csrf
                                     @method('PATCH')
-                                <button type="submit" class="btn btn-secondary">Activate User {{ $userId->id }}</button>
+                                <button type="submit" class="btn b-color">Activate User {{ $userId->id }}</button>
+                                </form>
                             @else
                                 <form action="{{ route('admin_user.deactivate', $userId->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                <button type="submit" class="btn btn-secondary">Deactivate User {{ $userId->id }}</button>
+                                <button type="submit" class="btn b-color" >Deactivate User {{ $userId->id }}</button>
+                                </form>
                             @endif
                     @endforeach
                 </td>
@@ -93,5 +95,5 @@
         </div>
 </div>
 
-
+@vite(['resources/js/checkbuttonstatus.js'])
 @endsection
