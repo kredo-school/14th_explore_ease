@@ -43,7 +43,6 @@ class AdminController extends Controller
     }
 
     public function dashboardAllUsers(){
-        // $profiles = Profile::where('usertype_id', 2)->latest()->paginate(3);
         $profiles = Profile::where('usertype_id', 2)->withTrashed()->latest()->paginate(3);
         // Data from Users table
         $userIds = [];
@@ -58,16 +57,16 @@ class AdminController extends Controller
 
         foreach ($profiles as $profile) {
             // Data from Users table
-            $iData = $this->user->where('id', $profile->user_id)->get();
+            $iData = $this->user->where('id', $profile->user_id)->withTrashed()->get();
             array_push($userIds, $iData);
 
-            $unData = $this->user->where('id', $profile->user_id)->get()->pluck('name')->toArray();
+            $unData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('name')->toArray();
             array_push($userNames, $unData);
 
-            $rgData = $this->user->where('id', $profile->user_id)->get()->pluck('created_at')->toArray();
+            $rgData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('created_at')->toArray();
             array_push($registDates, $rgData);
 
-            $emData = $this->user->where('id', $profile->user_id)->get()->pluck('email')->toArray();
+            $emData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('email')->toArray();
             array_push($emails, $emData);
 
             // Data from Profiles table
@@ -94,24 +93,24 @@ class AdminController extends Controller
         ]);
     }
 
-    public function hide($id){
-        $this->user->destroy($id);
+    public function deactivate($id){
+        $profileUser = Profile::where('user_id', $id);
+        $profileUser->delete();
 
         $user = $this->user->findOrFail($id);
-        $user_id = $user->profile->pluck('user_id');
-        $this->profile->destroy($user_id);
+        $user->delete();
 
         return back();
     }
 
 
-    public function unhide($id)
-    {
-        $this->user->onlyTrashed()->findOrFail($id)->restore();
+    public function activate($id){
+        $profileUser = Profile::where('user_id','=', $id);
+        $profileUser->restore();
 
-        $user = $this->user->findOrFail($id);
-        $user_id = $user->profile->pluck('user_id');
-        $this->profile->onlyTrashed()->findOrFail($user_id)->restore();
+        // dd($profileUser);
+        $user = User::where('id','=', $id);
+        $user->restore();
 
         return back();
     }
@@ -131,16 +130,16 @@ class AdminController extends Controller
 
         foreach ($profiles as $profile) {
             // Data from Users table
-            $iData = $this->user->where('id', $profile->user_id)->get();
+            $iData = $this->user->where('id', $profile->user_id)->withTrashed()->get();
             array_push($userIds, $iData);
 
-            $unData = $this->user->where('id', $profile->user_id)->get()->pluck('name')->toArray();
+            $unData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('name')->toArray();
             array_push($userNames, $unData);
 
-            $rgData = $this->user->where('id', $profile->user_id)->get()->pluck('created_at')->toArray();
+            $rgData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('created_at')->toArray();
             array_push($registDates, $rgData);
 
-            $emData = $this->user->where('id', $profile->user_id)->get()->pluck('email')->toArray();
+            $emData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('email')->toArray();
             array_push($emails, $emData);
 
             // Data from Profiles table
@@ -165,5 +164,26 @@ class AdminController extends Controller
             'emails'=>$emails,
             'phones'=>$phones,
         ]);
+    }
+
+    public function deactivateOwner($id){
+        $profileUser = Profile::where('user_id', $id);
+        $profileUser->delete();
+
+        $user = $this->user->findOrFail($id);
+        $user->delete();
+
+        return back();
+    }
+
+
+    public function activateOwner($id){
+        $profileUser = Profile::where('user_id','=', $id);
+        $profileUser->restore();
+
+        $user = User::where('id','=', $id);
+        $user->restore();
+
+        return back();
     }
 }
