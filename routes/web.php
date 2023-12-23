@@ -51,6 +51,7 @@ Route::group(['middleware'=>'set.locale'], function () {
         // Dashboard
         Route::get('/admin/dashboard', [App\Http\Controllers\AdminGraphController::class, 'index'])->name('admin.dashboard');
         Route::get('/api/admin/dashboard', [App\Http\Controllers\AdminGraphController::class, 'userChartApi'])->name('admin.userChartApi');
+        Route::get('/api/admin/dashboard_restaurant', [App\Http\Controllers\AdminGraphController::class, 'restaurantChartApi'])->name('admin.restaurantChartApi');
 
         // Dashboard_all_users
         Route::get('/admin/dashboard_all_users', [App\Http\Controllers\AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
