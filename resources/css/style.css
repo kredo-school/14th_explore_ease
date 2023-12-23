@@ -69,3 +69,13 @@
       width: 100%;
     }
   }
+
+ /* For Footer */ 
+ footer {
+   background-color: #E7DA3D; 
+   height: 130px;
+   position: fixed;
+   right: 0;
+   bottom: 0;
+   left: 0;
+ }
