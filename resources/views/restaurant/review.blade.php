@@ -67,7 +67,7 @@
                         </div>
                         {{-- Error --}}
                         @error('star')
-                            <div class="text-danger small">{{ $message }}</div>
+                            <div class="text-danger h4">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                 <textarea name="comment" id="comment" rows="3" class="form-control w-100 bg-transparent"></textarea>
                 {{-- Error --}}
                 @error('comment')
-                    <div class="text-danger small">{{ $message }}</div>
+                    <div class="text-danger h4">{{ $message }}</div>
                 @enderror
             </div>
 
