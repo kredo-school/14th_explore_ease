@@ -20,16 +20,13 @@ class AdminController extends Controller
     private $review;
     private $reservation;
 
-    private $user;
 
-    public function __construct(Profile $profile, User $user, Restaurant $restaurant, Review $review, Reservation $reservation, User $user,){
+    public function __construct(Profile $profile, User $user, Restaurant $restaurant, Review $review, Reservation $reservation,){
         $this->profile = $profile;
         $this->user = $user;
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->reservation = $reservation;
-        $this->user = $user;
-        $this->user = $user;
     }
 
     // show dashboard page
