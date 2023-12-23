@@ -66,9 +66,6 @@ Route::group(['middleware'=>'set.locale'], function () {
 
         // HomeController
         Route::get('/home', [HomeController::class, 'index'])->name('home');
-        Route::get('/profile', [HomeController::class, 'profileBase'])->name('profile');
-        Route::get('/profile/reservation', [HomeController::class, 'profileReservation'])->name('profile.reservation');
-        Route::get('/profile/review', [HomeController::class, 'profileReview'])->name('profile.review');
 
         // Restaurant Controller
         // Show the form for creating a new resource.
