@@ -62,24 +62,28 @@
                 </td>
 
                 @foreach ($courseNames[$loop->index] as $courseName)
-                <td class="py-3">
                     @if($courseName)
+                    <td class="py-3">
                     {{$courseName}}
+                    </td>
                     @else
+                    <td class="py-3">
                     ----
+                    </td>
                     @endif
-                </td>
                 @endforeach
 
 
                 @foreach ($coursePrices[$loop->index] as $coursePrice)
-                <td class="py-3">
-                    @if($coursePrice)
-                    ¥{{$coursePrice}}
+                @if($coursePrice)
+                    <td class="py-3">
+                    {{$coursePrice}}
+                    </td>
                     @else
+                    <td class="py-3">
                     ----
+                    </td>
                     @endif
-                </td>
                 @endforeach
 
 
