@@ -49,6 +49,8 @@ Route::group(['middleware'=>'set.locale'], function () {
 
         // Dashboard
         Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+        Route::get('/api/admin/dashboard', [AdminController::class, 'userChartApi'])->name('admin.userChartApi');
+
         // Dashboard_all_users
         Route::get('/admin/dashboard_all_users', [AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
         Route::delete('/admin/dashboard_all_users/{id}/hide', [AdminController::class, 'hide'])->name('admin_user.hide');
@@ -78,6 +80,8 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/restaurant/{id}/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
         // Update the specified resource in storage.
         Route::get('restaurant/{id}/update', [RestaurantController::class, 'update'])->name('restaurant.update');
+        // Remove the specified resource from storage.
+        Route::delete('/restaurant/{id}/destroy', [RestaurantController::class, 'destroy'])->name('restaurant.destroy');
         // ranking
         Route::get('/restaurant/ranking', [RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
 

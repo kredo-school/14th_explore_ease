@@ -6,7 +6,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
-use App\Enums\UserTypeEnum;
 
 class ExistProfileMiddleware
 {
@@ -21,8 +20,8 @@ class ExistProfileMiddleware
         // Auth::check() - loginしていればtrue
         if (Auth::check()) {
             if (Auth::user()->profile == null) {
-                // profileがなかったらhomeページに遷移する
-                return redirect()->route('home');
+                // profileがなかったらprofileページに遷移する
+                return redirect()->route('profile.show', Auth::user()->id);
             }
         }
 
