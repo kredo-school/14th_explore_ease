@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <script>
+    <script type="text/javascript">
         /**
          * Search Restaurants Script at index.blade.php
          */

@@ -121,8 +121,8 @@
                             <!-- Avatar -->
                             <li class="nav-item dropdown">
                                 <button class="btn shadow-none nav-link" id="account-dropdown" data-bs-toggle="dropdown">
-                                    @if(Auth::user()->avatar)
-                                        <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}" class="rounded-circle avatar-sm">
+                                    @if(Auth::user()->profile != null && Auth::user()->profile->avatar)
+                                        <img src="{{ Auth::user()->profile->avatar }}" alt="{{ Auth::user()->name }}" class="img-thumbnail rounded-circle" style="width: 42px; height: 42px;">
                                     @else
                                         <span style="display: inline-block; line-height: 42px;">
                                             <i class="fa-regular fa-circle-user fa-lg" style="color: #000000; "></i>
@@ -161,11 +161,11 @@
             @yield('content')
         </main>
 
-        <footer id="app-footer" class="text-center text-dark mt-5 d-flex align-items-center" style="background-color: #E7DA3D; height: 130px">
+        <footer id="app-footer" class="text-center text-dark d-flex align-items-center py-5">
             <div class="container">
-                <a href="https://www.instagram.com/" class="text-decoration-none text-black me-5"><i class="fa-brands fa-instagram fa-3x"></i></a>
-                <a href="https://www.facebook.com/" class="text-decoration-none text-black me-5"><i class="fa-brands fa-square-facebook fa-3x"></i></a>
-                <a href="https://www.snapchat.com/" class="text-decoration-none text-black"><i class="fa-brands fa-snapchat fa-3x"></i></a>
+                <a href="https://www.instagram.com/" class="text-decoration-none text-black me-3"><i class="fa-brands fa-instagram fa-2x"></i></a>
+                <a href="https://www.facebook.com/" class="text-decoration-none text-black me-3"><i class="fa-brands fa-square-facebook fa-2x"></i></a>
+                <a href="https://www.snapchat.com/" class="text-decoration-none text-black"><i class="fa-brands fa-snapchat fa-2x"></i></a>
                 <p class="mt-2 mb-0 fs-5">Copyright ©️ 2023</p>
             </div>
         </footer>

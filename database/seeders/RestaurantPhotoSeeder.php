@@ -34,18 +34,21 @@ class RestaurantPhotoSeeder extends Seeder
                 'name' => 'First Photo',
                 'description' => 'For First Photo.',
                 'photo' => $restaurant_image1,
+                'photoindex'=> 1,
             ],
             [
                 'restaurant_id' => 1,
                 'name' => 'Second Photo',
                 'description' => 'For Second Photo.',
                 'photo' => $restaurant_image2,
+                'photoindex'=> 2,
             ],
             [
                 'restaurant_id' => 1,
                 'name' => 'Third Photo',
                 'description' => 'For Third Photo.',
                 'photo' => $restaurant_image3,
+                'photoindex'=> 3,
             ],
 
             [
@@ -53,18 +56,21 @@ class RestaurantPhotoSeeder extends Seeder
                 'name' => 'First Photo',
                 'description' => 'For First Photo.',
                 'photo' => $restaurant_image1,
+                'photoindex'=> 1,
             ],
             [
                 'restaurant_id' => 2,
                 'name' => 'Second Photo',
                 'description' => 'For Second Photo.',
                 'photo' => $restaurant_image2,
+                'photoindex'=> 2,
             ],
             [
                 'restaurant_id' => 2,
                 'name' => 'Third Photo',
                 'description' => 'For Third Photo.',
                 'photo' => $restaurant_image3,
+                'photoindex'=> 3,
             ],
 
             [
@@ -72,18 +78,21 @@ class RestaurantPhotoSeeder extends Seeder
                 'name' => 'First Photo',
                 'description' => 'For First Photo.',
                 'photo' => $restaurant_image1,
+                'photoindex'=> 1,
             ],
             [
                 'restaurant_id' => 3,
                 'name' => 'Second Photo',
                 'description' => 'For Second Photo.',
                 'photo' => $restaurant_image2,
+                'photoindex'=> 2,
             ],
             [
                 'restaurant_id' => 3,
                 'name' => 'Third Photo',
                 'description' => 'For Third Photo.',
                 'photo' => $restaurant_image3,
+                'photoindex'=> 3,
             ],
 
             [
@@ -91,18 +100,21 @@ class RestaurantPhotoSeeder extends Seeder
                 'name' => 'First Photo',
                 'description' => 'For First Photo.',
                 'photo' => $restaurant_image1,
+                'photoindex'=> 1,
             ],
             [
                 'restaurant_id' => 4,
                 'name' => 'Second Photo',
                 'description' => 'For Second Photo.',
                 'photo' => $restaurant_image2,
+                'photoindex'=> 2,
             ],
             [
                 'restaurant_id' => 4,
                 'name' => 'Third Photo',
                 'description' => 'For Third Photo.',
                 'photo' => $restaurant_image3,
+                'photoindex'=> 3,
             ],
 
             [
@@ -110,18 +122,21 @@ class RestaurantPhotoSeeder extends Seeder
                 'name' => 'First Photo',
                 'description' => 'For First Photo.',
                 'photo' => $restaurant_image1,
+                'photoindex'=> 1,
             ],
             [
                 'restaurant_id' => 5,
                 'name' => 'Second Photo',
                 'description' => 'For Second Photo.',
                 'photo' => $restaurant_image2,
+                'photoindex'=> 2,
             ],
             [
                 'restaurant_id' => 5,
                 'name' => 'Third Photo',
                 'description' => 'For Third Photo.',
                 'photo' => $restaurant_image3,
+                'photoindex'=> 3,
             ],
 
         ];
