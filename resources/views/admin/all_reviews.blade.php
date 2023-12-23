@@ -69,19 +69,19 @@
                                 <form action="{{-- route('admin_user.activate',$userId->id) --}}" method="post">
                                     @csrf
                                     @method('PATCH')
-                                <button type="submit" class="btn btn-secondary">Unhide Review {{-- $review --}}</button>
+                                <button type="submit" class="btn b-color">Unhide Review {{-- $review --}}</button>
                             @else
                                 <form action="{{-- route('admin_user.deactivate',$userId->id) --}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                <button type="submit" class="btn btn-secondary">Hide Owner {{-- $review --}}</button>
+                                <button type="submit" class="btn b-color">Hide Owner {{-- $review --}}</button>
                             @endif
                 </td>
             </tr>
             @endforeach
           </tbody>
         </table>
-      </div>
+    </div>
 
         <div class="d-flex justify-content-center">
             {{ $reviews->links() }}
@@ -89,4 +89,5 @@
 </div>
 
 @vite(['resources/js/textlimit.js'])
+@vite(['resources/js/checkbuttonstatus.js'])
 @endsection
