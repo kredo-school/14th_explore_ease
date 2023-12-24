@@ -86,6 +86,8 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/restaurant/adding', [App\Http\Controllers\RestaurantController::class, 'create'])->name('restaurant.adding');
         Route::get('/restaurant/edit', [App\Http\Controllers\RestaurantController::class, 'edit'])->name('restaurant.edit');
         Route::post('/restaurant/store', [App\Http\Controllers\RestaurantController::class, 'store'])->name('restaurant.store');
+        // Remove the specified resource from storage.
+        Route::delete('/restaurant/{id}/destroy', [RestaurantController::class, 'destroy'])->name('restaurant.destroy');
         // ranking
         Route::get('/restaurant/ranking', [RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
 
