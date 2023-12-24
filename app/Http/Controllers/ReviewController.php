@@ -102,14 +102,48 @@ class ReviewController extends Controller
             'comment' => 'required|min:1'
         ]);
 
+        // get exist review record.
+        $review = $this->review
+            ->where([
+                ['user_id', Auth::user()->id],
+                ['restaurant_id', $restaurant_id]
+            ])->get();
+
+        // delete exist review record to put new review.
+        if ($review != null) {
+            $this->review
+                ->where([
+                    ['user_id', Auth::user()->id],
+                    ['restaurant_id', $restaurant_id]
+                ])->delete();
+        }
+
         $this->review->comment = $request->comment;
-        // $this->review->user_id = Auth::user()->id;
         $this->review->star = $request->star;
-        $this->review->user_id = 3;
+        $this->review->user_id = Auth::user()->id;
         $this->review->restaurant_id = $restaurant_id;
         $this->review->save();
 
+        // calculate average of star and set it to the restaurant.
+        $avgstar = $this->calcStarAverage($restaurant_id);
+        $restaurant = $this->restaurant->findOrFail($restaurant_id);
+        $restaurant->avgstar = $avgstar;
+        $restaurant->save();
+
         return redirect()->route('restaurant.detail', $restaurant_id);
+    }
+
+    /**
+     * Return average of star value.
+     * The value is rouned. (ex) 2.45 -> 2.5
+     */
+    public function calcStarAverage($restaurant_id)
+    {
+        $avgstar = $this->review
+            ->where('restaurant_id', $restaurant_id)
+            ->avg('star');
+
+        return round($avgstar, 1);
     }
 
     /**

@@ -610,8 +610,9 @@ class RestaurantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Restaurant $restaurant)
+    public function destroy($id)
     {
-        //
+        $this->restaurant->destroy($id);
+        return redirect()->back();
     }
 }
