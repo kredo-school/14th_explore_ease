@@ -14,6 +14,7 @@ class AdminController extends Controller
 {
     private $profile;
     private $user;
+    private $reservation;
 
     public function __construct(Profile $profile, Restaurant $restaurant, Review $review, Reservation $reservation, User $user,){
         $this->profile = $profile;
@@ -114,5 +115,12 @@ class AdminController extends Controller
         $this->profile->onlyTrashed()->findOrFail($user_id)->restore();
 
         return back();
+    }
+
+    public function dashboardAllReservations(){
+        $all_reservations = $this->reservation->all();
+
+
+        return view('admin.dashboard_all_reservations')->with($all_reservations, 'all_reservations');
     }
 }
