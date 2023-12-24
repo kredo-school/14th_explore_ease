@@ -6,12 +6,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RestaurantPhotoController;
-use App\Http\Controllers\Reservation;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ModalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,85 +41,77 @@ Route::group(['middleware'=>'set.locale'], function () {
     })->middleware('existprofile');
 
     // Show restaurant list
-    Route::get('/restaurant/show', [App\Http\Controllers\RestaurantController::class, 'index'])->name('restaurant.show');
+    Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
     // Show restaurant detail
-    Route::get('/restaurant/{id}/detail', [App\Http\Controllers\RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
+    Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
 
     // Authenticate exclude index page
     Route::group(['middleware'=>'auth'], function () {
 
         // Dashboard
-        Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
+        Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+        Route::get('/api/admin/dashboard', [AdminController::class, 'userChartApi'])->name('admin.userChartApi');
 
         // Dashboard_all_users
-        Route::get('/admin/dashboard_all_users', [App\Http\Controllers\AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
-        Route::delete('/admin/dashboard_all_users/{id}/hide', [App\Http\Controllers\AdminController::class, 'hide'])->name('admin_user.hide');
-        Route::patch('/admin/dashboard_all_users/{id}/hide', [App\Http\Controllers\AdminController::class, 'unhide'])->name('admin_user.unhide');
-
+        Route::get('/admin/dashboard_all_users', [AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
+        Route::delete('/admin/dashboard_all_users/{id}/hide', [AdminController::class, 'hide'])->name('admin_user.hide');
+        Route::patch('/admin/dashboard_all_users/{id}/unhide', [AdminController::class, 'unhide'])->name('admin_user.unhide');
         // Dashboard_all_owners
-        Route::get('/admin/dashboard_all_owners', [App\Http\Controllers\AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
-
+        Route::get('/admin/dashboard_all_owners', [AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
         // Dashboard_all_restaurants
-        Route::get('/admin/dashboard_all_restaurants', [App\Http\Controllers\AdminController::class, 'dashboardAllRestaurants'])->name('admin.allRestaurants');
-
+        Route::get('/admin/dashboard_all_restaurants', [AdminController::class, 'dashboardAllRestaurants'])->name('admin.allRestaurants');
         // Dashboard_all_reviews
-        Route::get('/admin/dashboard_all_reviews', [App\Http\Controllers\AdminController::class, 'dashboardAllReviews'])->name('admin.allReviews');
-
+        Route::get('/admin/dashboard_all_reviews', [AdminController::class, 'dashboardAllReviews'])->name('admin.allReviews');
         // Dashboard_all_reservations
         Route::get('/admin/dashboard_all_reservations', [App\Http\Controllers\AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
+        Route::delete('/admin/dashboard_all_users/{id}/modal', [App\Http\Controllers\AdminController::class, 'cancelModal'])->name('admin_reservation.modal');
+        Route::delete('/admin/dashboard_all_users/{id}/cancel', [App\Http\Controllers\AdminController::class, 'cancelReservation'])->name('admin_reservation.cancel');
+
 
 
         // HomeController
-        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-        Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
-        Route::get('/profile/reservation', [App\Http\Controllers\HomeController::class, 'profileReservation'])->name('profile.reservation');
-        Route::get('/profile/review', [App\Http\Controllers\HomeController::class, 'profileReview'])->name('profile.review');
-
-
-        Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
-
-        Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
-
-        Route::get('/restaurant/{id}/review', [App\Http\Controllers\RestaurantController::class, 'restaurantReview'])->name('restaurant.review');
-
-
-        Route::get('/restaurant/{id}/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
-
-        Route::get('restaurant/{id}/update', [RestaurantController::class, 'update'])->name('restaurant.update');
-
+        Route::get('/home', [HomeController::class, 'index'])->name('home');
+        Route::get('/profile', [HomeController::class, 'profileBase'])->name('profile');
+        Route::get('/profile/reservation', [HomeController::class, 'profileReservation'])->name('profile.reservation');
+        Route::get('/profile/review', [HomeController::class, 'profileReview'])->name('profile.review');
 
         // Restaurant Controller
-        Route::get('/restaurant/adding', [App\Http\Controllers\RestaurantController::class, 'create'])->name('restaurant.adding');
-        Route::get('/restaurant/edit', [App\Http\Controllers\RestaurantController::class, 'edit'])->name('restaurant.edit');
-        Route::post('/restaurant/store', [App\Http\Controllers\RestaurantController::class, 'store'])->name('restaurant.store');
+        // Show the form for creating a new resource.
+        Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
+        // Store a newly created resource in storage.
+        Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
+
+        // Show the form for editing the specified resource.
+        Route::get('/restaurant/{id}/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
+        // Update the specified resource in storage.
+        Route::get('restaurant/{id}/update', [RestaurantController::class, 'update'])->name('restaurant.update');
+        // Remove the specified resource from storage.
+        Route::delete('/restaurant/{id}/destroy', [RestaurantController::class, 'destroy'])->name('restaurant.destroy');
+
         // ranking
-        Route::get('/restaurant/ranking', [App\Http\Controllers\RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
+        Route::get('/restaurant/ranking', [RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
 
         // Reservation Controller
-        Route::get('/restaurant/{id}/reservasions', [App\Http\Controllers\ReservationController::class, 'show'])->name('restaurant.reservations');
-        Route::get('/restaurant/{id}/reservasions/create', [App\Http\Controllers\ReservationController::class, 'create'])->name('restaurant.reservation.create');
-        Route::post('/restaurant/reservasions/store/{restaurant_id}', [App\Http\Controllers\ReservationController::class, 'store'])->name('restaurant.reservation.store');
-        // detail
-        Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
-
+        Route::get('/restaurant/{id}/reservasions', [ReservationController::class, 'show'])->name('restaurant.reservations');
+        Route::get('/restaurant/{id}/reservasions/create', [ReservationController::class, 'create'])->name('restaurant.reservation.create');
+        Route::post('/restaurant/reservasions/store/{restaurant_id}', [ReservationController::class, 'store'])->name('restaurant.reservation.store');
 
         // Review Controller
         // show review page
-        Route::get('/restaurant/{id}/review', [App\Http\Controllers\ReviewController::class, 'ShowRestaurantReview'])->name('restaurant.review');
+        Route::get('/restaurant/{id}/review', [ReviewController::class, 'ShowRestaurantReview'])->name('restaurant.review');
         // store comment
-        Route::post('/restaurant/{id}/review/comment', [App\Http\Controllers\ReviewController::class, 'store'])->name('restaurant.review.store');
+        Route::post('/restaurant/{id}/review/comment', [ReviewController::class, 'store'])->name('restaurant.review.store');
 
         // Profile Controller
-        //Kazuya working on here:)
-        Route::get('/profile/{id}/show', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
-        Route::patch('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
-        Route::get('/bookmark/{id}/show', [App\Http\Controllers\ProfileController::class, 'bookmarkShow'])->name('bookmark.show');//connect user bookmark page from menu bar
-        Route::get('/review/{id}/show', [App\Http\Controllers\ProfileController::class, 'reviewShow'])->name('review.show');//connect user review page from menu bar
-        Route::get('/reservation/{id}/show', [App\Http\Controllers\ProfileController::class, 'reservationShow'])->name('reservation.show');//connect user reservation page from menu bar
+        Route::get('/profile/{id}/show', [ProfileController::class, 'show'])->name('profile.show');
+        Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/bookmark/{id}/show', [ProfileController::class, 'bookmarkShow'])->name('bookmark.show');//connect user bookmark page from menu bar
+        Route::get('/review/{id}/show', [ProfileController::class, 'reviewShow'])->name('review.show');//connect user review page from menu bar
+        Route::get('/reservation/{id}/show', [ProfileController::class, 'reservationShow'])->name('reservation.show');//connect user reservation page from menu bar
 
         // Bookmark Controller
-        Route::get('/profile/bookmark', [App\Http\Controllers\BookmarkController::class, 'show'])->name('profile.bookmark');
-        Route::post('/bookmark/{id}/store',[App\Http\Controllers\BookmarkController::class, 'store'])->name('bookmark.store');
-        Route::delete('/bookmark/{id}/destroy',[App\Http\Controllers\BookmarkController::class, 'destroy'])->name('bookmark.destroy');
+        Route::get('/profile/bookmark', [BookmarkController::class, 'show'])->name('profile.bookmark');
+        Route::post('/bookmark/{id}/store',[BookmarkController::class, 'store'])->name('bookmark.store');
+        Route::delete('/bookmark/{id}/destroy',[BookmarkController::class, 'destroy'])->name('bookmark.destroy');
     });
 });

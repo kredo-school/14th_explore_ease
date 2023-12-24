@@ -2,26 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Review;
 use App\Models\Profile;
 use App\Models\Restaurant;
-use App\Models\Review;
 use App\Models\Reservation;
-use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
+use App\Models\AreaType;
+use App\Models\FoodType;
+use App\Models\Course;
 
 class AdminController extends Controller
 {
     private $profile;
     private $user;
+    private $restaurant;
+    private $review;
     private $reservation;
+    private $areaType;
+    private $foodType;
+    private $course;
 
-    public function __construct(Profile $profile, Restaurant $restaurant, Review $review, Reservation $reservation, User $user,){
+
+    public function __construct(Profile $profile, Restaurant $restaurant, Review $review, Reservation $reservation, User $user, AreaType $areaType, FoodType $foodType, Course $course){
         $this->profile = $profile;
+        $this->user = $user;
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->reservation = $reservation;
-        $this->user = $user;
+
+        $this->areaType = $areaType;
+        $this->foodType = $foodType;
+        $this->course = $course;
     }
 
     // show dashboard page
@@ -35,11 +50,11 @@ class AdminController extends Controller
 
         return view('admin.dashboard',
         [
-            'profileUsers'=>$profileUsers,
-            'profileOwners'=>$profileOwners,
-            'restaurants'=>$restaurants,
-            'reviews'=>$reviews,
-            'reservations'=>$reservations,
+            'profileUsers'  => $profileUsers,
+            'profileOwners' => $profileOwners,
+            'restaurants'   => $restaurants,
+            'reviews'       => $reviews,
+            'reservations'  => $reservations,
         ]);
     }
 
@@ -115,12 +130,5 @@ class AdminController extends Controller
         $this->profile->onlyTrashed()->findOrFail($user_id)->restore();
 
         return back();
-    }
-
-    public function dashboardAllReservations(){
-        $all_reservations = $this->reservation->all();
-
-
-        return view('admin.dashboard_all_reservations')->with($all_reservations, 'all_reservations');
     }
 }
