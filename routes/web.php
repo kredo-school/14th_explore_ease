@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ModalController;
+use App\Http\Controllers\AdminGraphController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,9 +48,13 @@ Route::group(['middleware'=>'set.locale'], function () {
     // Authenticate exclude index page
     Route::group(['middleware'=>'auth'], function () {
 
-        // Dashboard
-        Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-        Route::get('/api/admin/dashboard', [AdminController::class, 'userChartApi'])->name('admin.userChartApi');
+        // Dashboard_for_graph
+        Route::get('/admin/dashboard', [AdminGraphController::class, 'index'])->name('admin.dashboard');
+        Route::get('/api/admin/dashboard', [AdminGraphController::class, 'userChartApi'])->name('admin.userChartApi');
+        Route::get('/api/admin/dashboard_restaurant', [AdminGraphController::class, 'restaurantChartApi'])->name('admin.restaurantChartApi');
+        Route::get('/api/admin/dashboard_review', [AdminGraphController::class, 'reviewChartApi'])->name('admin.reviewChartApi');
+        Route::get('/api/admin/dashboard_reservation', [AdminGraphController::class, 'reservationChartApi'])->name('admin.reservationChartApi');
+        Route::get('/api/admin/dashboard_nationality', [AdminGraphController::class, 'nationalityChart'])->name('admin.nationalityChart');
 
         // Dashboard_all_users
         Route::get('/admin/dashboard_all_users', [AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
@@ -63,11 +67,7 @@ Route::group(['middleware'=>'set.locale'], function () {
         // Dashboard_all_reviews
         Route::get('/admin/dashboard_all_reviews', [AdminController::class, 'dashboardAllReviews'])->name('admin.allReviews');
         // Dashboard_all_reservations
-        Route::get('/admin/dashboard_all_reservations', [App\Http\Controllers\AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
-        Route::delete('/admin/dashboard_all_users/{id}/modal', [App\Http\Controllers\AdminController::class, 'cancelModal'])->name('admin_reservation.modal');
-        Route::delete('/admin/dashboard_all_users/{id}/cancel', [App\Http\Controllers\AdminController::class, 'cancelReservation'])->name('admin_reservation.cancel');
-
-
+        Route::get('/admin/dashboard_all_reservations', [AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
 
         // HomeController
         Route::get('/home', [HomeController::class, 'index'])->name('home');
