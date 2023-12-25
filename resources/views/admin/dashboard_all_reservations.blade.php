@@ -35,45 +35,39 @@
           <tbody>
             @foreach ($reservations as $reservation)
             <tr>
-                <td class="py-3">{{ $reserveIds[$loop->index] }}</td>
+                <td class="py-3">{{ $reservation[$loop->index] }}</td>
 
-                @foreach ($restaurantNames[$loop->index] as $restaurantName)
-                    <td class="py-3">{{$restaurantName}}</td>
-                @endforeach
+               
+                <td class="py-3">{{$reservation->restaurant->name}}</td>
 
-                @foreach ($userNames[$loop->index] as $userName)
-                    <td class="py-3">{{$userName}}</td>
-                @endforeach
 
-                <td class="py-3">{{ $startDates[$loop->index] }}</td>
-                <td class="py-3">{{ $startTimes[$loop->index] }}</td>
+                <td class="py-3">{{$reservation->user->username}}</td>
 
-                <td class="py-3">{{ $reserveMinutes[$loop->index] }}</td>
+                <td class="py-3">{{ $reservation->reservation_start_date }}</td>
+                <td class="py-3">{{ $reservation->reservation_start_time }}</td>
 
-                <td class="py-3">{{ $numbers[$loop->index] }}</td>
+                <td class="py-3">{{ $reservation->reservation_minutes }}</td>
+
+                <td class="py-3">{{ $reservation->number_of_people }}</td>
 
                 <td class="py-3">
-                    @if($seatOnlys[$loop->index])
-                    {{ $seatOnlys[$loop->index] }}
+                    @if($reservation->seat_id == 1)
+                      Available
                     @else
-                    --
+                      Unavailable
                     @endif
                 </td>
 
                 <td class="py-3">
-                    @foreach ($courseNames[$loop->index] as $courseName)
-                        {{$courseName}}
-                    @endforeach
+                    {{ $reservation->course->name }}
                 </td>
 
                 <td class="py-3">
-                    @foreach ($coursePrices[$loop->index] as $coursePrice)
-                        ¥{{$coursePrice}}
-                    @endforeach
+                    ￥{{ $reservation->course->price }}
                 </td>
 
                 <td>
-                    <button type="submit" class="btn b-color" data-bs-toggle="modal" data-bs-target="#cancel-reservation-{{ $reservation->id }}">Cancel Reservation{{ $reservation->id}}</button>
+                    <button type="submit" class="btn b-color" data-bs-toggle="modal" data-bs-target="#cancel-reservation-{{ $reservation->id }}">Cancel Reservation</button>
                 </td>
                 @include('admin.modal.cancel_reservation')
             </tr>

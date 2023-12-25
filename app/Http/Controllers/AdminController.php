@@ -131,4 +131,11 @@ class AdminController extends Controller
 
         return back();
     }
+
+    public function dashboardAllReservations(){
+        $reservations = $this->reservation->all();
+
+        return view('admin.dashboard_all_reservations')
+            ->with('reservations', $reservations);
+    }
 }
