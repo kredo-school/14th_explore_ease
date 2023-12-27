@@ -52,9 +52,10 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/api/admin/dashboard', [AdminController::class, 'userChartApi'])->name('admin.userChartApi');
 
         // Dashboard_all_users
-        Route::get('/admin/dashboard_all_users', [AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
-        Route::delete('/admin/dashboard_all_users/{id}/hide', [AdminController::class, 'hide'])->name('admin_user.hide');
-        Route::patch('/admin/dashboard_all_users/{id}/unhide', [AdminController::class, 'unhide'])->name('admin_user.unhide');
+        Route::get('/admin/dashboard_all_users', [App\Http\Controllers\AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
+        Route::delete('/admin/dashboard_all_users/{id}/deactivate', [App\Http\Controllers\AdminController::class, 'deactivate'])->name('admin_user.deactivate');
+        Route::patch('/admin/dashboard_all_users/{id}/activate', [App\Http\Controllers\AdminController::class, 'activate'])->name('admin_user.activate');
+
         // Dashboard_all_owners
         Route::get('/admin/dashboard_all_owners', [AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
         // Dashboard_all_restaurants

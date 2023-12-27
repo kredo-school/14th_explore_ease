@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
-use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -21,16 +20,13 @@ class AdminController extends Controller
     private $review;
     private $reservation;
 
-    private $user;
 
-    public function __construct(Profile $profile, User $user, Restaurant $restaurant, Review $review, Reservation $reservation, User $user,){
+    public function __construct(Profile $profile, User $user, Restaurant $restaurant, Review $review, Reservation $reservation,){
         $this->profile = $profile;
         $this->user = $user;
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->reservation = $reservation;
-        $this->user = $user;
-        $this->user = $user;
     }
 
     // show dashboard page
@@ -53,7 +49,6 @@ class AdminController extends Controller
     }
 
     public function dashboardAllUsers(){
-        // $profiles = Profile::where('usertype_id', 2)->latest()->paginate(3);
         $profiles = Profile::where('usertype_id', 2)->withTrashed()->latest()->paginate(3);
         // Data from Users table
         $userIds = [];
@@ -68,16 +63,16 @@ class AdminController extends Controller
 
         foreach ($profiles as $profile) {
             // Data from Users table
-            $iData = $this->user->where('id', $profile->user_id)->get();
+            $iData = $this->user->where('id', $profile->user_id)->withTrashed()->get();
             array_push($userIds, $iData);
 
-            $unData = $this->user->where('id', $profile->user_id)->get()->pluck('name')->toArray();
+            $unData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('name')->toArray();
             array_push($userNames, $unData);
 
-            $rgData = $this->user->where('id', $profile->user_id)->get()->pluck('created_at')->toArray();
+            $rgData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('created_at')->toArray();
             array_push($registDates, $rgData);
 
-            $emData = $this->user->where('id', $profile->user_id)->get()->pluck('email')->toArray();
+            $emData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('email')->toArray();
             array_push($emails, $emData);
 
             // Data from Profiles table
@@ -104,24 +99,24 @@ class AdminController extends Controller
         ]);
     }
 
-    public function hide($id){
-        $this->user->destroy($id);
+    public function deactivate($id){
+        $profileUser = Profile::where('user_id', $id);
+        $profileUser->delete();
 
         $user = $this->user->findOrFail($id);
-        $user_id = $user->profile->pluck('user_id');
-        $this->profile->destroy($user_id);
+        $user->delete();
 
         return back();
     }
 
 
-    public function unhide($id)
-    {
-        $this->user->onlyTrashed()->findOrFail($id)->restore();
+    public function activate($id){
+        $profileUser = Profile::where('user_id','=', $id);
+        $profileUser->restore();
 
-        $user = $this->user->findOrFail($id);
-        $user_id = $user->profile->pluck('user_id');
-        $this->profile->onlyTrashed()->findOrFail($user_id)->restore();
+        // dd($profileUser);
+        $user = User::where('id','=', $id);
+        $user->restore();
 
         return back();
     }
@@ -163,7 +158,7 @@ class AdminController extends Controller
 
     public function userChartApi(Request $request){
         $user_type = $request->user_type;
-        
+
         $users = [];
         $labels = [];
         $data = [];
@@ -172,7 +167,7 @@ class AdminController extends Controller
             case 'user':
                 $users = DB::table('profiles')->where('usertype_id', '=', 2)->get();
                 break;
-            
+
         }
 
         for($i=1; $i < 13; $i++) {
