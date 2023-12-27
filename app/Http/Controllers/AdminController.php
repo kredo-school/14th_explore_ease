@@ -66,11 +66,14 @@ class AdminController extends Controller
             array_push($userIds, $iData);
 
             $unData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('name')->toArray();
+            $unData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('name')->toArray();
             array_push($userNames, $unData);
 
             $rgData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('created_at')->toArray();
+            $rgData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('created_at')->toArray();
             array_push($registDates, $rgData);
 
+            $emData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('email')->toArray();
             $emData = $this->user->where('id', $profile->user_id)->withTrashed()->get()->pluck('email')->toArray();
             array_push($emails, $emData);
 

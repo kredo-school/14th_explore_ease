@@ -70,9 +70,6 @@ Route::group(['middleware'=>'set.locale'], function () {
 
         // HomeController
         Route::get('/home', [HomeController::class, 'index'])->name('home');
-        Route::get('/profile', [HomeController::class, 'profileBase'])->name('profile');
-        Route::get('/profile/reservation', [HomeController::class, 'profileReservation'])->name('profile.reservation');
-        Route::get('/profile/review', [HomeController::class, 'profileReview'])->name('profile.review');
 
         // Restaurant Controller
         // Show the form for creating a new resource.
@@ -84,9 +81,14 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/restaurant/{id}/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
         // Update the specified resource in storage.
         Route::get('restaurant/{id}/update', [RestaurantController::class, 'update'])->name('restaurant.update');
+
+
+        // Restaurant Controller
+        Route::get('/restaurant/adding', [App\Http\Controllers\RestaurantController::class, 'create'])->name('restaurant.adding');
+        Route::get('/restaurant/edit', [App\Http\Controllers\RestaurantController::class, 'edit'])->name('restaurant.edit');
+        Route::post('/restaurant/store', [App\Http\Controllers\RestaurantController::class, 'store'])->name('restaurant.store');
         // Remove the specified resource from storage.
         Route::delete('/restaurant/{id}/destroy', [RestaurantController::class, 'destroy'])->name('restaurant.destroy');
-
         // ranking
         Route::get('/restaurant/ranking', [RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
 
@@ -107,9 +109,11 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/bookmark/{id}/show', [ProfileController::class, 'bookmarkShow'])->name('bookmark.show');//connect user bookmark page from menu bar
         Route::get('/review/{id}/show', [ProfileController::class, 'reviewShow'])->name('review.show');//connect user review page from menu bar
         Route::get('/reservation/{id}/show', [ProfileController::class, 'reservationShow'])->name('reservation.show');//connect user reservation page from menu bar
+        Route::delete('/reservation/{id}/cancel', [ProfileController::class, 'reservationCancel'])->name('reservation.cancel');//can cancel reservation
+        Route::get('/reservation/{id}/edit', [ReservationController::class, 'edit'])->name('reservation.edit');//modify the reservation
+        Route::delete('review/{id}/delete', [ProfileController::class, 'reviewDelete'])->name('review.delete');//delete the review.
 
         // Bookmark Controller
-        Route::get('/profile/bookmark', [BookmarkController::class, 'show'])->name('profile.bookmark');
         Route::post('/bookmark/{id}/store',[BookmarkController::class, 'store'])->name('bookmark.store');
         Route::delete('/bookmark/{id}/destroy',[BookmarkController::class, 'destroy'])->name('bookmark.destroy');
     });
