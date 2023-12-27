@@ -67,9 +67,6 @@ Route::group(['middleware'=>'set.locale'], function () {
 
         // HomeController
         Route::get('/home', [HomeController::class, 'index'])->name('home');
-        Route::get('/profile', [HomeController::class, 'profileBase'])->name('profile');
-        Route::get('/profile/reservation', [HomeController::class, 'profileReservation'])->name('profile.reservation');
-        Route::get('/profile/review', [HomeController::class, 'profileReview'])->name('profile.review');
 
         // Restaurant Controller
         // Show the form for creating a new resource.
@@ -111,7 +108,6 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/reservation/{id}/show', [ProfileController::class, 'reservationShow'])->name('reservation.show');//connect user reservation page from menu bar
 
         // Bookmark Controller
-        Route::get('/profile/bookmark', [BookmarkController::class, 'show'])->name('profile.bookmark');
         Route::post('/bookmark/{id}/store',[BookmarkController::class, 'store'])->name('bookmark.store');
         Route::delete('/bookmark/{id}/destroy',[BookmarkController::class, 'destroy'])->name('bookmark.destroy');
     });

@@ -57,7 +57,12 @@
                                                     <span onClick="textLimiter()" id="toggle_text">Read More</span>
                                                 </div>
                                             </td>
-                                            <td>{{ $review->star }} <i class="fa-solid fa-star"></i></td>
+                                            <td>
+                                                {{ $review->restaurant->avgstar }}
+                                                <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 50.79px; height: 50.79px">
+                                                    <i class="fa-solid fa-star"></i>
+                                                </span>
+                                            </td>
                                             <td>{{ $review->updated_at }}</td>
                                             <td>
                                                 <a href="#" class="btn b-color">Edit</a>
