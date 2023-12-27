@@ -37,7 +37,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Admin,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-01-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -48,7 +48,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Admin,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-02-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -59,7 +59,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Admin,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-03-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -70,7 +70,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Admin,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-04-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -81,7 +81,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Admin,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-05-01',
                 'updated_at' => new DateTime(),
             ],
         ];
@@ -95,7 +95,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::User,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-06-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -106,7 +106,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::User,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-07-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -117,7 +117,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::User,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-08-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -128,7 +128,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::User,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-09-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -139,7 +139,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::User,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-10-01',
                 'updated_at' => new DateTime(),
             ],
         ];
@@ -153,7 +153,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Owner,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-11-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -164,7 +164,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Owner,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-12-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -175,7 +175,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Owner,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-01-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -186,7 +186,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Owner,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-02-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -197,7 +197,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Owner,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-03-01',
                 'updated_at' => new DateTime(),
             ],
         ];
