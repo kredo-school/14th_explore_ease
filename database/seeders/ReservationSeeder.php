@@ -36,7 +36,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 2,
                 'requests' => 'We want to use lunch coupon.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-01-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -53,7 +53,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 3,
                 'requests' => 'We want to use student coupon.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-02-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -70,7 +70,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 4,
                 'requests' => 'We want to order free drink.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-03-01',
                 'updated_at' => new DateTime(),
             ],
 
@@ -88,7 +88,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 2,
                 'requests' => 'We want to use lunch coupon.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-04-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -105,7 +105,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 3,
                 'requests' => 'We want to use student coupon.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-05-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -122,7 +122,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 4,
                 'requests' => 'We want to order free drink.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-06-01',
                 'updated_at' => new DateTime(),
             ],
 
@@ -140,7 +140,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 2,
                 'requests' => 'We want to use lunch coupon.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-07-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -157,7 +157,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 3,
                 'requests' => 'We want to use student coupon.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-08-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -174,7 +174,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 4,
                 'requests' => 'We want to order free drink.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-09-01',
                 'updated_at' => new DateTime(),
             ],
 
@@ -192,7 +192,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 2,
                 'requests' => 'We want to use lunch coupon.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-10-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -209,7 +209,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 3,
                 'requests' => 'We want to use student coupon.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-11-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -226,7 +226,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 4,
                 'requests' => 'We want to order free drink.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-12-01',
                 'updated_at' => new DateTime(),
             ],
 
@@ -244,7 +244,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 2,
                 'requests' => 'We want to use lunch coupon.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-06-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -261,7 +261,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 3,
                 'requests' => 'We want to use student coupon.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-07-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -278,7 +278,7 @@ class ReservationSeeder extends Seeder
                 'number_of_people' => 4,
                 'requests' => 'We want to order free drink.',
 
-                'created_at' => new DateTime(),
+                'created_at' => '2023-08-01',
                 'updated_at' => new DateTime(),
             ],
         ];
