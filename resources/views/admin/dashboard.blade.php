@@ -71,11 +71,11 @@
         <div class="row py-5 border border-bottom-0">
             <div class="col-6 themed-grid-col">
                 <h5 class="text-center">Reviews</h5>
-                <canvas id="reviewsChart"></canvas>
+                <canvas id="reviewChart"></canvas>
             </div>
             <div class="col-6 themed-grid-col">
                 <h5 class="text-center">Reservations</h5>
-                <canvas id="reservationsChart"></canvas>
+                <canvas id="reservationChart"></canvas>
             </div>
         </div>
 

@@ -40,13 +40,13 @@
     </script>
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="main_contentsarea">
         <!-- navigation bar -->
-        <nav id="app-nav" class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #E7DA3D; height: 60px">
+        <nav id="app-nav" class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #E7DA3D; height: 80px">
             <div class="container">
                 <a class="navbar-brand d-flex" href="{{ url('/') }}">
-                    <img class="logo justify-content-center" src="{{ asset('assets/Logo_ExploreEase_fin.png') }}" alt="Logo" style="width: 42px; height: 42px;">
-                    <span style="display: inline-block; line-height: 42px; margin-left: 5px;" class="justify-content-center">Explore-Ease</span>
+                    <img class="logo justify-content-center" src="{{ asset('assets/Logo_ExploreEase_fin.png') }}" alt="Logo" style="width: 50px; height: 50px;">
+                    <span style="display: inline-block; line-height: 42px; margin-left: 5px; font-size: xx-large;" class="justify-content-center py-2">Explore-Ease</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -161,7 +161,7 @@
             @yield('content')
         </main>
 
-        <footer id="app-footer" class="text-center text-dark d-flex align-items-center py-5">
+        <footer id="app-footer" class="bd-footer text-center text-dark d-flex align-items-center py-5">
             <div class="container">
                 <a href="https://www.instagram.com/" class="text-decoration-none text-black me-3"><i class="fa-brands fa-instagram fa-2x"></i></a>
                 <a href="https://www.facebook.com/" class="text-decoration-none text-black me-3"><i class="fa-brands fa-square-facebook fa-2x"></i></a>
