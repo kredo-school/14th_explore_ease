@@ -57,7 +57,10 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::patch('/admin/dashboard_all_users/{id}/activate', [App\Http\Controllers\AdminController::class, 'activate'])->name('admin_user.activate');
 
         // Dashboard_all_owners
-        Route::get('/admin/dashboard_all_owners', [AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
+        Route::get('/admin/dashboard_all_owners', [App\Http\Controllers\AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
+        Route::delete('/admin/dashboard_all_owners/{id}/deactivate', [App\Http\Controllers\AdminController::class, 'deactivateOwner'])->name('admin_owner.deactivate');
+        Route::patch('/admin/dashboard_all_owners/{id}/activate', [App\Http\Controllers\AdminController::class, 'activateOwner'])->name('admin_owner.activate');
+
         // Dashboard_all_restaurants
         Route::get('/admin/dashboard_all_restaurants', [AdminController::class, 'dashboardAllRestaurants'])->name('admin.allRestaurants');
         // Dashboard_all_reviews
