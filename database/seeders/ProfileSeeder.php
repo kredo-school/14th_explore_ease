@@ -24,7 +24,7 @@ class ProfileSeeder extends Seeder
     public function run(): void
     {
         // set 20M on mysql's max_allowed_packet temporarily to avoid over packet size
-        DB::statement('SET GLOBAL max_allowed_packet=20971520');
+        //DB::statement('SET GLOBAL max_allowed_packet=20971520');
 
         $avatar_image = 'data:image/' . 'png' . ';base64,' . base64_encode(file_get_contents('public/assets/seeder/avatar_penguin.png'));
 
@@ -84,7 +84,9 @@ class ProfileSeeder extends Seeder
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ],
-
+        ];
+        $this->profile->insert($profiles);
+        $profiles = [
             [
                 'user_id' => 6,
                 'first_name' => 'name001',
@@ -140,7 +142,9 @@ class ProfileSeeder extends Seeder
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ],
-
+        ];
+        $this->profile->insert($profiles);
+        $profiles = [
             [
                 'user_id' => 11,
                 'first_name' => 'name001',

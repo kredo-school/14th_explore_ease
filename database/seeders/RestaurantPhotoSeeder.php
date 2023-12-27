@@ -22,7 +22,7 @@ class RestaurantPhotoSeeder extends Seeder
     public function run(): void
     {
         // set 20M on mysql's max_allowed_packet temporarily to avoid over packet size
-        DB::statement('SET GLOBAL max_allowed_packet=20971520');
+        //DB::statement('SET GLOBAL max_allowed_packet=20971520');
 
         $restaurant_image1 = 'data:image/' . 'jpg' . ';base64,' . base64_encode(file_get_contents('public/assets/seeder/restaurant_1.jpg'));
         $restaurant_image2 = 'data:image/' . 'jpg' . ';base64,' . base64_encode(file_get_contents('public/assets/seeder/restaurant_2.jpg'));
@@ -50,7 +50,9 @@ class RestaurantPhotoSeeder extends Seeder
                 'photo' => $restaurant_image3,
                 'photoindex'=> 3,
             ],
-
+        ];
+        $this->restaurant_photo->insert($restaurant_photos);
+        $restaurant_photos = [
             [
                 'restaurant_id' => 2,
                 'name' => 'First Photo',
@@ -72,7 +74,9 @@ class RestaurantPhotoSeeder extends Seeder
                 'photo' => $restaurant_image3,
                 'photoindex'=> 3,
             ],
-
+        ];
+        $this->restaurant_photo->insert($restaurant_photos);
+        $restaurant_photos = [
             [
                 'restaurant_id' => 3,
                 'name' => 'First Photo',
@@ -94,7 +98,9 @@ class RestaurantPhotoSeeder extends Seeder
                 'photo' => $restaurant_image3,
                 'photoindex'=> 3,
             ],
-
+        ];
+        $this->restaurant_photo->insert($restaurant_photos);
+        $restaurant_photos = [
             [
                 'restaurant_id' => 4,
                 'name' => 'First Photo',
@@ -116,7 +122,9 @@ class RestaurantPhotoSeeder extends Seeder
                 'photo' => $restaurant_image3,
                 'photoindex'=> 3,
             ],
-
+        ];
+        $this->restaurant_photo->insert($restaurant_photos);
+        $restaurant_photos = [
             [
                 'restaurant_id' => 5,
                 'name' => 'First Photo',

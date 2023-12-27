@@ -52,9 +52,9 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/api/admin/dashboard', [AdminController::class, 'userChartApi'])->name('admin.userChartApi');
 
         // Dashboard_all_users
-        Route::get('/admin/dashboard_all_users', [AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
-        Route::delete('/admin/dashboard_all_users/{id}/hide', [AdminController::class, 'hide'])->name('admin_user.hide');
-        Route::patch('/admin/dashboard_all_users/{id}/unhide', [AdminController::class, 'unhide'])->name('admin_user.unhide');
+        Route::get('/admin/dashboard_all_users', [App\Http\Controllers\AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
+        Route::delete('/admin/dashboard_all_users/{id}/deactivate', [App\Http\Controllers\AdminController::class, 'deactivate'])->name('admin_user.deactivate');
+        Route::patch('/admin/dashboard_all_users/{id}/activate', [App\Http\Controllers\AdminController::class, 'activate'])->name('admin_user.activate');
 
         // Dashboard_all_owners
         Route::get('/admin/dashboard_all_owners', [AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
@@ -72,9 +72,6 @@ Route::group(['middleware'=>'set.locale'], function () {
 
         // HomeController
         Route::get('/home', [HomeController::class, 'index'])->name('home');
-        Route::get('/profile', [HomeController::class, 'profileBase'])->name('profile');
-        Route::get('/profile/reservation', [HomeController::class, 'profileReservation'])->name('profile.reservation');
-        Route::get('/profile/review', [HomeController::class, 'profileReview'])->name('profile.review');
 
         // Restaurant Controller
         // Show the form for creating a new resource.
@@ -86,9 +83,14 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/restaurant/{id}/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
         // Update the specified resource in storage.
         Route::get('restaurant/{id}/update', [RestaurantController::class, 'update'])->name('restaurant.update');
+
+
+        // Restaurant Controller
+        Route::get('/restaurant/adding', [App\Http\Controllers\RestaurantController::class, 'create'])->name('restaurant.adding');
+        Route::get('/restaurant/edit', [App\Http\Controllers\RestaurantController::class, 'edit'])->name('restaurant.edit');
+        Route::post('/restaurant/store', [App\Http\Controllers\RestaurantController::class, 'store'])->name('restaurant.store');
         // Remove the specified resource from storage.
         Route::delete('/restaurant/{id}/destroy', [RestaurantController::class, 'destroy'])->name('restaurant.destroy');
-
         // ranking
         Route::get('/restaurant/ranking', [RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
 
@@ -109,9 +111,11 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::get('/bookmark/{id}/show', [ProfileController::class, 'bookmarkShow'])->name('bookmark.show');//connect user bookmark page from menu bar
         Route::get('/review/{id}/show', [ProfileController::class, 'reviewShow'])->name('review.show');//connect user review page from menu bar
         Route::get('/reservation/{id}/show', [ProfileController::class, 'reservationShow'])->name('reservation.show');//connect user reservation page from menu bar
+        Route::delete('/reservation/{id}/cancel', [ProfileController::class, 'reservationCancel'])->name('reservation.cancel');//can cancel reservation
+        Route::get('/reservation/{id}/edit', [ReservationController::class, 'edit'])->name('reservation.edit');//modify the reservation
+        Route::delete('review/{id}/delete', [ProfileController::class, 'reviewDelete'])->name('review.delete');//delete the review.
 
         // Bookmark Controller
-        Route::get('/profile/bookmark', [BookmarkController::class, 'show'])->name('profile.bookmark');
         Route::post('/bookmark/{id}/store',[BookmarkController::class, 'store'])->name('bookmark.store');
         Route::delete('/bookmark/{id}/destroy',[BookmarkController::class, 'destroy'])->name('bookmark.destroy');
     });

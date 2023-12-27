@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Profile extends Model
 {
+    // use HasFactory;
     use HasFactory, SoftDeletes;
 
     protected $fillable = ['user_id', 'first_name', 'last_name', 'avatar', 'phone', 'usertype_id', 'nationality_id'];

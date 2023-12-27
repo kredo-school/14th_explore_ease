@@ -11,7 +11,7 @@
         <div class="border border-dark p-5">
             <div class="mb-3">
                 <label for="restaurant_name" class="form-label h3">Restaurant name</label>
-                <input type="text" id="restaurant_name" class="form-control" placeholder="{{$restaurant->name}}" name="restaurant_name">
+                <input type="text" id="restaurant_name" class="form-control" value="{{$restaurant->name}}" name="restaurant_name">
             </div>
             <div class="mb-3">
                 <label for="area" class="form-label h3">Area type</label>
@@ -28,7 +28,7 @@
             </div>
             <div class="mb-3">
                 <label for="restaurant_address" class="form-label h3">Restaurant address</label>
-                <input type="text" id="restaurant_address" class="form-control" placeholder="{{$restaurant->address}}" name="restaurant_address">
+                <input type="text" id="restaurant_address" class="form-control" value="{{$restaurant->address}}" name="restaurant_address">
             </div>
             <div class="mb-3">
                 <label for="restaurant_location" class="form-label h3">Please place the pin accurately at your outlet's location on the map</label>
@@ -87,7 +87,7 @@
                             </select>
                         </div>
                         <div class="col">
-                            @if(!empty($openhours[$loop->index]->closed && $openhours[$loop->index]->closed == 1))
+                            @if(!empty($openhours[$loop->index]->closed) && $openhours[$loop->index]->closed == 1)
                                 <input type="checkbox" name="closed_checkbox_{{$day}}"  value="1" id="closed_{{$day}}" checked>
                                 <label for="closed_{{$day}}" class="h4">Closed</label>
                             @else
@@ -159,21 +159,34 @@
             <div class="mb-3">
                 <label for="photo" class="form-label h3">Photo</label><br>
                 <div class="row">
-                    @if(!empty($restaurant->restaurant_photos))
-                        @foreach($restaurant->restaurant_photos as $key => $photo)
-                            <div class="col-4">
-                                <img src="{{$photo}}" alt="">
-                                <input type="file" name="photo_".$key+1>
-                            </div>
-                        @endforeach
-                    @endif
+                    @php($a = 0)
+                    @while($a < 3)
+                        @php($data = false)
+                        @if($restaurant_photos == true)
+                            @foreach($restaurant_photos as $key => $photo)
+                                @if($photo->photoindex == $a+1)
+                                <div class="col-4">
+                                    <img src="{{$photo->photo}}" alt="" class="w-75">
+                                    <input type="file" name="photo_".$key+1>
+                                </div>
+                                @php($data = true)
+                                @endif
+                            @endforeach
+                        @endif
+                        @if($data == false)
+                                <div class="col-4">
+                                    <input type="file" name="photo_{{$a+1}}">
+                                </div>
+                        @endif
+                        @php($a++)
+                    @endwhile
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="foodtype" class="form-label h3">Food type</label>
                 <select id="foodtype" class="form-select" name="foodtype">
-                    <option value="">Select</option>
+                    <option value="0">Select</option>
                     @foreach($foodtypes as $foodtype)
                         @if($foodtype == $restaurant->foodtype)
                             <option value="{{$foodtype->id}}" selected>{{$foodtype->name}}</option>
@@ -190,18 +203,24 @@
                         <div class="h4">Lunch</div>
                     </div><br>
                     <div class="col-8">
-                        <div class="btn-group" style="width: 125%;" role="group" aria-label="Basic checkbox toggle button group">
-                            <input type="checkbox" class="btn-check" id="L_budget1" autocomplete="off" name="L_budget1">
-                            <label class="btn btn-outline-dark" for="L_budget1">￥</label>
-
-                            <input type="checkbox" class="btn-check" id="L_budget2" autocomplete="off" name="L_budget2">
-                            <label class="btn btn-outline-dark" for="L_budget2">￥￥</label>
-
-                            <input type="checkbox" class="btn-check" id="L_budget3" autocomplete="off" name="L_budget3">
-                            <label class="btn btn-outline-dark" for="L_budget3">￥￥￥</label>
-
-                            <input type="checkbox" class="btn-check" id="L_budget4" autocomplete="off" name="L_budget4">
-                            <label class="btn btn-outline-dark" for="L_budget4">￥￥￥￥</label>
+                        <div class="btn-group ms-4" style="width: 125%;" role="group" aria-label="Basic checkbox toggle button group">
+                            @php($index = 0)
+                            @php($isFound = false)
+                            @while($index < 4)
+                                @php($isFound = false)
+                                @foreach($budgets as $key => $budget)
+                                    @if($budget->timezonetype == 1 && $budget->budgetindex == $index+1)
+                                        <input type="checkbox" class="btn-check" id="{{'L_budget'.$key+1}}" autocomplete="off" name="{{'L_budget'.$key+1}}" checked>
+                                        <label class="btn btn-outline-dark" for="{{'L_budget'.$key+1}}">{!! str_replace("\\",'￥', $budget->budgetvalue) !!}</label>
+                                        @php($isFound = true)
+                                    @endif 
+                                @endforeach
+                                @php($index++)
+                                @if(!$isFound)
+                                    <input type="checkbox" class="btn-check" id="L_budget".$key+1 autocomplete="off" name="{{'L_budget'.$key+1}}">
+                                    <label class="btn btn-outline-dark" for="{{'L_budget'.$key+1}}">{{ Str::limit("￥￥￥￥", $index*2, '') }}</label>
+                                @endif
+                            @endwhile
                         </div>
                     </div>
                 </div>
@@ -210,19 +229,24 @@
                         <div class="h4">Dinner</div>
                     </div><br>
                     <div class="col-8">
-                        <div class="btn-group" style="width: 125%" role="group" aria-label="Basic checkbox toggle button group">
-                            <input type="checkbox" class="btn-check" id="D_budget1" autocomplete="off" name="D_budget1">
-                            <label class="btn btn-outline-dark" for="D_budget1">￥</label>
-
-                            <input type="checkbox" class="btn-check" id="D_budget2" autocomplete="off" name="D_budget2">
-                            <label class="btn btn-outline-dark" for="D_budget2">￥￥</label>
-
-                            <input type="checkbox" class="btn-check" id="D_budget3" autocomplete="off" name="D_budget3">
-                            <label class="btn btn-outline-dark" for="D_budget3">￥￥￥</label>
-
-                            <input type="checkbox" class="btn-check" id="D_budget4" autocomplete="off" name="D_budget4">
-                            <label class="btn btn-outline-dark" for="D_budget4">￥￥￥￥</label>
-                        </div>
+                        <div class="btn-group ms-4" style="width: 125%;" role="group" aria-label="Basic checkbox toggle button group">
+                            @php($index=0)
+                            @while($index < 4)
+                                @php($isFound = false)
+                                @foreach($budgets as $key => $budget)
+                                    @if($budget->timezonetype == 2 && $budget->budgetindex == $index+1)
+                                        <input type="checkbox" class="btn-check" id="{{'D_budget'.$key+1}}" autocomplete="off" name="{{'D_budget'.$key+1}}" checked>
+                                        <label class="btn btn-outline-dark" for="{{'D_budget'.$key+1}}">{!! str_replace("\\",'￥', $budget->budgetvalue) !!}</label>
+                                        @php($isFound = true)
+                                    @endif 
+                                @endforeach
+                                @php($index++)
+                                @if(!$isFound)
+                                    <input type="checkbox" class="btn-check" id="D_budget".$key+1 autocomplete="off" name="{{'D_budget'.$key+1}}">
+                                    <label class="btn btn-outline-dark" for="{{'D_budget'.$key+1}}">{{ Str::limit("￥￥￥￥", $index*2, '') }}</label>
+                                @endif
+                            @endwhile
+                         </div>
                     </div>
                 </div>
             </div>
@@ -231,13 +255,20 @@
                 <label for="features" class="form-label h3">Features</label><br>
                 @foreach($features as $key => $feature)
                     <div class="form-check-inline h4">
-                        @if($feature->featuretype->feature_id == $key+1)
-                            <input class="form-check-input" type="checkbox" id="{{$feature}}" name="features".$key+1 value="1" checked="checked">
-                            <label class="form-check-label" for="gluten_free">{{$feature}}</label>
-                        @else
-                            <input class="form-check-input" type="checkbox" id="{{$feature}}" name="features".$key+1 value="1">
-                            <label class="form-check-label" for="gluten_free">{{$feature}}</label>
-                        @endif
+                        @php($found = false)
+                        @foreach($s_features as $s_feature)
+                            @if($s_feature->featuretype_id == $feature->id)
+                                <input class="form-check-input" type="checkbox" id="{{$feature->name}}" name="features{{$key+1}}" value="1" checked>
+                                <label class="form-check-label" for="{{$feature->name}}">{{$feature->name}}</label>            
+                                @php($found = true)
+                                @break
+                            @endif
+                        @endforeach
+
+                        @unless($found)
+                            <input class="form-check-input" type="checkbox" id="{{$feature->name}}" name="features{{$key+1}}" value="1">
+                            <label class="form-check-label" for="{{$feature->name}}">{{$feature->name}}</label>                     
+                        @endunless
                     </div>
                 @endforeach
             </div>

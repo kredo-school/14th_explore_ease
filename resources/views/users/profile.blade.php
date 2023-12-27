@@ -105,7 +105,7 @@
                                                 <th>Registration Date</th>
                                                 <th>Rate</th>
                                                 <th>Area</th>
-                                                <th>Foodtype</th>
+                                                <th>FoodType</th>
                                                 <th></th>
                                             </tr>
                                         </thead>

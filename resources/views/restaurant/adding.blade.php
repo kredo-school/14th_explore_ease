@@ -133,7 +133,7 @@
                         <div class="h4">Lunch</div>
                     </div>
                     <div class="col-auto">
-                        <div class="btn-group" style="width: 800px;" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group ms-4" style="width: 200%;" role="group" aria-label="Basic checkbox toggle button group">
                             <input type="checkbox" class="btn-check" id="L_budget1" autocomplete="off" name="L_budget1">
                             <label class="btn btn-outline-dark" for="L_budget1">￥</label>
 
@@ -153,7 +153,7 @@
                         <div class="h4">Dinner</div>
                     </div>
                     <div class="col-auto">
-                        <div class="btn-group" style="width: 800px;" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group ms-4" style="width: 200%;" role="group" aria-label="Basic checkbox toggle button group">
                             <input type="checkbox" class="btn-check" id="D_budget1" autocomplete="off" name="D_budget1">
                             <label class="btn btn-outline-dark" for="D_budget1">￥</label>
 
