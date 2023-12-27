@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@vite(['resources/js/checkbuttonstatus.js'])
 
 <div class="container w-75">
     <h2>All reservations</h2>
@@ -87,5 +88,4 @@
         </div>
 </div>
 
-@vite(['resources/js/checkbuttonstatus.js'])
 @endsection

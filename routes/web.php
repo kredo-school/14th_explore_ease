@@ -67,7 +67,6 @@ Route::group(['middleware'=>'set.locale'], function () {
 
         // Dashboard_all_reservations
         Route::get('/admin/dashboard_all_reservations', [App\Http\Controllers\AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
-        Route::delete('/admin/dashboard_all_users/{id}/modal', [App\Http\Controllers\AdminController::class, 'cancelModal'])->name('admin_reservation.modal');
         Route::delete('/admin/dashboard_all_users/{id}/cancel', [App\Http\Controllers\AdminController::class, 'cancelReservation'])->name('admin_reservation.cancel');
 
 

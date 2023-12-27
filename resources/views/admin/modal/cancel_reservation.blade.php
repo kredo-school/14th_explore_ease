@@ -8,7 +8,7 @@
             </div>
 
             <div class="modal-body">
-                Are you sure you want to cancel <span class="fw-bold">{{ $reservation->id }} ?</span>
+                Are you sure you want to cancel <span class="fw-bold"> Reservation {{ $reservation->id }} ?</span>
             </div>
 
             <div class="modal-footer border-0">
