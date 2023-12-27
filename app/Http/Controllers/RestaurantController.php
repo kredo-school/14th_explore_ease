@@ -376,10 +376,13 @@ class RestaurantController extends Controller
                 $restaurant_photo->restaurant_id = $restaurant->id;
                 if($i == 0){
                     $restaurant_photo->name = "First photo";
+                    $restaurant_photo->photoindex = 1;
                 } elseif($i == 1){
                     $restaurant_photo->name = "Second photo";
+                    $restaurant_photo->photoindex = 2;
                 } elseif($i == 2){
                     $restaurant_photo->name = "Third photo";
+                    $restaurant_photo->photoindex = 3;
                 }
                 $restaurant_photo->photo = 'data:image/' . $request->{"photo_".$i+1}->extension().
                 ';base64,'. base64_encode(file_get_contents($request->{"photo_".$i+1}));
@@ -450,7 +453,7 @@ class RestaurantController extends Controller
         $foodtype = new FoodType();
         $foodtypes = $foodtype->all();
 
-        $features = new Feature();
+        $features = new FeatureType();
         $features = $features->all();
 
         $openhour = new OpenHour();
@@ -462,19 +465,29 @@ class RestaurantController extends Controller
         $s_feature = new Feature();
         $s_features = $s_feature->where('restaurant_id', $id)->get();
         
+        $budget = new Budget();
+        $budgets = $budget->where('restaurant_id', $id)->get();
 
-        // dd($openhours[1]->openinghours);
+        $restaurant_photo = new RestaurantPhoto();
+        $restaurant_photos = $restaurant_photo->where('restaurant_id', $id)->get();
 
-        return view('restaurant.edit')->with('areatypes', $areatypes)->with('foodtypes', $foodtypes)->with('restaurant', $restaurant)->with('openhours', $openhours)
-        ->with('courses', $courses)->with('s_features', $s_features)->with('features', $features);
+        return view('restaurant.edit')->with('areatypes', $areatypes)
+        ->with('foodtypes', $foodtypes)
+        ->with('restaurant', $restaurant)
+        ->with('openhours', $openhours)
+        ->with('courses', $courses)
+        ->with('s_features', $s_features)
+        ->with('features', $features)
+        ->with('budgets', $budgets)
+        ->with('restaurant_photos', $restaurant_photos);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $this->restaurant = 
+        $restaurant = $this->restaurant->findOrFail($id);
 
         $days_of_week = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Holiday'];
 
@@ -534,10 +547,13 @@ class RestaurantController extends Controller
                 $restaurant_photo->restaurant_id = $restaurant->id;
                 if($i == 0){
                     $restaurant_photo->name = "First photo";
+                    $restaurant_photo->photoindex = 1;
                 } elseif($i == 1){
                     $restaurant_photo->name = "Second photo";
+                    $restaurant_photo->photoindex = 2;
                 } elseif($i == 2){
                     $restaurant_photo->name = "Third photo";
+                    $restaurant_photo->photoindex = 3;
                 }
                 $restaurant_photo->photo = 'data:image/' . $request->{"photo_".$i+1}->extension().
                 ';base64,'. base64_encode(file_get_contents($request->{"photo_".$i+1}));
@@ -545,6 +561,10 @@ class RestaurantController extends Controller
                 $restaurant_photo->save();
             }
         }
+
+
+        
+        $restaurant->budgets()->delete();
 
         for($i = 0; $i < 4; $i++)
         {
@@ -570,6 +590,8 @@ class RestaurantController extends Controller
             }
         }
 
+        $restaurant->features()->delete();
+
         for($i = 0; $i < 7; $i++)
         {
             if($request->{"features".$i+1}){
@@ -580,8 +602,6 @@ class RestaurantController extends Controller
             }
         }
 
-
-
         return redirect()->back();
 
 
@@ -590,8 +610,9 @@ class RestaurantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Restaurant $restaurant)
+    public function destroy($id)
     {
-        //
+        $this->restaurant->destroy($id);
+        return redirect()->back();
     }
 }

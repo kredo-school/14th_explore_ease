@@ -34,6 +34,7 @@ class RestaurantSeeder extends Seeder
                 'latitude' => 35.690725,
                 'longitude' => 139.699851,
                 'foodtype_id' => 5,
+                'avgstar' => 1,
 
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
@@ -50,6 +51,7 @@ class RestaurantSeeder extends Seeder
                 'latitude' => 35.690725,
                 'longitude' => 139.699851,
                 'foodtype_id' => 5,
+                'avgstar' => 2,
 
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
@@ -66,6 +68,7 @@ class RestaurantSeeder extends Seeder
                 'latitude' => 35.690725,
                 'longitude' => 139.699851,
                 'foodtype_id' => 5,
+                'avgstar' => 3,
 
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
@@ -82,6 +85,7 @@ class RestaurantSeeder extends Seeder
                 'latitude' => 35.690725,
                 'longitude' => 139.699851,
                 'foodtype_id' => 5,
+                'avgstar' => 4,
 
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
@@ -98,6 +102,7 @@ class RestaurantSeeder extends Seeder
                 'latitude' => 35.690725,
                 'longitude' => 139.699851,
                 'foodtype_id' => 5,
+                'avgstar' => 5,
 
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),

@@ -10,7 +10,10 @@ use App\Models\User;
 use App\Models\Nationality;
 use App\Models\Restaurant;
 use App\Models\RestaurantPhoto;
-use App\Models\Foodtype;
+use App\Models\FoodType;
+use App\Models\Reservation;
+use App\Models\Review;
+
 use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
@@ -21,9 +24,11 @@ class ProfileController extends Controller
     private $bookmark;
     private $restaurant_photo;
     private $foodtype;
+    private $reservation;
+    private $review;
     private $restaurant;
 
-    public function __construct(Profile $profile, User $user, Nationality $nationality, Bookmark $bookmark, RestaurantPhoto $restaurant_photo, Restaurant $restaurant, Foodtype $foodtype)
+    public function __construct(Profile $profile, User $user, Nationality $nationality, Bookmark $bookmark, RestaurantPhoto $restaurant_photo, Restaurant $restaurant, FoodType $foodtype, Reservation $reservation, Review $review)
     {
         $this->profile = $profile;
         $this->user = $user;
@@ -32,6 +37,8 @@ class ProfileController extends Controller
         $this->restaurant_photo = $restaurant_photo;
         $this->restaurant = $restaurant;
         $this->foodtype = $foodtype;
+        $this->reservation = $reservation;
+        $this->review = $review;
     }
 
 
@@ -40,7 +47,16 @@ class ProfileController extends Controller
     public function bookmarkShow($id)
     {   
         $user = $this->user->findOrFail($id);
-        $bookmarks = $this->bookmark->where('user_id', Auth::user()->id)->get();
+        $tempbookmarks = $this->bookmark->where('user_id', Auth::user()->id)->get();
+
+        // remove softdeleted restraunt
+        $bookmarks = [];
+        foreach($tempbookmarks as $bookmark) {
+            if ($bookmark->restaurant != null) {
+                array_push($bookmarks, $bookmark);
+            }
+        }
+
         //parts of count on header.blade.php
         // 1. count restaurants for the owner
         $count_restaurant = $user->restaurants->count();
@@ -146,14 +162,21 @@ class ProfileController extends Controller
         $nationalities = $this->nationality->get(); 
 
         $count_restaurant = $user->restaurants->count();
-        if(Auth::user()->profile->usertype_id != 3){
+        if(Auth::user()->profile != null && Auth::user()->profile->usertype_id != 3){
             $count_restaurant = "ー";
         }
         
         $count_reservation = $user->reservations->count();
         $count_review = $user->reviews->count();
         $count_bookmark = $user->bookmarks->count();
-        if(Auth::user()->profile->usertype_id != 2){
+        if(Auth::user()->profile != null && Auth::user()->profile->usertype_id != 2){
+            $count_reservation = "ー";
+            $count_review = "ー";
+            $count_bookmark = "ー";
+        }
+
+        if(Auth::user()->profile == null) {
+            $count_restaurant = "ー";
             $count_reservation = "ー";
             $count_review = "ー";
             $count_bookmark = "ー";
@@ -198,29 +221,58 @@ class ProfileController extends Controller
         ]);
        
         $user = $this->user->findOrFail(Auth::user()->id);
-        $user->profile->first_name = $request->firstname;
-        $user->profile->last_name = $request->lastname;
-        $user->profile->phone = $request->phonenumber;
-        $user->name = $request->username;
-        $user->email = $request->email;
-        $user->profile->nationality_id = $request->nationality;
-        if($request->image){
-            $user->profile->avatar = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
-        }
-        
-        $user->save();
-        $user->profile->save();
 
+        if ($user->profile != null) {
+            $user->profile->first_name = $request->firstname;
+            $user->profile->last_name = $request->lastname;
+            $user->profile->phone = $request->phonenumber;
+            $user->name = $request->username;
+            $user->email = $request->email;
+            $user->profile->nationality_id = $request->nationality;
+            if($request->image){
+                $user->profile->avatar = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
+            }
+            
+            $user->save();
+            $user->profile->save();
+
+            return redirect()->route('profile.show', Auth::user()->id);
+        } else {
+            $profile = $this->profile;
+            $profile->user_id = $user->id;
+            $profile->first_name = $request->firstname;
+            $profile->last_name = $request->lastname;
+            $profile->phone = $request->phonenumber;
+            $profile->nationality_id = $request->nationality;
+            $profile->usertype_id = $request->usertype;
+            if($request->image){
+                $profile->avatar = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
+            }
+            $profile->save();
+
+            $user->name = $request->username;
+            $user->email = $request->email;
+            $user->save();
+
+            return view('index');
+        }
+    }
+
+    // Cancel(Delete) the reservation
+    public function reservationCancel($id)
+    {
+        $reservation = $this->reservation->findOrFail($id);
+        $reservation->forceDelete();
         return redirect()->route('profile.show', Auth::user()->id);
 
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Profile $profile)
+    //Delete the Review
+    public function reviewDelete($id)
     {
-        //
+        $review = $this->review->where('user_id', Auth::user()->id)
+                                ->where('restaurant_id', $id)
+                                ->forceDelete();
+        return redirect()->route('review.show', Auth::user()->id);
     }
 
 
