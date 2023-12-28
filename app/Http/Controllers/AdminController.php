@@ -33,7 +33,6 @@ class AdminController extends Controller
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->reservation = $reservation;
-        $this->user = $user;
         $this->areaType = $areaType;
         $this->foodType = $foodType;
         $this->course = $course;
@@ -206,83 +205,69 @@ class AdminController extends Controller
         return back();
     }
 
-    public function userChart(){
-        $users = User::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
-                    ->whereYear('created_at', date('Y'))
-                    ->groupBy('month')
-                    ->oderBy('month')
-                    ->get();
+    public function dashboardAllRestaurants(){
+        $restaurants = $this->restaurant->withTrashed()->latest()->paginate(3);
+        // Data from other tables
+        $ownerNames = [];
+        $stars = [];
+        $areaTypes = [];
+        $foodTypes = [];
 
-        $labels = [];
-        $data = [];
+        // Data from Restaurants table
+        $restaurantIds = [];
+        $restaurantNames = [];
+        $registrationDates = [];
 
-        for($i=1; $i < 12; $i++) {
-            $month = date('F',mktime(0,0,0,$i,1));
-            $count =0;
 
-            foreach($users as $user){
-                if($user->month == $i){
-                    $count =$user->count;
-                    break;
-                }
-            }
+        foreach ($restaurants as $restaurant) {
+            // Data from other table
+            $owData = $this->user->where('id', $restaurant->user_id)->withTrashed()->get();
+            array_push($ownerNames, $owData);
 
-            array_push($labels,$month);
-            array_push($data,$count);
+            $sdata = $this->review->where('restaurant_id', $restaurant->id)->get()->pluck('star')->toArray();
+            $sdatalength = count($sdata);
+            $sdatasum = array_sum($sdata);
+            $sdatasum /= $sdatalength;
+            array_push($stars, $sdatasum);
+
+            $arData = $this->areaType->where('id', $restaurant->areatype_id)->get()->pluck('station_name')->toArray();
+            array_push($areaTypes, $arData);
+
+            $foData = $this->foodType->where('id', $restaurant->foodtype_id)->get()->pluck('name')->toArray();
+            array_push($foodTypes, $foData);
+
+            // Data from Restaurants table
+            $restaurantIds[] = $restaurant->id;
+            $restaurantNames[] = $restaurant->name;
+            $registrationDates[] = $restaurant->created_at;
         }
 
-        $datasets = [
-            [
-                'label' => 'Users',
-                'data' => $data,
-
-            ]
-            ];
-            return view('admin.dashboard',compact('datasets','labels'));
+        return view('admin.all_restaurants',
+        [
+            'restaurants'=>$restaurants,
+            'ownerNames'=>$ownerNames,
+            'stars'=>$stars,
+            'areaTypes'=>$areaTypes,
+            'foodTypes'=>$foodTypes,
+            'restaurantIds'=>$restaurantIds,
+            'restaurantNames'=>$restaurantNames,
+            'registrationDates'=>$registrationDates,
+        ]);
     }
 
-    public function userChartApi(Request $request){
-        $user_type = $request->user_type;
+    public function deactivateRestaurants($id){
+        $restaurant = $this->restaurant->findOrFail($id);
+        $restaurant->delete();
 
-        $users = [];
-        $labels = [];
-        $data = [];
-
-        switch ($user_type){
-            case 'user':
-                $users = DB::table('profiles')->where('usertype_id', '=', 2)->get();
-                break;
-
-        }
-
-        for($i=1; $i < 13; $i++) {
-            $month = date('M',mktime(0,0,0,$i,1));
+        return back();
+    }
 
 
-            array_push($labels,$month);
+    public function activateRestaurants($id){
+        $restaurant = Restaurant::where('id','=',$id);
+        $restaurant->restore();
 
-        }
-
-        for($i=1; $i < 13; $i++){
-            $userCount = 0;
-
-            for($j = 0; $j < count($users); $j++){
-                $userMonthCreated = (int)explode('-', $users[$j]->created_at)[1];
-                if($userMonthCreated == $i){
-                    $userCount++;
-                }
-            }
-            array_push($data,$userCount);
-        }
-
-        $datasets = [
-            [
-                'label' => 'Users',
-                'data' => $data,
-                'backgroundColor' => "#CAC2C7"
-            ]
-        ];
-        return Response::json(['success'=>true, 'labels'=>$labels, 'datasets'=>$datasets]);
+        return back();
     }
 
     public function dashboardAllReservations(){
@@ -349,4 +334,5 @@ class AdminController extends Controller
 
         return back();
     }
+
 }
