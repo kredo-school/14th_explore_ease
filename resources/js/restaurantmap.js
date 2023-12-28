@@ -1,7 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2F5by0yNCIsImEiOiJjbG9vYWFuMnQxeWRxMmtwcXl6eDFnYnJ5In0.sFXiFRRhb9wJZFBJWGO6qA';
 const map = new mapboxgl.Map({
     container: 'map',
-    center:[139.69171, 35.6895],
+    center:[139.41, 35.41],
     zoom:10,
     style: 'mapbox://styles/kayo-24/clood88qv003p01r6f9ht7e56'
 });
@@ -31,25 +31,29 @@ function initializeMarker()
     const latitude = document.getElementById('map').getAttribute('lat');
     const longitude = document.getElementById('map').getAttribute('lng');
 
+
     map.on('load', () => 
     {
-        const markerInputLatitude = document.getElementById('marker-input-latitude');
-        const markerInputLongitude = document.getElementById('marker-input-longitude');
-    
-    
-        if (markers.length > 0)
-            markers[0].remove();
-    
-        markers[0] = new mapboxgl.Marker()
-            .setLngLat([longitude, latitude])
-            .addTo(map);
-    
-        markerInputLatitude.value = latitude;
-        markerInputLongitude.value = longitude;
+        if(latitude != undefined)
+        {
+            const markerInputLatitude = document.getElementById('marker-input-latitude');
+            const markerInputLongitude = document.getElementById('marker-input-longitude');
         
-        map.flyTo({
-            center:[longitude, latitude]
-        })
+        
+            if (markers.length > 0)
+                markers[0].remove();
+        
+            markers[0] = new mapboxgl.Marker()
+                .setLngLat([longitude, latitude])
+                .addTo(map);
+        
+            markerInputLatitude.value = latitude;
+            markerInputLongitude.value = longitude;
+            
+            map.flyTo({
+                center:[longitude, latitude]
+            })
+        }
     });
     
 }
