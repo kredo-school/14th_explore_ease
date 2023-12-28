@@ -11,7 +11,7 @@
 <div class="container w-50">
         {{-- Message Area --}}
         <div class="container mb-5">
-            <h2 class="mb-4">{{ $restaurant->name }}</h2>
+            <h1 class="mb-4">{{ $restaurant->name }}</h2>
             <h3 class="mb-2">Message from Venue</h3>
               <p>
               {{ $restaurant->description }}

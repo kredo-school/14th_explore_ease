@@ -16,7 +16,7 @@
 @section('content')
     {{-- MainV --}}
     <div class="main d-flex align-items-center">
-        <div class="container">
+        <div class="container position-relative">
             <div class="row">
                 <div class="col-md-6 p-lg-5 mx-auto my-5 text-white">
                     <h2>{{ __('messages.search_copy1') }}<br>{{ __('messages.search_copy2') }}</h2>
