@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container w-75">
-    <h2>All users</h2>
+    <h2>All reviews</h2>
     {{-- Search Box --}}
     <div class="container text-end mb-3">
         <form class="form-inline">
@@ -20,50 +20,76 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">id</th>
               <th scope="col">Restaurant name</th>
-              <th scope="col">Username</th>
-              <th scope="col">Reviewdate</th>
+              <th scope="col">User name</th>
+              <th scope="col">Review date</th>
               <th scope="col">Rate</th>
-              <th scope="col">Review</th>
+              <th scope="col">review</th>
+              <th scope="col"></th>
               <th scope="col"></th>
             </tr>
           </thead>
           {{-- Data starting here --}}
           <tbody>
+            @foreach ($reviews as $review)
             <tr>
-              <td class="py-3">#</td>
-              <td class="py-3">OREORESTAURANT in Tokyo</td>
-              <td class="py-3">Dayo</td>
-              <td class="py-3">11:00  <br>12 OCT 2024</td>
-              <td class="py-3 m">
-                <div class="row">
-                  <div class="col card text-center p-0 shadow-sm">
-                    <p class="my-auto">4.5<i class="fa-solid fa-star text-warning col"></i></p>
-                  </div>
-                </div>
-              </td>
-              <td class="py-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque deserunt obcaecati suscipit provident<span>...</span>
-              </td>
-              <td td class="py-3"><button type="button" class="btn btn-secondary">Inactivate</button>
-              </td>
+                @foreach ($restaurantNames[$loop->index] as $restaurantName)
+                    <td class="py-3">{{$restaurantName}}</td>
+                @endforeach
+
+                @foreach ($userNames[$loop->index] as $userName)
+                    <td class="py-3">{{$userName}}</td>
+                @endforeach
+
+                <td class="py-3">{{ $reviewDates[$loop->index] }}</td>
+
+                <td class="py-3">{{ $rates[$loop->index] }}</td>
+
+                <td class="py-3">
+                    <div class="myClass">
+                        <p id="overflow_text">{{ $reviewComments[$loop->index] }}</p>
+                        <span onClick="textLimiter()" id="toggle_text">Read More</span>
+                    </div>
+                </td>
+
+
+                <td class="py-3">
+                        @if($reviews[$loop->index])
+                        {{-- @if ($restaurant->trashed()) --}}
+                            <i class="fa-solid fa-circle-minus text-secondary"></i> &nbsp; Inactive
+                        @else
+                            <i class="fa-solid fa-circle text-primary"></i> &nbsp; Active
+                        @endif
+                </td>
+
+
+                <td>
+                            @if($reviews[$loop->index])
+                            {{-- @if ($restaurant->trashed()) --}}
+                                <form action="{{-- route('admin_reviews.activate',$review->id) --}}" method="post">
+                                    @csrf
+                                    @method('PATCH')
+                                <button type="submit" class="btn b-color">Unhide Review {{-- $review --}}</button>
+                                </form>
+                            @else
+                                <form action="{{-- route('admin_reviews.deactivate',$review->id) --}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                <button type="submit" class="btn b-color">Hide Owner {{-- $review --}}</button>
+                                </form>
+                            @endif
+                </td>
             </tr>
+            @endforeach
           </tbody>
         </table>
-      </div>
+    </div>
 
-
-
-
-
-
-      {{-- permanent_area --}}
         <div class="d-flex justify-content-center">
-        <!--previousry-->
-          <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="<%preventry_url>">previous &lt;&lt;</a>
-        <!--nextentry-->
-          <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover mx-5" href="<%nextentry_url>">&gt;&gt;next</a>
+            {{ $reviews->links() }}
         </div>
 </div>
 
+@vite(['resources/js/textlimit.js'])
+@vite(['resources/js/checkbuttonstatus.js'])
 @endsection

@@ -270,6 +270,43 @@ class AdminController extends Controller
         return back();
     }
 
+    public function dashboardAllReviews(){
+        $reviews = $this->review->latest()->paginate(10);
+        // Data from other tables
+        $restaurantNames = [];
+        $userNames = [];
+
+        // Data from Reviews table
+        $reviewDates = [];
+        $rates = [];
+        $reviewComments = [];
+
+
+        foreach ($reviews as $review) {
+            // Data from other table
+            $reData = $this->restaurant->where('id', $review->restaurant_id)->pluck('name')->toArray();
+            array_push($restaurantNames, $reData);
+
+            $usData = $this->user->where('id', $review->user_id)->get()->pluck('name')->toArray();
+            array_push($userNames , $usData);
+
+            // Data from Restaurants table
+            $reviewDates[] = $review->created_at;
+            $rates[] = $review->star;
+            $reviewComments[] = $review->comment;
+        }
+
+        return view('admin.all_reviews',
+        [
+            'reviews'=>$reviews,
+            'restaurantNames'=>$restaurantNames,
+            'userNames'=>$userNames,
+            'reviewDates'=>$reviewDates,
+            'rates'=>$rates,
+            'reviewComments'=>$reviewComments,
+        ]);
+    }
+
     public function dashboardAllReservations(){
         $reservations = Reservation::orderBy('id', 'desc')->paginate(10);
         // Data from other tables
