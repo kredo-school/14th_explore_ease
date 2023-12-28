@@ -24,11 +24,7 @@ class AdminController extends Controller
     private $areaType;
     private $foodType;
 
-<<<<<<< HEAD
     public function __construct(Profile $profile, Restaurant $restaurant, Review $review, Reservation $reservation, User $user, AreaType $areaType, FoodType $foodType){
-=======
-    public function __construct(Profile $profile, User $user, Restaurant $restaurant, Review $review, Reservation $reservation){
->>>>>>> main
         $this->profile = $profile;
         $this->user = $user;
         $this->restaurant = $restaurant;
@@ -205,7 +201,6 @@ class AdminController extends Controller
         return back();
     }
 
-<<<<<<< HEAD
     public function dashboardAllOwners(){
         $profiles = Profile::where('usertype_id', 3)->withTrashed()->latest()->paginate(3);
         // Data from Users table
@@ -343,6 +338,4 @@ class AdminController extends Controller
 
         return back();
     }
-=======
->>>>>>> main
 }
