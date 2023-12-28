@@ -125,7 +125,7 @@
                     <!--This course_name number should be more than 2. need to fix.-->
                     <div class="row mb-3">
                     <div class="rounded d-flex justify-content-center align-items-center flex-column" style="height: 150px; background-color: rgba(0,0,0,0.3); cursor: pointer;" onclick="addCourseMenu()">
-                        <i class="fa-solid fa-circle-plus h1"></i>Add more
+                        <i class="fa-solid fa-plus h1"></i>Add more
                     </div>
                 @else
                     <div class="row mb-3">
