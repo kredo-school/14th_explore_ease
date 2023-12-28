@@ -4,7 +4,7 @@
 @section('content')
 @vite(['resources/js/restaurant.js', 'resources/js/restaurantmap.js'])
 
-<div class="container" style="width: 50%;">
+<div class="container w-50 mt-5 mb-5">
     <form action="{{ route('restaurant.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="h1">RESTAURANT INFORMATION</div>

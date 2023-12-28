@@ -15,40 +15,40 @@
             <div class="col-4 themed-grid-col text-center border-end">
                 <span class="border-right">
                 <h5 class="text-center">Users</h5>
-                <span>
+                <a href="{{ route('admin.allUsers') }}" class="text-decoration-none text-black">
                     <i class="fa-solid fa-circle-user fa-3x  text-secondary"></i>
                     <p class="d-inline display-5 ps-2">{{ count($profileUsers) }}</p>
-                </span>
+                </a>
             </div>
             <div class="col-4 themed-grid-col text-center border-end">
                 <h5 class="text-center">Owners</h5>
-                <span>
+                <a href="{{ route('admin.allOwners') }}" class="text-decoration-none text-black">
                     <i class="fa-solid fa-house-user fa-3x  text-secondary"></i>
                     <p class="d-inline display-5 ps-2">{{ count($profileOwners) }}</p>
-                </span>
+                </a>
             </div>
             <div class="col-4 themed-grid-col text-center">
                 <h5 class="text-center">Restaurants</h5>
-                <span>
+                <a href="{{ route('admin.allRestaurants') }}" class="text-decoration-none text-black">
                     <i class="fa-solid fa-utensils fa-3x  text-secondary"></i>
                     <p class="d-inline display-5 ps-2">{{ count($restaurants) }}</p>
-                </span>
+                </a>
             </div>
          </div>
         <div class="row border border-bottom-0 py-3 px-5">
                 <div class="col-6 themed-grid-col text-center border-end">
                     <h5 class="text-center">Reviews</h5>
-                    <span>
+                    <a href="{{ route('admin.allReviews') }}" class="text-decoration-none text-black">
                         <i class="fa-solid fa-clipboard fa-3x  text-secondary"></i>
                         <p class="d-inline display-5 ps-2">{{ count($reviews) }}</p>
-                    </span>
+                    </a>
                 </div>
                 <div class="col-6 themed-grid-col text-center">
                     <h5 class="text-center">Reservations</h5>
-                    <span>
-                    <i class="fa-solid fa-calendar-check fa-3x  text-secondary"></i>
-                    <p class="d-inline display-5 ps-2">{{ count($reservations) }}</p>
-                </span>
+                    <a href="{{ route('admin.allReservations') }}" class="text-decoration-none text-black">
+                        <i class="fa-solid fa-calendar-check fa-3x  text-secondary"></i>
+                        <p class="d-inline display-5 ps-2">{{ count($reservations) }}</p>
+                    </a>
             </div>
         </div>
 
