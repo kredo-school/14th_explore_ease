@@ -24,7 +24,7 @@ class ProfileSeeder extends Seeder
     public function run(): void
     {
         // set 20M on mysql's max_allowed_packet temporarily to avoid over packet size
-        DB::statement('SET GLOBAL max_allowed_packet=20971520');
+        //DB::statement('SET GLOBAL max_allowed_packet=20971520');
 
         $avatar_image = 'data:image/' . 'png' . ';base64,' . base64_encode(file_get_contents('public/assets/seeder/avatar_penguin.png'));
 
@@ -37,7 +37,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Admin,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-01-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -48,7 +48,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Admin,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-02-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -59,7 +59,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Admin,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-03-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -70,7 +70,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Admin,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-04-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -81,10 +81,12 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Admin,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-05-01',
                 'updated_at' => new DateTime(),
             ],
-
+        ];
+        $this->profile->insert($profiles);
+        $profiles = [
             [
                 'user_id' => 6,
                 'first_name' => 'name001',
@@ -93,7 +95,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::User,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-06-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -104,7 +106,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::User,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-07-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -115,7 +117,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::User,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-08-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -126,7 +128,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::User,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-09-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -137,10 +139,12 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::User,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-10-01',
                 'updated_at' => new DateTime(),
             ],
-
+        ];
+        $this->profile->insert($profiles);
+        $profiles = [
             [
                 'user_id' => 11,
                 'first_name' => 'name001',
@@ -149,7 +153,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Owner,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-11-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -160,7 +164,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Owner,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-12-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -171,7 +175,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Owner,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-01-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -182,7 +186,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Owner,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-02-01',
                 'updated_at' => new DateTime(),
             ],
             [
@@ -193,7 +197,7 @@ class ProfileSeeder extends Seeder
                 'phone' => '999-9999-9999',
                 'usertype_id' => UserTypeEnum::Owner,
                 'nationality_id' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => '2023-03-01',
                 'updated_at' => new DateTime(),
             ],
         ];

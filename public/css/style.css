@@ -1,41 +1,41 @@
-.main{
+.main {
     background-image: url("../assets/turkey-315079_1920.png");
     background-position: center;
     background-size: cover;
+    width: 100%;
+    height: calc(100vh - 50px);
+    margin-top: -10rem;
 }
-.icon-user{
+.icon-user {
     font-size: 6rem;
-
 }
 
-.icon-edit{
+.icon-edit {
     font-size: 1rem;
 }
 
-.profile{
+.profile {
     display: flex;
     background-color: #f8b0a6;
     justify-content: center;
     width: auto;
 }
 
-.header-image{
-  object-fit: cover;
-  width: 6rem;
-  height: 6rem;
+.header-image {
+    object-fit: cover;
+    width: 6rem;
+    height: 6rem;
 }
 
 
-.vertical-line{
+.vertical-line {
     border-right: 2px solid;
     line-height: auto;
     text-align: center;
-
-
 }
 
 /* bookmark restaurants */
-.rcards{
+.rcards {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -45,7 +45,7 @@
 }
 
 /* restaurants show */
-.scards{
+.scards {
   margin: auto;
   padding: auto;
   display: flex;
@@ -86,10 +86,10 @@
 }
 .rate-form label {
   position: relative;
-  padding: 0 5px;
+  padding: 3px;
   color: #CAC2C7;
   cursor: pointer;
-  font-size: 50px;
+  font-size: 40px;
 }
 .rate-form label:hover {
   color: #E7DA3D;

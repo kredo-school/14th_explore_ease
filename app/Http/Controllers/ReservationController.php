@@ -20,7 +20,7 @@ class ReservationController extends Controller
     private $restaurant;
     private $restaurantphoto;
     private $booking_data;
-    private $massage;
+    private $message;
     private $course;
     private $all_courses;
 
@@ -41,12 +41,13 @@ class ReservationController extends Controller
         $restaurantphoto =  $this->restaurantphoto->findOrFail($restaurant->id);
         $course =  $this->course->findOrFail($id);
         $all_courses = $restaurant->courses->all();
+
         //$all_courses = $restaurant->courses();
         //dd($all_courses);
 
         return view('restaurant.reservation.show',
          ['restaurant'=> $restaurant, 'restaurantphoto' => $restaurantphoto,
-          'course' => $course, 'all_courses' => $all_courses]);
+          'course' => $course, 'all_courses' => $all_courses, ]);
     }
 
     public function show_message($id)
@@ -55,7 +56,7 @@ class ReservationController extends Controller
         $massage = $this->restaurant->findOrFail($restaurant->message);
         return view('restaurant.reservation.show')->with('$message');
     }
-    
+
     public function index()
     {
         //
@@ -73,36 +74,54 @@ class ReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $restaurant_id)
     {
-        # 1. Validate all form data
-        $request->validate([
-            'number_of_people' => 'required',
-            'datepicker' => 'required',
-            'reservation_start_time' => 'required',
-            
-
-        ]);
-
-        # 2. Save the post
+        # 2. Save the post ???? 
         $this->reservation->user_id        = Auth::user()->id;
-
-        $this->reservation->number_of_people         = $request->number_of_people;
-        $this->reservation->reservation_start_date   = $request->datepicker;
+        $this->reservation->restaurant_id            = $restaurant_id;
+        $this->reservation->reservation_start_date   = $request->reservation_start_date;
         $this->reservation->reservation_start_time   = $request->reservation_start_time;
-        $this->booking_data->save();
+        $this->reservation->reservation_end_date     =  $request->reservation_start_date;
+        $this->reservation->seat_id                  = $request->seat_id;
+        $this->reservation->course_id                = $request->course;
+        $this->reservation->number_of_people         = $request->number_of_people;
+        $this->reservation->requests                 = $request->requests;
+        $course = $this->course->find($request->course); 
+        if($course)
+        {
+            $this->reservation->reservation_end_time = date('H:i:s', strtotime($request->reservation_start_time . ' +' . $course->reservation_minutes . ' minutes'));
+            $this->reservation->reservation_minutes = $course->reservation_minutes;
+        }else{
+            $this->reservation->reservation_end_time = date('H:i:s', strtotime($request->reservation_start_time . ' +60 minutes'));
+            $this->reservation->reservation_minutes = 60;
+        }
+
+
+        $this->reservation->save();
 
         #3. go back to the homepage
-        return redirect()->route('index');
+        return redirect()->route('restaurant.show');
     }
 
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Reservation $reservation)
-    {
-        //
+    public function edit($reservation_id)
+    {   
+        $reservation = $this->reservation->findOrFail($reservation_id);
+        $restaurants = $reservation->restaurant;
+        $restaurantphotos =  $this->restaurantphoto->findOrFail($restaurants->id);
+
+        $courses =  $restaurants->courses;
+        $all_courses = $courses;
+        // If the users reserve seat only, it is checked 
+        $isChecked = true;
+
+        return view('users.profile_show_reservation',
+         ['reservation'=>$reservation, 'restaurant'=> $restaurants, 'restaurantphoto' => $restaurantphotos,
+          'course' => $courses, 'all_courses' => $all_courses, 'isChecked' => $isChecked,]);
+
     }
 
     /**
@@ -126,12 +145,6 @@ class ReservationController extends Controller
         return view('admin.dashboard_all_reservations');
     }
 
-    public function rules()
-    {
-        return [
-            'reservation_ppl' => ['required'],
-            'reservation_start_date' => ['required'],
-            'reservation_start_time' => ['required'],
-        ];
-    }
+
+
 }

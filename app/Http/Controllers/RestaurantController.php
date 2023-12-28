@@ -33,8 +33,10 @@ class RestaurantController extends Controller
     private $user;
     private $profile;
     private $openHour;
+    private $course;
+    private $all_courses;
 
-    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype, Budget $budget, User $user, Profile $profile, OpenHour $openHour,){
+    public function __construct(Restaurant $restaurant, Review $review, RestaurantPhoto $restaurantphoto, FoodType $foodtype, AreaType $areatype, Feature $feature, FeatureType $featuretype, Budget $budget, User $user, Profile $profile, OpenHour $openHour,Course $course){
         $this->restaurant = $restaurant;
         $this->review = $review;
         $this->restaurantphoto = $restaurantphoto;
@@ -46,11 +48,72 @@ class RestaurantController extends Controller
         $this->user = $user;
         $this->profile = $profile;
         $this->openHour = $openHour;
+        $this->course = $course;
     }
 
     /** Show restaurant ranking page */
     public function restaurantRanking(){
-        return view('restaurant.ranking');
+        $restaurants = $this->restaurant->all();
+        $restaurant_photos = [];
+        $features = [];
+        $finalBudget = [];
+        $stars = [];
+
+        $restaurant_names = [];
+        $restaurant_addresses = [];
+        $restaurant_id = [];
+
+        $timezoneLunch = [];
+        $timezoneDinner = [];
+
+        foreach($restaurants as $restaurant){
+            //get data from restaurantPhoto table, feature table, budget table.
+                $data = $this->restaurantphoto->where('restaurant_id', $restaurant->id)->get();
+                array_push($restaurant_photos, $data);
+
+                $fdata = $this->feature->where('restaurant_id', $restaurant->id)->get();
+                array_push($features, $fdata);
+
+                $bdata = $this->budget->where('restaurant_id', $restaurant->id)->get();
+                array_push($finalBudget, $bdata);
+
+            //get rating data from review table, then calculate the average of stars.
+                $sdata = $this->review->where('restaurant_id', $restaurant->id)->get()->pluck('star')->toArray();
+                $sdatalength = count($sdata);
+                $sdatasum = array_sum($sdata);
+                $sdatasum /= $sdatalength;
+                array_push($stars, $sdatasum);
+
+            //get data from restaurant table.
+                $restaurant_names[] = $restaurant->name;
+                $restaurant_addresses[] = $restaurant->address;
+                $restaurant_id[] = $restaurant->id;
+
+            //get timezone data from budget table for if component on blade.php.
+                // lunch
+                $Ldata = $this->budget->where('restaurant_id', $restaurant->id)->where('timezonetype', 1)->get()->pluck('timezonetype')->toArray();
+                array_push($timezoneLunch, $Ldata);
+                // Dinner
+                $Ddata = $this->budget->where('restaurant_id', $restaurant->id)->where('timezonetype', 2)->get()->pluck('timezonetype')->toArray();
+                array_push($timezoneDinner, $Ddata);
+        }
+        // dd($timezoneLunch);
+
+        array_multisort($stars, SORT_DESC, $restaurant_photos, $features, $finalBudget, $restaurant_names, $restaurant_addresses, $restaurant_id, $timezoneLunch, $timezoneDinner);
+
+        return view('restaurant.ranking',
+        [
+            'restaurants'=>$restaurants,
+            'restaurant_photos'=>$restaurant_photos,
+            'features'=>$features,
+            'finalBudget'=>$finalBudget,
+            'stars'=>$stars,
+            'restaurant_names'=>$restaurant_names,
+            'restaurant_addresses'=>$restaurant_addresses,
+            'restaurant_id'=>$restaurant_id,
+            'timezoneLunch'=>$timezoneLunch,
+            'timezoneDinner'=>$timezoneDinner,
+        ]);
     }
 
     /** Show restaurant detail page */
@@ -61,8 +124,13 @@ class RestaurantController extends Controller
         $review = Review::where('restaurant_id', $restaurant->id)->latest()->paginate(10);
         $foodtype = $this->foodtype->findOrFail($restaurant->foodtype->id);
         $areatype = $this->areatype->findOrFail($restaurant->areatype->id);
-        $user = $this->user->findOrFail(Auth::user()->id);
-        $profile = $user->profile;
+        if (Auth::check()) {
+            $user = $this->user->findOrFail(Auth::user()->id);
+            $profile = $user->profile;
+        } else {
+            $user = new User();
+            $profile = new Profile();
+        }
 
         /** FeatureTypes via Features table */
         $restaurantFeatures = $restaurant->features; // Gets all the features of the restaurant
@@ -154,6 +222,13 @@ class RestaurantController extends Controller
                 $averageAllStars[] = $averageAllStar;
             }
 
+        /** Course */
+        $course =  $this->course->findOrFail($id);
+        $all_courses = $restaurant->courses->all();
+
+        /** Main menu */
+
+
         return view('restaurant.detail',
         [
             'restaurant' => $restaurant,
@@ -175,15 +250,28 @@ class RestaurantController extends Controller
             'openHours5' => $openHours5,
             'openHours6' => $openHours6,
             'openHours0' => $openHours0,
+            'course' => $course,
+            'all_courses' => $all_courses,
         ]);
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $restaurants = $this->restaurant->all();
+        $keyword = $request->search;
+        $restaurant = [];
+        if ($keyword == null || $keyword == "") {
+            $restaurants = $this->restaurant->all();
+        } else {
+            $restaurants = $this->restaurant
+                    ->where('name', 'like', "%{$keyword}%")
+                    ->orWhere('description', 'like', "%{$keyword}%")
+                    ->orWhere('address', 'like', "%{$keyword}%")
+                    ->get();
+        }
+
         $restaurant_photos = [];
         $features = [];
         $finalBudget = [];
@@ -200,9 +288,13 @@ class RestaurantController extends Controller
             array_push($finalBudget, $bdata);
         }
 
-
-        return view('restaurant.show', ['restaurants'
-        =>$restaurants, 'restaurant_photos'=>$restaurant_photos, 'features'=>$features, 'finalBudget'=>$finalBudget]);
+        return view('restaurant.show',
+            [
+                'restaurants' => $restaurants,
+                'restaurant_photos' => $restaurant_photos,
+                'features' => $features,
+                'finalBudget'=> $finalBudget
+            ]);
     }
 
 
@@ -284,10 +376,13 @@ class RestaurantController extends Controller
                 $restaurant_photo->restaurant_id = $restaurant->id;
                 if($i == 0){
                     $restaurant_photo->name = "First photo";
+                    $restaurant_photo->photoindex = 1;
                 } elseif($i == 1){
                     $restaurant_photo->name = "Second photo";
+                    $restaurant_photo->photoindex = 2;
                 } elseif($i == 2){
                     $restaurant_photo->name = "Third photo";
+                    $restaurant_photo->photoindex = 3;
                 }
                 $restaurant_photo->photo = 'data:image/' . $request->{"photo_".$i+1}->extension().
                 ';base64,'. base64_encode(file_get_contents($request->{"photo_".$i+1}));
@@ -348,40 +443,176 @@ class RestaurantController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Restaurant $restaurant)
+    public function edit($id)
     {
-        return view('restaurant.edit');
+        $restaurant = $this->restaurant->findOrFail($id);
+
+        $areatype = new AreaType();
+        $areatypes = $areatype->all();
+
+        $foodtype = new FoodType();
+        $foodtypes = $foodtype->all();
+
+        $features = new FeatureType();
+        $features = $features->all();
+
+        $openhour = new OpenHour();
+        $openhours = $openhour->where('restaurant_id', $id)->get();
+
+        $course = new Course();
+        $courses = $course->where('restaurant_id', $id)->get();
+
+        $s_feature = new Feature();
+        $s_features = $s_feature->where('restaurant_id', $id)->get();
+        
+        $budget = new Budget();
+        $budgets = $budget->where('restaurant_id', $id)->get();
+
+        $restaurant_photo = new RestaurantPhoto();
+        $restaurant_photos = $restaurant_photo->where('restaurant_id', $id)->get();
+
+        return view('restaurant.edit')->with('areatypes', $areatypes)
+        ->with('foodtypes', $foodtypes)
+        ->with('restaurant', $restaurant)
+        ->with('openhours', $openhours)
+        ->with('courses', $courses)
+        ->with('s_features', $s_features)
+        ->with('features', $features)
+        ->with('budgets', $budgets)
+        ->with('restaurant_photos', $restaurant_photos);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(Request $request, $id)
     {
-        //
+        $restaurant = $this->restaurant->findOrFail($id);
+
+        $days_of_week = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Holiday'];
+
+
+        $restaurant = new Restaurant();
+        //store to the db
+        $restaurant->user_id = Auth::id();
+        $restaurant->name = $request->restaurant_name;
+        $restaurant->description = $request->description;
+        $restaurant->menu = $request->menu;
+        $restaurant->areatype_id = $request->area;
+        $restaurant->address = $request->restautrant_address;
+        $restaurant->latitude = $request->latitude;
+        $restaurant->longitude = $request->longitude;
+        $restaurant->foodtype_id = $request->foodtype;
+        $restaurant->message = $request->message;
+
+        $restaurant->save();
+
+
+        for($i = 0; $i < 8; $i++)
+        {
+            $openhour = new OpenHour();
+
+            $openhour->restaurant_id = $restaurant->id;
+            $openhour->daytype = $i;
+            $openhour->openinghours = $request->input('open_' . $days_of_week[$i]);
+            $openhour->closinghours = $request->input('close_' . $days_of_week[$i]);
+            $openhour->closed = $request->has(`closed_checkbox_$days_of_week[$i]`);
+            $openhour->save();
+        }
+
+        for($i = 0; $i < 4; $i++)
+        {
+            if($request->{"course_photo".$i+1}){
+                $course = new Course();
+                $course->restaurant_id = $restaurant->id;
+                $course->photo = 'data:image/' . $request->{"course_photo".$i+1}->extension().
+                ';base64,'. base64_encode(file_get_contents($request->{"course_photo".$i+1}));
+                $course->name = $request->{"course_name".$i+1};
+                $course->description = $request->{"course_description".$i+1};
+                $course->reservation_minutes = 60;
+                $course->save();
+            }
+        }
+
+        $seat = new Seat();
+        if($request->seat == "available"){
+            $seat->restaurant_id = $restaurant->id;
+            $seat->reservation_minutes = 60;
+            $seat->save();
+        }
+
+        for($i = 0; $i < 3; $i++){
+            if($request->{"photo_".$i+1}){
+                $restaurant_photo = new RestaurantPhoto();
+                $restaurant_photo->restaurant_id = $restaurant->id;
+                if($i == 0){
+                    $restaurant_photo->name = "First photo";
+                    $restaurant_photo->photoindex = 1;
+                } elseif($i == 1){
+                    $restaurant_photo->name = "Second photo";
+                    $restaurant_photo->photoindex = 2;
+                } elseif($i == 2){
+                    $restaurant_photo->name = "Third photo";
+                    $restaurant_photo->photoindex = 3;
+                }
+                $restaurant_photo->photo = 'data:image/' . $request->{"photo_".$i+1}->extension().
+                ';base64,'. base64_encode(file_get_contents($request->{"photo_".$i+1}));
+
+                $restaurant_photo->save();
+            }
+        }
+
+
+        
+        $restaurant->budgets()->delete();
+
+        for($i = 0; $i < 4; $i++)
+        {
+            if($request->{"L_budget".$i+1}){
+                $budget = new Budget();
+                $budget->restaurant_id = $restaurant->id;
+                $budget->timezonetype = "1";
+                $budget->budgetindex = $i+1;
+                $budget->budgetvalue = str_repeat("￥", ($i + 1));
+                $budget->save();
+            }
+        }
+
+        for($i = 0; $i < 4; $i++)
+        {
+            if($request->{"D_budget".$i+1}){
+                $budget = new Budget();
+                $budget->restaurant_id = $restaurant->id;
+                $budget->timezonetype = "2";
+                $budget->budgetindex = $i+1;
+                $budget->budgetvalue = str_repeat("￥", ($i + 1));
+                $budget->save();
+            }
+        }
+
+        $restaurant->features()->delete();
+
+        for($i = 0; $i < 7; $i++)
+        {
+            if($request->{"features".$i+1}){
+                $feature = new Feature();
+                $feature->restaurant_id = $restaurant->id;
+                $feature->featuretype_id = $i+1;
+                $feature->save();
+            }
+        }
+
+        return redirect()->back();
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Restaurant $restaurant)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Search restaurants and return list.
-     */
-    public function search(Request $request)
-    {
-        $keyword = $request->search;
-
-        $totalList = DB::table('restaurants')
-                ->where('name', 'like', "%{$keyword}%")
-                ->orWhere('description', 'like', "%{$keyword}%")
-                ->orWhere('address', 'like', "%{$keyword}%")
-                ->get();
-
-        return $totalList;
+        $this->restaurant->destroy($id);
+        return redirect()->back();
     }
 }

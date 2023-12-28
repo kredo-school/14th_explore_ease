@@ -6,10 +6,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RestaurantPhotoController;
-use App\Http\Controllers\Reservation;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminGraphController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,95 +40,90 @@ Route::group(['middleware'=>'set.locale'], function () {
         return view('index');
     })->middleware('existprofile');
 
-    // Show searched list in index page
-    Route::get('/restaurant/search', [RestaurantController::class, 'search'])->name('restaurant.search');
+    // Show restaurant list
+    Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
+    // Show restaurant detail
+    Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
 
     // Authenticate exclude index page
     Route::group(['middleware'=>'auth'], function () {
 
-        Route::get('/admin/dashboard', function () {
-            return view('admin/dashboard');
-        });
-        Route::get('/admin/dashboard_all_users', function () {
-            return view('/admin/dashboard_all_users');
-        });
-        Route::get('admin/all_restaurants', function () {
-            return view('admin/all_restaurants');
-        });
-        Route::get('admin/all_reviews', function () {
-            return view('admin/all_reviews');
-        });
+        // Dashboard_for_graph
+        Route::get('/admin/dashboard', [AdminGraphController::class, 'index'])->name('admin.dashboard');
+        Route::get('/api/admin/dashboard', [AdminGraphController::class, 'userChartApi'])->name('admin.userChartApi');
+        Route::get('/api/admin/dashboard_restaurant', [AdminGraphController::class, 'restaurantChartApi'])->name('admin.restaurantChartApi');
+        Route::get('/api/admin/dashboard_review', [AdminGraphController::class, 'reviewChartApi'])->name('admin.reviewChartApi');
+        Route::get('/api/admin/dashboard_reservation', [AdminGraphController::class, 'reservationChartApi'])->name('admin.reservationChartApi');
+        Route::get('/api/admin/dashboard_nationality', [AdminGraphController::class, 'nationalityChart'])->name('admin.nationalityChart');
 
-        Route::get('/admin/dashboard', function () {
-            return view('/admin/dashboard');
-        });
+        // Dashboard_all_users
+        Route::get('/admin/dashboard_all_users', [App\Http\Controllers\AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
+        Route::delete('/admin/dashboard_all_users/{id}/deactivate', [App\Http\Controllers\AdminController::class, 'deactivate'])->name('admin_user.deactivate');
+        Route::patch('/admin/dashboard_all_users/{id}/activate', [App\Http\Controllers\AdminController::class, 'activate'])->name('admin_user.activate');
 
+        // Dashboard_all_owners
+        Route::get('/admin/dashboard_all_owners', [App\Http\Controllers\AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
+        Route::delete('/admin/dashboard_all_owners/{id}/deactivate', [App\Http\Controllers\AdminController::class, 'deactivateOwner'])->name('admin_owner.deactivate');
+        Route::patch('/admin/dashboard_all_owners/{id}/activate', [App\Http\Controllers\AdminController::class, 'activateOwner'])->name('admin_owner.activate');
 
-        Route::get('admin/dashboard_all_owners', function () {
-            return view('admin/dashboard_all_owners');
-        });
-
-
-
-
-        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-        Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profileBase'])->name('profile');
-
-        Route::get('/profile/reservation', [HomeController::class, 'profileReservation'])->name('profile.reservation');
-
-        Route::get('/profile/review', [App\Http\Controllers\HomeController::class, 'profileReview'])->name('profile.review');
+        // Dashboard_all_restaurants
+        Route::get('/admin/dashboard_all_restaurants', [AdminController::class, 'dashboardAllRestaurants'])->name('admin.allRestaurants');
+        Route::delete('/admin/dashboard_all_restaurants/{id}/deactivate', [App\Http\Controllers\AdminController::class, 'deactivateRestaurants'])->name('admin_restaurants.deactivate');
+        Route::patch('/admin/dashboard_all_restaurants/{id}/activate', [App\Http\Controllers\AdminController::class, 'activateRestaurants'])->name('admin_restaurants.activate');
 
 
-        Route::get('/restaurant/show', [RestaurantController::class, 'index'])->name('restaurant.show');
+        // Dashboard_all_reviews
+        Route::get('/admin/dashboard_all_reviews', [AdminController::class, 'dashboardAllReviews'])->name('admin.allReviews');
+        // Dashboard_all_reservations
+        Route::get('/admin/dashboard_all_reservations', [AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
 
+        // HomeController
+        Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+        // Restaurant Controller
+        // Show the form for creating a new resource.
         Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
+        // Store a newly created resource in storage.
+        Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
 
-        Route::get('/restaurant/{id}/review', [App\Http\Controllers\RestaurantController::class, 'restaurantReview'])->name('restaurant.review');
-
-
-        Route::get('/restaurant/adding', [RestaurantController::class, 'create'])->name('restaurant.adding');
-
-
-
-
-        Route::get('/restaurant/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
-
+        // Show the form for editing the specified resource.
+        Route::get('/restaurant/{id}/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
+        // Update the specified resource in storage.
+        Route::get('restaurant/{id}/update', [RestaurantController::class, 'update'])->name('restaurant.update');
 
 
         // Restaurant Controller
+        Route::get('/restaurant/adding', [App\Http\Controllers\RestaurantController::class, 'create'])->name('restaurant.adding');
+        Route::get('/restaurant/edit', [App\Http\Controllers\RestaurantController::class, 'edit'])->name('restaurant.edit');
+        Route::post('/restaurant/store', [App\Http\Controllers\RestaurantController::class, 'store'])->name('restaurant.store');
+        // Remove the specified resource from storage.
+        Route::delete('/restaurant/{id}/destroy', [RestaurantController::class, 'destroy'])->name('restaurant.destroy');
         // ranking
         Route::get('/restaurant/ranking', [RestaurantController::class, 'restaurantRanking'])->name('restaurant.ranking');
 
-        #Reservation page
-        //Tommie working on here:)
-        Route::get('/restaurant/{id}/reservasions', [App\Http\Controllers\ReservationController::class, 'show'])->name('restaurant.reservations');
-        Route::get('/restaurant/{id}/reservasions/create', [App\Http\Controllers\ReservationController::class, 'create'])->name('restaurant.reservation.create');
-        Route::post('/restaurant/reservasions/store', [App\Http\Controllers\ReservationController::class, 'store'])->name('restaurant.reservation.store');
-        // detail
-        Route::get('/restaurant/{id}/detail', [RestaurantController::class, 'ShowRestaurantDetail'])->name('restaurant.detail');
-
+        // Reservation Controller
+        Route::get('/restaurant/{id}/reservasions', [ReservationController::class, 'show'])->name('restaurant.reservations');
+        Route::get('/restaurant/{id}/reservasions/create', [ReservationController::class, 'create'])->name('restaurant.reservation.create');
+        Route::post('/restaurant/reservasions/store/{restaurant_id}', [ReservationController::class, 'store'])->name('restaurant.reservation.store');
 
         // Review Controller
         // show review page
         Route::get('/restaurant/{id}/review', [ReviewController::class, 'ShowRestaurantReview'])->name('restaurant.review');
-
-        //store comment
+        // store comment
         Route::post('/restaurant/{id}/review/comment', [ReviewController::class, 'store'])->name('restaurant.review.store');
 
-        Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
-        Route::get('/profile/bookmark', [BookmarkController::class, 'show'])->name('profile.bookmark');
-
-        #Profile(Kazuya)
+        // Profile Controller
         Route::get('/profile/{id}/show', [ProfileController::class, 'show'])->name('profile.show');
         Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/bookmark/{id}/show', [ProfileController::class, 'bookmarkShow'])->name('bookmark.show');//connect user bookmark page from menu bar
+        Route::get('/review/{id}/show', [ProfileController::class, 'reviewShow'])->name('review.show');//connect user review page from menu bar
+        Route::get('/reservation/{id}/show', [ProfileController::class, 'reservationShow'])->name('reservation.show');//connect user reservation page from menu bar
+        Route::delete('/reservation/{id}/cancel', [ProfileController::class, 'reservationCancel'])->name('reservation.cancel');//can cancel reservation
+        Route::get('/reservation/{id}/edit', [ReservationController::class, 'edit'])->name('reservation.edit');//modify the reservation
+        Route::delete('review/{id}/delete', [ProfileController::class, 'reviewDelete'])->name('review.delete');//delete the review.
 
         // Bookmark Controller
         Route::post('/bookmark/{id}/store',[BookmarkController::class, 'store'])->name('bookmark.store');
         Route::delete('/bookmark/{id}/destroy',[BookmarkController::class, 'destroy'])->name('bookmark.destroy');
-
     });
-
-
-
 });

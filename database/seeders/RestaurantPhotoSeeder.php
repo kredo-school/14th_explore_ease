@@ -22,7 +22,7 @@ class RestaurantPhotoSeeder extends Seeder
     public function run(): void
     {
         // set 20M on mysql's max_allowed_packet temporarily to avoid over packet size
-        DB::statement('SET GLOBAL max_allowed_packet=20971520');
+        //DB::statement('SET GLOBAL max_allowed_packet=20971520');
 
         $restaurant_image1 = 'data:image/' . 'jpg' . ';base64,' . base64_encode(file_get_contents('public/assets/seeder/restaurant_1.jpg'));
         $restaurant_image2 = 'data:image/' . 'jpg' . ';base64,' . base64_encode(file_get_contents('public/assets/seeder/restaurant_2.jpg'));
@@ -34,94 +34,117 @@ class RestaurantPhotoSeeder extends Seeder
                 'name' => 'First Photo',
                 'description' => 'For First Photo.',
                 'photo' => $restaurant_image1,
+                'photoindex'=> 1,
             ],
             [
                 'restaurant_id' => 1,
                 'name' => 'Second Photo',
                 'description' => 'For Second Photo.',
                 'photo' => $restaurant_image2,
+                'photoindex'=> 2,
             ],
             [
                 'restaurant_id' => 1,
                 'name' => 'Third Photo',
                 'description' => 'For Third Photo.',
                 'photo' => $restaurant_image3,
+                'photoindex'=> 3,
             ],
-
+        ];
+        $this->restaurant_photo->insert($restaurant_photos);
+        $restaurant_photos = [
             [
                 'restaurant_id' => 2,
                 'name' => 'First Photo',
                 'description' => 'For First Photo.',
                 'photo' => $restaurant_image1,
+                'photoindex'=> 1,
             ],
             [
                 'restaurant_id' => 2,
                 'name' => 'Second Photo',
                 'description' => 'For Second Photo.',
                 'photo' => $restaurant_image2,
+                'photoindex'=> 2,
             ],
             [
                 'restaurant_id' => 2,
                 'name' => 'Third Photo',
                 'description' => 'For Third Photo.',
                 'photo' => $restaurant_image3,
+                'photoindex'=> 3,
             ],
-
+        ];
+        $this->restaurant_photo->insert($restaurant_photos);
+        $restaurant_photos = [
             [
                 'restaurant_id' => 3,
                 'name' => 'First Photo',
                 'description' => 'For First Photo.',
                 'photo' => $restaurant_image1,
+                'photoindex'=> 1,
             ],
             [
                 'restaurant_id' => 3,
                 'name' => 'Second Photo',
                 'description' => 'For Second Photo.',
                 'photo' => $restaurant_image2,
+                'photoindex'=> 2,
             ],
             [
                 'restaurant_id' => 3,
                 'name' => 'Third Photo',
                 'description' => 'For Third Photo.',
                 'photo' => $restaurant_image3,
+                'photoindex'=> 3,
             ],
-
+        ];
+        $this->restaurant_photo->insert($restaurant_photos);
+        $restaurant_photos = [
             [
                 'restaurant_id' => 4,
                 'name' => 'First Photo',
                 'description' => 'For First Photo.',
                 'photo' => $restaurant_image1,
+                'photoindex'=> 1,
             ],
             [
                 'restaurant_id' => 4,
                 'name' => 'Second Photo',
                 'description' => 'For Second Photo.',
                 'photo' => $restaurant_image2,
+                'photoindex'=> 2,
             ],
             [
                 'restaurant_id' => 4,
                 'name' => 'Third Photo',
                 'description' => 'For Third Photo.',
                 'photo' => $restaurant_image3,
+                'photoindex'=> 3,
             ],
-
+        ];
+        $this->restaurant_photo->insert($restaurant_photos);
+        $restaurant_photos = [
             [
                 'restaurant_id' => 5,
                 'name' => 'First Photo',
                 'description' => 'For First Photo.',
                 'photo' => $restaurant_image1,
+                'photoindex'=> 1,
             ],
             [
                 'restaurant_id' => 5,
                 'name' => 'Second Photo',
                 'description' => 'For Second Photo.',
                 'photo' => $restaurant_image2,
+                'photoindex'=> 2,
             ],
             [
                 'restaurant_id' => 5,
                 'name' => 'Third Photo',
                 'description' => 'For Third Photo.',
                 'photo' => $restaurant_image3,
+                'photoindex'=> 3,
             ],
 
         ];

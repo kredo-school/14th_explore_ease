@@ -9,7 +9,6 @@
     {{-- profile page --}}
     @include('users.header')
 
-    <form method="POST" action="#">
         @csrf
         <div class="container w-75 mt-4 mx-auto">
             <div class="row justify-content-center">
@@ -47,40 +46,46 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="vertical-align: middle;">
-                                    <td>Restaurantname</td>
-                                    <td>
-                                        <div class="myClass">
-                                            <p id="overflow_text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur atque, nostrum, ad natus sint illo neque eum alias ipsam excepturi numquam fuga sapiente molestias odit dolores recusandae cumque ipsa.</p>
-                                            <span onClick="textLimiter()" id="toggle_text">Read More</span>
-                                        </div>
-                                    </td>
-                                    <td>4.5 <i class="fa-solid fa-star"></i></td>
-                                    <td>18:00-21:00<br>25/OCT/2023</td>
-                                    <td>
-                                        <a href="#" class="btn btn-secondary">Edit</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                        <button class="btn btn-secondary">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-
+                                @foreach($reviews as $review)
+                                    @if($review->user_id == Auth::user()->id)
+                                        <tr style="vertical-align: middle;">
+                                            <td>{{$review->restaurant->name}}</td>
+                                            <td>
+                                                <div class="myClass">
+                                                    <p id="overflow_text">{{$review->comment}}</p>
+                                                    <span onClick="textLimiter()" id="toggle_text">Read More</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {{ $review->restaurant->avgstar }}
+                                                <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 50.79px; height: 50.79px">
+                                                    <i class="fa-solid fa-star"></i>
+                                                </span>
+                                            </td>
+                                            <td>{{ $review->updated_at }}</td>
+                                            <td>
+                                                <a href="{{ route('restaurant.review', $review->restaurant_id ) }}" class="btn b-color">Edit</a>
+                                            </td>
+                                            <td>
+                                                {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
+                                                <button class="btn b-color" data-bs-toggle="modal" data-bs-target="#reviewDelete-{{ $review->restaurant_id }}">
+                                                    Delete
+                                                </button>
+                                                @include('users.modal.review_delete')
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
 
                             </tbody>
                         </table>
-
-                        <!--permanent_area-->
-                        <div class="d-flex justify-content-center">
-                            <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="<%preventry_url>">previous &lt;&lt;</a>
-                        <!--nextentry-->
-                            <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover mx-5" href="<%nextentry_url>">&gt;&gt;next</a>
-                        <!--/permanent_area-->
-                        </div>
                     </div>
                 </div>
+                <!--paginate_area-->
+                <div class="d-flex justify-content-center">
+                    {{ $reviews->links() }}
+                </div>
+                
             </div>
         </div>
 

@@ -1,33 +1,33 @@
-
-.top_img{
+.top_img {
     height: 560px;
     /* padding: 0; */
 }
-.top_img img
-{
+
+.top_img img {
     max-width: 100%;
     height: auto;
 }
 
 /* For reservations.blade.php */
-.b-color{
-  background-color: #CAC2C7;
-  transition: background-color .5s;
-  }
+.b-color {
+    background-color: #CAC2C7;
+    transition: background-color .5s;
+}
   
-  .b-color:hover{
-  background-color: #E9EEEA;
-  transition: background-color .5s;
-  }
-  .btn-check:checked + .btn, 
-  :not(.btn-check) + .btn:active, 
-  .btn:first-child:active, 
-  .btn.active, 
-  .btn.show:active{
-  background-color: #F8B0A6!important;
-  border: none; /*If we have spair time, make adjust the button doesnt move*/
-  transition: background-color .5s;
-  }
+.b-color:hover {
+    background-color: #E9EEEA;
+    transition: background-color .5s;
+}
+
+.btn-check:checked + .btn, 
+:not(.btn-check) + .btn:active, 
+.btn:first-child:active, 
+.btn.active, 
+.btn.show:active {
+    background-color: #F8B0A6!important;
+    border: none; /*If we have spair time, make adjust the button doesnt move*/
+    transition: background-color .5s;
+}
 
 /* For reservations.blade.php */
 .main_v_reservation img {
@@ -37,14 +37,12 @@
 }
 
 
-
-
 .text-block {
     padding: 40px;
     margin: 0 auto;
     width: 600px;
     
-    p {
+    :is(p) {
       color: #fefefe;
       display: none;
       font: 400 28px/38px "Helvtica Neue", "Helvetica", Arial;
@@ -56,12 +54,12 @@
     }
     
     &.text-block--expanded {
-      p {
+      :is(p) {
         display: block;
       }
     }
     
-    a {
+    :is(a) {
       border: 1px solid #fefefe;
       color: #fefefe;
       display: block;
@@ -72,3 +70,14 @@
       width: 100%;
     }
   }
+
+ /* For Footer */ 
+ #app-footer {
+   background-color: #E7DA3D; 
+   height: 130px;
+   position: absolute;
+   top: auto;
+   right: 0;
+   bottom: 0;
+   left: 0;
+ }
