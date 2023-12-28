@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminGraphController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,9 +48,13 @@ Route::group(['middleware'=>'set.locale'], function () {
     // Authenticate exclude index page
     Route::group(['middleware'=>'auth'], function () {
 
-        // Dashboard
-        Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-        Route::get('/api/admin/dashboard', [AdminController::class, 'userChartApi'])->name('admin.userChartApi');
+        // Dashboard_for_graph
+        Route::get('/admin/dashboard', [AdminGraphController::class, 'index'])->name('admin.dashboard');
+        Route::get('/api/admin/dashboard', [AdminGraphController::class, 'userChartApi'])->name('admin.userChartApi');
+        Route::get('/api/admin/dashboard_restaurant', [AdminGraphController::class, 'restaurantChartApi'])->name('admin.restaurantChartApi');
+        Route::get('/api/admin/dashboard_review', [AdminGraphController::class, 'reviewChartApi'])->name('admin.reviewChartApi');
+        Route::get('/api/admin/dashboard_reservation', [AdminGraphController::class, 'reservationChartApi'])->name('admin.reservationChartApi');
+        Route::get('/api/admin/dashboard_nationality', [AdminGraphController::class, 'nationalityChart'])->name('admin.nationalityChart');
 
         // Dashboard_all_users
         Route::get('/admin/dashboard_all_users', [App\Http\Controllers\AdminController::class, 'dashboardAllUsers'])->name('admin.allUsers');
@@ -57,7 +62,10 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::patch('/admin/dashboard_all_users/{id}/activate', [App\Http\Controllers\AdminController::class, 'activate'])->name('admin_user.activate');
 
         // Dashboard_all_owners
-        Route::get('/admin/dashboard_all_owners', [AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
+        Route::get('/admin/dashboard_all_owners', [App\Http\Controllers\AdminController::class, 'dashboardAllOwners'])->name('admin.allOwners');
+        Route::delete('/admin/dashboard_all_owners/{id}/deactivate', [App\Http\Controllers\AdminController::class, 'deactivateOwner'])->name('admin_owner.deactivate');
+        Route::patch('/admin/dashboard_all_owners/{id}/activate', [App\Http\Controllers\AdminController::class, 'activateOwner'])->name('admin_owner.activate');
+
         // Dashboard_all_restaurants
         Route::get('/admin/dashboard_all_restaurants', [AdminController::class, 'dashboardAllRestaurants'])->name('admin.allRestaurants');
         // Dashboard_all_reviews

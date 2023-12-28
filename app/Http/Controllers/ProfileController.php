@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Models\Nationality;
 use App\Models\Restaurant;
 use App\Models\RestaurantPhoto;
-use App\Models\Foodtype;
+use App\Models\FoodType;
 use App\Models\Reservation;
 use App\Models\Review;
 
@@ -28,7 +28,7 @@ class ProfileController extends Controller
     private $review;
     private $restaurant;
 
-    public function __construct(Profile $profile, User $user, Nationality $nationality, Bookmark $bookmark, RestaurantPhoto $restaurant_photo, Restaurant $restaurant, Foodtype $foodtype, Reservation $reservation, Review $review)
+    public function __construct(Profile $profile, User $user, Nationality $nationality, Bookmark $bookmark, RestaurantPhoto $restaurant_photo, Restaurant $restaurant, FoodType $foodtype, Reservation $reservation, Review $review)
     {
         $this->profile = $profile;
         $this->user = $user;
