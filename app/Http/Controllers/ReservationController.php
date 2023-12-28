@@ -111,13 +111,16 @@ class ReservationController extends Controller
     {   
         $reservation = $this->reservation->findOrFail($reservation_id);
         $restaurants = $reservation->restaurant;
-        $restaurantphotos = $this->restaurantphoto;
+        $restaurantphotos =  $this->restaurantphoto->findOrFail($restaurants->id);
+
         $courses =  $restaurants->courses;
         $all_courses = $courses;
+        // If the users reserve seat only, it is checked 
+        $isChecked = true;
 
         return view('users.profile_show_reservation',
          ['reservation'=>$reservation, 'restaurant'=> $restaurants, 'restaurantphoto' => $restaurantphotos,
-          'course' => $courses, 'all_courses' => $all_courses, ]);
+          'course' => $courses, 'all_courses' => $all_courses, 'isChecked' => $isChecked,]);
 
     }
 
