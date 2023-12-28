@@ -15,7 +15,7 @@
 
 @section('content')
     {{-- MainV --}}
-    <div class="main d-flex align-items-center" style="height: 75vh">
+    <div class="main d-flex align-items-center">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 p-lg-5 mx-auto my-5 text-white">
