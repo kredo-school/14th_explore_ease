@@ -68,10 +68,20 @@ Route::group(['middleware'=>'set.locale'], function () {
 
         // Dashboard_all_restaurants
         Route::get('/admin/dashboard_all_restaurants', [AdminController::class, 'dashboardAllRestaurants'])->name('admin.allRestaurants');
+        Route::delete('/admin/dashboard_all_restaurants/{id}/deactivate', [App\Http\Controllers\AdminController::class, 'deactivateRestaurants'])->name('admin_restaurants.deactivate');
+        Route::patch('/admin/dashboard_all_restaurants/{id}/activate', [App\Http\Controllers\AdminController::class, 'activateRestaurants'])->name('admin_restaurants.activate');
+
+
         // Dashboard_all_reviews
         Route::get('/admin/dashboard_all_reviews', [AdminController::class, 'dashboardAllReviews'])->name('admin.allReviews');
+        Route::delete('/admin/dashboard_all_reviews/{id}/deactivate', [App\Http\Controllers\AdminController::class, 'deactivateReviews'])->name('admin_reviews.deactivate');
+        Route::patch('/admin/dashboard_all_reviews/{id}/activate', [App\Http\Controllers\AdminController::class, 'activateReviews'])->name('admin_reviews.activate');
+
         // Dashboard_all_reservations
-        Route::get('/admin/dashboard_all_reservations', [AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
+        Route::get('/admin/dashboard_all_reservations', [App\Http\Controllers\AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
+        Route::delete('/admin/dashboard_all_users/{id}/cancel', [App\Http\Controllers\AdminController::class, 'cancelReservation'])->name('admin_reservation.cancel');
+
+
 
         // HomeController
         Route::get('/home', [HomeController::class, 'index'])->name('home');
