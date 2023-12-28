@@ -11,8 +11,8 @@
                 <div class="containaer d-flex flex-row">
                     <div class='container mb-4'>
                         <label for="number_of_people">Number of people</label>
-                        <select class="form-select" name="number_of_people" id="number_of_people" required>
-                            <option value="---"> --- </option>
+                        <select class="form-select" name="number_of_people" id="number_of_people"  required>
+                            <option value="---"> {{ $reservation->number_of_people }} </option>
                             @for($i = 0; $i < 10; $i++)
                             <option id="number_of_people" value="{{$i + 1}}" name="" required>{{$i + 1}}</option>
                             @endfor
@@ -24,7 +24,7 @@
                     </div>
                     <div class='container mb-4'>
                         <label for="datepicker">Date</label>
-                        <input id="datepicker" name="reservation_start_date" required/>
+                        <input id="datepicker" name="reservation_start_date" value="{{ $reservation->reservation_start_date }}"required/>
                         <script>
                             $('#datepicker').datepicker({
                                 uiLibrary: 'bootstrap5'
@@ -35,7 +35,7 @@
                     <div class='container mb-4'>
                         <div class="cs-form">
                             <label for="">Time</label>
-                            <input type="time" class="form-control" id="reservation_start_time" required/>
+                            <input type="time" class="form-control" id="reservation_start_time" value="{{ $reservation->reservation_start_time }}" required/>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,11 @@
 
                 {{-- Check Box  --}}
                 <div class="form-check mb-4">
-                    <input class="form-check-input" name="reservation_seats_only" type="checkbox" id="reservation_seats_only" value="60">
+                    @if($reservation->seat_id != null)
+                        <input class="form-check-input" name="reservation_seats_only" type="checkbox" id="reservation_seats_only" {{ $isChecked ? 'checked' : '' }} value="60">
+                    @else
+                        <input class="form-check-input" name="reservation_seats_only" type="checkbox" id="reservation_seats_only" value="60">
+                    @endif
                     <label class="form-check-label" for="reservation_seats_only">
                     Seat only
                     </label>
@@ -79,9 +83,12 @@
 
                 {{-- Request --}}
                 <h2 class="mt-4">Requests</h2>
-                <div class="form-group mb-4
-                ">
-                    <textarea class="form-control" placeholder="leave a comment such as a special requests" name="requests" id="requests" rows="5"></textarea>
+                <div class="form-group mb-4">
+                    @if($reservation->requests != null)
+                        <textarea class="form-control" placeholder="{{ $reservation->requests }}" name="requests" id="requests" rows="5"></textarea>
+                    @else
+                        <textarea class="form-control" placeholder="leave a comment such as a special requests" name="requests" id="requests" rows="5"></textarea>
+                    @endif
                 </div>
                 <div class="text-center">
                     <button type="button" class="btn b-color mb-3 mx-3 px-5"><a href="{{ route('home')}}"></a>Cancel</button>
