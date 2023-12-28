@@ -68,6 +68,10 @@ Route::group(['middleware'=>'set.locale'], function () {
 
         // Dashboard_all_restaurants
         Route::get('/admin/dashboard_all_restaurants', [AdminController::class, 'dashboardAllRestaurants'])->name('admin.allRestaurants');
+        Route::delete('/admin/dashboard_all_restaurants/{id}/deactivate', [App\Http\Controllers\AdminController::class, 'deactivateRestaurants'])->name('admin_restaurants.deactivate');
+        Route::patch('/admin/dashboard_all_restaurants/{id}/activate', [App\Http\Controllers\AdminController::class, 'activateRestaurants'])->name('admin_restaurants.activate');
+
+
         // Dashboard_all_reviews
         Route::get('/admin/dashboard_all_reviews', [AdminController::class, 'dashboardAllReviews'])->name('admin.allReviews');
         // Dashboard_all_reservations
