@@ -22,7 +22,7 @@ class CourseSeeder extends Seeder
     public function run(): void
     {
         // set 20M on mysql's max_allowed_packet temporarily to avoid over packet size
-        DB::statement('SET GLOBAL max_allowed_packet=20971520');
+        //DB::statement('SET GLOBAL max_allowed_packet=20971520');
 
         $course_image1 = 'data:image/' . 'jpg' . ';base64,' . base64_encode(file_get_contents('public/assets/seeder/course_1.jpg'));
         $course_image2 = 'data:image/' . 'jpg' . ';base64,' . base64_encode(file_get_contents('public/assets/seeder/course_2.jpg'));
@@ -53,7 +53,9 @@ class CourseSeeder extends Seeder
                 'photo' => $course_image3,
                 'reservation_minutes' => 120,
             ],
-
+        ];
+        $this->course->insert($courses);
+        $courses = [
             [
                 'restaurant_id' => 2,
                 'name' => '1 hour course',
@@ -78,7 +80,9 @@ class CourseSeeder extends Seeder
                 'photo' => $course_image3,
                 'reservation_minutes' => 120,
             ],
-
+        ];
+        $this->course->insert($courses);
+        $courses = [
             [
                 'restaurant_id' => 3,
                 'name' => '1 hour course',
@@ -103,7 +107,9 @@ class CourseSeeder extends Seeder
                 'photo' => $course_image3,
                 'reservation_minutes' => 120,
             ],
-
+        ];
+        $this->course->insert($courses);
+        $courses = [
             [
                 'restaurant_id' => 4,
                 'name' => '1 hour course',
@@ -128,7 +134,9 @@ class CourseSeeder extends Seeder
                 'photo' => $course_image3,
                 'reservation_minutes' => 120,
             ],
-
+        ];
+        $this->course->insert($courses);
+        $courses = [
             [
                 'restaurant_id' => 5,
                 'name' => '1 hour course',

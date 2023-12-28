@@ -10,7 +10,10 @@ use App\Models\User;
 use App\Models\Nationality;
 use App\Models\Restaurant;
 use App\Models\RestaurantPhoto;
-use App\Models\Foodtype;
+use App\Models\FoodType;
+use App\Models\Reservation;
+use App\Models\Review;
+
 use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
@@ -21,9 +24,11 @@ class ProfileController extends Controller
     private $bookmark;
     private $restaurant_photo;
     private $foodtype;
+    private $reservation;
+    private $review;
     private $restaurant;
 
-    public function __construct(Profile $profile, User $user, Nationality $nationality, Bookmark $bookmark, RestaurantPhoto $restaurant_photo, Restaurant $restaurant, Foodtype $foodtype)
+    public function __construct(Profile $profile, User $user, Nationality $nationality, Bookmark $bookmark, RestaurantPhoto $restaurant_photo, Restaurant $restaurant, FoodType $foodtype, Reservation $reservation, Review $review)
     {
         $this->profile = $profile;
         $this->user = $user;
@@ -32,6 +37,8 @@ class ProfileController extends Controller
         $this->restaurant_photo = $restaurant_photo;
         $this->restaurant = $restaurant;
         $this->foodtype = $foodtype;
+        $this->reservation = $reservation;
+        $this->review = $review;
     }
 
 
@@ -40,7 +47,16 @@ class ProfileController extends Controller
     public function bookmarkShow($id)
     {   
         $user = $this->user->findOrFail($id);
-        $bookmarks = $this->bookmark->where('user_id', Auth::user()->id)->get();
+        $tempbookmarks = $this->bookmark->where('user_id', Auth::user()->id)->get();
+
+        // remove softdeleted restraunt
+        $bookmarks = [];
+        foreach($tempbookmarks as $bookmark) {
+            if ($bookmark->restaurant != null) {
+                array_push($bookmarks, $bookmark);
+            }
+        }
+
         //parts of count on header.blade.php
         // 1. count restaurants for the owner
         $count_restaurant = $user->restaurants->count();
@@ -242,12 +258,21 @@ class ProfileController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Profile $profile)
+    // Cancel(Delete) the reservation
+    public function reservationCancel($id)
     {
-        //
+        $reservation = $this->reservation->findOrFail($id);
+        $reservation->forceDelete();
+        return redirect()->route('profile.show', Auth::user()->id);
+
+    }
+    //Delete the Review
+    public function reviewDelete($id)
+    {
+        $review = $this->review->where('user_id', Auth::user()->id)
+                                ->where('restaurant_id', $id)
+                                ->forceDelete();
+        return redirect()->route('review.show', Auth::user()->id);
     }
 
 

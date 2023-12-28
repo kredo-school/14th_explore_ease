@@ -107,9 +107,21 @@ class ReservationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Reservation $reservation)
-    {
-        //
+    public function edit($reservation_id)
+    {   
+        $reservation = $this->reservation->findOrFail($reservation_id);
+        $restaurants = $reservation->restaurant;
+        $restaurantphotos =  $this->restaurantphoto->findOrFail($restaurants->id);
+
+        $courses =  $restaurants->courses;
+        $all_courses = $courses;
+        // If the users reserve seat only, it is checked 
+        $isChecked = true;
+
+        return view('users.profile_show_reservation',
+         ['reservation'=>$reservation, 'restaurant'=> $restaurants, 'restaurantphoto' => $restaurantphotos,
+          'course' => $courses, 'all_courses' => $all_courses, 'isChecked' => $isChecked,]);
+
     }
 
     /**

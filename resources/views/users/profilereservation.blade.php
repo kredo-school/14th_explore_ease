@@ -4,7 +4,6 @@
     {{-- profile page --}}
     @include('users.header')
 
-    <form method="POST" action="#">
         @csrf
         <div class="container w-75 mt-4 mx-auto">
             <div class="row justify-content-center">
@@ -44,7 +43,7 @@
                             </thead>
                             <tbody>
                                 @foreach($reservations as $reservation)
-                                    @if($reservation->user_id == Auth::user()->id)
+                                    @if($reservation->user_id == Auth::user()->id && $reservation->restaurant != null)
                                         <tr style="vertical-align: middle">
                                             <td>{{ $reservation->restaurant->name }}</td>
                                             <td>{{ $reservation->reservation_start_date }}<br>{{ $reservation->reservation_start_time }}</td>
@@ -60,13 +59,14 @@
                                                 <td>{{$reservation->course->price}}</td>
                                             @endif
                                             <td>
-                                                <a href="#" class="btn b-color">Edit</a>
+                                                <a href="{{ route('reservation.edit', $reservation->id )}}" class="btn b-color">Edit</a>
                                             </td>
                                             <td>
                                                 {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
-                                                <button class="btn b-color">
+                                                <button class="btn b-color" data-bs-toggle="modal" data-bs-target="#reservationCancel-{{ $reservation->id }}" >
                                                     Cancel
                                                 </button>
+                                                @include('users.modal.reservation_cancel')
                                             </td>
                                         </tr>
                                     @endif

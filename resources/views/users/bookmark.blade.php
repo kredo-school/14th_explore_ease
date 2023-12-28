@@ -36,28 +36,33 @@
                             <div class="card-body w-100 border p-0">
                                 <div class="row ps-2">
                                     <div class="col-9">
-                                            <a href="{{ route('restaurant.detail', $bookmark->restaurant_id) }}" class="text-decoration-none text-black h4">
-                                                {{$bookmark->restaurant->name}}
-                                            </a>
+                                        <a href="{{ route('restaurant.detail', $bookmark->restaurant_id) }}" class="text-decoration-none text-black h4" style="line-height: 42.15px">
+                                            {{$bookmark->restaurant->name}}
+                                        </a>
                                     </div>
-                                    <div class="col h3 rowspan='2'">
+                                    <div class="col h3">
                                         <form action="{{route('bookmark.destroy', $bookmark->restaurant_id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="border border-white bg-white"><i class="fa-solid fa-bookmark"></i></button>
+                                            <button type="submit" class="border border-white bg-white">
+                                                <i class="fa-solid fa-bookmark fa-2x" style="color: #E7DA3D; font-size: 25px; line-height: 42.15px"></i>
+                                            </button>
                                         </form>
                                     </div>
                                 </div>
-                                <div class="row ps-2">
-                                    <div class="col-3">
-                                        <p class="border border-dark">
-                                            4.5 <i class="fa-solid fa-star"></i>
-                                        </p>
-                                    </div>
+                                <div class="row ps-2 mb-2">
                                     <div class="col">
                                         @foreach($features[$loop->index] as $feature)
-                                            <span class="border border-dark">{{$feature->featuretype->name}}</span>
+                                            <span class="h6 border-0 me-1 rounded text-center px-1" style="background-color: rgb(231, 52, 8); color: white">
+                                                {{$feature->featuretype->name}}
+                                            </span>
                                         @endforeach
+                                    </div>
+                                    <div class="col-3">
+                                        {{ $bookmark->restaurant->avgstar }}
+                                        <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 35px; height: 35px">
+                                            <i class="fa-solid fa-star"></i>
+                                        <span>
                                     </div>
                                 </div>
                             </div>

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container w-75">
-    <h2>All users</h2>
+    <h2>All restaurants</h2>
     {{-- Search Box --}}
     <div class="container text-end mb-3">
         <form class="form-inline">
@@ -22,49 +22,81 @@
             <tr>
               <th scope="col">id</th>
               <th scope="col">Restaurant name</th>
-              <th scope="col">Ownername</th>
-              <th scope="col">Reviewdate</th>
+              <th scope="col">Owner name</th>
+              <th scope="col">Registration date</th>
               <th scope="col">Rate</th>
               <th scope="col">Area</th>
-              <th scope="col">Food type</th>
+              <th scope="col">Food Type</th>
+              <th scope="col"></th>
               <th scope="col"></th>
             </tr>
           </thead>
           {{-- Data starting here --}}
           <tbody>
+            @foreach ($restaurants as $restaurant)
             <tr>
-              <td class="py-3">#</td>
-              <td class="py-3">OREORESTAURANT in Tokyo</td>
-              <td class="py-3">Dayo</td>
-              <td class="py-3">11:00  <br>12 OCT 2024</td>
-              <td class="py-3 m">
-                <div class="row">
-                  <div class="col card text-center p-0 shadow-sm">
-                    <p class="my-auto">4.5<i class="fa-solid fa-star text-warning col"></i></p>
-                  </div>
-                </div>
-              </td>
-              <td class="py-3">Tokyo</td>
-              <td class="py-3">Italian</td>
-              <td td class="py-3"><button type="button" class="btn btn-secondary">Inactivate</button>
-              </td>
+                <td class="py-3">{{ $restaurantIds[$loop->index] }}</td>
+
+                <td class="py-3">{{ $restaurantNames[$loop->index] }}</td>
+
+                @foreach ($ownerNames[$loop->index] as $ownerName)
+                    <td class="py-3">{{$ownerName->name}}</td>
+                @endforeach
+
+                <td class="py-3">{{ $registrationDates[$loop->index] }}</td>
+
+                <td class="py-3">
+                    {{ $stars[$loop->index] }}
+                    <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 35px; height: 35px">
+                        <i class="fa-solid fa-star"></i>
+                    </span>
+                </td>
+
+                @foreach ($areaTypes[$loop->index] as $areaType)
+                    <td class="py-3">{{ $areaType }}</td>
+                @endforeach
+
+                @foreach ($foodTypes[$loop->index] as $foodType)
+                    <td class="py-3">{{ $foodType }}</td>
+                @endforeach
+
+
+                <td class="py-3">
+                        {{-- @if($restaurants[$loop->index]) --}}
+                        @if ($restaurant->trashed())
+                            <i class="fa-solid fa-circle-minus text-secondary"></i> &nbsp; Inactive
+                        @else
+                            <i class="fa-solid fa-circle text-primary"></i> &nbsp; Active
+                        @endif
+                </td>
+
+
+                <td>
+                            {{-- @if($restaurants[$loop->index]) --}}
+                            @if ($restaurant->trashed())
+                                <form action="{{ route('admin_restaurants.activate',$restaurant->id) }}" method="post">
+                                    @csrf
+                                    @method('PATCH')
+                                <button type="submit" class="btn b-color">Activate Restaurant {{ $restaurant->id }}</button>
+                                </form>
+                            @else
+                                <form action="{{ route('admin_restaurants.deactivate',$restaurant->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                <button type="submit" class="btn b-color">Deactivate Restaurant {{ $restaurant->id }}</button>
+                                </form>
+                            @endif
+                </td>
             </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
 
-
-
-
-
-      
-      {{-- permanent_area --}}
         <div class="d-flex justify-content-center">
-        <!--previousry-->
-          <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="<%preventry_url>">previous &lt;&lt;</a>
-        <!--nextentry-->
-          <a  class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover mx-5" href="<%nextentry_url>">&gt;&gt;next</a>
+            {{ $restaurants->links() }}
         </div>
 </div>
 
+@vite(['resources/js/checkbuttonstatus.js'])
 @endsection
