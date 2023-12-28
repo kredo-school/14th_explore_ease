@@ -78,7 +78,10 @@ Route::group(['middleware'=>'set.locale'], function () {
         Route::patch('/admin/dashboard_all_reviews/{id}/activate', [App\Http\Controllers\AdminController::class, 'activateReviews'])->name('admin_reviews.activate');
 
         // Dashboard_all_reservations
-        Route::get('/admin/dashboard_all_reservations', [AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
+        Route::get('/admin/dashboard_all_reservations', [App\Http\Controllers\AdminController::class, 'dashboardAllReservations'])->name('admin.allReservations');
+        Route::delete('/admin/dashboard_all_users/{id}/cancel', [App\Http\Controllers\AdminController::class, 'cancelReservation'])->name('admin_reservation.cancel');
+
+
 
         // HomeController
         Route::get('/home', [HomeController::class, 'index'])->name('home');
