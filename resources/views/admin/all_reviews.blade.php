@@ -66,15 +66,17 @@
                 <td>
                             @if($reviews[$loop->index])
                             {{-- @if ($restaurant->trashed()) --}}
-                                <form action="{{-- route('admin_user.activate',$userId->id) --}}" method="post">
+                                <form action="{{-- route('admin_reviews.activate',$review->id) --}}" method="post">
                                     @csrf
                                     @method('PATCH')
                                 <button type="submit" class="btn b-color">Unhide Review {{-- $review --}}</button>
+                                </form>
                             @else
-                                <form action="{{-- route('admin_user.deactivate',$userId->id) --}}" method="post">
+                                <form action="{{-- route('admin_reviews.deactivate',$review->id) --}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                 <button type="submit" class="btn b-color">Hide Owner {{-- $review --}}</button>
+                                </form>
                             @endif
                 </td>
             </tr>
