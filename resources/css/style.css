@@ -1,3 +1,4 @@
+
 .top_img {
     height: 560px;
     /* padding: 0; */
@@ -74,7 +75,7 @@
  /* For Footer */ 
  #app-footer {
    background-color: #E7DA3D; 
-   height: 130px;
+   height: 85px;
    position: absolute;
    top: auto;
    right: 0;

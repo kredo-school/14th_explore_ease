@@ -5,7 +5,7 @@
     @include('users.header')
 
     {{-- profile list --}}
-        <div class="container w-75 mt-4 mx-auto">
+        <div class="container w-75 mt-4 mx-auto position-relative">
             <div class="row justify-content-center">
                 <div class="col-3">
                     @include('users.menu')
