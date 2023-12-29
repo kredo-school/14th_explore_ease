@@ -81,7 +81,11 @@ class RestaurantController extends Controller
                 $sdata = $this->review->where('restaurant_id', $restaurant->id)->get()->pluck('star')->toArray();
                 $sdatalength = count($sdata);
                 $sdatasum = array_sum($sdata);
-                $sdatasum /= $sdatalength;
+                if ($sdatalength != 0) {
+                    $sdatasum /= $sdatalength;
+                } else {
+                    $sdatasum = 0;
+                }
                 array_push($stars, $sdatasum);
 
             //get data from restaurant table.
