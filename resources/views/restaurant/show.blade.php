@@ -5,7 +5,7 @@
 
 @vite(['public/css/style.css'])
 
-<div class="container">
+<div class="container mb-5">
     <div class="h1"  style="margin-left: 100px; padding: 0px; margin-top: 20px;">RESTAURANTS</div>
     <div class="scards">
         @foreach($restaurants as $restaurant)

@@ -4,7 +4,7 @@
     background-size: cover;
     width: 100%;
     height: calc(100vh - 160px);
-    margin-bottom: -100px;
+    margin-bottom: -35px;
 }
 .icon-user {
     font-size: 6rem;

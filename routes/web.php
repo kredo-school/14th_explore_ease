@@ -1,18 +1,19 @@
 <?php
 
-use App\Http\Controllers\BookmarkController;
-use App\Http\Controllers\HomeController;
-
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RestaurantController;
-use App\Http\Controllers\RestaurantPhotoController;
-use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\AdminGraphController;
+
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\RestaurantPhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +86,9 @@ Route::group(['middleware'=>'set.locale'], function () {
 
         // HomeController
         Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+        // ContactController
+        Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
         // Restaurant Controller
         // Show the form for creating a new resource.
