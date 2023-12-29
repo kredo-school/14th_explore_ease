@@ -9,7 +9,7 @@
 
             <div class="modal-body">
                 <p>Are you sure you want to delete this review?</p>
-                <h3>Restaurant Name : {{$review->restaurant->name}}</h3>
+                <h3>Restaurant Name : {{$review->restaurant->name ?? 'None'}}</h3>
                 <h3>Comment : {{$review->comment}}</h3>
                 <h3>Star : {{ $review->star }} <i class="fa-solid fa-star"></i></h3>
             </div>

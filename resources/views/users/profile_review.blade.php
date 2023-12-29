@@ -49,7 +49,7 @@
                                 @foreach($reviews as $review)
                                     @if($review->user_id == Auth::user()->id)
                                         <tr style="vertical-align: middle;">
-                                            <td>{{$review->restaurant->name}}</td>
+                                            <td>{{$review->restaurant->name ?? 'None'}}</td>
                                             <td>
                                                 <div class="myClass">
                                                     <p id="overflow_text">{{$review->comment}}</p>
@@ -57,7 +57,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                {{ $review->restaurant->avgstar }}
+                                                {{ $review->restaurant->avgstar ?? 'None' }}
                                                 <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 50.79px; height: 50.79px">
                                                     <i class="fa-solid fa-star"></i>
                                                 </span>

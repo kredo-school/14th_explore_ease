@@ -60,8 +60,6 @@
                                             @endif
                                             <td>
                                                 <a href="{{ route('reservation.edit', $reservation->id )}}" class="btn b-color">Edit</a>
-                                            </td>
-                                            <td>
                                                 {{-- <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}"> --}}
                                                 <button class="btn b-color" data-bs-toggle="modal" data-bs-target="#reservationCancel-{{ $reservation->id }}" >
                                                     Cancel
