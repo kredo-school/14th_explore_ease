@@ -52,7 +52,7 @@
                             <div class="col-6 text-end h3">
                                 <a href="" class="text-decoration-none text-dark">
                                     {{-- @foreach($stars as $star) --}}
-                                    {{ $stars[$loop->index] }}
+                                    {{ round($stars[$loop->index],1) }}
                                     <span class="border-1 rounded text-center px-1" style="background-color: orangered; color: white; border-color: rgb(255, 51, 0); width: 35px; height: 35px">
                                         <i class="fa-solid fa-star"></i>
                                     </span>

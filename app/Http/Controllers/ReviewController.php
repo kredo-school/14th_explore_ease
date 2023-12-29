@@ -78,7 +78,11 @@ class ReviewController extends Controller
                 $allStars[] = $allStar->star;
             }
     $countAllStars = count($allStars);
-    $averageAllStars = array_sum($allStars) / $countAllStars;
+    if ($countAllStars != 0) {
+        $averageAllStars = array_sum($allStars) / $countAllStars;
+    } else {
+        $averageAllStars = 0;
+    }
 
 
     return view('restaurant.review',[
