@@ -99,7 +99,7 @@ Route::group(['middleware'=>'set.locale'], function () {
         // Show the form for editing the specified resource.
         Route::get('/restaurant/{id}/edit', [RestaurantController::class, 'edit'])->name('restaurant.edit');
         // Update the specified resource in storage.
-        Route::get('restaurant/{id}/update', [RestaurantController::class, 'update'])->name('restaurant.update');
+        Route::post('restaurant/{id}/update', [RestaurantController::class, 'update'])->name('restaurant.update');
 
         // Remove the specified resource from storage.
         Route::delete('/restaurant/{id}/destroy', [RestaurantController::class, 'destroy'])->name('restaurant.destroy');
