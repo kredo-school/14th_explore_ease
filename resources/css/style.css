@@ -1,3 +1,4 @@
+
 .top_img {
     height: 560px;
     /* padding: 0; */
@@ -36,6 +37,7 @@
     object-fit: cover;
 }
 
+
 .text-block {
     padding: 40px;
     margin: 0 auto;
@@ -71,10 +73,11 @@
   }
 
  /* For Footer */ 
- footer {
+ #app-footer {
    background-color: #E7DA3D; 
-   height: 130px;
-   position: fixed;
+   height: 85px;
+   position: absolute;
+   top: auto;
    right: 0;
    bottom: 0;
    left: 0;

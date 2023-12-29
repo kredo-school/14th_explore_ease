@@ -4,7 +4,7 @@
 @section('content')
 @vite(['resources/js/restaurant.js', 'resources/js/restaurantmap.js'])
 
-<div class="container" style="width: 50%;">
+<div class="container w-50 mt-5 mb-5">
     <form action="{{ route('restaurant.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="h1">RESTAURANT INFORMATION</div>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="rounded d-flex justify-content-center align-items-center flex-column" style="height: 150px; background-color: rgba(0,0,0,0.3); cursor: pointer;" onclick="addCourseMenu()">
-                        <i class="fa-solid fa-circle-plus h1"></i>Add more
+                        <i class="fa-solid fa-plus h1"></i>Add more
                     </div>
                 </div>
             </div>

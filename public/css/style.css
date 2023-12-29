@@ -2,6 +2,9 @@
     background-image: url("../assets/turkey-315079_1920.png");
     background-position: center;
     background-size: cover;
+    width: 100%;
+    height: calc(100vh - 160px);
+    margin-bottom: -100px;
 }
 .icon-user {
     font-size: 6rem;
