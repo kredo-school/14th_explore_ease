@@ -81,18 +81,18 @@
                             <!-- Link to Restaurant page -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-black" href="#" id="restaurant-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span style="display: inline-block; line-height: 42px;">Restaurant</span>
+                                    <span style="display: inline-block; line-height: 42px;">{{ __('messages.navbar_restaurant') }}</span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="restaurant-dropdown">
-                                    <li><a class="dropdown-item" href="{{ route('restaurant.show') }}">See Restaurants</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('restaurant.adding') }}">Adding new restaurant</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('restaurant.show') }}">{{ __('messages.navbar_seeRestaurants') }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('restaurant.adding') }}">{{ __('messages.navbar_addRestaurants') }}</a></li>
                                 </ul>
                             </li>
 
                             <!-- Link to Ranking page -->
                             <li class="nav-item my-auto ms-3 me-3">
                                 <a href="{{ route('restaurant.ranking') }}" class="text-decoration-none text-black">
-                                    <span style="display: inline-block; line-height: 42px;">Ranking</span>
+                                    <span style="display: inline-block; line-height: 42px;">{{ __('messages.navbar_ranking') }}</span>
                                 </a>
                             </li>
 
@@ -131,10 +131,10 @@
                                 </button>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a href="{{ route('profile.show', Auth::user()->id) }}" class="dropdown-item">Profile</a>
+                                    <a href="{{ route('profile.show', Auth::user()->id) }}" class="dropdown-item">{{ __('messages.navbar_profile') }}</a>
 
                                     @can('admin')
-                                        <a href="{{ route('admin.dashboard') }}" class="dropdown-item">Dashboard</a>
+                                        <a href="{{ route('admin.dashboard') }}" class="dropdown-item">{{ __('messages.navbar_dashboard') }}</a>
                                     @endcan
 
                                     <a class="dropdown-item" href="#"
@@ -144,7 +144,7 @@
 
                                     <hr class="hr-blurry">
 
-                                    <a href="#contact" class="dropdown-item">Contact Us</a>
+                                    <a href="#contact" class="dropdown-item">{{ __('messages.navbar_contactUs') }}</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
