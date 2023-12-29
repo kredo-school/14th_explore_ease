@@ -1,3 +1,5 @@
+/* For login.blade.php */
+
 
 .top_img {
     height: 560px;
@@ -81,4 +83,8 @@
    right: 0;
    bottom: 0;
    left: 0;
+ }
+
+ .position_control {
+  padding-top: 14rem;
  }

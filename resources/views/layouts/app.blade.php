@@ -40,7 +40,7 @@
     </script>
 </head>
 <body>
-    <div id="app" class="main_contentsarea position-relative" style="padding-bottom: 180px;">
+    <div id="app" class="main_contentsarea position-relative" style="padding-bottom: 7rem">
         <!-- navigation bar -->
         <nav id="app-nav" class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #E7DA3D; height: 80px">
             <div class="container">
@@ -144,7 +144,7 @@
 
                                     <hr class="hr-blurry">
 
-                                    <a href="#contact" class="dropdown-item">Contact Us</a>
+                                    <a href="{{ route('contact') }}" class="dropdown-item">Contact Us</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
